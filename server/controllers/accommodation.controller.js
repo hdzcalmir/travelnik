@@ -61,7 +61,6 @@ export const getAllAccomodation = (req, res) => {
  *             example:
  *               error: Internal server error.
  */
-
 export const updateAccommodation = async (req, res) => {
     try {
         const bookingApiResponse = await axios.request(
