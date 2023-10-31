@@ -1,8 +1,10 @@
-import {
+const {
   getAllAccomodation,
   updateAccommodation,
-} from "../controllers/accommodation.controller.js";
-import express from "express";
+} = require('../controllers/accommodation.controller.js');
+const express = require('express');
+const VerifyToken = require('../middlewares/authentication.js');
+
 
 const router = express.Router();
 
@@ -73,6 +75,7 @@ const router = express.Router();
  */
 
 router.get("/", getAllAccomodation);
-router.patch("/", updateAccommodation);
 
-export default router;
+router.patch("/", VerifyToken, updateAccommodation);
+
+module.exports = router;

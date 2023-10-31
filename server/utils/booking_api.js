@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv";
+const dotenv = require('dotenv');
 dotenv.config();
 
-export const bookingApiOptions = (arrivalDate, departureDate) => {
+const bookingApiOptions = (arrivalDate, departureDate) => {
   return {
     method: "GET",
     url: "https://apidojo-booking-v1.p.rapidapi.com/properties/list",
@@ -26,3 +26,5 @@ export const bookingApiOptions = (arrivalDate, departureDate) => {
     },
   };
 };
+
+module.exports = bookingApiOptions;

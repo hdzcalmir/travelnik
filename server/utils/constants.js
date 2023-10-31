@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv";
+const dotenv = require('dotenv');
 dotenv.config();
 
-export const swaggerOptions = {
+const swaggerOptions = {
   definition: {
     openapi: "3.1.0",
     info: {
@@ -27,3 +27,5 @@ export const swaggerOptions = {
   },
   apis: ["./routes/*.js", "./controllers/*.js"],
 };
+
+module.exports = swaggerOptions;

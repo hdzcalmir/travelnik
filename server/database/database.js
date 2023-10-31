@@ -1,9 +1,10 @@
-import mysql from "mysql";
-import * as dotenv from "dotenv";
-import { logger } from "../utils/logger.js";
+const mysql = require('mysql');
+const dotenv = require('dotenv');
+const { logger } = require('../utils/logger.js');
+
 dotenv.config();
 
-export const db = mysql.createConnection({
+const db = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
@@ -14,3 +15,5 @@ db.on("error", (err) => {
   logger.error(err);
   console.log("Greška prilikom povezivanja s bazom podataka:", err);
 });
+
+module.exports = db;

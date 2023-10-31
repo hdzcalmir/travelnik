@@ -1,7 +1,6 @@
-import {
-    getAllActivities,
-} from "../controllers/activity.controller.js";
-import express from "express";
+const { getAllActivities } = require('../controllers/activity.controller.js');
+const express = require('express');
+
 
 const router = express.Router();
 
@@ -49,4 +48,5 @@ const router = express.Router();
 
 router.get("/", getAllActivities);
 
-export default router;
+module.exports = router;
+

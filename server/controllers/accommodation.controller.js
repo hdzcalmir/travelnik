@@ -1,8 +1,8 @@
-import axios from "axios";
-import { db } from "../database/database.js";
-import { bookingApiOptions } from "../utils/booking_api.js";
-import { logger } from "../utils/logger.js";
-import { Accommodation } from "../models/accommodation.js";
+const axios = require('axios');
+const { db } = require('../database/database.js');
+const { bookingApiOptions } = require('../utils/booking_api.js');
+const { logger } = require('../utils/logger.js');
+const { Accommodation } = require('../models/accommodation.js');
 
 /**
  * @swagger
@@ -28,7 +28,7 @@ import { Accommodation } from "../models/accommodation.js";
  *             example:
  *               error: Internal server error.
  */
-export const getAllAccomodation = (req, res) => {
+const getAllAccomodation = (req, res) => {
     try {
         const getAccommodationWithFiltersQuery = "SELECT * FROM accommodation";
         db.query(getAccommodationWithFiltersQuery, (err, data) => {
@@ -61,7 +61,7 @@ export const getAllAccomodation = (req, res) => {
  *             example:
  *               error: Internal server error.
  */
-export const updateAccommodation = async (req, res) => {
+const updateAccommodation = async (req, res) => {
     try {
         const bookingApiResponse = await axios.request(
             bookingApiOptions("2023-11-01", "2023-11-02")
@@ -121,4 +121,8 @@ export const updateAccommodation = async (req, res) => {
         logger.error(error);
         return res.status(500).send("Internal server error.");
     }
+};
+
+module.exports = {
+    getAllAccomodation, updateAccommodation
 };

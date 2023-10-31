@@ -1,4 +1,4 @@
-export class Accommodation {
+class Accommodation {
     constructor(
         source,
         image,
@@ -141,3 +141,5 @@ export class Accommodation {
         this._address = value;
     }
 }
+
+module.exports = Accommodation;

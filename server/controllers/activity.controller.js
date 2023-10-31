@@ -18,7 +18,7 @@
  *       '500':
  *         description: Internal server error.
  */
-export const getAllActivities = (req, res) => {
+const getAllActivities = (req, res) => {
     try {
         const getAllActivitiesQuery = "SELECT * FROM activities";
         db.query(getAllActivitiesQuery, (err, data) => {
@@ -28,3 +28,5 @@ export const getAllActivities = (req, res) => {
         return res.status(500).send("Internal server error.");
     }
 };
+
+module.exports = { getAllActivities };

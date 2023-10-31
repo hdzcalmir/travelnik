@@ -1,7 +1,5 @@
-import {
-    getAllActivities,
-} from "../controllers/business.controller.js";
-import express from "express";
+const { getAllBusinesses } = require('../controllers/business.controller.js');
+const express = require('express');
 
 const router = express.Router();
 
@@ -49,4 +47,4 @@ const router = express.Router();
 
 router.get("/", getAllBusinesses);
 
-export default router;
+module.exports = router; 

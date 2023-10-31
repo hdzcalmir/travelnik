@@ -1,7 +1,6 @@
-import {
-    getAllUsers,
-} from "../controllers/user.controller.js";
-import express from "express";
+const { getAllUsers } = require('../controllers/user.controller.js');
+const express = require('express');
+
 
 const router = express.Router();
 
@@ -47,4 +46,5 @@ const router = express.Router();
 
 router.get("/", getAllUsers);
 
-export default router;
+module.exports = router;
+

@@ -1,7 +1,6 @@
-import {
-    getAllEvents,
-} from "../controllers/event.controller.js";
-import express from "express";
+const { getAllEvents } = require('../controllers/event.controller.js');
+const express = require('express');
+
 
 const router = express.Router();
 
@@ -40,4 +39,5 @@ const router = express.Router();
 
 router.get("/", getAllEvents);
 
-export default router;
+module.exports = router;
+
