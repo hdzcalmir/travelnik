@@ -1,27 +1,27 @@
 /**
  * @swagger
- * /api/users:
+ * /api/activity:
  *   get:
  *     tags:
- *       - Users
- *     summary: Get all users
- *     description: Retrieve a list of all users.
+ *       - Activities
+ *     summary: Get all activities
+ *     description: Retrieve a list of all activities.
  *     responses:
  *       '200':
- *         description: Successful response with a list of users.
+ *         description: Successful response with a list of activities.
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/User'
+ *                 $ref: '#/components/schemas/Activity'
  *       '500':
  *         description: Internal server error.
  */
-export const getAllUsers = (req, res) => {
+export const getAllActivities = (req, res) => {
     try {
-        const getAllUsersQuery = "SELECT * FROM users";
-        db.query(getAllUsersQuery, (err, data) => {
+        const getAllActivitiesQuery = "SELECT * FROM activities";
+        db.query(getAllActivitiesQuery, (err, data) => {
             return res.status(200).json(data);
         });
     } catch (error) {
