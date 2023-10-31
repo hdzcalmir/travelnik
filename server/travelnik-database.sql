@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 29, 2023 at 06:48 PM
--- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
--- PHP Version: 8.1.2-1ubuntu2.14
+-- Host: 127.0.0.1
+-- Generation Time: Oct 31, 2023 at 08:29 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodation`
+-- Table structure for table `accommodations`
 --
 
-CREATE TABLE `accommodation` (
+CREATE TABLE `accommodations` (
   `id` int(11) NOT NULL,
   `source` text DEFAULT NULL,
   `image` text DEFAULT NULL,
@@ -42,13 +42,13 @@ CREATE TABLE `accommodation` (
   `check_in_time` varchar(12) DEFAULT NULL,
   `check_out_time` varchar(12) DEFAULT NULL,
   `address` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `accommodation`
+-- Dumping data for table `accommodations`
 --
 
-INSERT INTO `accommodation` (`id`, `source`, `image`, `title`, `rating`, `price`, `distance_from_center`, `reviews`, `status`, `longitude`, `latitude`, `check_in_time`, `check_out_time`, `address`) VALUES
+INSERT INTO `accommodations` (`id`, `source`, `image`, `title`, `rating`, `price`, `distance_from_center`, `reviews`, `status`, `longitude`, `latitude`, `check_in_time`, `check_out_time`, `address`) VALUES
 (1, 'https://www.booking.com/hotel/ba/vezir-palace.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/226684314.jpg?k=d0ce7f1352b9ad1b6da7e24c58b93920544cf78f94f29ee178b5f2f551eb1f59&o=', 'Hotel Vezir Palace', 8.4, 64.8, '0.75', 533, 'Very Good', 17.670232, 44.229841, '06:00', '11:00', 'Varoš bb, Travnik'),
 (2, 'https://www.booking.com/hotel/ba/mlm.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/401639645.jpg?k=54a619db525fb44dfb7b877b13366262a70382fb6e0448134557f892f6bd3e2e&o=', 'MALM Travnik', 9.4, 30, '0.25', 144, 'Wonderful', 17.6633591738413, 44.2241592918428, '08:00', '11:00', 'Gaj'),
 (3, 'https://www.booking.com/hotel/ba/panorama-travnik-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/351364602.jpg?k=c70b85e828abd5b15d50c14fb90f31ae73b8efe094a0991b339b1c8351614af3&o=', 'Panorama Travnik', 9.7, 40, '0.90', 117, 'Exceptional', 17.6734173558992, 44.2274911027521, '', '10:00', 'Gornje Osoje 15'),
@@ -68,16 +68,147 @@ INSERT INTO `accommodation` (`id`, `source`, `image`, `title`, `rating`, `price`
 (17, 'https://www.booking.com/hotel/ba/apartman-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/287711831.jpg?k=311fc6a1806c94ab27ed9f2da92e92a8adf2d34e347c920bcf96a482aae965b6&o=', 'Apartman Travnik', 8.1, 30.6, '0.40', 40, 'Very Good', 17.6677248, 44.2253916, '06:30', '11:30', 'Konatur'),
 (18, 'https://www.booking.com/hotel/ba/travnik-apartment.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/474756679.jpg?k=ed756d2dca249634e4e8012cbb0ae5fd565e28d6913f0ad69d6af0929b8ec822&o=', 'Travnik Apartment', 9.1, 25.6, '0.70', 27, 'Wonderful', 17.654431087645, 44.226119920019, '10:00', '12:00', '3 Bosanska'),
 (19, 'https://www.booking.com/hotel/ba/stari-grad-migy-apartman-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/300631153.jpg?k=7fde9c9fb8bbe35ed7a697711341f29ec61a2be451651863c77050b9eda9db6d&o=', 'Stari Grad Migy Travnik Apartman', 9.1, 22.5, '0.75', 100, 'Wonderful', 17.6700068378387, 44.2300016287347, '', '', 'Varoš 62 Stari grad'),
-(20, 'https://www.booking.com/hotel/ba/apartman-ada-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/285978833.jpg?k=5d0358baf6bdc9c75a4549601b5d89bbc6f8af466554af25c6a1237693336a20&o=', 'Apartman DIN', 9.5, 36, '0.30', 96, 'Exceptional', 17.659439470465, 44.226332688888, '07:00', '11:00', 'Rizaha Hercegovca 6');
+(20, 'https://www.booking.com/hotel/ba/apartman-ada-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/285978833.jpg?k=5d0358baf6bdc9c75a4549601b5d89bbc6f8af466554af25c6a1237693336a20&o=', 'Apartman DIN', 9.5, 36, '0.30', 96, 'Exceptional', 17.659439470465, 44.226332688888, '07:00', '11:00', 'Rizaha Hercegovca 6'),
+(21, 'https://www.booking.com/hotel/ba/motel-calypso.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/52942764.jpg?k=32b065f5c73872f1aa5537a751933e0fe69a8b04a492843e130cd1f3f97b44c4&o=', 'Motel Calypso Travnik', 8.3, 26, '6.35', 235, 'Very Good', 17.7309331297874, 44.1965266492725, '07:00', '21:30', 'Nova Bila bb'),
+(22, 'https://www.booking.com/hotel/ba/tomy.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/375015095.jpg?k=6ed5897a8b43a15c1e44239378f834911d3d10af8f18721e81d056e2475b3870&o=', 'Tomy', 9.3, 28.35, '0.30', 24, 'Wonderful', 17.6663382, 44.2257812, '09:00', '10:00', 'Mehmed-paše Kukavice 14'),
+(23, 'https://www.booking.com/hotel/ba/apartment-emina-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/211696552.jpg?k=037f16d25b1bdbac3d59b5198434b34b42bdd5938e8e0da89f7e1d2a764ce6b3&o=', 'Apartment Emina', 9.4, 41, '0.45', 58, 'Wonderful', 17.667857250332, 44.225119147748, '07:00', '10:00', 'ulica Konatur A/14'),
+(24, 'https://www.booking.com/hotel/ba/apartmani-snjezna-kraljica-vlasic.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/500895936.jpg?k=eebeb818d231e1e6ce19ea868b3baa3aaf22635cbcb7b06e22dbf11b4343334e&o=', 'Apartmani Snježna Kraljica Vlašić', 0, 108, '12.00', 0, '', 17.576548692363, 44.314103699113, '09:00', '10:00', 'Babanovac');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activities`
+--
+
+CREATE TABLE `activities` (
+  `id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `reviews` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`reviews`)),
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `duration` time DEFAULT NULL,
+  `difficulty` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `businesses`
+--
+
+CREATE TABLE `businesses` (
+  `id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `reviews` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`reviews`)),
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `opening_time` datetime DEFAULT NULL,
+  `closing_time` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL,
+  `longitude` double DEFAULT NULL,
+  `latitude` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `text` text DEFAULT NULL,
+  `rate` int(11) DEFAULT NULL,
+  `images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`images`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `surname` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `role` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `accommodation`
+-- Indexes for table `accommodations`
 --
-ALTER TABLE `accommodation`
+ALTER TABLE `accommodations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `activities`
+--
+ALTER TABLE `activities`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `location_id` (`location_id`);
+
+--
+-- Indexes for table `businesses`
+--
+ALTER TABLE `businesses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `location_id` (`location_id`);
+
+--
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -85,10 +216,62 @@ ALTER TABLE `accommodation`
 --
 
 --
--- AUTO_INCREMENT for table `accommodation`
+-- AUTO_INCREMENT for table `accommodations`
 --
-ALTER TABLE `accommodation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `accommodations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `activities`
+--
+ALTER TABLE `activities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `businesses`
+--
+ALTER TABLE `businesses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `activities`
+--
+ALTER TABLE `activities`
+  ADD CONSTRAINT `activities_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

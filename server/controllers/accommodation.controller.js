@@ -2,6 +2,7 @@ import axios from "axios";
 import { db } from "../database/database.js";
 import { bookingApiOptions } from "../utils/booking_api.js";
 import { logger } from "../utils/logger.js";
+import { Accommodation } from "../models/accommodation.js";
 
 /**
  * @swagger
@@ -28,14 +29,14 @@ import { logger } from "../utils/logger.js";
  *               error: Internal server error.
  */
 export const getAllAccomodation = (req, res) => {
-  try {
-    const getAccommodationWithFiltersQuery = "SELECT * FROM accommodation";
-    db.query(getAccommodationWithFiltersQuery, (err, data) => {
-      return res.status(200).json(data);
-    });
-  } catch (error) {
-    return res.status(500).send("Internal server error.");
-  }
+    try {
+        const getAccommodationWithFiltersQuery = "SELECT * FROM accommodation";
+        db.query(getAccommodationWithFiltersQuery, (err, data) => {
+            return res.status(200).json(data);
+        });
+    } catch (error) {
+        return res.status(500).send("Internal server error.");
+    }
 };
 
 /**
@@ -62,45 +63,63 @@ export const getAllAccomodation = (req, res) => {
  */
 
 export const updateAccommodation = async (req, res) => {
-  try {
-    const bookingApiResponse = await axios.request(
-      bookingApiOptions("2023-11-01", "2023-11-02")
-    );
+    try {
+        const bookingApiResponse = await axios.request(
+            bookingApiOptions("2023-11-01", "2023-11-02")
+        );
 
-    const accommodations = bookingApiResponse.data.result;
+        const accommodationsData = bookingApiResponse.data.result;
 
-    accommodations.forEach((accommodation) => {
-      // >> Check if accommodation exist
-      const checkIfAccommodationExist =
-        "SELECT * FROM accommodation WHERE source = ?";
-      db.query(checkIfAccommodationExist, [accommodation.url], (err, data) => {
-        // >> If accommodation does not exist, insert it into database.
-        if (data.length === 0) {
-          const insertNewAccommodationQuery =
-            "INSERT INTO accommodation (source, image, title, rating, price, distance_from_center, reviews, status, longitude, latitude, check_in_time, check_out_time, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-          const values = [
-            accommodation.url,
-            accommodation.main_photo_url,
-            accommodation.hotel_name,
-            accommodation.review_score,
-            accommodation.min_total_price,
-            accommodation.distance_to_cc,
-            accommodation.review_nr,
-            accommodation.review_score_word,
-            accommodation.longitude,
-            accommodation.latitude,
-            accommodation.checkout.from,
-            accommodation.checkout.until,
-            accommodation.address,
-          ];
-          db.query(insertNewAccommodationQuery, values);
-        }
-      });
-    });
+        const accommodations = accommodationsData.map((accommodationData) => {
+            return new Accommodation(
+                accommodationData.url,
+                accommodationData.main_photo_url,
+                accommodationData.hotel_name,
+                accommodationData.review_score,
+                accommodationData.min_total_price,
+                accommodationData.distance_to_cc,
+                accommodationData.review_nr,
+                accommodationData.review_score_word,
+                accommodationData.longitude,
+                accommodationData.latitude,
+                accommodationData.checkout.from,
+                accommodationData.checkout.until,
+                accommodationData.address
+            );
+        });
 
-    return res.status(200).send("Accommodation successfully updated.");
-  } catch (error) {
-    logger.error(error);
-    return res.status(500).send("Internal server error.");
-  }
+        accommodations.forEach((accommodation) => {
+            // >> Check if accommodation exist
+            const checkIfAccommodationExist =
+                "SELECT * FROM accommodations WHERE source = ?";
+            db.query(checkIfAccommodationExist, [accommodation.source], (err, data) => {
+                // >> If accommodation does not exist, insert it into database.
+                if (data.length === 0) {
+                    const insertNewAccommodationQuery =
+                        "INSERT INTO accommodations (source, image, title, rating, price, distance_from_center, reviews, status, longitude, latitude, check_in_time, check_out_time, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    const values = [
+                        accommodation.source,
+                        accommodation.image,
+                        accommodation.title,
+                        accommodation.rating,
+                        accommodation.price,
+                        accommodation.distance_from_center,
+                        accommodation.reviews,
+                        accommodation.status,
+                        accommodation.longitude,
+                        accommodation.latitude,
+                        accommodation.check_in_time,
+                        accommodation.check_out_time,
+                        accommodation.address,
+                    ];
+                    db.query(insertNewAccommodationQuery, values);
+                }
+            });
+        });
+
+        return res.status(200).send("Accommodation successfully updated.");
+    } catch (error) {
+        logger.error(error);
+        return res.status(500).send("Internal server error.");
+    }
 };

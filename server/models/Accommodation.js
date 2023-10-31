@@ -1,18 +1,33 @@
 export class Accommodation {
-    _id;
-    _source;
-    _image;
-    _title;
-    _rating;
-    _price;
-    _distance_from_center;
-    _reviews;
-    _status;
-    _longitude;
-    _latitude;
-    _check_in_time;
-    _check_out_time;
-    _address;
+    constructor(
+        source,
+        image,
+        title,
+        rating,
+        price,
+        distance_from_center,
+        reviews,
+        status,
+        longitude,
+        latitude,
+        check_in_time,
+        check_out_time,
+        address
+    ) {
+        this._source = source;
+        this._image = image;
+        this._title = title;
+        this._rating = rating;
+        this._price = price;
+        this._distance_from_center = distance_from_center;
+        this._reviews = reviews;
+        this._status = status;
+        this._longitude = longitude;
+        this._latitude = latitude;
+        this._check_in_time = check_in_time;
+        this._check_out_time = check_out_time;
+        this._address = address;
+    }
 
     get id() {
         return this._id;
@@ -47,11 +62,11 @@ export class Accommodation {
     }
 
     get rating() {
-        return this._rating;
+        return this._rating || 0;
     }
 
     set rating(value) {
-        this._rating = value;
+        this._rating = value || 0;
     }
 
     get price() {
@@ -71,11 +86,11 @@ export class Accommodation {
     }
 
     get reviews() {
-        return this._reviews;
+        return this._reviews || 0;
     }
 
     set reviews(value) {
-        this._reviews = value;
+        this._reviews = value || 0;
     }
 
     get status() {
