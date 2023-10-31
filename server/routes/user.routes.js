@@ -9,34 +9,41 @@ const router = express.Router();
  * @swagger
  * components:
  *   schemas:
- *     User:
+ *     Event:
  *       type: object
  *       properties:
  *         id:
  *           type: string
- *           description: The unique identifier for the user.
+ *           description: The unique identifier for the event.
+ *         locationId:
+ *           type: string
+ *           description: The identifier for the event location.
  *         name:
  *           type: string
- *           description: The first name of the user.
- *         surname:
+ *           description: The name of the event.
+ *         description:
  *           type: string
- *           description: The last name of the user.
- *         email:
+ *           description: A brief description of the event.
+ *         category:
  *           type: string
- *           format: email
- *           description: The email address of the user.
- *         role:
+ *           description: The category of the event.
+ *         start_date:
  *           type: string
- *           description: The role of the user. 
- *
+ *           format: date-time
+ *           description: The start date and time of the event.
+ *         end_date:
+ *           type: string
+ *           format: date-time
+ *           description: The end date and time of the event.
  *       example:
  *         id: "1"
- *         name: John
- *         surname: Doe
- *         email: john.doe@example.com
- *         role: admin 
+ *         locationId: "123"
+ *         name: Sample Event
+ *         description: This is a sample event description.
+ *         category: Music
+ *         start_date: "2023-11-01T10:00:00Z"
+ *         end_date: "2023-11-01T18:00:00Z"
  */
-
 
 router.get("/", getAllUsers);
 
