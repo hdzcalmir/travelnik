@@ -1,6 +1,10 @@
-const { getAllActivities } = require('../controllers/activity.controller.js');
-const express = require('express');
-
+const {
+  getAllActivities,
+  deleteActivity,
+  createNewActivity,
+  editActivity,
+} = require("../controllers/activity.controller.js");
+const express = require("express");
 
 const router = express.Router();
 
@@ -44,9 +48,11 @@ const router = express.Router();
  *         category: Outdoor
  *         duration: 1:30
  *         difficulty: Moderate
-*/
+ */
 
 router.get("/", getAllActivities);
+router.post("/", createNewActivity);
+router.delete("/:id", deleteActivity);
+router.patch("/:id", editActivity);
 
 module.exports = router;
-

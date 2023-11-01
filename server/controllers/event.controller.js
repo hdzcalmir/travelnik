@@ -179,7 +179,6 @@ const createNewEvent = (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).send("Internal server error.");
   }
 };
@@ -271,7 +270,6 @@ const editEvent = (req, res) => {
           ],
           (err, updateResult) => {
             if (err) {
-              console.log(err);
               return res.status(500).send("Internal server error.");
             }
 
@@ -280,7 +278,6 @@ const editEvent = (req, res) => {
               "SELECT * FROM events INNER JOIN location ON location.id = events.location_id WHERE events.id = ? LIMIT 1";
             db.query(getEditedEventQuery, [req.params.id], (err, data) => {
               if (err) {
-                console.log(err);
                 return res.status(500).send("Internal server error.");
               }
 
@@ -302,7 +299,6 @@ const editEvent = (req, res) => {
       } else return res.status(404).send("That event does not exist.");
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).send("Internal server error.");
   }
 };
