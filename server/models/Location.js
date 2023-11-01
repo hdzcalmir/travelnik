@@ -1,20 +1,26 @@
-export class Location {
-    _longitude;
-    _latitude;
+class Location {
+  _longitude;
+  _latitude;
 
-    get latitude() {
-        return this._latitude;
-    }
+  constructor() {
+    this.latitude = null;
+    this.longitude = null;
+  }
 
-    get longitude() {
-        return this._longitude;
-    }
+  get latitude() {
+    return this._latitude;
+  }
 
-    set latitude(latitude) {
-        this._latitude = latitude;
-    }
+  get longitude() {
+    return this._longitude;
+  }
 
-    set longitude(longitude) {
-        this._longitude = longitude;
-    }
+  set latitude(latitude) {
+    this._latitude = latitude;
+  }
+
+  set longitude(longitude) {
+    this._longitude = longitude;
+  }
 }
+module.exports = Location;

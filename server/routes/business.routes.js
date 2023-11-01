@@ -1,5 +1,8 @@
-const { getAllBusinesses } = require('../controllers/business.controller.js');
-const express = require('express');
+const {
+  getAllBusinesses,
+  createNewBusiness,
+} = require("../controllers/business.controller.js");
+const express = require("express");
 
 const router = express.Router();
 
@@ -33,7 +36,7 @@ const router = express.Router();
  *           description: The opening time of the business.
  *         closingTime:
  *           type: string
- *           description: The closing time of the business. 
+ *           description: The closing time of the business.
  *       example:
  *         id: "1"
  *         reviewId: "123"
@@ -42,9 +45,10 @@ const router = express.Router();
  *         description: A cozy cafe with a variety of beverages and snacks.
  *         category: Cafe
  *         openingTime: 08:00 AM
- *         closingTime: 10:00 PM 
+ *         closingTime: 10:00 PM
  */
 
 router.get("/", getAllBusinesses);
+router.post("/", createNewBusiness);
 
-module.exports = router; 
+module.exports = router;
