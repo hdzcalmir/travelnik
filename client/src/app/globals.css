@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.backdrop-saturate-150 {
+    background: #0f3a30 !important;
+  }
+  
+  .tap-highlight-transparent {
+    color: white;
+  }
