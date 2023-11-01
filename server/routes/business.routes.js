@@ -1,6 +1,8 @@
 const {
   getAllBusinesses,
   createNewBusiness,
+  deleteBusiness,
+  editBusiness,
 } = require("../controllers/business.controller.js");
 const express = require("express");
 
@@ -50,5 +52,7 @@ const router = express.Router();
 
 router.get("/", getAllBusinesses);
 router.post("/", createNewBusiness);
+router.delete("/:id", deleteBusiness);
+router.patch("/:id", editBusiness);
 
 module.exports = router;

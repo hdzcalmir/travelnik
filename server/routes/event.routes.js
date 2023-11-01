@@ -1,6 +1,10 @@
-const { getAllEvents } = require('../controllers/event.controller.js');
-const express = require('express');
-
+const {
+  getAllEvents,
+  deleteEvent,
+  editEvent,
+  createNewEvent,
+} = require("../controllers/event.controller.js");
+const express = require("express");
 
 const router = express.Router();
 
@@ -26,18 +30,19 @@ const router = express.Router();
  *           description: The email address of the user.
  *         role:
  *           type: string
- *           description: The role of the user. 
+ *           description: The role of the user.
  *
  *       example:
  *         id: "1"
  *         name: John
  *         surname: Doe
  *         email: john.doe@example.com
- *         role: admin 
+ *         role: admin
  */
 
-
 router.get("/", getAllEvents);
+router.delete("/:id", deleteEvent);
+router.patch("/:id", editEvent);
+router.post("/", createNewEvent);
 
 module.exports = router;
-
