@@ -17,13 +17,61 @@ const db = require("../database/database.js");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Event'
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     description: The unique identifier for the event.
+ *                   location_id:
+ *                     type: number
+ *                     description: The unique identifier for the location associated with the event.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the event.
+ *                   description:
+ *                     type: string
+ *                     description: A description of the event.
+ *                   category:
+ *                     type: string
+ *                     description: The category of the event.
+ *                   start_date:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The start date and time of the event.
+ *                   end_date:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The end date and time of the event.
+ *                   latitude:
+ *                     type: number
+ *                     description: The new latitude coordinate of the event location.
+ *                   longitude:
+ *                     type: number
+ *                     description: The new longitude coordinate of the event location.
+ *                   address:
+ *                     type: string
+ *                     description: Street address of the event.
+ *                   city:
+ *                     type: string
+ *                     description: City of the event.
+ *                   country:
+ *                     type: string
+ *                     description: Country of the event.
+ *                   postal_code:
+ *                     type: string
+ *                     description: Postal code of city where event is. 
+ *                   duration:
+ *                     type: string
+ *                     description: The duration of the event.
+ *                   difficulty:
+ *                     type: string
+ *                     description: The difficulty level of the event.
  *       '500':
  *         description: Internal server error.
  */
 const getAllEvents = (req, res) => {
   try {
-    const getAllEventsQuery = "SELECT * FROM events";
+    const getAllEventsQuery = "SELECT * FROM events INNER JOIN location ON events .location_id = location.id";
     db.query(getAllEventsQuery, (err, data) => {
       return res.status(200).json(data);
     });
