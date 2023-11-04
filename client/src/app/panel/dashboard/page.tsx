@@ -1,10 +1,53 @@
 "use client"
 
 import Sidebar from '@/components/panel/sidebar/sidebar';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl, { Marker } from 'mapbox-gl';
 import { useEffect } from 'react';
 
 export default function Dashboard() {
+
+    const ventures: Array<any> = [
+        {
+            "lng": 17.65746447619486,
+            "lat": 44.20660338455724
+        },
+        {
+            "lng": 17.64364880427837,
+            "lat": 44.22899848897313
+        },
+        {
+            "lng": 17.67395832304308,
+            "lat": 44.22377053265586
+        },
+        {
+            "lng": 17.663315317671504,
+            "lat": 44.22949050808299
+        },
+        {
+            "lng": 17.66280033354164,
+            "lat": 44.22131015722667
+        },
+        {
+            "lng": 17.652414820234895,
+            "lat": 44.22161770977837
+        },
+        {
+            "lng": 17.653101465742736,
+            "lat": 44.22758391136591
+        },
+        {
+            "lng": 17.623489878218948,
+            "lat": 44.223955056668046
+        },
+        {
+            "lng": 17.620829126876004,
+            "lat": 44.234594962996255
+        },
+        {
+            "lng": 17.637909433882783,
+            "lat": 44.231766042673655
+        }
+    ];
 
     useEffect(() => {
         mapboxgl.accessToken = 'pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg';
@@ -19,12 +62,20 @@ export default function Dashboard() {
             'Dobrodošli u Travnik!'
         );
 
-        map.on('click', (data)=>{
-            new mapboxgl.Marker({
-                draggable: true
+        map.on('click', (data) => {
+            const venture = new mapboxgl.Marker({
             }).setLngLat(data.lngLat)
                 .setPopup(popup)
                 .addTo(map);
+        })
+
+        map.on('load', ()=>{
+            ventures.forEach((addr)=>{
+                new mapboxgl.Marker({
+                }).setLngLat(addr)
+                    .setPopup(popup)
+                    .addTo(map);
+            })
         })
 
     })

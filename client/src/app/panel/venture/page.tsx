@@ -1,8 +1,8 @@
 "use client"
 
-import Sidebar from '../components/sidebar/sidebar'
+import Sidebar from "@/components/panel/sidebar/sidebar"
 
-export default function AddLocation() {
+export default function Venture() {
     return (
         <>
             <Sidebar></Sidebar>

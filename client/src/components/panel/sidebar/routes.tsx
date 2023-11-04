@@ -4,15 +4,15 @@ export const routes = [
         route: '/panel/dashboard'
     },
     {
-        name: 'Add Location',
-        route: '/panel/addlocation'
+        name: 'Venture',
+        route: '/panel/venture'
     },
     {
-        name: 'Add Event',
-        route: '/panel/addevent'
+        name: 'Events',
+        route: '/panel/event'
     },
     {
-        name: 'Add Activity',
-        route: '/panel/addactivity'
+        name: 'Activity',
+        route: '/panel/activity'
     }
 ]
