@@ -189,18 +189,12 @@ const createNewEvent = (req, res) => {
                 data.insertId,
               ]);
               return res.status(201).send("Event successfully created.");
-            } else {
-              console.log(err)
-
-              return res.status(500).send("Internal server error.");
-            }
+            } else return res.status(500).send("Internal server error.");
           }
         );
       }
     });
   } catch (error) {
-    console.log(error)
-
     return res.status(500).send("Internal server error.");
   }
 };
