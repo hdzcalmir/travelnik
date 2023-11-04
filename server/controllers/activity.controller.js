@@ -17,7 +17,56 @@ const db = require("../database/database.js");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Activity'
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     description: The unique identifier for the activity.
+ *                   reviews:
+ *                     type: array
+ *                     description: The list of reviews with its properties.
+ *                   location_id:
+ *                     type: number
+ *                     description: The unique identifier for the location associated with the activity.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the activity.
+ *                   description:
+ *                     type: string
+ *                     description: A description of the activity.
+ *                   category:
+ *                     type: string
+ *                     description: The category of the activity.
+ *                   duration:
+ *                     type: string
+ *                     description: The duration of the activity.
+ *                   difficulty:
+ *                     type: string
+ *                     description: The difficulty level of the activity.
+ *                   latitude:
+ *                     type: number
+ *                     description: The new latitude coordinate of the activity location.
+ *                   longitude:
+ *                     type: number
+ *                     description: The new longitude coordinate of the activity location.
+ *                   address:
+ *                     type: string
+ *                     description: Street address of the activity.
+ *                   city:
+ *                     type: string
+ *                     description: City of the activity.
+ *                   country:
+ *                     type: string
+ *                     description: Country of the activity.
+ *                   postal_code:
+ *                     type: string
+ *                     description: Postal code of city where activity is.
+ *                   start_time:
+ *                     type: string
+ *                     description: The start time of the activity.
+ *                   end_time:
+ *                     type: string
+ *                     description: The end time of the activity.
  *       '500':
  *         description: Internal server error.
  */

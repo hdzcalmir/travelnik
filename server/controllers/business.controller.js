@@ -17,12 +17,50 @@ const db = require("../database/database.js");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Business'
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: number
+ *                     description: The unique identifier for the business.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the business.
+ *                   category:
+ *                    type: string
+ *                    description: The category of the business.
+ *                   latitude:
+ *                     type: number
+ *                     description: The latitude coordinate of the business location.
+ *                   longitude:
+ *                     type: number
+ *                     description: The longitude coordinate of the business location.
+ *                   address:
+ *                     type: string
+ *                     description: Street address of the business.
+ *                   city:
+ *                     type: string
+ *                     description: City of the business.
+ *                   country:
+ *                     type: string
+ *                     description: Country of the business.
+ *                   postal_code:
+ *                     type: string
+ *                     description: Postal code of city where business is.
+ *                   description:
+ *                     type: string
+ *                     description: A description of the business.
+ *                   opening_time:
+ *                     type: string
+ *                     description: The opening time of the business.
+ *                   closing_time:
+ *                     type: string
+ *                     description: The closing time of the business.
  *       '500':
  *         description: Internal server error.
  *       '400':
  *         description: Bad request.
  */
+
 const getAllBusinesses = (req, res) => {
   try {
     const getAllBusinessesQuery =
