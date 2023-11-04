@@ -15,9 +15,16 @@ export default function Dashboard() {
             zoom: 13
         });
 
-        const marker = new mapboxgl.Marker()
-            .setLngLat([17.656692, 44.227211])
+        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            'Dobrodošli u Travnik!'
+        );
+
+        const marker = new mapboxgl.Marker({
+            draggable: true
+        }).setLngLat([17.656692, 44.227211])
+            .setPopup(popup)
             .addTo(map);
+
     })
 
 
