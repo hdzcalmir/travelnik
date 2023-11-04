@@ -172,13 +172,18 @@ const createNewBusiness = (req, res) => {
                   data.insertId,
                 ]);
                 return res.status(201).send("Business successfully created.");
-              } else return res.status(500).send("Internal server error.");
+              } else {
+                console.log(err)
+
+                return res.status(500).send("Internal server error.");
+              }
             }
           );
         }
       }
     );
   } catch (error) {
+    console.log(error)
     return res.status(500).send("Internal server error.");
   }
 };

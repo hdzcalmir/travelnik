@@ -1,7 +1,8 @@
 "use client"
 
+import Footer from '@/components/panel/footer/footer';
 import Sidebar from '@/components/panel/sidebar/sidebar';
-import mapboxgl, { Marker } from 'mapbox-gl';
+import mapboxgl, { Marker, } from 'mapbox-gl';
 import { useEffect } from 'react';
 import IsAuth from '@/hooks/isAuth';
 import { NextPage } from 'next';
@@ -51,6 +52,7 @@ const Dashboard: NextPage = () => {
     ];
 
     useEffect(() => {
+
         mapboxgl.accessToken = 'pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -70,53 +72,67 @@ const Dashboard: NextPage = () => {
                 .addTo(map);
         })
 
-        map.on('load', () => {
-            ventures.forEach((addr) => {
+        map.on('load', ()=>{
+            ventures.forEach((addr)=>{
                 new mapboxgl.Marker({
                 }).setLngLat(addr)
                     .setPopup(popup)
                     .addTo(map);
+
+                await reverseGeo(addr);
             })
         })
 
     })
 
+    let reverseGeo = async (geo: any) => {
+        try {
+            const resp = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${geo.lng},${geo.lat}.json?access_token=pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg`);
+            const data = await resp.json();
+            console.log(data);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
     return (
-        <div className='w-full'>
-            <Sidebar></Sidebar>
-            <div className="container mx-auto mt-12">
-                <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Total Locations
+        <div className="space-y-5">
+            <div className='w-full'>
+                <Sidebar></Sidebar>
+                <div className="container mx-auto mt-12">
+                    <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                            <div className="text-sm font-medium text-gray-500 truncate">
+                                Total Locations
+                            </div>
+                            <div className="mt-1 text-3xl font-semibold text-gray-900">
+                                128
+                            </div>
                         </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            128
+                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                            <div className="text-sm font-medium text-gray-500 truncate">
+                                Total Events
+                            </div>
+                            <div className="mt-1 text-3xl font-semibold text-gray-900">
+                                133
+                            </div>
                         </div>
-                    </div>
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Total Events
-                        </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            133
-                        </div>
-                    </div>
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Total Activities
-                        </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            350
+                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                            <div className="text-sm font-medium text-gray-500 truncate">
+                                Total Activities
+                            </div>
+                            <div className="mt-1 text-3xl font-semibold text-gray-900">
+                                350
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className="flex justify-center">
+                    <div className="h-[720px] w-[1280px]" id="map"></div>
+                </div>
             </div>
-            <div className="flex justify-center">
-                <div className="h-[720px] w-[1280px]" id="map"></div>
-            </div>
+            <Footer></Footer>
         </div>
     )
 }
-export default IsAuth(Dashboard);
