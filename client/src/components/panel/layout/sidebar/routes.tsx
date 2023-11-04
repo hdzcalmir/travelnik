@@ -4,8 +4,8 @@ export const routes = [
         route: '/panel/dashboard'
     },
     {
-        name: 'Venture',
-        route: '/panel/venture'
+        name: 'Add Venture',
+        route: '/panel/add-venture'
     },
     {
         name: 'Events',

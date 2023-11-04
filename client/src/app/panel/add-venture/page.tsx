@@ -1,0 +1,116 @@
+"use client"
+
+import { ADDRESS, CITY, CLICK, COUNTRY, GEO_LOC, LAT, LNG, MAP, POST_CODE, TOKEN } from "@/common/consts";
+import Footer from "@/components/panel/layout/footer/footer";
+import Sidebar from "@/components/panel/layout/sidebar/sidebar"
+import BusinessAPI from "@/interceptor/Business/Business";
+import { Api } from "@/interceptor/api";
+import mapboxgl, { Marker } from "mapbox-gl";
+import { useEffect, useState } from "react";
+
+
+const addVenture = async (venture: any) => {
+    await BusinessAPI.addVenture(venture);
+}
+
+export default function AddVenture() {
+
+    let markerExists = false;
+
+    const [venture, setVenture] = useState({
+        name: '',
+        category: '',
+        longitude: '',
+        latitude: '',
+        address: '',
+        city: '',
+        country: '',
+        postalCode: '',
+        description: '',
+        opening_time: '',
+        closing_time: ''
+    });
+
+    useEffect(() => {
+
+        mapboxgl.accessToken = TOKEN;
+        const map = new mapboxgl.Map({
+            container: MAP,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [GEO_LOC[0], GEO_LOC[1]],
+            zoom: 13
+        });
+
+        const nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'top-left');
+
+        map.on(CLICK, async (data) => {
+            if (!markerExists) {
+                new mapboxgl.Marker({
+                }).setLngLat(data.lngLat)
+                    .addTo(map);
+                const resp = await Api.reverseGeocode(data.lngLat);
+                setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                markerExists = true;
+            }
+        })
+
+    }, [])
+
+
+    const handleInputChange = (e: any) => {
+        setVenture({ ...venture, [e.target.name]: e.target.value });
+    }
+
+    return (
+        <div className="space-y-10">
+            <Sidebar></Sidebar>
+            <div className="container mx-auto space-y-5">
+                <div className="border-b-2 border-teal-500">
+                    <h1 className="text-teal-500 font-bold text-2xl">Add Venture</h1>
+                </div>
+                <div className="flex justify-center">
+                    <div className="h-[480px] w-[1560px]" id="map"></div>
+                </div>
+                <form onSubmit={addVenture} className="w-full">
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input name="name" value={venture.name} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input name="category" value={venture.category} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Category" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input value={venture.country} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input value={venture.city} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="City" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input value={venture.postalCode} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Postal Code" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input value={venture.address} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Street" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input name="description" value={venture.description} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Description" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input name="opening_time" value={venture.opening_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Opening time" />
+                    </div>
+                    <div className="flex items-center border-b border-teal-500 py-2">
+                        <input name="closing_time" value={venture.closing_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Closing time" />
+                    </div>
+                    <div className="flex justify-end mt-10 space-x-3">
+                        <button className="flex-shrink-0 bg-white hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-2 text-teal-500 py-1 px-2 rounded">
+                            Cancel
+                        </button>
+                        <button type="submit" className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
+                            Add Venture
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <Footer></Footer>
+        </div>
+    )
+}

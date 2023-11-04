@@ -1,13 +1,15 @@
 "use client"
 
-import Footer from '@/components/panel/footer/footer';
-import Sidebar from '@/components/panel/sidebar/sidebar';
-import mapboxgl, { Marker, } from 'mapbox-gl';
+import Footer from '@/components/panel/layout/footer/footer';
+import Sidebar from '@/components/panel/layout/sidebar/sidebar';
+import mapboxgl, { Marker } from 'mapbox-gl';
 import { useEffect } from 'react';
 import IsAuth from '@/hooks/isAuth';
 import { NextPage } from 'next';
+import { GEO_LOC, MAP, TOKEN } from '@/common/consts';
 
 const Dashboard: NextPage = () => {
+
     const ventures: Array<any> = [
         {
             "lng": 17.65746447619486,
@@ -53,11 +55,11 @@ const Dashboard: NextPage = () => {
 
     useEffect(() => {
 
-        mapboxgl.accessToken = 'pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg';
+        mapboxgl.accessToken = TOKEN;
         const map = new mapboxgl.Map({
-            container: 'map',
+            container: MAP,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [17.656692, 44.227211],
+            center: [GEO_LOC[0], GEO_LOC[1]],
             zoom: 13
         });
 
@@ -73,7 +75,7 @@ const Dashboard: NextPage = () => {
         })
 
         map.on('load', ()=>{
-            ventures.forEach((addr)=>{
+            ventures.forEach( async (addr)=>{
                 new mapboxgl.Marker({
                 }).setLngLat(addr)
                     .setPopup(popup)
@@ -136,3 +138,4 @@ const Dashboard: NextPage = () => {
         </div>
     )
 }
+export default IsAuth(Dashboard)
