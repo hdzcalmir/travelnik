@@ -3,7 +3,6 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMen
 import { useRouter } from "next/navigation";
 import { routes } from "./routes";
 import Image from "next/image";
-import Logo from "../../../../assets/travelnik-logo.png";
 
 export default function Sidebar() {
 
@@ -18,7 +17,7 @@ export default function Sidebar() {
           className="sm:hidden"
         />
         <NavbarBrand className="text-white">
-          <Image  onClick={() => router.push('/panel/dashboard')} alt='travelnik logo' className="block cursor-pointer object-cover rounded-xl object-center w-full md:w-2/3" width={1203} height={503} src={Logo} />
+          <Image onClick={() => router.push('/panel/dashboard')} alt='travelnik logo' className="block cursor-pointer object-cover rounded-xl object-center w-full md:w-2/3" width={1203} height={503} src='/images/travelnik-logo.png' />
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
