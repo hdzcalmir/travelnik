@@ -96,7 +96,7 @@ const loginUser = (req, res) => {
                     if (err) throw err;
                     else if (!isMatch) return res.status(404).json('User with that credentials does not exist, try again.');
                     else {
-                        const token = generateAccessToken(req.body.email);
+                        const token = generateAccessToken({ name: data[0].name, surname: data[0].surname, email: req.body.email });
 
                         return res.cookie('jwt-token',
                             token, {
