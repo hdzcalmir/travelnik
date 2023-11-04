@@ -240,10 +240,22 @@ const createNewEvent = (req, res) => {
  *                 description: The new end date and time of the event.
  *               latitude:
  *                 type: number
- *                 description: The new latitude coordinate of the business location.
+ *                 description: The new latitude coordinate of the event location.
  *               longitude:
  *                 type: number
- *                 description: The new longitude coordinate of the business location.
+ *                 description: The new longitude coordinate of the event location.
+ *               address:
+ *                 type: string
+ *                 description: Street address of the event.
+ *               city:
+ *                 type: string
+ *                 description: City of the event.
+ *               country:
+ *                 type: string
+ *                 description: Country of the event.
+ *               postalCode:
+ *                 type: string
+ *                 description: Postal code of city where event is.
  *     responses:
  *       '200':
  *         description: Event successfully updated.
@@ -299,10 +311,14 @@ const editEvent = (req, res) => {
 
               if (data.length > 0) {
                 const editEventLocationQuery =
-                  "UPDATE location SET latitude = ?, longitude = ? WHERE id = ?";
+                  "UPDATE location SET latitude = ?, longitude = ?, address = ?, city = ?, country = ?, postal_code = ? WHERE id = ?";
                 db.query(editEventLocationQuery, [
                   req.body.latitude,
                   req.body.longitude,
+                  req.body.address,
+                  req.body.city,
+                  req.body.country,
+                  req.body.postal_code,
                   data[0].location_id,
                 ]);
                 return res.status(200).json("Event successfully updated.");

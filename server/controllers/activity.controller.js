@@ -70,16 +70,16 @@ const getAllActivities = (req, res) => {
  *                 description: The longitude coordinate of the activity location.
  *               address:
  *                 type: string
- *                 description: Street address of the event.
+ *                 description: Street address of the activity.
  *               city:
  *                 type: string
- *                 description: City of the event.
+ *                 description: City of the activity.
  *               country:
  *                 type: string
- *                 description: Country of the event.
+ *                 description: Country of the activity.
  *               postalCode:
  *                 type: string
- *                 description: Postal code of city where event is organized.
+ *                 description: Postal code of city where activity is organized.
  *     responses:
  *       '201':
  *         description: Activity successfully created.
@@ -263,6 +263,18 @@ const deleteActivity = (req, res) => {
  *               longitude:
  *                 type: number
  *                 description: The new longitude coordinate of the activity location.
+ *               address:
+ *                 type: string
+ *                 description: Street address of the business.
+ *               city:
+ *                 type: string
+ *                 description: City of the business.
+ *               country:
+ *                 type: string
+ *                 description: Country of the business.
+ *               postalCode:
+ *                 type: string
+ *                 description: Postal code of city where business is.
  *     responses:
  *       '200':
  *         description: Activity successfully updated.
@@ -308,10 +320,14 @@ const editActivity = (req, res) => {
 
               if (data.length > 0) {
                 const editActivityLocationQuery =
-                  "UPDATE location SET latitude = ?, longitude = ? WHERE id = ?";
+                  "UPDATE location SET latitude = ?, longitude = ?, address = ?, city = ?, country = ?, postal_code = ? WHERE id = ?";
                 db.query(editActivityLocationQuery, [
                   req.body.latitude,
                   req.body.longitude,
+                  req.body.address,
+                  req.body.city,
+                  req.body.country,
+                  req.body.postal_code,
                   data[0].location_id,
                 ]);
                 return res.status(200).json("Activity successfully updated.");

@@ -64,16 +64,16 @@ const getAllBusinesses = (req, res) => {
  *                 description: The longitude coordinate of the business location.
  *               address:
  *                 type: string
- *                 description: Street address of the event.
+ *                 description: Street address of the business.
  *               city:
  *                 type: string
- *                 description: City of the event.
+ *                 description: City of the business.
  *               country:
  *                 type: string
- *                 description: Country of the event.
+ *                 description: Country of the business.
  *               postalCode:
  *                 type: string
- *                 description: Postal code of city where event is organized.
+ *                 description: Postal code of city where business is.
  *               description:
  *                 type: string
  *                 description: A description of the business.
@@ -233,6 +233,18 @@ const deleteBusiness = (req, res) => {
  *               longitude:
  *                 type: number
  *                 description: The new longitude coordinate of the business location.
+ *               address:
+ *                 type: string
+ *                 description: Street address of the business.
+ *               city:
+ *                 type: string
+ *                 description: City of the business.
+ *               country:
+ *                 type: string
+ *                 description: Country of the business.
+ *               postalCode:
+ *                 type: string
+ *                 description: Postal code of city where business is.
  *     responses:
  *       '200':
  *         description: Business successfully updated.
@@ -278,10 +290,14 @@ const editBusiness = (req, res) => {
 
               if (data.length > 0) {
                 const editBusinessLocationQuery =
-                  "UPDATE location SET latitude = ?, longitude = ? WHERE id = ?";
+                  "UPDATE location SET latitude = ?, longitude = ?, address = ?, city = ?, country = ?, postal_code = ? WHERE id = ?";
                 db.query(editBusinessLocationQuery, [
                   req.body.latitude,
                   req.body.longitude,
+                  req.body.address,
+                  req.body.city,
+                  req.body.country,
+                  req.body.postal_code,
                   data[0].location_id,
                 ]);
                 return res.status(200).json("Business successfully updated.");
