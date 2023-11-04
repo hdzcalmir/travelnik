@@ -1,10 +1,28 @@
 "use client"
 
-import Sidebar from '../components/sidebar/sidebar'
+import Sidebar from '../components/sidebar/sidebar';
+import mapboxgl from 'mapbox-gl';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
+
+    useEffect(() => {
+        mapboxgl.accessToken = 'pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [17.656692, 44.227211],
+            zoom: 13
+        });
+
+        const marker = new mapboxgl.Marker()
+            .setLngLat([17.656692, 44.227211])
+            .addTo(map);
+    })
+
+
     return (
-        <>
+        <div className='w-full'>
             <Sidebar></Sidebar>
             <div className="container mx-auto mt-12">
                 <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
@@ -34,6 +52,9 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </>
+            <div className="flex justify-center">
+                <div className="h-[720px] w-[1280px]" id="map"></div>
+            </div>
+        </div>
     )
 }
