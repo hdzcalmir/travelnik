@@ -162,7 +162,7 @@ const createNewEvent = (req, res) => {
         location.country = req.body.country;
         location.postalCode = req.body.postalCode;
         const insertNewLocationQuery =
-          "INSERT INTO location (latitude, longitude, address, city, country, postalCode) VALUES(?, ?, ?, ?, ?, ?)";
+          "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
         db.query(
           insertNewLocationQuery,
           [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
@@ -189,12 +189,18 @@ const createNewEvent = (req, res) => {
                 data.insertId,
               ]);
               return res.status(201).send("Event successfully created.");
-            } else return res.status(500).send("Internal server error.");
+            } else {
+              console.log(err)
+
+              return res.status(500).send("Internal server error.");
+            }
           }
         );
       }
     });
   } catch (error) {
+    console.log(error)
+
     return res.status(500).send("Internal server error.");
   }
 };

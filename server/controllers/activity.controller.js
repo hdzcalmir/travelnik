@@ -122,7 +122,7 @@ const createNewActivity = (req, res) => {
           location.country = req.body.country;
           location.postalCode = req.body.postalCode;
           const insertNewLocationQuery =
-            "INSERT INTO location (latitude, longitude, address, city, country, postalCode) VALUES(?, ?, ?, ?, ?, ?)";
+            "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
           db.query(
             insertNewLocationQuery,
             [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
