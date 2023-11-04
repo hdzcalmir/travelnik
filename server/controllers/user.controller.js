@@ -114,4 +114,21 @@ const loginUser = (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, loginUser };
+const checkProtectedAdminRoute = (req, res) => {
+    if (!req.cookies['jwt-token']) return res.status(400).send("Bad request.");
+    try {
+        const checkIfUserExistQuery = "SELECT * FROM users WHERE email = ? AND name = ?";
+        db.query(checkIfUserExistQuery, [req.tokenData.data.email, req.tokenData.data.name], (err, data) => {
+            if (data.length === 0) return res.status(401).send("Unauthorized.");
+            else {
+                if (data[0].role !== "Admin") return res.status(401).send("Unauthorized.");
+                else return res.status(200);
+            }
+        });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send("Internal server error.");
+    }
+}
+
+module.exports = { getAllUsers, loginUser, checkProtectedAdminRoute };

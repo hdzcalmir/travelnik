@@ -4,5 +4,9 @@ const UserAPI = {
         const response = await http.post('/user/login', { email, password });
         return response;
     },
+    protectedRoute: async () => {
+        const response = await http.get('/user/auth');
+        return response;
+    },
 };
 export default UserAPI;

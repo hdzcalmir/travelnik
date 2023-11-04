@@ -1,5 +1,6 @@
-const { getAllUsers, loginUser } = require('../controllers/user.controller.js');
+const { getAllUsers, loginUser, checkProtectedAdminRoute } = require('../controllers/user.controller.js');
 const express = require('express');
+const { VerifyToken } = require('../middlewares/authentication.js');
 
 
 const router = express.Router();
@@ -8,43 +9,34 @@ const router = express.Router();
  * @swagger
  * components:
  *   schemas:
- *     Event:
+ *     User:
  *       type: object
  *       properties:
  *         id:
  *           type: string
- *           description: The unique identifier for the event.
- *         locationId:
- *           type: string
- *           description: The identifier for the event location.
+ *           description: The unique identifier for the user.
  *         name:
  *           type: string
- *           description: The name of the event.
- *         description:
+ *           description: The first name of the user.
+ *         surname:
  *           type: string
- *           description: A brief description of the event.
- *         category:
+ *           description: The last name of the user.
+ *         email:
  *           type: string
- *           description: The category of the event.
- *         start_date:
+ *           description: The email address of the user.
+ *         role:
  *           type: string
- *           format: date-time
- *           description: The start date and time of the event.
- *         end_date:
- *           type: string
- *           format: date-time
- *           description: The end date and time of the event.
+ *           description: The role or privilege level of the user.
  *       example:
  *         id: "1"
- *         locationId: "123"
- *         name: Sample Event
- *         description: This is a sample event description.
- *         category: Music
- *         start_date: "2023-11-01T10:00:00Z"
- *         end_date: "2023-11-01T18:00:00Z"
+ *         name: John
+ *         surname: Doe
+ *         email: john.doe@example.com
+ *         role: admin
  */
 
 router.get("/", getAllUsers);
+router.get("/auth", VerifyToken, checkProtectedAdminRoute);
 router.post("/login", loginUser);
 
 module.exports = router;

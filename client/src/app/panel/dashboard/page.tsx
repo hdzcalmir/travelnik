@@ -3,9 +3,10 @@
 import Sidebar from '@/components/panel/sidebar/sidebar';
 import mapboxgl, { Marker } from 'mapbox-gl';
 import { useEffect } from 'react';
+import IsAuth from '@/hooks/isAuth';
+import { NextPage } from 'next';
 
-export default function Dashboard() {
-
+const Dashboard: NextPage = () => {
     const ventures: Array<any> = [
         {
             "lng": 17.65746447619486,
@@ -69,8 +70,8 @@ export default function Dashboard() {
                 .addTo(map);
         })
 
-        map.on('load', ()=>{
-            ventures.forEach((addr)=>{
+        map.on('load', () => {
+            ventures.forEach((addr) => {
                 new mapboxgl.Marker({
                 }).setLngLat(addr)
                     .setPopup(popup)
@@ -118,3 +119,4 @@ export default function Dashboard() {
         </div>
     )
 }
+export default IsAuth(Dashboard);

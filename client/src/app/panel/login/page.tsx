@@ -1,6 +1,7 @@
 'use client'
 import UserAPI from '@/interceptor/User/User';
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
 interface ILogin {
@@ -11,12 +12,18 @@ interface ILogin {
 export default function Login() {
     const [data, setData] = useState<ILogin>({ email: '', password: '' });
     const [error, setError] = useState<string>('');
+    const router = useRouter();
 
     const handleLogin = async () => {
+        if (data.email.length === 0 || data.password.length === 0) return setError("Please insert your email and password to log in.");
         try {
             const response = await UserAPI.login(data.email, data.password);
-        } catch (error) {
-            setError('We encountered an error while attempting to log in.');
+            if (response.status === 200) {
+                setError('');
+                router.push('/panel/dashboard');
+            }
+        } catch (error: any) {
+            setError(error.response.data as string);
         }
     }
 
