@@ -1,3 +1,6 @@
+const bcrypt = require("bcrypt");
+const db = require("../database/database.js");
+
 /**
  * @swagger
  * /api/users:
@@ -29,4 +32,72 @@ const getAllUsers = (req, res) => {
     }
 };
 
-module.exports = { getAllUsers };
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     tags:
+ *       - Users
+ *     summary: Login user
+ *     description: Log in a user with email and password.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: The email of the user.
+ *               password:
+ *                 type: string
+ *                 description: The password of the user.
+ *     responses:
+ *       '200':
+ *         description: Successfully logged in.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *       '403':
+ *         description: User with provided credentials does not exist.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string 
+ *       '400':
+ *         description: Bad request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *       '500':
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ */
+const loginUser = (req, res) => {
+    if (!req.body.email && !req.body.password) return res.status(400).send("Bad request.");
+    try {
+        const checkIfUserExistQuery = "SELECT * FROM users WHERE email = ?";
+        db.query(checkIfUserExistQuery, [req.body.email], (err, data) => {
+            if (data.length === 0) {
+                return res.status(404).json("User with that credentials does not exist, try again.");
+            }
+            else {
+                bcrypt.compare(req.body.password, data[0].password, function (err, isMatch) {
+                    if (err) throw err;
+                    else if (!isMatch) return res.status(404).json('User with that credentials does not exist, try again.');
+                    else return res.status(200).json("Successfully logged in.");
+                })
+            }
+        });
+    } catch (error) {
+        return res.status(500).send("Internal server error.");
+    }
+}
+
+module.exports = { getAllUsers, loginUser };

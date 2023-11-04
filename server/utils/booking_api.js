@@ -27,4 +27,4 @@ const bookingApiOptions = (arrivalDate, departureDate) => {
   };
 };
 
-module.exports = bookingApiOptions;
+module.exports = { bookingApiOptions };

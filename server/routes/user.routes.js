@@ -1,4 +1,4 @@
-const { getAllUsers } = require('../controllers/user.controller.js');
+const { getAllUsers, loginUser } = require('../controllers/user.controller.js');
 const express = require('express');
 
 
@@ -45,6 +45,7 @@ const router = express.Router();
  */
 
 router.get("/", getAllUsers);
+router.post("/login", loginUser);
 
 module.exports = router;
 

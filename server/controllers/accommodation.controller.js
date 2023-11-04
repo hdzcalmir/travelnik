@@ -63,8 +63,16 @@ const getAllAccomodation = (req, res) => {
  */
 const updateAccommodation = async (req, res) => {
   try {
+    const today = new Date();
+    const tomorrow = new Date();
+
+    tomorrow.setDate(today.getDate() + 1);
+
+    const formattedToday = today.toISOString().slice(0, 10);
+    const formattedTomorrow = tomorrow.toISOString().slice(0, 10);
+
     const bookingApiResponse = await axios.request(
-      bookingApiOptions("2023-11-01", "2023-11-02")
+      bookingApiOptions(formattedToday, formattedTomorrow)
     );
 
     const accommodationsData = bookingApiResponse.data.result;
@@ -122,7 +130,7 @@ const updateAccommodation = async (req, res) => {
 
     return res.status(200).send("Accommodation successfully updated.");
   } catch (error) {
-    logger.error(error);
+    console.log(error)
     return res.status(500).send("Internal server error.");
   }
 };

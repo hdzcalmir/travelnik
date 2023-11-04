@@ -1,5 +1,7 @@
-const jose = require('node-jose');
 const dotenv = require('dotenv');
+
+const { decode } = require('next-auth/jwt');
+
 dotenv.config()
 
 async function VerifyToken(req, res, next) {
@@ -8,14 +10,13 @@ async function VerifyToken(req, res, next) {
         if (!tokenString) {
             return res.status(401).json({ message: 'Unauthorized' });
         }
+        console.log(tokenString);
 
         const nextAuthSecret = process.env.NEXTAUTH_SECRET;
-        const key = await jose.JWK.asKey(nextAuthSecret, 'base64');
 
-        const decryptedToken = await jose.JWE.createDecrypt(key).decrypt(tokenString);
-        const payloadString = decryptedToken.payload.toString('utf-8');
+        const payload = await decode(tokenString, nextAuthSecret)
 
-        console.log(payloadString);
+        console.log(payload);
 
         next();
     } catch (error) {

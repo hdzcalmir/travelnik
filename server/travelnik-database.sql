@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 08:29 PM
+-- Generation Time: Nov 04, 2023 at 07:56 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -72,7 +72,14 @@ INSERT INTO `accommodations` (`id`, `source`, `image`, `title`, `rating`, `price
 (21, 'https://www.booking.com/hotel/ba/motel-calypso.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/52942764.jpg?k=32b065f5c73872f1aa5537a751933e0fe69a8b04a492843e130cd1f3f97b44c4&o=', 'Motel Calypso Travnik', 8.3, 26, '6.35', 235, 'Very Good', 17.7309331297874, 44.1965266492725, '07:00', '21:30', 'Nova Bila bb'),
 (22, 'https://www.booking.com/hotel/ba/tomy.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/375015095.jpg?k=6ed5897a8b43a15c1e44239378f834911d3d10af8f18721e81d056e2475b3870&o=', 'Tomy', 9.3, 28.35, '0.30', 24, 'Wonderful', 17.6663382, 44.2257812, '09:00', '10:00', 'Mehmed-paše Kukavice 14'),
 (23, 'https://www.booking.com/hotel/ba/apartment-emina-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/211696552.jpg?k=037f16d25b1bdbac3d59b5198434b34b42bdd5938e8e0da89f7e1d2a764ce6b3&o=', 'Apartment Emina', 9.4, 41, '0.45', 58, 'Wonderful', 17.667857250332, 44.225119147748, '07:00', '10:00', 'ulica Konatur A/14'),
-(24, 'https://www.booking.com/hotel/ba/apartmani-snjezna-kraljica-vlasic.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/500895936.jpg?k=eebeb818d231e1e6ce19ea868b3baa3aaf22635cbcb7b06e22dbf11b4343334e&o=', 'Apartmani Snježna Kraljica Vlašić', 0, 108, '12.00', 0, '', 17.576548692363, 44.314103699113, '09:00', '10:00', 'Babanovac');
+(24, 'https://www.booking.com/hotel/ba/apartmani-snjezna-kraljica-vlasic.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/500895936.jpg?k=eebeb818d231e1e6ce19ea868b3baa3aaf22635cbcb7b06e22dbf11b4343334e&o=', 'Apartmani Snježna Kraljica Vlašić', 0, 108, '12.00', 0, '', 17.576548692363, 44.314103699113, '09:00', '10:00', 'Babanovac'),
+(25, 'https://www.booking.com/hotel/ba/ajanovic.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/463713856.jpg?k=1e58134af3b477ec63f93bfcd8dacc21a18add3b543b71097bded6afd4b843d7&o=', 'Ajanovic', 5.6, 22.5, '0.65', 7, 'Okay', 17.67086572249, 44.227228955259, '', '', 'Podmusala'),
+(26, 'https://www.booking.com/hotel/ba/lagenhet-i-zenica.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/503755798.jpg?k=2144ebe057cbe27eb3a75f0f4bf4b4f7af2bca38cc72dc3cf391f137ce08bbf8&o=', 'Stan u Zenici', 0, 50.32, '1.60', 0, '', 17.925866, 44.2006362, '08:00', '12:00', 'Prve Zeničke brigade 11 C våning 4'),
+(27, 'https://www.booking.com/hotel/ba/33-lipe.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/499372237.jpg?k=ac48a31c10c1d1d35f12c839b3e77c048baea2a5f850195b4fd02ee7c5794431&o=', '33 Lipe', 6.8, 18, '7.65', 6, 'Pleasant', 17.568719335713, 44.237332654095, '00:00', '00:00', 'Turbe bb'),
+(28, 'https://www.booking.com/hotel/ba/krajina-v.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/455229314.jpg?k=3f0e0d2ef29121743d6d091097db396aa5d155d54e28de630a4bf40fe56310f2&o=', 'Krajina V', 8.8, 41.25, '13.85', 24, 'Excellent', 17.5442270349447, 44.3169080034726, '07:00', '11:00', 'Babanovac'),
+(29, 'https://www.booking.com/hotel/ba/apartment-vremeplov.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/87254405.jpg?k=93fa97a46aa0bb3eb9737934f849c73b9301073f28725d44476448e20450d3ec&o=', 'Apartment Vremeplov', 8.6, 35, '0.65', 284, 'Excellent', 17.670524418354, 44.2271034231815, '07:00', '10:30', 'Varoš 10'),
+(30, 'https://www.booking.com/hotel/ba/villa-popovic-nova-bila1.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/415286098.jpg?k=8622406337fe2deadbab84cd76524fe4d0221631273ba640843f851ce7fba30d&o=', 'Hostel Villa Popović', 9, 16.88, '7.05', 59, 'Wonderful', 17.7409658984263, 44.1970691475776, '00:00', '00:00', 'Podolac bb'),
+(31, 'https://www.booking.com/hotel/ba/apartmani-venci-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/376173840.jpg?k=41fb414c116258c84be432f8d4fbaf75c050b742ead127360eea0ba238063aff&o=', 'Apartmani Venci Travnik', 8.9, 60, '0.55', 59, 'Excellent', 17.6567860634056, 44.2279029897834, '08:00', '11:00', 'Stanična');
 
 -- --------------------------------------------------------
 
@@ -104,8 +111,8 @@ CREATE TABLE `businesses` (
   `name` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `category` varchar(50) DEFAULT NULL,
-  `opening_time` datetime DEFAULT NULL,
-  `closing_time` datetime DEFAULT NULL
+  `opening_time` time DEFAULT NULL,
+  `closing_time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -133,7 +140,11 @@ CREATE TABLE `events` (
 CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `longitude` double DEFAULT NULL,
-  `latitude` double DEFAULT NULL
+  `latitude` double DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `city` varchar(128) DEFAULT NULL,
+  `country` varchar(128) DEFAULT NULL,
+  `postal_code` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -160,8 +171,17 @@ CREATE TABLE `users` (
   `name` varchar(50) DEFAULT NULL,
   `surname` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
   `role` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `role`) VALUES
+(1, 'Ibrahim', 'Okic', 'ibrahim@gmail.com', '$2a$12$4GXFQvTLG8LVZpyfdTbmOuWWQB7/h65Z6qrQ1KS8Nzs5mMQXukuoy', 'Admin'),
+(2, 'Almir', 'Hodzic', 'almir@gmail.com', '$2a$12$V3Gtblbi/6nOEhNc.74Bg.IRDfS4FsRReN9LwVEaPccBN8jkaMYxG', 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -219,7 +239,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accommodations`
 --
 ALTER TABLE `accommodations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `activities`
@@ -255,7 +275,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
