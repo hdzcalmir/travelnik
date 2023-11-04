@@ -1,5 +1,9 @@
 const bcrypt = require("bcrypt");
 const db = require("../database/database.js");
+const { encode } = require("next-auth/jwt");
+const dotenv = require('dotenv');
+const { generateAccessToken } = require("../middlewares/authentication.js");
+dotenv.config()
 
 /**
  * @swagger
@@ -88,10 +92,20 @@ const loginUser = (req, res) => {
                 return res.status(404).json("User with that credentials does not exist, try again.");
             }
             else {
-                bcrypt.compare(req.body.password, data[0].password, function (err, isMatch) {
+                bcrypt.compare(req.body.password, data[0].password, async function (err, isMatch) {
                     if (err) throw err;
                     else if (!isMatch) return res.status(404).json('User with that credentials does not exist, try again.');
-                    else return res.status(200).json("Successfully logged in.");
+                    else {
+                        const token = generateAccessToken(req.body.email);
+
+                        return res.cookie('jwt-token',
+                            token, {
+                            maxAge: 900000,
+                            httpOnly: true
+                        })
+                            .status(200)
+                            .json("Successfully logged in.");
+                    }
                 })
             }
         });

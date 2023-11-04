@@ -3,7 +3,7 @@ const {
   updateAccommodation,
 } = require('../controllers/accommodation.controller.js');
 const express = require('express');
-const VerifyToken = require('../middlewares/authentication.js');
+const { VerifyToken } = require('../middlewares/authentication.js');
 
 
 const router = express.Router();

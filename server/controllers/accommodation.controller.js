@@ -130,7 +130,6 @@ const updateAccommodation = async (req, res) => {
 
     return res.status(200).send("Accommodation successfully updated.");
   } catch (error) {
-    console.log(error)
     return res.status(500).send("Internal server error.");
   }
 };
