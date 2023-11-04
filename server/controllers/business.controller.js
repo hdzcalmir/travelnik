@@ -62,6 +62,18 @@ const getAllBusinesses = (req, res) => {
  *               longitude:
  *                 type: number
  *                 description: The longitude coordinate of the business location.
+ *               address:
+ *                 type: string
+ *                 description: Street address of the event.
+ *               city:
+ *                 type: string
+ *                 description: City of the event.
+ *               country:
+ *                 type: string
+ *                 description: Country of the event.
+ *               postalCode:
+ *                 type: string
+ *                 description: Postal code of city where event is organized.
  *               description:
  *                 type: string
  *                 description: A description of the business.
@@ -99,11 +111,15 @@ const createNewBusiness = (req, res) => {
           let location = new Location();
           location.latitude = req.body.latitude;
           location.longitude = req.body.longitude;
+          location.address = req.body.address;
+          location.city = req.body.city;
+          location.country = req.body.country;
+          location.postalCode = req.body.postalCode;
           const insertNewLocationQuery =
-            "INSERT INTO location (latitude, longitude) VALUES(?, ?)";
+            "INSERT INTO location (latitude, longitude, address, city, country, postalCode) VALUES(?, ?, ?, ?, ?, ?)";
           db.query(
             insertNewLocationQuery,
-            [location.latitude, location.longitude],
+            [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
             (err, data) => {
               if (data) {
                 // >> If business does not exist, create it

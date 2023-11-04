@@ -68,6 +68,18 @@ const getAllActivities = (req, res) => {
  *               longitude:
  *                 type: number
  *                 description: The longitude coordinate of the activity location.
+ *               address:
+ *                 type: string
+ *                 description: Street address of the event.
+ *               city:
+ *                 type: string
+ *                 description: City of the event.
+ *               country:
+ *                 type: string
+ *                 description: Country of the event.
+ *               postalCode:
+ *                 type: string
+ *                 description: Postal code of city where event is organized.
  *     responses:
  *       '201':
  *         description: Activity successfully created.
@@ -96,7 +108,6 @@ const createNewActivity = (req, res) => {
       [req.body.name, req.body.category],
       (err, data) => {
         if (err) {
-          console.log(err);
           return res.status(500).send("Internal server error.");
         }
 
@@ -106,14 +117,17 @@ const createNewActivity = (req, res) => {
           let location = new Location();
           location.latitude = req.body.latitude;
           location.longitude = req.body.longitude;
+          location.address = req.body.address;
+          location.city = req.body.city;
+          location.country = req.body.country;
+          location.postalCode = req.body.postalCode;
           const insertNewLocationQuery =
-            "INSERT INTO location (latitude, longitude) VALUES(?, ?)";
+            "INSERT INTO location (latitude, longitude, address, city, country, postalCode) VALUES(?, ?, ?, ?, ?, ?)";
           db.query(
             insertNewLocationQuery,
-            [location.latitude, location.longitude],
+            [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
             (err, data) => {
               if (err) {
-                console.log(err);
                 return res.status(500).send("Internal server error.");
               }
 
@@ -132,7 +146,6 @@ const createNewActivity = (req, res) => {
                   ],
                   (err, data) => {
                     if (err) {
-                      console.log(err);
                       return res.status(500).send("Internal server error.");
                     }
 
@@ -142,7 +155,6 @@ const createNewActivity = (req, res) => {
                   }
                 );
               } else {
-                console.log("test");
                 return res.status(500).send("Internal server error.");
               }
             }
@@ -151,7 +163,6 @@ const createNewActivity = (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
     return res.status(500).send("Internal server error.");
   }
 };
