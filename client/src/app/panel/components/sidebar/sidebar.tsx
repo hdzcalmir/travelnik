@@ -18,7 +18,7 @@ export default function Sidebar() {
           className="sm:hidden"
         />
         <NavbarBrand className="text-white">
-          <Image alt='travelnik logo' className="block object-cover rounded-xl object-center w-full md:w-2/3" width={1203} height={503} src={Logo} />
+          <Image  onClick={() => router.push('/panel/dashboard')} alt='travelnik logo' className="block cursor-pointer object-cover rounded-xl object-center w-full md:w-2/3" width={1203} height={503} src={Logo} />
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
