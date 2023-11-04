@@ -2,7 +2,7 @@
 
 import Sidebar from '../components/sidebar/sidebar'
 
-export default function AddActivity() {
+export default function Activity() {
     return (
         <>
             <Sidebar></Sidebar>

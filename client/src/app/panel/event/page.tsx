@@ -1,8 +1,8 @@
 "use client"
 
-import Sidebar from '../components/sidebar/sidebar'
+import Sidebar from "@/components/panel/sidebar/sidebar";
 
-export default function AddEvent() {
+export default function Event() {
     return (
         <>
             <Sidebar></Sidebar>

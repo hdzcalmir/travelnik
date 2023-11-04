@@ -1,6 +1,6 @@
 "use client"
 
-import Sidebar from '../components/sidebar/sidebar';
+import Sidebar from '@/components/panel/sidebar/sidebar';
 import mapboxgl from 'mapbox-gl';
 import { useEffect } from 'react';
 
@@ -19,11 +19,13 @@ export default function Dashboard() {
             'Dobrodošli u Travnik!'
         );
 
-        const marker = new mapboxgl.Marker({
-            draggable: true
-        }).setLngLat([17.656692, 44.227211])
-            .setPopup(popup)
-            .addTo(map);
+        map.on('click', (data)=>{
+            new mapboxgl.Marker({
+                draggable: true
+            }).setLngLat(data.lngLat)
+                .setPopup(popup)
+                .addTo(map);
+        })
 
     })
 
