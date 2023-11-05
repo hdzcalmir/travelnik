@@ -1,6 +1,5 @@
 "use client"
 
-import useAccommodations from "@/hooks/useAccommodations";
 import AccommodationCard, { IAccommodation } from "./AccommodationCard/AccommodationCard";
 
 interface AccommodationListProps {
