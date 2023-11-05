@@ -27,7 +27,7 @@ const AccommodationCard = (data: IAccommodation) => {
                 <div
                     className="mb-10 cursor-pointer relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-2xl border border-white bg-white">
                     <div className="w-full md:w-1/3 bg-white grid place-items-center text-gray-800">
-                        <Image src={data.image} alt={data.title} className="rounded-xl" width={400} height={400} loading="lazy" />
+                        <Image src={data.image.replace('square60', 'square600')} alt={data.title} className="rounded-xl" width={400} height={400} loading="lazy" />
                     </div>
                     <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
                         <div className="flex justify-between item-center">
