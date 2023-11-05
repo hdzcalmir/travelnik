@@ -1,14 +1,15 @@
 "use client"
 
-import AccommodationList from "@/components/home/accommodation/AccommodationList";
-import useAccommodations from "@/hooks/useAccommodations";
+import Hero from "@/components/home/hero/Hero"
+import Navbar from "@/components/home/navbar/Navbar"
+
 
 export default function Home() {
-  const { accommodations, accommodationsLoading } = useAccommodations();
 
-  return (
-    <>
-      <AccommodationList accommodations={accommodations} accommodationsLoading={accommodationsLoading} />
-    </>
-  )
+    return (
+        <>
+            <Navbar />
+            <Hero />
+        </>
+    )
 }

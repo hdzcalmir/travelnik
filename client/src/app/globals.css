@@ -1,5 +1,4 @@
-@import "mapbox-gl/dist/mapbox-gl.css";
-@import "../../../node_modules/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+@import "mapbox-gl/dist/mapbox-gl.css"; 
 
 @tailwind base;
 @tailwind components;
@@ -21,3 +20,7 @@
     height: 44.28px;
     cursor: pointer;
   }
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display:none;
+}
