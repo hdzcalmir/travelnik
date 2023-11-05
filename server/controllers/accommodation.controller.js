@@ -30,7 +30,7 @@ const Accommodation = require("../models/Accommodation.js");
  */
 const getAllAccomodation = (req, res) => {
   try {
-    const getAccommodationWithFiltersQuery = "SELECT * FROM accommodation";
+    const getAccommodationWithFiltersQuery = "SELECT * FROM accommodations ORDER BY id DESC LIMIT 15";
     db.query(getAccommodationWithFiltersQuery, (err, data) => {
       return res.status(200).json(data);
     });
