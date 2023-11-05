@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cookieParser = require('cookie-parser');
-const swaggerOptions = require('./utils/constants.js');
+const { swaggerOptions } = require('./utils/constants.js');
 
 dotenv.config();
 const app = express();

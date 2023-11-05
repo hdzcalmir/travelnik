@@ -15,7 +15,8 @@ export const interests = [
     'Food',
     'Music',
     'Hiking',
-    'Fashion'
+    'Fashion',
+    'Sport'
 ];
 export const homeNavLinks = [
     {

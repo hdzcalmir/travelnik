@@ -1,5 +1,6 @@
 const Location = require("../models/Location");
 const db = require("../database/database.js");
+const { INTEREST_CATEGORIES } = require("../utils/constants.js");
 
 /**
  * @swagger
@@ -63,8 +64,21 @@ const db = require("../database/database.js");
 
 const getAllBusinesses = (req, res) => {
   try {
-    const getAllBusinessesQuery =
-      "SELECT * FROM businesses INNER JOIN location ON businesses.location_id = location.id";
+    let getAllBusinessesQuery = 'SELECT * FROM businesses INNER JOIN location ON businesses.location_id = location.id';
+    if (req.query.interests && req.query.check_in && req.query.check_out && req.query.people) {
+      const jsonInterests = atob(req.query.interests);
+      const interests = JSON.parse(jsonInterests);
+
+      const selectedCategories = interests.reduce((acc, interest) => {
+        return acc.concat(INTEREST_CATEGORIES[interest] || []);
+      }, []);
+
+      getAllBusinessesQuery = `SELECT * 
+                              FROM businesses 
+                              INNER JOIN location ON businesses.location_id = location.id 
+                              WHERE category IN (${selectedCategories.join(',')})`;
+
+    }
     db.query(getAllBusinessesQuery, (err, data) => {
       return res.status(200).json(data);
     });
