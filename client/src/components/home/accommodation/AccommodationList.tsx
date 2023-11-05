@@ -1,6 +1,7 @@
 "use client"
 
 import AccommodationCard, { IAccommodation } from "./AccommodationCard/AccommodationCard";
+import AccommodationSkeleton from "./AccommodationCard/AccommodationSkeleton";
 
 interface AccommodationListProps {
     accommodations: IAccommodation[] | undefined;
@@ -8,7 +9,18 @@ interface AccommodationListProps {
 }
 
 const AccommodationList = ({ accommodations, accommodationsLoading }: AccommodationListProps) => {
-    if (accommodationsLoading) return <div>Loading</div>;
+    if (accommodationsLoading) {
+
+        const skeletonElements = Array.from({ length: 10 }, (_, index) => (
+            <AccommodationSkeleton key={index} />
+        ));
+
+        return (
+            <>
+                {skeletonElements}
+            </>
+        )
+    }
     return (
         <>
             {accommodations &&
