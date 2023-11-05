@@ -57,7 +57,16 @@ const AboutPage = () => {
     return (
         <>
             <Navbar />
-            <AccommodationList accommodations={accommodations} accommodationsLoading={accommodationsLoading} />
+            <div className="grid grid-cols-3 grid-rows-1 mt-6 mx-4">
+                <div></div>
+                <div></div>
+                <div className=" rounded-xl py-4">
+                    <h2 className="text-3xl font-bold mb-2 mx-2">Available apartments:</h2>
+                    <div className="overflow-y-auto h-[84vh]">
+                        <AccommodationList accommodations={accommodations} accommodationsLoading={accommodationsLoading} />
+                    </div>
+                </div>
+            </div>
         </>
     );
 }
