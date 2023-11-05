@@ -6,7 +6,7 @@ import mapboxgl, { Marker } from 'mapbox-gl';
 import { useEffect } from 'react';
 import IsAuth from '@/hooks/isAuth';
 import { NextPage } from 'next';
-import { GEO_LOC, MAP, TOKEN } from '@/common/consts';
+import { GEO_LOC, LOAD, MAP, TOKEN } from '@/common/consts';
 
 const Dashboard: NextPage = () => {
 
@@ -74,29 +74,18 @@ const Dashboard: NextPage = () => {
                 .addTo(map);
         })
 
-        map.on('load', ()=>{
-            ventures.forEach( async (addr)=>{
-                new mapboxgl.Marker({
-                }).setLngLat(addr)
+        map.on(LOAD, () => {
+            ventures.forEach((addr) => {
+                let el = document.createElement('div');
+                el.className = 'marker';
+                new mapboxgl.Marker(el)
+                    .setLngLat(addr)
                     .setPopup(popup)
                     .addTo(map);
-
-                await reverseGeo(addr);
             })
         })
 
     })
-
-    let reverseGeo = async (geo: any) => {
-        try {
-            const resp = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${geo.lng},${geo.lat}.json?access_token=pk.eyJ1IjoidHlyb25laWtuZXIiLCJhIjoiY2xvazNzOHJlMjgyZzJrbzJ1b2k4eHM5eCJ9.tuNLcp01YK2C8O8YCAJSAg`);
-            const data = await resp.json();
-            console.log(data);
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
 
     return (
         <div className="space-y-5">
@@ -131,7 +120,7 @@ const Dashboard: NextPage = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="h-[720px] w-[1280px]" id="map"></div>
+                    <div className="h-[720px] w-[1560px]" id="map"></div>
                 </div>
             </div>
             <Footer></Footer>
