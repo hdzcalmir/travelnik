@@ -1,5 +1,7 @@
 "use client"
 
+import { IActivity } from "@/common/interfaces/IActivity";
+import { IEvent } from "@/common/interfaces/IEvent";
 import { IVenture } from "@/common/interfaces/IVenture";
 import AccommodationList from "@/components/home/accommodation/AccommodationList";
 import Navbar from "@/components/home/navbar/Navbar"
@@ -17,9 +19,9 @@ const AboutPage = () => {
 
     // >> States & Hooks
     const { accommodations, accommodationsLoading } = useAccommodations();
-    const [businesses, setBusinesses] = useState<IVenture>();
-    const [activities, setActivities] = useState<[]>();
-    const [events, setEvents] = useState<[]>();
+    const [businesses, setBusinesses] = useState<IVenture[]>();
+    const [activities, setActivities] = useState<IActivity[]>();
+    const [events, setEvents] = useState<IEvent[]>();
 
     // >> Filters
     const interests = params.get('interests');
