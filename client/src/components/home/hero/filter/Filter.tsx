@@ -4,10 +4,15 @@ import { interests } from "@/common/consts";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaHashtag } from "react-icons/fa";
 
+export interface IDepartureTime {
+    check_in: string;
+    check_out: string;
+}
 interface FilterProps {
     selectedInterests: string[];
     setSelectedInterests: Dispatch<SetStateAction<string[]>>;
 }
+
 
 const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
     const [interestDropdown, setInterestDropdown] = useState(false);
@@ -18,6 +23,10 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
 
         if (e.target.checked) setSelectedInterests(prevInterests => [...prevInterests, interest]);
         else setSelectedInterests(prevInterests => prevInterests.filter(item => item !== interest));
+    }
+
+    const handleDepartureChange = (e: ChangeEvent<HTMLInputElement>) =>{
+
     }
 
     useEffect(() => {
@@ -50,7 +59,7 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                             onClick={() => setInterestDropdown(!interestDropdown)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor"
                             placeholder="Select your interests"
-                            value={selectedInterests.join(', ')}
+                            defaultValue={selectedInterests.join(', ')}
                         />
                         {interestDropdown && (
                             <div id="dropdownSearch" className="z-10 absolute bg-white top-10 shadow w-60 dark:bg-gray-700 rounded-b-lg">
@@ -62,7 +71,7 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                                                     id={`checkbox-item-${interest}`}
                                                     type="checkbox"
                                                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleCheckedInterest(e)}
-                                                    value={interest}
+                                                    defaultValue={interest}
                                                     checked={selectedInterests.includes(interest)}
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
@@ -83,7 +92,7 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
                         </svg>
                     </div>
-                    <input name="check_in" type="date" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="Check in date" />
+                    <input name="check_in" type="date" onChange={(e: ChangeEvent<HTMLInputElement>)=>handleDepartureChange(e)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="Check in date" />
                 </div>
                 <div className="relative">
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

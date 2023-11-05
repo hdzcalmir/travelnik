@@ -1,9 +1,9 @@
 "use client"
 import React from "react";
 import { Navbar, NavbarBrand, NavbarContent, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
-import { routes } from "./routes";
+import { useRouter } from "next/navigation"; 
 import Image from "next/image";
+import { routes } from "./routes";
 
 export default function Sidebar() {
 
