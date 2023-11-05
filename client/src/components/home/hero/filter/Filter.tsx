@@ -1,11 +1,39 @@
 "use client"
 
 import { interests } from "@/common/consts";
-import { useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaHashtag } from "react-icons/fa";
 
-const Filter = () => {
+interface FilterProps {
+    selectedInterests: string[];
+    setSelectedInterests: Dispatch<SetStateAction<string[]>>;
+}
+
+const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
     const [interestDropdown, setInterestDropdown] = useState(false);
+    const interestRef = useRef<HTMLDivElement>(null);
+
+    const handleCheckedInterest = (e: ChangeEvent<HTMLInputElement>) => {
+        const interest = e.target.value;
+
+        if (e.target.checked) setSelectedInterests(prevInterests => [...prevInterests, interest]);
+        else setSelectedInterests(prevInterests => prevInterests.filter(item => item !== interest));
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (interestRef.current && !interestRef.current.contains(event.target as Node)) {
+                setInterestDropdown(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
 
     return (
         <form action="#" className="grid gap-y-4 p-4 mt-8 w-full bg-white rounded lg:gap-x-4 lg:grid-cols-9 lg:mt-12 dark:bg-gray-800">
@@ -15,22 +43,37 @@ const Filter = () => {
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                         <FaHashtag className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                     </div>
-                    <input type="text" id="interest-form" onClick={() => setInterestDropdown(!interestDropdown)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="Select your interests" />
-                    {interestDropdown && (
-                        <div id="dropdownSearch" className="z-10 absolute bg-white top-10 shadow w-60 dark:bg-gray-700 rounded-b-lg">
-                            <ul className="h-48 px-3 scrollbar-hidden pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSearchButton">
-                                {interests && interests.map((interest) => (
-                                    <li key={interest}>
-                                        <div className="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <input id="checkbox-item-13" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                                            <label htmlFor="checkbox-item-13" className="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{interest}</label>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
+                    <div ref={interestRef}>
+                        <input
+                            type="text"
+                            id="interest-form"
+                            onClick={() => setInterestDropdown(!interestDropdown)}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor"
+                            placeholder="Select your interests"
+                            value={selectedInterests.join(', ')}
+                        />
+                        {interestDropdown && (
+                            <div id="dropdownSearch" className="z-10 absolute bg-white top-10 shadow w-60 dark:bg-gray-700 rounded-b-lg">
+                                <ul className="h-48 px-3 scrollbar-hidden pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSearchButton">
+                                    {interests && interests.map((interest) => (
+                                        <li key={interest}>
+                                            <div className="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                <input
+                                                    id={`checkbox-item-${interest}`}
+                                                    type="checkbox"
+                                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleCheckedInterest(e)}
+                                                    value={interest}
+                                                    checked={selectedInterests.includes(interest)}
+                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                />
+                                                <label htmlFor={`checkbox-item-${interest}`} className="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{interest}</label>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <div date-rangepicker="" className="grid grid-cols-2 gap-x-4 lg:col-span-3">
