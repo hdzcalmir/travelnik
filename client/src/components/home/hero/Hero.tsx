@@ -7,11 +7,13 @@ import { useState } from 'react';
 
 const Hero = () => {
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-    const [peopleComing, setPeopleComing] = useState<number>(1);
+    const [peopleComing, setPeopleComing] = useState<string>('No. people');
     const [departureTime, setDepartureTime] = useState<IDepartureTime>({
-        check_in:'', check_out:''
+        check_in: '', check_out: ''
     });
-    
+
+    console.log(peopleComing)
+
     return (
         <section className="bg-[url('http://localhost:3000/images/castle.png')] bg-no-repeat bg-cover bg-center bg-gray-700 bg-blend-multiply">
             <div className="relative py-8 px-4 mx-auto max-w-screen-xl text-white lg:py-32 xl:px-0 z-1">
@@ -24,7 +26,14 @@ const Hero = () => {
                         Learn More
                     </Link>
                 </div>
-                <Filter selectedInterests={selectedInterests} setSelectedInterests={setSelectedInterests} />
+                <Filter
+                    selectedInterests={selectedInterests}
+                    setSelectedInterests={setSelectedInterests}
+                    departureTime={departureTime}
+                    setDepartureTime={setDepartureTime}
+                    peopleComing={peopleComing}
+                    setPeopleComing={setPeopleComing}
+                />
             </div>
         </section>
     );

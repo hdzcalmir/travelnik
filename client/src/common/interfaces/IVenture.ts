@@ -1,4 +1,5 @@
 export interface IVenture {
+    id?: string;
     name: string,
     category: string,
     latitude: string,

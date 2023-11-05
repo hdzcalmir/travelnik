@@ -3,6 +3,8 @@
 import { interests } from "@/common/consts";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaHashtag } from "react-icons/fa";
+import { toast } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 export interface IDepartureTime {
     check_in: string;
@@ -11,12 +13,26 @@ export interface IDepartureTime {
 interface FilterProps {
     selectedInterests: string[];
     setSelectedInterests: Dispatch<SetStateAction<string[]>>;
+
+    departureTime: IDepartureTime;
+    setDepartureTime: Dispatch<SetStateAction<IDepartureTime>>;
+
+    peopleComing: string;
+    setPeopleComing: Dispatch<SetStateAction<string>>;
 }
 
 
-const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
+const Filter = ({
+    selectedInterests,
+    setSelectedInterests,
+    departureTime,
+    setDepartureTime,
+    peopleComing,
+    setPeopleComing }: FilterProps) => {
+
     const [interestDropdown, setInterestDropdown] = useState(false);
     const interestRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     const handleCheckedInterest = (e: ChangeEvent<HTMLInputElement>) => {
         const interest = e.target.value;
@@ -25,8 +41,32 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
         else setSelectedInterests(prevInterests => prevInterests.filter(item => item !== interest));
     }
 
-    const handleDepartureChange = (e: ChangeEvent<HTMLInputElement>) =>{
+    const handleDepartureChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setDepartureTime({
+            ...departureTime,
+            [e.target.name]: e.target.value
+        });
+    }
 
+    const handlePeopleComing = (e: ChangeEvent<HTMLSelectElement>) => {
+        setPeopleComing(e.target.value);
+    }
+
+    const fetchDataForGivenFilters = async () => {
+        if (selectedInterests.length === 0) {
+            toast.error('You need to choose your interests.');
+            return;
+        }
+        if (departureTime.check_in.length === 0 || departureTime.check_out.length === 0) {
+            toast.error('You need to select departure date.');
+            return;
+        }
+        if (peopleComing === 'No. people') {
+            toast.error('You need to select number of people.');
+            return;
+        }
+        // >> If filters are good, send request to fetch data on given filters
+        router.push(`/departure?interests=${btoa(JSON.stringify(selectedInterests))}&check_in=${departureTime.check_in}&check_out=${departureTime.check_out}&people=${peopleComing}`)
     }
 
     useEffect(() => {
@@ -45,7 +85,7 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
 
 
     return (
-        <form action="#" className="grid gap-y-4 p-4 mt-8 w-full bg-white rounded lg:gap-x-4 lg:grid-cols-9 lg:mt-12 dark:bg-gray-800">
+        <div className="grid gap-y-4 p-4 mt-8 w-full bg-white rounded lg:gap-x-4 lg:grid-cols-9 lg:mt-12 dark:bg-gray-800">
             <div className="lg:col-span-3">
                 <label htmlFor="interest-form" className="sr-only">Interests</label>
                 <div className="relative">
@@ -92,7 +132,7 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
                         </svg>
                     </div>
-                    <input name="check_in" type="date" onChange={(e: ChangeEvent<HTMLInputElement>)=>handleDepartureChange(e)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="Check in date" />
+                    <input name="check_in" type="date" onChange={(e: ChangeEvent<HTMLInputElement>) => handleDepartureChange(e)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="DD/MM/YYYY" />
                 </div>
                 <div className="relative">
                     <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -100,13 +140,13 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
                         </svg>
                     </div>
-                    <input name="check_out" type="date" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="Check out date" />
+                    <input name="check_out" type="date" onChange={(e: ChangeEvent<HTMLInputElement>) => handleDepartureChange(e)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor" placeholder="DD/MM/YYYY" />
                 </div>
             </div>
             <div className="lg:col-span-1">
                 <label htmlFor="guests" className="sr-only">Select number of people</label>
-                <select id="guests" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-gray-200">
-                    <option>No. people</option>
+                <select id="guests" onChange={(e: ChangeEvent<HTMLSelectElement>) => handlePeopleComing(e)} value={peopleComing} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-gray-200">
+                    <option disabled>No. people</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -114,13 +154,13 @@ const Filter = ({ selectedInterests, setSelectedInterests }: FilterProps) => {
                     <option>5+</option>
                 </select>
             </div>
-            <button type="submit" className="lg:col-span-2 justify-center md:w-auto text-white bg-secondaryColor/80 hover:bg-secondaryColor focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-500 dark:focus:ring-gray-200 inline-flex items-center">
+            <button type="submit" onClick={fetchDataForGivenFilters} className="lg:col-span-2 justify-center md:w-auto text-white bg-secondaryColor/80 hover:bg-secondaryColor focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-500 dark:focus:ring-gray-200 inline-flex items-center">
                 <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
                 </svg>
                 Search
             </button>
-        </form>
+        </div>
     );
 }
 
