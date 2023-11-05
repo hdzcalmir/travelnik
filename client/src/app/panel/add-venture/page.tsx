@@ -1,6 +1,7 @@
 "use client"
 
 import { ADDRESS, CITY, CLICK, COUNTRY, GEO_LOC, LAT, LNG, MAP, POST_CODE, TOKEN } from "@/common/consts";
+import { Category } from "@/common/enums/category";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar"
 import BusinessAPI from "@/interceptor/Business/Business";
@@ -47,8 +48,11 @@ export default function AddVenture() {
 
         map.on(CLICK, async (data) => {
             if (!markerExists) {
-                marker = new mapboxgl.Marker({
-                }).setLngLat(data.lngLat)
+                let icon = document.createElement('div');
+                icon.className = 'marker';
+
+                marker = new mapboxgl.Marker(icon)
+                    .setLngLat(data.lngLat)
                     .addTo(map);
                 const resp = await Api.reverseGeocode(data.lngLat);
                 setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
@@ -60,6 +64,7 @@ export default function AddVenture() {
 
     const handleInputChange = (e: any) => {
         setVenture({ ...venture, [e.target.name]: e.target.value });
+        console.log(venture)
     }
 
     const removeMarker = (e: any) => {
@@ -81,8 +86,19 @@ export default function AddVenture() {
                     <div className="flex items-center border-b border-teal-500 py-2">
                         <input name="name" value={venture.name} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" />
                     </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input name="category" value={venture.category} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Category" />
+                    <div className="py-2 w-full">
+                        <select className="border-b border-teal-500 w-full py-2 px-1" id="category" name="category" value={venture.category} onChange={handleInputChange}>
+                            <option value={Category.Restaurant}>Select Category..</option>
+                            <option value={Category.Restaurant}>Restaurant</option>
+                            <option value={Category.Hotel}>Hotel</option>
+                            <option value={Category.Hospital}>Hospital</option>
+                            <option value={Category.Gym}>Gym</option>
+                            <option value={Category.Cinema}>Cinema</option>
+                            <option value={Category.GasStation}>Gas Station</option>
+                            <option value={Category.Market}>Market</option>
+                            <option value={Category.Taxi}>Taxi</option>
+                            <option value={Category.BusStation}>Bus Station</option>
+                        </select>
                     </div>
                     <div className="flex items-center border-b border-teal-500 py-2">
                         <input value={venture.country} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />

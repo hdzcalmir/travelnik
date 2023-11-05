@@ -8,3 +8,4 @@ export const ADDRESS = 'address';
 export const LAT = 'latitude';
 export const LNG = 'longitude';
 export const CLICK = 'click';
+export const LOAD = 'load';

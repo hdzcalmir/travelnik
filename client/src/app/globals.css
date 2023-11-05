@@ -12,3 +12,11 @@
   .tap-highlight-transparent {
     color: white;
   }
+
+  .marker {
+    background-image: url('../../public/map-icons/gas.png');
+    background-size: cover;
+    width: 31.32px;
+    height: 44.28px;
+    cursor: pointer;
+  }
