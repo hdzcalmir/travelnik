@@ -16,12 +16,13 @@ const addVenture = async (venture: any) => {
 export default function AddVenture() {
 
     let markerExists = false;
+    let marker: any;
 
     const [venture, setVenture] = useState({
         name: '',
         category: '',
-        longitude: '',
-        latitude: '',
+        longitude: 0,
+        latitude: 0,
         address: '',
         city: '',
         country: '',
@@ -46,7 +47,7 @@ export default function AddVenture() {
 
         map.on(CLICK, async (data) => {
             if (!markerExists) {
-                new mapboxgl.Marker({
+                marker = new mapboxgl.Marker({
                 }).setLngLat(data.lngLat)
                     .addTo(map);
                 const resp = await Api.reverseGeocode(data.lngLat);
@@ -54,12 +55,16 @@ export default function AddVenture() {
                 markerExists = true;
             }
         })
-
     }, [])
 
 
     const handleInputChange = (e: any) => {
         setVenture({ ...venture, [e.target.name]: e.target.value });
+    }
+
+    const removeMarker = (e: any) => {
+        e.preventDefault();
+        marker.remove();
     }
 
     return (
@@ -104,7 +109,7 @@ export default function AddVenture() {
                         <button className="flex-shrink-0 bg-white hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-2 text-teal-500 py-1 px-2 rounded">
                             Cancel
                         </button>
-                        <button type="submit" className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
+                        <button onClick={() => removeMarker} className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
                             Add Venture
                         </button>
                     </div>
