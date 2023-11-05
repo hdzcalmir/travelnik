@@ -13,7 +13,7 @@ const Hero = () => {
                         Discover <FaSearchLocation className="inline-flex text-secondaryColor" />Travnik, Bosnia and Herzegovina&apos;s Hidden Gem!</h1>
                     <p className="mb-6 font-light text-gray-300 lg:mb-8 md:text-md lg:text-lg ">Travelnik is your personalized guide to the enchanting city of Travnik, Bosnia and Herzegovina.
                         <br></br>Packed with insider tips, interactive maps, and curated recommendations, it&apos;s the perfect companion for tourists looking to uncover the rich history, stunning architecture, and vibrant culture of this hidden gem.</p>
-                    <Link href="/history" className="inline-flex items-center py-3 px-5 font-medium text-center text-white rounded-lg bg-secondaryColor hover:bg-secondaryColor/80 focus:ring-4 focus:outline-none focus:ring-primary-900 dark:bg-secondaryColor dark:hover:bg-secondaryColor dark:focus:ring-secondaryColor/80">
+                    <Link href="/history" className="inline-flex items-center py-3 px-5 font-medium text-center text-white rounded-lg bg-secondaryColor/80 hover:bg-secondaryColor transition duration-500 focus:ring-4 focus:outline-none focus:ring-primary-900 dark:focus:ring-secondaryColor/80">
                         Learn More
                     </Link>
                 </div>

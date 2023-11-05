@@ -62,7 +62,7 @@ const Filter = () => {
                     <option>5+</option>
                 </select>
             </div>
-            <button type="submit" className="lg:col-span-2 justify-center md:w-auto text-white bg-secondaryColor hover:bg-secondaryColor/80 focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-secondaryColor dark:hover:bg-secondaryColor dark:focus:ring-gray-200 inline-flex items-center">
+            <button type="submit" className="lg:col-span-2 justify-center md:w-auto text-white bg-secondaryColor/80 hover:bg-secondaryColor focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-500 dark:focus:ring-gray-200 inline-flex items-center">
                 <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
                 </svg>
