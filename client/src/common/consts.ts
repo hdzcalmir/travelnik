@@ -17,3 +17,17 @@ export const interests = [
     'Hiking',
     'Fashion'
 ];
+export const homeNavLinks = [
+    {
+        name: "Home",
+        link: "/"
+    },
+    {
+        name: "About",
+        link: "/about"
+    },
+    {
+        name: "History",
+        link: "/history"
+    }
+];
