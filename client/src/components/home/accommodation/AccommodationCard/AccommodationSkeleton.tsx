@@ -1,3 +1,5 @@
+"use client"
+
 const AccommodationSkeleton = () => {
     return (
         <div className="border border-gray-300 shadow rounded-md p-4 max-w-xs md:max-w-md w-full mb-10">

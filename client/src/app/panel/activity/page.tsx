@@ -1,8 +1,5 @@
 "use client"
-
 import Sidebar from "@/components/panel/layout/sidebar/sidebar"
-
-
 
 export default function Activity() {
     return (
