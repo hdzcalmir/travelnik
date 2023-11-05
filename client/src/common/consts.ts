@@ -9,3 +9,11 @@ export const LAT = 'latitude';
 export const LNG = 'longitude';
 export const CLICK = 'click';
 export const LOAD = 'load';
+export const interests = [
+    'History',
+    'Art',
+    'Food',
+    'Music',
+    'Hiking',
+    'Fashion'
+];

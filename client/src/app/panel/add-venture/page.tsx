@@ -98,8 +98,8 @@ export default function AddVenture() {
                         <input name="description" value={venture.description} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Description" />
                     </div>
                     <div className="py-2 w-full">
-                        <select className="border-b border-teal-500 w-full py-2 px-1" id="category" name="category" value={venture.category} onChange={handleInputChange}>
-                            <option value={Category.Restaurant}>Select Category..</option>
+                        <select className="border-b outline-none border-teal-500 w-full py-2 px-1" id="category" name="category" value={venture.category} onChange={handleInputChange}>
+                            <option>Select Category..</option>
                             <option value={Category.Restaurant}>Restaurant</option>
                             <option value={Category.Hotel}>Hotel</option>
                             <option value={Category.Hospital}>Hospital</option>
