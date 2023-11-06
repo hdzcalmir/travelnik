@@ -7,7 +7,6 @@ import Sidebar from "@/components/panel/layout/sidebar/sidebar"
 import BusinessAPI from "@/interceptor/Business/Business";
 import { Api } from "@/interceptor/api";
 import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "mapbox-gl-geocoder";
 import { useEffect, useState } from "react";
 
 
@@ -44,13 +43,6 @@ export default function AddVenture() {
             zoom: 13
         });
 
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: TOKEN,
-                mapboxgl: mapboxgl
-            })
-        )
-
         const nav = new mapboxgl.NavigationControl();
         map.addControl(nav, 'top-left');
 
@@ -81,60 +73,63 @@ export default function AddVenture() {
     };
 
     return (
-        <div className="space-y-10">
+        <div className="">
             <Sidebar></Sidebar>
-            <div className="container mx-auto space-y-5">
+            <div className="p-4 sm:ml-64 h-full">
                 <div className="border-b-2 border-teal-500">
                     <h1 className="text-teal-500 font-bold text-2xl">Add Venture</h1>
                 </div>
-                <div className="flex justify-center">
-                    <div className="h-[480px] w-[1560px]" id="map"></div>
+                <div className="p-4 border-gray-200 h-full dark:border-gray-700">
+                    <div className="flex items-center justify-center rounded-lg h-96 mb-4" id="map">
+                    </div>
+                    <div className="flex items-center justify-center h-full p-10 mb-4 rounded bg-gray-50">
+                        <form onSubmit={handleAddVenture} className="w-full">
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input name="name" value={venture.name} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input name="description" value={venture.description} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Description" />
+                            </div>
+                            <div className="py-2 w-full">
+                                <select className="border-b outline-none border-teal-500 w-full py-2 px-1" id="category" name="category" value={venture.category} onChange={handleInputChange}>
+                                    <option>Select Category..</option>
+                                    <option value={Category.Restaurant}>Restaurant</option>
+                                    <option value={Category.Hotel}>Hotel</option>
+                                    <option value={Category.Hospital}>Hospital</option>
+                                    <option value={Category.Gym}>Gym</option>
+                                    <option value={Category.Cinema}>Cinema</option>
+                                    <option value={Category.GasStation}>Gas Station</option>
+                                    <option value={Category.Market}>Market</option>
+                                    <option value={Category.Taxi}>Taxi</option>
+                                    <option value={Category.BusStation}>Bus Station</option>
+                                </select>
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input value={venture.country} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input value={venture.city} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="City" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input value={venture.postalCode} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Postal Code" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input value={venture.address} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Street" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input type="time" name="opening_time" value={venture.opening_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Opening time" />
+                            </div>
+                            <div className="flex items-center border-b border-teal-500 py-2">
+                                <input type="time" name="closing_time" value={venture.closing_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Closing time" />
+                            </div>
+                            <div className="flex justify-end mt-10 space-x-3">
+                                <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
+                                    Add Venture
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <form onSubmit={handleAddVenture} className="w-full">
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input name="name" value={venture.name} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Name" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input name="description" value={venture.description} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Description" />
-                    </div>
-                    <div className="py-2 w-full">
-                        <select className="border-b outline-none border-teal-500 w-full py-2 px-1" id="category" name="category" value={venture.category} onChange={handleInputChange}>
-                            <option>Select Category..</option>
-                            <option value={Category.Restaurant}>Restaurant</option>
-                            <option value={Category.Hotel}>Hotel</option>
-                            <option value={Category.Hospital}>Hospital</option>
-                            <option value={Category.Gym}>Gym</option>
-                            <option value={Category.Cinema}>Cinema</option>
-                            <option value={Category.GasStation}>Gas Station</option>
-                            <option value={Category.Market}>Market</option>
-                            <option value={Category.Taxi}>Taxi</option>
-                            <option value={Category.BusStation}>Bus Station</option>
-                        </select>
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input value={venture.country} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input value={venture.city} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="City" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input value={venture.postalCode} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Postal Code" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input value={venture.address} disabled className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Street" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input type="time" name="opening_time" value={venture.opening_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Opening time" />
-                    </div>
-                    <div className="flex items-center border-b border-teal-500 py-2">
-                        <input type="time" name="closing_time" value={venture.closing_time} onChange={handleInputChange} className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Closing time" />
-                    </div>
-                    <div className="flex justify-end mt-10 space-x-3">
-                        <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
-                            Add Venture
-                        </button>
-                    </div>
-                </form>
             </div>
             <Footer></Footer>
         </div>

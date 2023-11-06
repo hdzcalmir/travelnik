@@ -88,39 +88,27 @@ const Dashboard: NextPage = () => {
     })
 
     return (
-        <div className="space-y-5">
-            <div className='w-full'>
-                <Sidebar></Sidebar>
-                <div className="container mx-auto mt-12">
-                    <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
-                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                            <div className="text-sm font-medium text-gray-500 truncate">
-                                Total Locations
-                            </div>
-                            <div className="mt-1 text-3xl font-semibold text-gray-900">
-                                128
-                            </div>
+        <div>
+            <Sidebar></Sidebar>
+            <div className="p-4 sm:ml-64 h-full">
+                <div className="border-b-2 border-teal-500">
+                    <h1 className="text-teal-500 font-bold text-2xl">Dashboard</h1>
+                </div>
+                <div className="p-4 border-gray-200 h-full dark:border-gray-700">
+                    <div className="flex items-center justify-center rounded-lg h-96 mb-4" id="map">
+                    </div>
+                    <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50">
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="flex items-center justify-center rounded bg-gray-50 h-28">
                         </div>
-                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                            <div className="text-sm font-medium text-gray-500 truncate">
-                                Total Events
-                            </div>
-                            <div className="mt-1 text-3xl font-semibold text-gray-900">
-                                133
-                            </div>
+                        <div className="flex items-center justify-center rounded bg-gray-50 h-28">
                         </div>
-                        <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                            <div className="text-sm font-medium text-gray-500 truncate">
-                                Total Activities
-                            </div>
-                            <div className="mt-1 text-3xl font-semibold text-gray-900">
-                                350
-                            </div>
+                        <div className="flex items-center justify-center rounded bg-gray-50 h-28">
+                        </div>
+                        <div className="flex items-center justify-center rounded bg-gray-50 h-28">
                         </div>
                     </div>
-                </div>
-                <div className="flex justify-center">
-                    <div className="h-[720px] w-[1560px]" id="map"></div>
                 </div>
             </div>
             <Footer></Footer>

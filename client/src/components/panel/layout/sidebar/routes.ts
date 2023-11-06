@@ -1,18 +1,27 @@
+import { MdSpaceDashboard } from "react-icons/md";
+import { BsCalendar2EventFill } from "react-icons/bs";
+import { VscActivateBreakpoints } from "react-icons/vsc";
+import { IoIosAddCircle } from "react-icons/io";
+
 export const routes = [
     {
         name: 'Dashboard',
-        route: '/panel/dashboard'
+        route: '/panel/dashboard',
+        icon: MdSpaceDashboard
     },
     {
         name: 'Add Venture',
-        route: '/panel/add-venture'
+        route: '/panel/add-venture',
+        icon: IoIosAddCircle
     },
     {
-        name: 'Events',
-        route: '/panel/event'
+        name: 'Add Events',
+        route: '/panel/event',
+        icon: IoIosAddCircle
     },
     {
-        name: 'Activity',
-        route: '/panel/activity'
+        name: 'Add Activity',
+        route: '/panel/activity',
+        icon: IoIosAddCircle
     }
 ]
