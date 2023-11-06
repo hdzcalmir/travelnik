@@ -2,7 +2,7 @@
 
 const AccommodationSkeleton = () => {
     return (
-        <div className="border border-gray-300 shadow rounded-md p-4 max-w-xs md:max-w-md w-full mb-10">
+        <div className="shadow rounded-md p-4 max-w-xs md:max-w-md w-full mb-10">
             <div className="animate-pulse flex space-x-4">
                 <div className="rounded-xl bg-slate-400 h-32 w-32"></div>
                 <div className="flex-1 space-y-6 py-1">

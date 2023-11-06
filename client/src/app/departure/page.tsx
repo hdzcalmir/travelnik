@@ -138,14 +138,14 @@ const AboutPage = () => {
             <div className="grid lg:grid-cols-3 grid-rows-1">
                 <div className="col-span-2">
                     <div className="flex justify-center">
-                        <div className="h-[680px] w-full" id="map"></div>
+                        <div className="h-[680px] w-full rounded-lg" id="map"></div>
                     </div>
-                    <ActivityTable />
+                    <ActivityTable activities={activities} />
                 </div>
                 <div className="py-4 xs:w-full bg-gray-800">
-                    <div className="mx-2">
-                        <h2 className="text-3xl font-bold mx-2 text-white">Available apartments:</h2>
-                        <div className="overflow-y-auto h-[84vh] px-2 scrollbar-hidden">
+                    <div className="mx-2 mt-4">
+                        <h2 className="text-3xl font-bold mx-2 text-white mb-2">Available apartments:</h2>
+                        <div className="overflow-y-auto h-[81vh] px-2 scrollbar-hidden">
                             <AccommodationList accommodations={accommodations} accommodationsLoading={accommodationsLoading} />
                         </div>
                     </div>
