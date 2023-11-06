@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <nav className="border-gray-200 px-4 lg:px-6 py-8 bg-gray-800 shadow-lg border-b-1 border-gray-700">
+            <nav className="px-4 lg:px-6 py-8 bg-gray-800 shadow-lg border-b-1 border-gray-700">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <Link href="/" className="flex items-center">
                         <Image src="/images/travelnik-logo.png" className="mr-3 h-6 " alt="Travelnik logo" width={200} height={10} />

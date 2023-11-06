@@ -7,7 +7,7 @@ import Sidebar from "@/components/panel/layout/sidebar/sidebar"
 import BusinessAPI from "@/interceptor/Business/Business";
 import { Api } from "@/interceptor/api";
 import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "mapbox-gl-geocoder";
+// import MapboxGeocoder from "mapbox-gl-geocoder";
 import { useEffect, useState } from "react";
 
 
@@ -44,12 +44,12 @@ export default function AddVenture() {
             zoom: 13
         });
 
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: TOKEN,
-                mapboxgl: mapboxgl
-            })
-        )
+        // map.addControl(
+        //     new MapboxGeocoder({
+        //         accessToken: TOKEN,
+        //         mapboxgl: mapboxgl
+        //     })
+        // )
 
         const nav = new mapboxgl.NavigationControl();
         map.addControl(nav, 'top-left');

@@ -25,7 +25,7 @@ const AccommodationCard = (data: IAccommodation) => {
         <div className="md:max-w-2xl max-w-xs">
             <Link href={data.source} target="_blank" className="space-y-10">
                 <div
-                    className="mb-10 cursor-pointer relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-2xl bg-gray-700">
+                    className="mb-4 cursor-pointer relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-2xl bg-gray-700">
                     <div className="w-full md:w-1/3 bg-gray-700 grid place-items-center text-gray-800">
                         <Image src={data.image.replace('square60', 'square600')} alt={data.title} className="rounded-xl" width={400} height={400} loading="lazy" />
                     </div>
