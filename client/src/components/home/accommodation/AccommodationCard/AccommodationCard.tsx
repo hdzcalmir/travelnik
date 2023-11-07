@@ -46,7 +46,7 @@ const AccommodationCard = (data: IAccommodation) => {
                             <div className="bg-gray-500 px-3 py-1 rounded-full text-xs font-medium text-white hidden md:block">
                                 Booking.com</div>
                         </div>
-                        <h3 className="font-black text-white md:text-3xl text-xl">{data.title}</h3>
+                        <h3 className="font-bold text-white md:text-3xl text-xl">{data.title}</h3>
                         <p className="md:text-md text-gray-300 text-base"><span className="text-white font-bold">Address:</span> {data.address} <br></br> <span className="text-white font-bold">Distance from center:</span> {data.distance_from_center}km <br></br> <span className="text-white font-bold">Check-in time:</span> {data.check_in_time}h | <span className="text-white font-bold">Check-out time:</span> {data.check_out_time}h</p>
                         <p className="text-xl font-black text-white">
                             €{data.price}

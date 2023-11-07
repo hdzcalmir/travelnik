@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import mapboxgl, { Marker } from 'mapbox-gl';
 import { GEO_LOC, LOAD, MAP, TOKEN } from '@/common/consts';
 import ActivityTable from "@/components/home/departure/ActivityTable";
+import EventCalendar from "@/components/home/departure/EventCalendar/EventCalendar";
 
 const AboutPage = () => {
     // >> React Hooks
@@ -31,6 +32,9 @@ const AboutPage = () => {
     const check_in = params.get('check_in');
     const check_out = params.get('check_out');
     const people = params.get('people');
+
+    const startDate = check_in ? new Date(check_in) : undefined;
+    const endDate = check_out ? new Date(check_out) : undefined;
 
 
     useEffect(() => {
@@ -131,7 +135,7 @@ const AboutPage = () => {
         fetchActivities();
         fetchEvents();
     }, [router, interests, check_in, check_out, people])
-    console.log(businesses)
+    console.log(events)
     return (
         <>
             <Navbar />
@@ -142,10 +146,11 @@ const AboutPage = () => {
                     </div>
                     <ActivityTable activities={activities} />
                 </div>
-                <div className="py-4 xs:w-full bg-gray-800">
+                <div className="pb-4 xs:w-full bg-gray-800">
+                    <EventCalendar startDate={startDate} endDate={endDate} events={events} />
                     <div className="mx-2 mt-4">
-                        <h2 className="text-3xl font-bold mx-2 text-white mb-2">Available apartments:</h2>
-                        <div className="overflow-y-auto h-[81vh] px-2 scrollbar-hidden">
+                        <h2 className="text-3xl font-bold mx-2 text-white mb-2">Available apartments</h2>
+                        <div className="overflow-y-auto h-[56.4vh] px-2 scrollbar-hidden">
                             <AccommodationList accommodations={accommodations} accommodationsLoading={accommodationsLoading} />
                         </div>
                     </div>
