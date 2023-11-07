@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import React from "react";
 
 export default function Footer() {
@@ -7,10 +8,9 @@ export default function Footer() {
     <footer className="text-gray-600 sm:ml-64 bg-primaryColor body-font">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <span className="ml-3 text-xl text-white">Travelnik</span>
+          <Image alt='travelnik logo' className="w-52" width={1203} height={503} src='/images/travelnik-logo.png' />
         </a>
-        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 Travelnik —
-          <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@travelnik</a>
+        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 Travelnik
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a className="text-gray-500">

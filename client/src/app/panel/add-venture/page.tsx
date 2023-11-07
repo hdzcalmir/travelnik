@@ -5,7 +5,7 @@ import { Category } from "@/common/enums/category";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar"
 import BusinessAPI from "@/interceptor/Business/Business";
-import { Api } from "@/interceptor/api";
+import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl from "mapbox-gl";
 import { useEffect, useState } from "react";
 
@@ -54,7 +54,7 @@ export default function AddVenture() {
                 marker = new mapboxgl.Marker(icon)
                     .setLngLat(data.lngLat)
                     .addTo(map);
-                const resp = await Api.reverseGeocode(data.lngLat);
+                const resp = await mapboxApi.reverseGeocode(data.lngLat);
                 setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                 markerExists = true;
             }

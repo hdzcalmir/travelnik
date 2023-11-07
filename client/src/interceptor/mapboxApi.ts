@@ -1,7 +1,7 @@
 import { TOKEN } from "@/common/consts";
 import { IGeoLocation } from "@/common/interfaces/IGeoLocation";
 
-export class Api {
+export class mapboxApi {
 
     static reverseGeocode = async (geo: IGeoLocation) => {
         try {
