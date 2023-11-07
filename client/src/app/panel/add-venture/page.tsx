@@ -80,7 +80,7 @@ export default function AddVenture() {
                     <h1 className="text-teal-500 font-bold text-2xl">Add Venture</h1>
                 </div>
                 <div className="p-4 border-gray-200 h-full dark:border-gray-700">
-                    <div className="flex items-center justify-center rounded-lg h-96 mb-4" id="map">
+                    <div className="rounded-lg h-96 mb-4" id="map">
                     </div>
                     <div className="flex items-center justify-center h-full p-10 mb-4 rounded bg-gray-50">
                         <form onSubmit={handleAddVenture} className="w-full">
