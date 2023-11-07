@@ -2,11 +2,8 @@
 
 import Footer from '@/components/panel/layout/footer/footer';
 import Sidebar from '@/components/panel/layout/sidebar/sidebar';
-import mapboxgl, { Marker } from 'mapbox-gl';
-import { useEffect } from 'react';
 import IsAuth from '@/hooks/isAuth';
 import { NextPage } from 'next';
-import { GEO_LOC, LOAD, MAP, TOKEN } from '@/common/consts';
 import Map from '@/components/map/map';
 
 const Dashboard: NextPage = () => {
