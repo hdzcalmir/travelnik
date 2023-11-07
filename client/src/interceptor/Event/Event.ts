@@ -1,7 +1,7 @@
 import http from "../http";
 
 const EventAPI = {
-    fetchBusinesses: async () => {
+    fetchEvents: async () => {
         const response = await http.get('/event');
         return response;
     },
