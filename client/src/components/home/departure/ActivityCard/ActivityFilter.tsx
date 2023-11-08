@@ -13,7 +13,13 @@ interface ActivityFilterProps {
 const ActivityFilter = ({
   filterDropdown,
   setFilterDropdown,
+  activeFilter,
+  setActiveFilter,
 }: ActivityFilterProps) => {
+  const setFilter = (filter: string) => {
+    setActiveFilter(filter);
+  };
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
       <div className="w-full md:w-1/2">
@@ -48,7 +54,7 @@ const ActivityFilter = ({
       </div>
       <div
         onClick={() => setFilterDropdown(!filterDropdown)}
-        className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
+        className="w-full md:w-auto flex flex-col relative md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0"
       >
         <div className="flex items-center space-x-3 w-full md:w-auto">
           <div className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 dark:bg-gray-700 dark:divide-gray-600">
@@ -107,29 +113,41 @@ const ActivityFilter = ({
           </button>
           <div
             className={`z-10 ${
-              filterDropdown ? "absolute -bottom-[4.4rem]" : "hidden"
+              filterDropdown ? "absolute top-9" : "hidden"
             } w-48 p-3 bg-white rounded-lg dark:bg-gray-700`}
           >
             <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
               Choose filter
             </h6>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
-                Name
-              </li>
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
+              <li
+                onClick={() => setFilter("category")}
+                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
+              >
                 Category
               </li>
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
+              <li
+                onClick={() => setFilter("rating")}
+                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
+              >
                 Rating
               </li>
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
+              <li
+                onClick={() => setFilter("difficulty")}
+                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
+              >
                 Difficulty
               </li>
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
+              <li
+                onClick={() => setFilter("status")}
+                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
+              >
                 Status
               </li>
-              <li className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500">
+              <li
+                onClick={() => setFilter("duration")}
+                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
+              >
                 Duration
               </li>
             </ul>

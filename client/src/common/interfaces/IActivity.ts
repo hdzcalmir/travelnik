@@ -1,7 +1,7 @@
 export interface IActivity {
     id?: string;
     location_id: number;
-    reviews: object[];
+    reviews: IReview[];
     name: string,
     category: string,
     latitude: string,

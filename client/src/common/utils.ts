@@ -1,3 +1,5 @@
+import { IActivity } from "./interfaces/IActivity";
+
 export class Utils {
 
     calculateRate(reviews: IReview[]): number {
@@ -10,4 +12,17 @@ export class Utils {
 
         return averageRate;
     }
+
+     sortActivities = (activities: IActivity[], activeFilter: string) => {
+        if (activeFilter === "category") {
+          return activities.sort((a, b) => a.category.localeCompare(b.category));
+        } else if (activeFilter === "rating") {
+          return activities.sort(
+            (a, b) =>
+              this.calculateRate(a.reviews) - this.calculateRate(b.reviews)
+          );
+        } else {
+          return activities;
+        }
+      };
 }

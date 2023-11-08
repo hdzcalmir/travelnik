@@ -51,13 +51,13 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
       </td>
       <td className="px-4 py-3 text-sm whitespace-nowrap">
         <p>{activity.difficulty}</p>
-        <div className="w-48 h-1.5 bg-white overflow-hidden rounded-full">
+        <div className="w-20 lg:w-48 h-1.5 bg-white overflow-hidden rounded-full">
           <div
             className={` ${
               activity.difficulty === "Easy"
                 ? "w-1/4 bg-green-400"
                 : activity.difficulty === "Medium"
-                ? "w-1/2 bg-orange-400"
+                ? "w-2/3 bg-orange-400"
                 : "w-full bg-red-400"
             } h-1.5`}
           ></div>
@@ -69,7 +69,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         </div>
       </td>
       <td className="px-4 py-3">
-        <div className="flex items-center font-semibold bg-gray-700 rounded-lg border border-gray-600 justify-center py-1">
+        <div className="px-1 flex items-center font-semibold bg-gray-700 rounded-lg border border-gray-600 justify-center py-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
