@@ -3,7 +3,7 @@ import { BsCalendar2EventFill } from "react-icons/bs";
 import { VscActivateBreakpoints } from "react-icons/vsc";
 import { IoIosAddCircle } from "react-icons/io";
 
-export const routes = [
+export const Sitemap = [
     {
         name: 'Dashboard',
         route: '/panel/dashboard',
@@ -15,13 +15,13 @@ export const routes = [
         icon: IoIosAddCircle
     },
     {
-        name: 'Add Events',
-        route: '/panel/event',
+        name: 'Add Event',
+        route: '/panel/add-event',
         icon: IoIosAddCircle
     },
     {
         name: 'Add Activity',
-        route: '/panel/activity',
+        route: '/panel/add-activity',
         icon: IoIosAddCircle
     }
 ]

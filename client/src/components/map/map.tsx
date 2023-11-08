@@ -1,47 +1,55 @@
-import { useEffect } from 'react';
-import mapboxgl from 'mapbox-gl';
-import { GEO_LOC, LOAD, MAP, TOKEN } from '@/common/consts';
-import { ventures } from './mockData';
+import mapboxgl, { Popup } from 'mapbox-gl';
+import { COORDS, LOAD, MAP, TOKEN } from '@/common/consts';
+import useVentures from '@/hooks/useVentures';
+import useEvents from '@/hooks/useEvents';
+import useActivities from '@/hooks/useActivities';
+import { Utils } from '@/common/utils';
 
 export default function Map() {
 
-    useEffect(() => {
+    const { ventures, venturesLoading } = useVentures();
+    const { events, eventsLoading } = useEvents();
+    const { activities, activitiesLoading } = useActivities();
 
+    if (venturesLoading || eventsLoading || activitiesLoading) {
+
+        return (
+            <div className="rounded-lg h-full mb-4" id="map">
+            </div>
+        )
+
+    } else {
         mapboxgl.accessToken = TOKEN;
         const map = new mapboxgl.Map({
             container: MAP,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [GEO_LOC[0], GEO_LOC[1]],
+            center: [COORDS[0], COORDS[1]],
             zoom: 13
         });
 
-        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-            'Dobrodošli u Travnik!'
-        );
+        const popups: Array<Popup> = [];
 
-        map.on('click', (data) => {
-            const venture = new mapboxgl.Marker({
-            }).setLngLat(data.lngLat)
-                .setPopup(popup)
-                .addTo(map);
+        ventures?.forEach((venture)=>{
+            const popup = new mapboxgl.Popup({ offset: 30 }).setText(
+                venture.description
+            );
+            popups.push(popup);
         })
 
         map.on(LOAD, () => {
-            ventures.forEach((addr) => {
+          ventures?.forEach((venture, index) => {
                 let el = document.createElement('div');
-                el.className = 'marker';
+                el.className = Utils.getMarker(Number(venture.category));
                 new mapboxgl.Marker(el)
-                    .setLngLat(addr)
-                    .setPopup(popup)
+                    .setLngLat([venture.longitude, venture.latitude])
+                    .setPopup(popups[index])
                     .addTo(map);
             })
         })
 
-    }, [])
-
-
-    return (
-        <div className="rounded-lg h-full mb-4" id="map">
-        </div>
-    )
+        return (
+            <div className="rounded-lg h-full mb-4" id="map">
+            </div>
+        )
+    }
 }

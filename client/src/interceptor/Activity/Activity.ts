@@ -9,6 +9,10 @@ const ActivityAPI = {
         const response = await http.get(`/activity?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },
+    addActivtiy: async (activity: any) => {
+        const response = await http.post('/activity', activity);
+        return response;
+    }
 };
 
 export default ActivityAPI;

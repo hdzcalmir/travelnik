@@ -5,7 +5,7 @@ import Sidebar from '@/components/panel/layout/sidebar/sidebar';
 import IsAuth from '@/hooks/isAuth';
 import { NextPage } from 'next';
 import Map from '@/components/map/map';
-import VenturesNumber from '@/components/panel/ventures-number/DashboardNumbers';
+import VenturesNumber from '@/components/panel/dashboardNumbers/DashboardNumbers';
 
 const Dashboard: NextPage = () => {
 

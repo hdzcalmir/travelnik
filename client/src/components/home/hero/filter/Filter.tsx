@@ -1,6 +1,6 @@
 "use client"
 
-import { interests } from "@/common/consts";
+import { interests } from "./interests";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaHashtag } from "react-icons/fa";
 import { toast } from 'react-hot-toast';

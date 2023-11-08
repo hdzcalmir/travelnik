@@ -7,8 +7,8 @@ export enum Category {
     Hospital = 6,
     Taxi = 7,
     Cinema = 8,
-    Market = 9,
-    Muzej = 10,
-    Diskoteka = 11,
-    TrzniCentar = 12
+    Store = 9,
+    Museum = 10,
+    Disco = 11,
+    ShoppingCenter = 12
 }

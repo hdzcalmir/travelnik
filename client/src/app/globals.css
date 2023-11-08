@@ -14,14 +14,6 @@
     color: white;
   }
 
-  .marker {
-    background-image: url('../../public/map-icons/gas.png');
-    background-size: cover;
-    width: 31.32px;
-    height: 44.28px;
-    cursor: pointer;
-  }
-
 .scrollbar-hidden::-webkit-scrollbar {
   display:none;
 }
@@ -76,4 +68,108 @@
   border-bottom-right-radius: 20px;
   background-color: #65CF94;
   border: 1px solid #65CF94;
+}
+
+.restaurantMarker {
+  background-image: url('../../public/map-icons/restaurant.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.gasStationMarker {
+  background-image: url('../../public/map-icons/gas.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.hotelMarker {
+  background-image: url('../../public/map-icons/hotel.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.busStationMarker {
+  background-image: url('../../public/map-icons/bus.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.gymMarker {
+  background-image: url('../../public/map-icons/gym.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.hospitalMarker {
+  background-image: url('../../public/map-icons/hospital.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.taxiMarker {
+  background-image: url('../../public/map-icons/taxi.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.cinemaMarker {
+  background-image: url('../../public/map-icons/gas.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.storeMarker {
+  background-image: url('../../public/map-icons/bus.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.museumMarker {
+  background-image: url('../../public/map-icons/gas.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.discoMarker {
+  background-image: url('../../public/map-icons/gas.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.shoppingCenterMarker {
+  background-image: url('../../public/map-icons/gas.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.defaultMarker {
+  background-image: url('../../public/map-icons/default.png');
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
 }

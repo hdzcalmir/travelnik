@@ -9,6 +9,10 @@ const EventAPI = {
         const response = await http.get(`/event?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },
+    addEvent: async (event: any) => {
+        const response = await http.post('/event', event);
+        return response;
+    },
 };
 
 export default EventAPI;

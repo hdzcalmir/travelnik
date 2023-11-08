@@ -1,6 +1,6 @@
 "use client";
 
-import { homeNavLinks } from "@/common/consts";
+import { homeSitemap } from "./homeSitemap";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -119,8 +119,8 @@ const Navbar = () => {
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              {homeNavLinks &&
-                homeNavLinks.map((navLink) => (
+              {homeSitemap &&
+                homeSitemap.map((navLink) => (
                   <li key={navLink.name}>
                     <Link
                       href={navLink.link}

@@ -14,10 +14,9 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
   const [filterDropdown, setFilterDropdown] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<string>("");
 
-  const utils = new Utils();
   console.log(activities);
 
-  const sortedActivities = utils.sortActivities(activities || [], activeFilter);
+  const sortedActivities = Utils.sortActivities(activities || [], activeFilter);
 
   return (
     <section className="bg-gray-800">

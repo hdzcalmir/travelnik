@@ -17,7 +17,7 @@ const DashboardSkeleton = () => {
                 </div>
                 <div className="w-full">
                     <div className="w-full">
-                        <div className="w-full h-96 bg-gray-300 rounded-lg "></div>
+                        <div className="w-full h-96 bg-gray-300 rounded-lg"></div>
                     </div>
                 </div>
             </div>

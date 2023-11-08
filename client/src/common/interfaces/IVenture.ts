@@ -1,9 +1,9 @@
 export interface IVenture {
     id?: string;
     name: string,
-    category: string,
-    latitude: string,
-    longitude: string,
+    category: number,
+    latitude: number,
+    longitude: number,
     address: string,
     city: string,
     country: string,

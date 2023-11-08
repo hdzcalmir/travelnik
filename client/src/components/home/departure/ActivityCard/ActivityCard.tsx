@@ -8,7 +8,6 @@ interface ActivityCardProps {
 }
 
 const ActivityCard = ({ activity }: ActivityCardProps) => {
-  const utils = new Utils();
 
   const durationFromDatabase = activity.duration;
 
@@ -19,7 +18,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const formattedDuration = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}h`;
-  const averageRate = utils.calculateRate(activity.reviews as IReview[]);
+  const averageRate = Utils.calculateRate(activity.reviews as IReview[]);
 
   return (
     <tr className="border-b dark:border-gray-700 hover:bg-gray-700 transition duration-500 cursor-pointer">

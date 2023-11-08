@@ -1,12 +1,12 @@
 "use client"
 
-import { ADDRESS, CITY, CLICK, COUNTRY, GEO_LOC, LAT, LNG, MAP, POST_CODE, TOKEN } from "@/common/consts";
-import { Category } from "@/common/enums/category";
+import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN, DEFAULT_MARKER } from "@/common/consts";
+import { Category } from "@/common/enums";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar"
 import BusinessAPI from "@/interceptor/Business/Business";
 import { mapboxApi } from "@/interceptor/mapboxApi";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 
 
@@ -17,7 +17,7 @@ const addVenture = async (venture: any) => {
 export default function AddVenture() {
 
     let markerExists = false;
-    let marker: any;
+    let marker: Marker;
 
     const [venture, setVenture] = useState({
         name: '',
@@ -39,7 +39,7 @@ export default function AddVenture() {
         const map = new mapboxgl.Map({
             container: MAP,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [GEO_LOC[0], GEO_LOC[1]],
+            center: [COORDS[0], COORDS[1]],
             zoom: 13
         });
 
@@ -49,7 +49,7 @@ export default function AddVenture() {
         map.on(CLICK, async (data) => {
             if (!markerExists) {
                 let icon = document.createElement('div');
-                icon.className = 'marker';
+                icon.className = DEFAULT_MARKER;
 
                 marker = new mapboxgl.Marker(icon)
                     .setLngLat(data.lngLat)
@@ -99,7 +99,7 @@ export default function AddVenture() {
                                     <option value={Category.Gym}>Gym</option>
                                     <option value={Category.Cinema}>Cinema</option>
                                     <option value={Category.GasStation}>Gas Station</option>
-                                    <option value={Category.Market}>Market</option>
+                                    <option value={Category.Store}>Market</option>
                                     <option value={Category.Taxi}>Taxi</option>
                                     <option value={Category.BusStation}>Bus Station</option>
                                 </select>
