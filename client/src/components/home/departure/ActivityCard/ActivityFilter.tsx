@@ -117,9 +117,8 @@ const ActivityFilter = ({
             </svg>
           </button>
           <div
-            className={`z-10 ${
-              filterDropdown ? "absolute top-9" : "hidden"
-            } w-48 p-3 bg-white rounded-lg dark:bg-gray-700`}
+            className={`z-10 ${filterDropdown ? "absolute top-9" : "hidden"
+              } w-48 p-3 bg-white rounded-lg dark:bg-gray-700`}
           >
             <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
               Choose filter
@@ -142,12 +141,6 @@ const ActivityFilter = ({
                 className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
               >
                 Difficulty
-              </li>
-              <li
-                onClick={() => setFilter("status")}
-                className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
-              >
-                Status
               </li>
               <li
                 onClick={() => setFilter("duration")}

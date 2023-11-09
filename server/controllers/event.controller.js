@@ -71,14 +71,29 @@ const db = require("../database/database.js");
  */
 const getAllEvents = (req, res) => {
   try {
-    const getAllEventsQuery = "SELECT * FROM events INNER JOIN location ON events .location_id = location.id";
-    db.query(getAllEventsQuery, (err, data) => {
+    let query = "SELECT * FROM events INNER JOIN location ON events.location_id = location.id";
+
+    const jsonInterests = req.query.interests;
+
+    if (jsonInterests) {
+      const interests = JSON.parse(atob(jsonInterests));
+      if (interests.length > 0) {
+        const interestsString = interests.map(interest => `category = '${interest}'`).join(' OR ');
+        query += ` WHERE ${interestsString}`;
+      }
+    }
+
+    db.query(query, (err, data) => {
+      if (err) {
+        return res.status(500).send("Internal server error.");
+      }
       return res.status(200).json(data);
     });
   } catch (error) {
     return res.status(500).send("Internal server error.");
   }
 };
+
 
 /**
  * @swagger

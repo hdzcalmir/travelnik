@@ -72,14 +72,29 @@ const db = require("../database/database.js");
  */
 const getAllActivities = (req, res) => {
   try {
-    const getAllActivitiesQuery = "SELECT * FROM activities";
-    db.query(getAllActivitiesQuery, (err, data) => {
+    let query = "SELECT * FROM activities";
+
+    const jsonInterests = req.query.interests;
+
+    if (jsonInterests) {
+      const interests = JSON.parse(atob(jsonInterests));
+      if (interests.length > 0) {
+        const interestsString = interests.map(interest => `category = '${interest}'`).join(' OR ');
+        query += ` WHERE ${interestsString}`;
+      }
+    }
+
+    db.query(query, (err, data) => {
+      if (err) {
+        return res.status(500).send("Internal server error.");
+      }
       return res.status(200).json(data);
     });
   } catch (error) {
     return res.status(500).send("Internal server error.");
   }
 };
+
 
 /**
  * @swagger
