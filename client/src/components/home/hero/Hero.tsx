@@ -5,6 +5,7 @@ import { FaSearchLocation } from 'react-icons/fa';
 import Filter, { IDepartureTime } from './filter/Filter';
 import { useState } from 'react';
 
+
 const Hero = () => {
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
     const [peopleComing, setPeopleComing] = useState<string>('No. people');
