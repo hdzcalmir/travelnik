@@ -51,23 +51,32 @@ export default function AddVenture() {
                 let icon = document.createElement('div');
                 icon.className = DEFAULT_MARKER;
 
+                const resp = await mapboxApi.reverseGeocode(data.lngLat);
+                if (resp?.features[4]?.text) {
                 marker = new mapboxgl.Marker(icon)
                     .setLngLat(data.lngLat)
                     .addTo(map);
-                const resp = await mapboxApi.reverseGeocode(data.lngLat);
-                setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
-                markerExists = true;
+                    setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                    markerExists = true;
+                } else {
+                    setVenture({ ...venture, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
+                } 
+
             } else {
                 marker?.remove();
                 let icon = document.createElement('div');
                 icon.className = DEFAULT_MARKER;
 
+                const resp = await mapboxApi.reverseGeocode(data.lngLat);
+                if (resp?.features[4]?.text) {
                 marker = new mapboxgl.Marker(icon)
                     .setLngLat(data.lngLat)
                     .addTo(map);
-                const resp = await mapboxApi.reverseGeocode(data.lngLat);
-                setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
-                markerExists = true;
+                    setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                    markerExists = true;
+                } else {
+                    setVenture({ ...venture, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
+                }
             }
         })
     }, [])
