@@ -57,6 +57,17 @@ export default function AddVenture() {
                 const resp = await mapboxApi.reverseGeocode(data.lngLat);
                 setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                 markerExists = true;
+            } else {
+                marker?.remove();
+                let icon = document.createElement('div');
+                icon.className = DEFAULT_MARKER;
+
+                marker = new mapboxgl.Marker(icon)
+                    .setLngLat(data.lngLat)
+                    .addTo(map);
+                const resp = await mapboxApi.reverseGeocode(data.lngLat);
+                setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                markerExists = true;
             }
         })
     }, [])

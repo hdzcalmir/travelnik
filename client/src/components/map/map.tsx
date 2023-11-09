@@ -11,8 +11,8 @@ export default function Map() {
     const { ventures, venturesLoading } = useVentures();
     const { events, eventsLoading } = useEvents();
     const { activities, activitiesLoading } = useActivities();
+    
     useEffect(() => {
-
         if (!venturesLoading && !eventsLoading && !activitiesLoading) {
 
             mapboxgl.accessToken = TOKEN;
