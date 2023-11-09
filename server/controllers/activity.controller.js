@@ -72,7 +72,7 @@ const db = require("../database/database.js");
  */
 const getAllActivities = (req, res) => {
   try {
-    let query = "SELECT * FROM activities";
+    let query = "SELECT * FROM activities INNER JOIN location ON activities.location_id = location.id";
 
     const jsonInterests = req.query.interests;
 
