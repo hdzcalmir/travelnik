@@ -13,19 +13,24 @@ interface ActivityTableProps {
 const ActivityTable = ({ activities }: ActivityTableProps) => {
   const [filterDropdown, setFilterDropdown] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<string>("");
+  const [searchFIlter, setSearchFIlter] = useState<string>("");
 
-  console.log(activities);
+  const sortedActivities = Utils.sortActivities(
+    activities || [],
+    activeFilter,
+    searchFIlter
+  );
 
-  const sortedActivities = Utils.sortActivities(activities || [], activeFilter);
-
+  console.log(searchFIlter);
   return (
     <section className="bg-gray-800">
       <div>
         <ActivityFilter
-          activeFilter={activeFilter}
           setActiveFilter={setActiveFilter}
           filterDropdown={filterDropdown}
           setFilterDropdown={setFilterDropdown}
+          searchFilter={searchFIlter}
+          setSearchFilter={setSearchFIlter}
         />
         <div className="bg-gray-800 relative shadow-md overflow-y-auto h-[17.5rem]">
           <div className="overflow-x-auto scrollbar-hidden">

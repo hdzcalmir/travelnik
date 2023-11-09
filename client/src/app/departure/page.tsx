@@ -92,7 +92,7 @@ const AboutPage = () => {
             <h2 className="text-3xl font-bold mx-2 text-white mb-2">
               Available apartments
             </h2>
-            <div className="overflow-y-auto h-[70vh] px-2 scrollbar-hidden">
+            <div className="overflow-y-auto h-[68vh] px-2 scrollbar-hidden">
               <AccommodationList
                 accommodations={accommodations}
                 accommodationsLoading={accommodationsLoading}

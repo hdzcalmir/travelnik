@@ -15,18 +15,50 @@ export class Utils {
     return averageRate;
   }
 
-  static sortActivities = (activities: IActivity[], activeFilter: string) => {
+  static sortActivities = (activities: IActivity[], activeFilter: string, searchFilter: string) => {
+    let filteredActivities = activities;
+  
+    if (searchFilter) {
+      const lowerCaseSearchFilter = searchFilter.toLowerCase();
+      filteredActivities = filteredActivities.filter(activity => {
+        return activity.name.toLowerCase().includes(lowerCaseSearchFilter);
+      });
+    }
+  
     if (activeFilter === "category") {
-      return activities.sort((a, b) => a.category.localeCompare(b.category));
+      return filteredActivities.sort((a, b) => a.category.localeCompare(b.category));
     } else if (activeFilter === "rating") {
-      return activities.sort(
+      return filteredActivities.sort(
         (a, b) =>
           Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
       );
+    } else if (activeFilter === "difficulty") {
+      const difficultiesOrder: { [key: string]: number } = {
+        "Easy": 1,
+        "Medium": 2,
+        "Hard": 3
+      };
+  
+      return filteredActivities.sort((a, b) => {
+        return difficultiesOrder[a.difficulty] - difficultiesOrder[b.difficulty];
+      });
+    } else if (activeFilter === "duration") {
+      return filteredActivities.sort((a, b) => {
+        const durationA = Utils.convertDurationToSeconds(a.duration);
+        const durationB = Utils.convertDurationToSeconds(b.duration);
+        return durationA - durationB;
+      });
     } else {
-      return activities;
+      return filteredActivities;
     }
   };
+  
+  
+  static convertDurationToSeconds(duration: string): number {
+    const [hours, minutes, seconds] = duration.split(":").map(Number);
+    return hours * 3600 + minutes * 60 + seconds;
+  }
+  
 
   static getMarker(category: number): string {
     switch (category) {
