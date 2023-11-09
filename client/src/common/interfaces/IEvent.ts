@@ -3,8 +3,8 @@ export interface IEvent {
     location_id: number;
     name: string,
     category: string,
-    latitude: string,
-    longitude: string,
+    latitude: number,
+    longitude: number,
     address: string,
     city: string,
     country: string,

@@ -1,3 +1,4 @@
+import mapboxgl, { Popup } from "mapbox-gl";
 import { BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
 import { Category } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
@@ -17,14 +18,14 @@ export class Utils {
 
   static sortActivities = (activities: IActivity[], activeFilter: string, searchFilter: string) => {
     let filteredActivities = activities;
-  
+
     if (searchFilter) {
       const lowerCaseSearchFilter = searchFilter.toLowerCase();
       filteredActivities = filteredActivities.filter(activity => {
         return activity.name.toLowerCase().includes(lowerCaseSearchFilter);
       });
     }
-  
+
     if (activeFilter === "category") {
       return filteredActivities.sort((a, b) => a.category.localeCompare(b.category));
     } else if (activeFilter === "rating") {
@@ -38,7 +39,7 @@ export class Utils {
         "Medium": 2,
         "Hard": 3
       };
-  
+
       return filteredActivities.sort((a, b) => {
         return difficultiesOrder[a.difficulty] - difficultiesOrder[b.difficulty];
       });
@@ -52,13 +53,13 @@ export class Utils {
       return filteredActivities;
     }
   };
-  
-  
+
+
   static convertDurationToSeconds(duration: string): number {
     const [hours, minutes, seconds] = duration.split(":").map(Number);
     return hours * 3600 + minutes * 60 + seconds;
   }
-  
+
 
   static getMarker(category: number): string {
     switch (category) {
@@ -90,5 +91,4 @@ export class Utils {
         return DEFAULT_MARKER;
     }
   }
-
 }

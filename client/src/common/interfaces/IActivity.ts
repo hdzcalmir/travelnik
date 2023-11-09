@@ -3,9 +3,9 @@ export interface IActivity {
     location_id: number;
     reviews: IReview[];
     name: string,
-    category: string,
-    latitude: string,
-    longitude: string,
+    category: number,
+    latitude: number,
+    longitude: number,
     address: string,
     city: string,
     country: string,
