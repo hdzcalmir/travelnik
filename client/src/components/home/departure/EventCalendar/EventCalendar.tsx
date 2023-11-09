@@ -17,25 +17,22 @@ const EventCalendar = ({ startDate, endDate, events }: EventCalendarProps) => {
   const tileContent = ({ date }: { date: Date }) => {
     const eventDates =
       events && events?.map((event) => new Date(event.start_date));
-    const formattedDate = `${date.getFullYear()}-${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
+    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1
+      }-${date.getDate()}`;
 
     const isEventDate =
       events &&
       eventDates?.some((eventDate) => {
-        const formattedEventDate = `${eventDate.getFullYear()}-${
-          eventDate.getMonth() + 1
-        }-${eventDate.getDate()}`;
+        const formattedEventDate = `${eventDate.getFullYear()}-${eventDate.getMonth() + 1
+          }-${eventDate.getDate()}`;
         return formattedEventDate === formattedDate;
       });
 
     if (isEventDate) {
       const event = events?.find((event) => {
         const eventDate = new Date(event.start_date);
-        const formattedEventDate = `${eventDate.getFullYear()}-${
-          eventDate.getMonth() + 1
-        }-${eventDate.getDate()}`;
+        const formattedEventDate = `${eventDate.getFullYear()}-${eventDate.getMonth() + 1
+          }-${eventDate.getDate()}`;
         return formattedEventDate === formattedDate;
       });
 

@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import ActivityTable from "@/components/home/departure/ActivityTable";
 import EventCalendar from "@/components/home/departure/EventCalendar/EventCalendar";
 import Map from "@/components/map/map";
+import Footer from "@/components/home/footer/Footer";
 
 const AboutPage = () => {
   // >> React Hooks
@@ -65,9 +66,9 @@ const AboutPage = () => {
   return (
     <>
       <Navbar />
-      <div className="grid xl:grid-cols-3 grid-rows-1 grid-cols-1">
-        <div className="col-span-2">
-          <div className="h-[680px] w-full rounded-lg">
+      <div className="grid xl:grid-cols-3 grid-rows-2 sm:grid-rows-1 grid-cols-1">
+        <div className="col-span-2 bg-gray-800">
+          <div className="h-2/4 w-full rounded-lg">
             <Map />
           </div>
           <ActivityTable activities={activities} />
@@ -91,6 +92,7 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

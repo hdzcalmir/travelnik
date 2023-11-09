@@ -32,7 +32,7 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
           searchFilter={searchFIlter}
           setSearchFilter={setSearchFIlter}
         />
-        <div className="bg-gray-800 relative shadow-md overflow-y-auto h-[17.5rem]">
+        <div className="bg-gray-800 relative shadow-md overflow-y-auto">
           <div className="overflow-x-auto scrollbar-hidden">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
