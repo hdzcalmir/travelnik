@@ -40,7 +40,7 @@ export default function AddVenture() {
             container: MAP,
             style: 'mapbox://styles/mapbox/streets-v12',
             center: [COORDS[0], COORDS[1]],
-            zoom: 13
+            zoom: 14
         });
 
         const nav = new mapboxgl.NavigationControl();
@@ -53,14 +53,14 @@ export default function AddVenture() {
 
                 const resp = await mapboxApi.reverseGeocode(data.lngLat);
                 if (resp?.features[4]?.text) {
-                marker = new mapboxgl.Marker(icon)
-                    .setLngLat(data.lngLat)
-                    .addTo(map);
+                    marker = new mapboxgl.Marker(icon)
+                        .setLngLat(data.lngLat)
+                        .addTo(map);
                     setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                     markerExists = true;
                 } else {
                     setVenture({ ...venture, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
-                } 
+                }
 
             } else {
                 marker?.remove();
@@ -69,9 +69,9 @@ export default function AddVenture() {
 
                 const resp = await mapboxApi.reverseGeocode(data.lngLat);
                 if (resp?.features[4]?.text) {
-                marker = new mapboxgl.Marker(icon)
-                    .setLngLat(data.lngLat)
-                    .addTo(map);
+                    marker = new mapboxgl.Marker(icon)
+                        .setLngLat(data.lngLat)
+                        .addTo(map);
                     setVenture({ ...venture, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                     markerExists = true;
                 } else {

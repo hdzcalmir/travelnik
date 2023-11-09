@@ -38,7 +38,7 @@ export default function AddActivity() {
             container: MAP,
             style: 'mapbox://styles/mapbox/streets-v12',
             center: [COORDS[0], COORDS[1]],
-            zoom: 13
+            zoom: 14
         });
 
         const nav = new mapboxgl.NavigationControl();

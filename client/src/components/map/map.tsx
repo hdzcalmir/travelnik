@@ -11,7 +11,7 @@ export default function Map() {
     const { ventures, venturesLoading } = useVentures();
     const { events, eventsLoading } = useEvents();
     const { activities, activitiesLoading } = useActivities();
-    
+
     useEffect(() => {
         if (!venturesLoading && !eventsLoading && !activitiesLoading) {
 
@@ -20,7 +20,7 @@ export default function Map() {
                 container: MAP,
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: [COORDS[0], COORDS[1]],
-                zoom: 13
+                zoom: 14
             });
 
             console.log(activities);
