@@ -3,7 +3,7 @@ export interface IActivity {
     location_id: number;
     reviews: IReview[];
     name: string,
-    category: number,
+    category: string,
     latitude: number,
     longitude: number,
     address: string,
