@@ -1,4 +1,3 @@
-import mapboxgl, { Popup } from "mapbox-gl";
 import { BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
 import { Category } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
