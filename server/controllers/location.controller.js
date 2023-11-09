@@ -2,7 +2,7 @@ const db = require("../database/database.js");
 
 /**
  * @swagger
- * /api/accommodation:
+ * /api/location:
  *   get:
  *     summary: Get All Locations
  *     tags:
