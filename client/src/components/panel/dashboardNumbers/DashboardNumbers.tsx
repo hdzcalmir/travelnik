@@ -27,32 +27,32 @@ export default function VenturesNumber() {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-        <div className="text-sm font-medium text-gray-500 truncate">
+      <div className="w-full px-4 bg-gray-600 py-5 rounded-lg shadow-lg">
+        <div className="text-sm font-medium text-gray-100 truncate">
           Ventures
         </div>
         {ventures && (
-          <div className="mt-1 text-3xl font-semibold text-gray-900">
+          <div className="mt-1 text-3xl font-semibold text-gray-50">
             {ventures.length}
           </div>
         )}
       </div>
-      <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-        <div className="text-sm font-medium text-gray-500 truncate">
+      <div className="w-full px-4 py-5 bg-gray-600 rounded-lg shadow-lg">
+        <div className="text-sm font-medium text-gray-100 truncate">
           Activities
         </div>
         {activities && (
-          <div className="mt-1 text-3xl font-semibold text-gray-900">
+          <div className="mt-1 text-3xl font-semibold text-gray-50">
             {activities.length}
           </div>
         )}
       </div>
-      <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-        <div className="text-sm font-medium text-gray-500 truncate">
+      <div className="w-full px-4 py-5 bg-gray-600 rounded-lg shadow-lg">
+        <div className="text-sm font-medium text-gray-100 truncate">
           Events
         </div>
         {events && (
-          <div className="mt-1 text-3xl font-semibold text-gray-900">
+          <div className="mt-1 text-3xl font-semibold text-gray-50">
             {events.length}
           </div>
         )}

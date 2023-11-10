@@ -82,7 +82,7 @@ export default function Map() {
         }
     }, [activities, events, activitiesLoading, ventures, venturesLoading, eventsLoading]);
     return (
-        <div className="rounded-lg h-full mb-4" id="map">
+        <div className="rounded-lg h-full mb-4 shadow-lg" id="map">
         </div>
     )
 }
