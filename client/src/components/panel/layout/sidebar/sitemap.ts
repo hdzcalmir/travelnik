@@ -9,7 +9,7 @@ export const Sitemap = [
         routes: [
             {
                 name: 'Ventures',
-                route: '/panel/add-venture',
+                route: '/panel/ventures',
                 icon: BiSolidBusiness
             },
             {

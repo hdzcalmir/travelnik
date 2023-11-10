@@ -23,8 +23,6 @@ export default function Map() {
                 zoom: 14
             });
 
-            console.log(activities);
-
             const venturePopup: Array<Popup> = [];
             const eventPopups: Array<Popup> = [];
             const activityPopups: Array<Popup> = [];

@@ -4,23 +4,22 @@ import Footer from "@/components/panel/layout/footer/Footer";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import useActivities from "@/hooks/useActivities";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
+import useVentures from "@/hooks/useVentures";
 
 
-function Activities() {
+function Ventures() {
 
-    const { activities, activitiesLoading } = useActivities();
+    const { ventures, venturesLoading } = useVentures();
 
-
-    if (activitiesLoading) {
+    if (venturesLoading) {
 
         const skeletonElements = Array.from({ length: 1 }, (_, index) => (
             <TableSkeleton key={index} />
         ));
 
         return (
-            <div className="h-[90vh]">
+            <div className="h-[90vh] w-full">
                 <Sidebar></Sidebar>
                 <div className="p-2 sm:p-4 sm:ml-64 h-full bg-gray-700">
                     <Breadcrumb homeElement={'Home'}></Breadcrumb>
@@ -29,9 +28,7 @@ function Activities() {
                 <Footer></Footer>
             </div>
         )
-
     }
-
 
     return (
         <div>
@@ -41,7 +38,7 @@ function Activities() {
                 <div className="flex flex-col w-full items-center border-gray-200 h-[80vh] dark:border-gray-700">
                     <div className="flex flex-col shadow-lg items-center w-full h-full mb-4 rounded-lg bg-gray-600">
                         <div className="flex h-10 mt-5 border-b border-gray-700 w-full px-5">
-                            <h2 className="text-gray-50 font-semibold text-xl">Activities</h2>
+                            <h2 className="text-gray-50 font-semibold text-xl">Ventures</h2>
                         </div>
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
@@ -56,18 +53,18 @@ function Activities() {
                                         Category
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Difficulty
+                                    Opening Time
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Duration
+                                    Closing Time
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Action
+                                        Actions
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {activities?.map((activity) => (
+                                {ventures?.map((activity) => (
                                     <tr key={activity.id} className="dark:bg-gray-800 border-b dark:border-gray-700">
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {activity.name}
@@ -79,10 +76,10 @@ function Activities() {
                                             {activity.category}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {activity.difficulty}
+                                            {activity.openingTime}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {activity.duration}
+                                            {activity.closingTime}
                                         </td>
                                         <td className="px-6 py-4 space-x-2">
                                             <a href="#" className="bg-green-500 hover:bg-green-600 rounded-lg px-5 py-2 text-gray-50 font-semibold">Edit</a>
@@ -90,7 +87,6 @@ function Activities() {
                                         </td>
                                     </tr>
                                 ))}
-
                             </tbody>
                         </table>
                     </div>
@@ -100,4 +96,4 @@ function Activities() {
         </div>
     )
 }
-export default IsAuth(Activities);
+export default IsAuth(Ventures);
