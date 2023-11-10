@@ -1,0 +1,33 @@
+{
+    "Hero": {
+        "discover": "Discover",
+        "text_1": "Travnik, Bosnia and Herzegovina's Hidden Gem!",
+        "text_2": "Travelnik is your personalized guide to the enchanting city of Travnik, Bosnia and Herzegovina.",
+        "text_3": "Packed with insider tips, interactive maps, and curated recommendations, it's the perfect companion for tourists looking to uncover the rich history, stunning architecture, and vibrant culture of this hidden gem.",
+        "learn_more": "Learn More"
+    },
+    "Filter": {
+        "interests_error": "You need to choose your interests.",
+        "departure_error": "You need to select departure date.",
+        "people_error": "You need to select number of people.",
+        "interests_placeholder": "Select your interests",
+        "people_placeholder": "No. people",
+        "search_button": "Search"
+    },
+    "Features": {
+        "explore": "Explore",
+        "text_1": "rich history of Travnik",
+        "text_2": "Travnik, nestled 90 kilometers northeast of Sarajevo, is a town steeped in charm and rich history. Its unassuming exterior belies its significant historical importance as the former seat of Bosnia&apos;s Ottoman viziers. Travnik offers visitors a glimpse into a bygone era, where echoes of its illustrious past still resonate through its cobbled streets and architectural treasures.",
+        "text_3": "Famous for its stunning fortress, vibrant bazaar, and the birthplace of Nobel laureate Ivo Andrić, Travnik is a place where the past comes alive. This city is a testament to the rich tapestry of Bosnia&apos;s heritage and a testament to its enduring spirit."
+    },
+    "Navlinks": {
+        "Home": "Home",
+        "About": "About",
+        "History": "History"
+    },
+    "Languages": {
+        "English": "English",
+        "Bosnian": "Bosnian",
+        "German": "German"
+    }
+}

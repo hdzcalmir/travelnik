@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from "next/navigation";
 import "./DatePicker.css";
 import Flatpickr from "react-flatpickr";
+import { useTranslations } from "next-intl";
 
 export interface IDepartureTime {
     check_in: string;
@@ -35,6 +36,7 @@ const Filter = ({
     const [interestDropdown, setInterestDropdown] = useState(false);
     const interestRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
+    const t = useTranslations('Filter');
 
     const handleCheckedInterest = (e: ChangeEvent<HTMLInputElement>) => {
         const interest = e.target.value;
@@ -49,15 +51,15 @@ const Filter = ({
 
     const fetchDataForGivenFilters = async () => {
         if (selectedInterests.length === 0) {
-            toast.error('You need to choose your interests.');
+            toast.error(t('interests_error'));
             return;
         }
         if (departureTime.check_in.length === 0 || departureTime.check_out.length === 0) {
-            toast.error('You need to select departure date.');
+            toast.error(t('departure_error'));
             return;
         }
         if (peopleComing === 'No. people') {
-            toast.error('You need to select number of people.');
+            toast.error(t('people_error'));
             return;
         }
         // >> If filters are good, send request to fetch data on given filters
@@ -93,7 +95,7 @@ const Filter = ({
                             id="interest-form"
                             onClick={() => setInterestDropdown(!interestDropdown)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor"
-                            placeholder="Select your interests"
+                            placeholder={t('interests_placeholder')}
                             defaultValue={selectedInterests.join(', ')}
                         />
                         {interestDropdown && (
@@ -161,7 +163,7 @@ const Filter = ({
             <div className="lg:col-span-1">
                 <label htmlFor="guests" className="sr-only">Select number of people</label>
                 <select id="guests" onChange={(e: ChangeEvent<HTMLSelectElement>) => handlePeopleComing(e)} value={peopleComing} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-gray-200">
-                    <option disabled>No. people</option>
+                    <option disabled>{t('people_placeholder')}</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -173,7 +175,7 @@ const Filter = ({
                 <svg className="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
                 </svg>
-                Search
+                {t('search_button')}
             </button>
         </div>
     );

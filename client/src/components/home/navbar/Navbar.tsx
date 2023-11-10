@@ -6,10 +6,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Language from "./Language/Language";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
   const path = usePathname();
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
+  const t = useTranslations('Navlinks');
 
   return (
     <header className="relative">
@@ -75,7 +77,7 @@ const Navbar = () => {
                         } rounded lg:bg-transparent lg:p-0 xs:text-xl text-md text-center`}
                       aria-current="page"
                     >
-                      {navLink.name}
+                      {t(navLink.name)}
                     </Link>
                   </li>
                 ))}

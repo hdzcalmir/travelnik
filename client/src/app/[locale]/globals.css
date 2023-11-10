@@ -1,5 +1,5 @@
 @import "mapbox-gl/dist/mapbox-gl.css";
-@import "../../node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+@import "../../../node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 @tailwind base;
 @tailwind components;
@@ -69,7 +69,7 @@
 }
 
 .restaurantMarker {
-  background-image: url("../../public/map-icons/restaurant.png");
+  background-image: url("../../../public/map-icons/restaurant.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -77,7 +77,7 @@
 }
 
 .gasStationMarker {
-  background-image: url("../../public/map-icons/gas.png");
+  background-image: url("../../../public/map-icons/gas.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -85,7 +85,7 @@
 }
 
 .hotelMarker {
-  background-image: url("../../public/map-icons/hotel.png");
+  background-image: url("../../../public/map-icons/hotel.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -93,7 +93,7 @@
 }
 
 .busStationMarker {
-  background-image: url("../../public/map-icons/bus.png");
+  background-image: url("../../../public/map-icons/bus.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -101,7 +101,7 @@
 }
 
 .gymMarker {
-  background-image: url("../../public/map-icons/gym.png");
+  background-image: url("../../../public/map-icons/gym.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -109,7 +109,7 @@
 }
 
 .hospitalMarker {
-  background-image: url("../../public/map-icons/hospital.png");
+  background-image: url("../../../public/map-icons/hospital.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -117,7 +117,7 @@
 }
 
 .taxiMarker {
-  background-image: url("../../public/map-icons/taxi.png");
+  background-image: url("../../../public/map-icons/taxi.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -125,7 +125,7 @@
 }
 
 .cinemaMarker {
-  background-image: url("../../public/map-icons/gas.png");
+  background-image: url("../../../public/map-icons/gas.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -133,7 +133,7 @@
 }
 
 .storeMarker {
-  background-image: url("../../public/map-icons/bus.png");
+  background-image: url("../../../public/map-icons/bus.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -141,7 +141,7 @@
 }
 
 .museumMarker {
-  background-image: url("../../public/map-icons/gas.png");
+  background-image: url("../../../public/map-icons/gas.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -149,7 +149,7 @@
 }
 
 .discoMarker {
-  background-image: url("../../public/map-icons/gas.png");
+  background-image: url("../../../public/map-icons/gas.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -157,7 +157,7 @@
 }
 
 .shoppingCenterMarker {
-  background-image: url("../../public/map-icons/gas.png");
+  background-image: url("../../../public/map-icons/gas.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;
@@ -165,7 +165,7 @@
 }
 
 .defaultMarker {
-  background-image: url("../../public/map-icons/default.png");
+  background-image: url("../../../public/map-icons/default.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;

@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Languages } from "./languages";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Language = () => {
     const [language, setLanguage] = useState<string>("English");
     const [languageDropdown, setLanguageDropDown] = useState<boolean>(false);
     const languageRef = useRef<HTMLDivElement>(null);
+    const t = useTranslations('Languages');
 
     const currentLanguage = Languages.find(lang => lang.name === language);
 
@@ -56,7 +58,7 @@ const Language = () => {
                     {Languages && Languages.map((language) => (
                         <li onClick={() => setLanguage(language.name)} key={language.name} className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
                             <Image src={language.icon} width={20} height={20} alt={`Flag of ${language.name}`} className="mr-2" />
-                            {language.name}
+                            {t(language.name)}
                         </li>
                     ))}
                 </ul>
