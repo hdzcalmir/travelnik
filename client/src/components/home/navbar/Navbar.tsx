@@ -62,7 +62,7 @@ const Navbar = () => {
             </button>
           </div>
           <div
-            className={`${mobileMenu ? "absolute top-20 left-0" : "hidden"} h-screen py-2 border-b-2 shadow-lg sm:shadow-none sm:border-b-0 border-b-gray-700 bg-gray-800 z-10 w-full lg:flex lg:w-auto lg:order-1`}
+            className={`${mobileMenu ? "absolute top-20 left-0" : "hidden"} h-screen sm:h-0 py-2 border-b-2 shadow-lg sm:shadow-none sm:border-b-0 border-b-gray-700 bg-gray-800 z-10 w-full lg:flex lg:w-auto lg:order-1`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col justify-center mx-auto mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
