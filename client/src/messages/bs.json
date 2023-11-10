@@ -37,7 +37,7 @@
         "difficulty": "Težina",
         "status": "Status",
         "duration": "Trajanje",
-        "reviews": "recenzije",
+        "reviews": "recenzija",
         "Easy": "Lako",
         "Medium": "Srednje",
         "Hard": "Teško",
@@ -46,7 +46,7 @@
         "Completed": "Završeno"
     },
     "Accommodations": {
-        "reviews": "recenzije",
+        "reviews": "recenzija",
         "No reviews": "Nema recenzija",
         "Address": "Adresa",
         "Distance from center": "Udaljenost od centra",
