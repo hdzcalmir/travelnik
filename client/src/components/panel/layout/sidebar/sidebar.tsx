@@ -37,9 +37,11 @@ export default function Sidebar() {
         </svg>
       </button>
       <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isMenuOpen ? '' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <Image alt='travelnik logo' className="mb-10" width={1203} height={503} src='/images/travelnik-logo.png' />
-          <ul className="space-y-2 font-medium">
+        <div className="h-full py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+          <div className="flex justify-center">
+            <Image alt='travelnik logo' className="mb-10 h-1/2 w-2/4" width={1203} height={503} src='/images/travelnik-logo.png' />
+          </div>
+          <ul className="space-y-2 px-4 font-medium">
             <li className="cursor-pointer mb-5">
               <a onClick={() => router.push('/panel/dashboard')} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 {<MdSpaceDashboard className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></MdSpaceDashboard>}
@@ -48,7 +50,7 @@ export default function Sidebar() {
             </li>
             {Sitemap.map((tab) => (
               <div key={tab.name} className="py-2">
-            <span className="text-sm px-2 font-semibold text-gray-500">{tab.name}</span>
+                <span className="text-sm px-2 font-semibold text-gray-500">{tab.name}</span>
                 {tab.routes.map((route) => (
                   <li key={route.name} className="cursor-pointer">
                     <a onClick={() => router.push(route.route)} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
