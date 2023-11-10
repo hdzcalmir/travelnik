@@ -4,12 +4,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Sitemap } from "./sitemap";
+import { FaSync } from "react-icons/fa";
+import AccommodationAPI from "@/interceptor/Accommodation/Accommodation";
+import toast from "react-hot-toast";
 
 export default function Sidebar() {
 
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const [syncInProgress, setSyncInProgress] = useState<boolean>(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -24,6 +28,23 @@ export default function Sidebar() {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const handleAccommodationSync = async () => {
+    if (syncInProgress) return;
+    try {
+      setSyncInProgress(true);
+      toast.success("Synchronization is successfully started.");
+      const response = await AccommodationAPI.updateAccommodations();
+
+      if (response.status === 200) {
+        setSyncInProgress(false);
+        toast.success("Accommodations successfully updated.");
+      }
+    } catch (error) {
+      setSyncInProgress(false);
+      toast.error("Accommodations synchronization failed.");
+    }
+  }
 
   return (
     <div ref={sidebarRef}>
@@ -46,6 +67,7 @@ export default function Sidebar() {
               </li>
             ))}
           </ul>
+          <button onClick={handleAccommodationSync} className="mt-8 rounded-lg transition duration-500 hover:bg-secondaryColor text-white py-2 px-4 flex items-center mx-auto bg-secondaryColor/80"><FaSync className={`mr-1 ${syncInProgress ? "animate-spin" : ""}`} /> Sync Apartments</button>
         </div>
       </aside>
     </div>
