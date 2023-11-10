@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <div className=" ">
-                            <Image src="/images/travelnik-logo.png" className="mr-3 h-6 " alt="Travelnik logo" width={200} height={10} />
+                            <Image src="/images/travelnik-logo.png" className="mr-3 w-2/3" alt="Travelnik logo" width={200} height={10} />
                             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 ml-2">© 2023 All Rights Reserved.</span>
                         </div>
                         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">

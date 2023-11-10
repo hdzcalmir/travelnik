@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link href="/" className="flex items-center">
             <Image
               src="/images/travelnik-logo.png"
-              className="mr-3 h-6 "
+              className="mr-3 w-2/4"
               alt="Travelnik logo"
               width={200}
               height={10}
