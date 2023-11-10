@@ -12,7 +12,14 @@
         "people_error": "Sie müssen die Anzahl der Personen auswählen.",
         "interests_placeholder": "Wählen Sie Ihre Interessen aus",
         "people_placeholder": "Anzahl Personen",
-        "search_button": "Suchen"
+        "search_button": "Suchen",
+        "History": "Geschichte",
+        "Art": "Kunst",
+        "Food": "Essen",
+        "Music": "Musik",
+        "Hiking": "Wandern",
+        "Fashion": "Mode",
+        "Sport": "Sport"
     },
     "Features": {
         "explore": "Erkunden",

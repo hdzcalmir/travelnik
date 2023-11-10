@@ -48,6 +48,7 @@ const Filter = ({
     const handlePeopleComing = (e: ChangeEvent<HTMLSelectElement>) => {
         setPeopleComing(e.target.value);
     }
+    console.log(selectedInterests)
 
     const fetchDataForGivenFilters = async () => {
         if (selectedInterests.length === 0) {
@@ -105,14 +106,14 @@ const Filter = ({
                                         <li key={interest}>
                                             <div className="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                                 <input
-                                                    id={`checkbox-item-${interest}`}
+                                                    id={`checkbox-item-${t(interest)}`}
                                                     type="checkbox"
                                                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleCheckedInterest(e)}
-                                                    defaultValue={interest}
-                                                    checked={selectedInterests.includes(interest)}
+                                                    defaultValue={t(interest)}
+                                                    checked={selectedInterests.includes(t(interest))}
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                 />
-                                                <label htmlFor={`checkbox-item-${interest}`} className="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{interest}</label>
+                                                <label htmlFor={`checkbox-item-${t(interest)}`} className="w-full py-2 ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{t(interest)}</label>
                                             </div>
                                         </li>
                                     ))}

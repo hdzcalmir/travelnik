@@ -12,7 +12,14 @@
         "people_error": "Morate odabrati broj osoba.",
         "interests_placeholder": "Odaberite svoje interese",
         "people_placeholder": "Broj osoba",
-        "search_button": "Pretraži"
+        "search_button": "Pretraži",
+        "History": "Historija",
+        "Art": "Umjetnost",
+        "Food": "Hrana",
+        "Music": "Muzika",
+        "Hiking": "Planinarenje",
+        "Fashion": "Odjeća",
+        "Sport": "Sport"
     },
     "Features": {
         "explore": "Istraži",
