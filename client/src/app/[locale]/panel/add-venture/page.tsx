@@ -1,7 +1,7 @@
 "use client"
 
 import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN, DEFAULT_MARKER } from "@/common/consts";
-import { Category } from "@/common/enums";
+import { VentureCategory } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Footer from "@/components/panel/layout/footer/Footer";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar"
@@ -119,16 +119,17 @@ function AddVenture() {
                                 <label className="text-md text-gray-50">Category</label>
                                 <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="category" name="category" value={venture.category} onChange={handleInputChange}>
                                     <option>Select Category..</option>
-                                    <option value={Category.Restaurant}>Restaurant</option>
-                                    <option value={Category.Hotel}>Hotel</option>
-                                    <option value={Category.Hospital}>Hospital</option>
-                                    <option value={Category.Gym}>Gym</option>
-                                    <option value={Category.Cinema}>Cinema</option>
-                                    <option value={Category.GasStation}>Gas Station</option>
-                                    <option value={Category.Store}>Market</option>
-                                    <option value={Category.Taxi}>Taxi</option>
-                                    <option value={Category.BusStation}>Bus Station</option>
-                                </select>                        </div>
+                                    <option value={VentureCategory.Restaurant}>Restaurant</option>
+                                    <option value={VentureCategory.Hotel}>Hotel</option>
+                                    <option value={VentureCategory.Hospital}>Hospital</option>
+                                    <option value={VentureCategory.Gym}>Gym</option>
+                                    <option value={VentureCategory.Cinema}>Cinema</option>
+                                    <option value={VentureCategory.GasStation}>Gas Station</option>
+                                    <option value={VentureCategory.Store}>Market</option>
+                                    <option value={VentureCategory.Taxi}>Taxi</option>
+                                    <option value={VentureCategory.BusStation}>Bus Station</option>
+                                </select>
+                            </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Country</label>
                                 <input value={venture.country} disabled className="appearance-none bg-gray-700 border-none rounded-lg w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />

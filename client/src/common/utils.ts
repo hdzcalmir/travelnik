@@ -1,5 +1,5 @@
 import { BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
-import { Category } from "./enums";
+import { VentureCategory } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
 
 export class Utils {
@@ -62,29 +62,29 @@ export class Utils {
 
   static getMarker(category: number): string {
     switch (category) {
-      case Category.Restaurant:
+      case VentureCategory.Restaurant:
         return RESTAURANT_MARKER;
-      case Category.GasStation:
+      case VentureCategory.GasStation:
         return GASSTATION_MARKER;
-      case Category.Hotel:
+      case VentureCategory.Hotel:
         return HOTEL_MARKER;
-      case Category.BusStation:
+      case VentureCategory.BusStation:
         return BUSSTATION_MARKER;
-      case Category.Gym:
+      case VentureCategory.Gym:
         return GYM_MARKER;
-      case Category.Hospital:
+      case VentureCategory.Hospital:
         return HOSPITAL_MARKER;
-      case Category.Taxi:
+      case VentureCategory.Taxi:
         return TAXI_MARKER;
-      case Category.Cinema:
+      case VentureCategory.Cinema:
         return CINEMA_MARKER;
-      case Category.Store:
+      case VentureCategory.Store:
         return STORE_MARKER;
-      case Category.Museum:
+      case VentureCategory.Museum:
         return MUSEUM_MARKER;
-      case Category.Disco:
+      case VentureCategory.Disco:
         return DISCO_MARKER;
-      case Category.ShoppingCenter:
+      case VentureCategory.ShoppingCenter:
         return SHOPPINGCENTER_MARKER;
       default:
         return DEFAULT_MARKER;

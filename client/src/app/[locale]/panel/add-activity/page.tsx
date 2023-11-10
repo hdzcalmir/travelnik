@@ -8,7 +8,7 @@ import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import { Category } from "@/common/enums";
+import { VentureCategory } from "@/common/enums";
 
 const addActivity = async (activity: any) => {
     await ActivityAPI.addActivtiy(activity);
@@ -74,76 +74,77 @@ function AddActivity() {
 
     return (
         <div>
-        <Sidebar></Sidebar>
-        <div className="p-2 sm:p-4 sm:ml-64 h-full bg-gray-700">
-            <div className="flex flex-col w-full items-center border-gray-200 h-full dark:border-gray-700">
-                <Breadcrumb homeElement={'Home'}></Breadcrumb>
-                <div className="rounded-lg shadow-lg h-96 w-full lg:w-2/3 mb-4" id="map">
-                </div>
-                <div className="flex flex-col shadow-lg items-center justify-center w-full lg:w-2/3 h-full mb-4 rounded-lg bg-gray-600">
-                    <div className="flex justify-start h-16 items-center border-b border-gray-700 w-full px-5">
-                        <h2 className="text-gray-50 font-semibold text-xl">Add Venture</h2>
+            <Sidebar></Sidebar>
+            <div className="p-2 sm:p-4 sm:ml-64 h-full bg-gray-700">
+                <div className="flex flex-col w-full items-center border-gray-200 h-full dark:border-gray-700">
+                    <Breadcrumb homeElement={'Home'}></Breadcrumb>
+                    <div className="rounded-lg shadow-lg h-96 w-full lg:w-2/3 mb-4" id="map">
                     </div>
-                    <form onSubmit={handleAddVenture} className="w-full space-y-2 py-5">
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Name</label>
-                            <input name="name" value={activity.name} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture name" />
+                    <div className="flex flex-col shadow-lg items-center justify-center w-full lg:w-2/3 h-full mb-4 rounded-lg bg-gray-600">
+                        <div className="flex justify-start h-16 items-center border-b border-gray-700 w-full px-5">
+                            <h2 className="text-gray-50 font-semibold text-xl">Add Venture</h2>
                         </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Description</label>
-                            <input name="description" value={activity.description} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture description" />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Category</label>
-                            <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="category" name="category" value={activity.category} onChange={handleInputChange}>
-                                <option>Select Category..</option>
-                                <option value={Category.Restaurant}>Restaurant</option>
-                                <option value={Category.Hotel}>Hotel</option>
-                                <option value={Category.Hospital}>Hospital</option>
-                                <option value={Category.Gym}>Gym</option>
-                                <option value={Category.Cinema}>Cinema</option>
-                                <option value={Category.GasStation}>Gas Station</option>
-                                <option value={Category.Store}>Market</option>
-                                <option value={Category.Taxi}>Taxi</option>
-                                <option value={Category.BusStation}>Bus Station</option>
-                            </select>                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Country</label>
-                            <input value={activity.country} disabled className="appearance-none bg-gray-700 border-none rounded-lg w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">City</label>
-                            <input value={activity.city} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 px-2 py-3 leading-tight focus:outline-none" type="text" placeholder="City" />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Postal Code</label>
-                            <input value={activity.postalCode} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Postal Code" />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Street</label>
-                            <input value={activity.address} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Street" />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Difficulty</label>
-                            <input type="text" name="difficulty" value={activity.difficulty} placeholder="Enter difficulty" onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                            />
-                        </div>
-                        <div className="flex justify-between w-full items-center px-5">
-                            <label className="text-md text-gray-50">Duration</label>
-                            <input type="time" name="duration" value={activity.duration} onChange={handleInputChange} className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" />
-                        </div>
-                        <div className="bg-gray-700 h-[1px]"></div>
-                        <div className="flex justify-end px-5">
-                            <button className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
-                                Add Activity
-                            </button>
-                        </div>
-                    </form>
+                        <form onSubmit={handleAddVenture} className="w-full space-y-2 py-5">
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Name</label>
+                                <input name="name" value={activity.name} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture name" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Description</label>
+                                <input name="description" value={activity.description} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture description" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Category</label>
+                                <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="category" name="category" value={activity.category} onChange={handleInputChange}>
+                                    <option>Select Category..</option>
+                                    <option value={VentureCategory.Restaurant}>Restaurant</option>
+                                    <option value={VentureCategory.Hotel}>Hotel</option>
+                                    <option value={VentureCategory.Hospital}>Hospital</option>
+                                    <option value={VentureCategory.Gym}>Gym</option>
+                                    <option value={VentureCategory.Cinema}>Cinema</option>
+                                    <option value={VentureCategory.GasStation}>Gas Station</option>
+                                    <option value={VentureCategory.Store}>Market</option>
+                                    <option value={VentureCategory.Taxi}>Taxi</option>
+                                    <option value={VentureCategory.BusStation}>Bus Station</option>
+                                </select>
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Country</label>
+                                <input value={activity.country} disabled className="appearance-none bg-gray-700 border-none rounded-lg w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Country" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">City</label>
+                                <input value={activity.city} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 px-2 py-3 leading-tight focus:outline-none" type="text" placeholder="City" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Postal Code</label>
+                                <input value={activity.postalCode} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Postal Code" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Street</label>
+                                <input value={activity.address} disabled className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Street" />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Difficulty</label>
+                                <input type="text" name="difficulty" value={activity.difficulty} placeholder="Enter difficulty" onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                                />
+                            </div>
+                            <div className="flex justify-between w-full items-center px-5">
+                                <label className="text-md text-gray-50">Duration</label>
+                                <input type="time" name="duration" value={activity.duration} onChange={handleInputChange} className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" />
+                            </div>
+                            <div className="bg-gray-700 h-[1px]"></div>
+                            <div className="flex justify-end px-5">
+                                <button className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
+                                    Add Activity
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
-        <Footer></Footer>
-    </div>
     )
 }
 export default IsAuth(AddActivity);

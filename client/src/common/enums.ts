@@ -1,4 +1,4 @@
-export enum Category {
+export enum VentureCategory {
     Restaurant = 1,
     GasStation = 2,
     Hotel = 3,
