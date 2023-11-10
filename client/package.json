@@ -27,6 +27,8 @@
     "react-flatpickr": "^3.10.13",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "react-parallax": "^3.5.1",
+    "react-spring": "^9.7.3",
     "sharp": "^0.32.6"
   },
   "devDependencies": {
