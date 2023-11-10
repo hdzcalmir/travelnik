@@ -72,7 +72,7 @@ const Navbar = () => {
                     <Link
                       href={navLink.link}
                       className={`block py-2 pr-4 pl-3 ${path === navLink.link ? "text-white" : "text-gray-400"
-                        } rounded lg:bg-transparent lg:p-0 text-xl text-center`}
+                        } rounded lg:bg-transparent lg:p-0 xs:text-xl text-md text-center`}
                       aria-current="page"
                     >
                       {navLink.name}
