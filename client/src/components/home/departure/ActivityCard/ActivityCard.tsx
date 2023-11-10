@@ -2,12 +2,14 @@
 
 import { IActivity } from "@/common/interfaces/IActivity";
 import { Utils } from "@/common/utils";
+import { useTranslations } from "next-intl";
 
 interface ActivityCardProps {
   activity: IActivity;
 }
 
 const ActivityCard = ({ activity }: ActivityCardProps) => {
+  const t = useTranslations('ActivityTable');
 
   const durationFromDatabase = activity.duration;
 
@@ -43,28 +45,27 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             {averageRate}
             <span className="text-gray-400 font-normal">
               ({activity.reviews?.length > 0 ? activity.reviews?.length : 0}{" "}
-              reviews)
+              {t('reviews')})
             </span>
           </p>
         </div>
       </td>
       <td className="px-4 py-3 text-sm whitespace-nowrap">
-        <p>{activity.difficulty}</p>
+        <p>{t(activity.difficulty)}</p>
         <div className="w-20 lg:w-48 h-1.5 bg-white overflow-hidden rounded-full">
           <div
-            className={` ${
-              activity.difficulty === "Easy"
-                ? "w-1/4 bg-green-400"
-                : activity.difficulty === "Medium"
+            className={` ${activity.difficulty === "Easy"
+              ? "w-1/4 bg-green-400"
+              : activity.difficulty === "Medium"
                 ? "w-2/3 bg-orange-400"
                 : "w-full bg-red-400"
-            } h-1.5`}
+              } h-1.5`}
           ></div>
         </div>
       </td>
       <td className="px-4 py-3">
         <div className="bg-red-400 rounded text-white justify-center flex text-sm">
-          Not completed
+          {t('Not completed')}
         </div>
       </td>
       <td className="px-4 py-3">

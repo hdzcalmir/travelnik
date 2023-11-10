@@ -1,0 +1,58 @@
+{
+    "Hero": {
+        "discover": "Entdecken",
+        "text_1": "Travnik, das verborgene Juwel von Bosnien und Herzegowina!",
+        "text_2": "Travelnik ist Ihr persönlicher Führer durch die bezaubernde Stadt Travnik, Bosnien und Herzegowina.",
+        "text_3": "Gepackt mit Insider-Tipps, interaktiven Karten und sorgfältig ausgewählten Empfehlungen ist es der perfekte Begleiter für Touristen, die die reiche Geschichte, die atemberaubende Architektur und die lebendige Kultur dieses versteckten Juwels entdecken möchten.",
+        "learn_more": "Erfahren Sie mehr"
+    },
+    "Filter": {
+        "interests_error": "Sie müssen Ihre Interessen auswählen.",
+        "departure_error": "Sie müssen das Abreisedatum auswählen.",
+        "people_error": "Sie müssen die Anzahl der Personen auswählen.",
+        "interests_placeholder": "Wählen Sie Ihre Interessen aus",
+        "people_placeholder": "Anzahl Personen",
+        "search_button": "Suchen"
+    },
+    "Features": {
+        "explore": "Erkunden",
+        "text_1": "die reiche Geschichte von Travnik",
+        "text_2": "Travnik, eingebettet 90 Kilometer nordöstlich von Sarajevo, ist eine Stadt voller Charme und reicher Geschichte. Sein unscheinbares Äußeres verbirgt seine bedeutende historische Bedeutung als ehemaliger Sitz der osmanischen Wesire von Bosnien. Travnik bietet Besuchern einen Einblick in eine vergangene Ära, in der die Echos seiner illustren Vergangenheit noch durch seine Kopfsteinpflasterstraßen und architektonischen Schätze hallen.",
+        "text_3": "Bekannt für seine beeindruckende Festung, den lebhaften Basar und den Geburtsort des Nobelpreisträgers Ivo Andrić ist Travnik ein Ort, an dem die Vergangenheit lebendig wird. Diese Stadt ist ein Zeugnis für das reiche Erbe Bosniens und ein Beweis für seinen beständigen Geist."
+    },
+    "Navlinks": {
+        "Home": "Startseite",
+        "About": "Über uns",
+        "History": "Geschichte"
+    },
+    "Languages": {
+        "English": "Englisch",
+        "Bosnian": "Bosnisch",
+        "German": "Deutsch"
+    },
+    "ActivityTable": {
+        "activity": "Aktivität",
+        "category": "Kategorie",
+        "rating": "Bewertung",
+        "difficulty": "Schwierigkeitsgrad",
+        "status": "Status",
+        "duration": "Dauer",
+        "reviews": "Bewertungen",
+        "Easy": "Leicht",
+        "Medium": "Mittel",
+        "Hard": "Schwer",
+        "Not completed": "Nicht abgeschlossen",
+        "In progress": "In Bearbeitung",
+        "Completed": "Abgeschlossen"
+    },
+    "Accommodations": {
+        "reviews": "Bewertungen",
+        "No reviews": "Keine Bewertungen",
+        "Address": "Adresse",
+        "Distance from center": "Entfernung vom Zentrum",
+        "Check-in time": "Check-in-Zeit",
+        "Check-out time": "Check-out-Zeit",
+        "day": "Tag",
+        "Available apartments": "Verfügbare Apartments"
+    }
+}

@@ -13,6 +13,7 @@ import ActivityTable from "@/components/home/departure/ActivityTable";
 import EventCalendar from "@/components/home/departure/EventCalendar/EventCalendar";
 import Map from "@/components/map/map";
 import Footer from "@/components/home/footer/Footer";
+import { useTranslations } from "next-intl";
 
 const AboutPage = () => {
   // >> React Hooks
@@ -23,6 +24,7 @@ const AboutPage = () => {
   const { accommodations, accommodationsLoading } = useAccommodations();
   const [activities, setActivities] = useState<IActivity[]>();
   const [events, setEvents] = useState<IEvent[]>();
+  const t = useTranslations("Accommodations");
 
   // >> Filters
   const interests = params.get("interests");
@@ -62,7 +64,7 @@ const AboutPage = () => {
     fetchActivities();
     fetchEvents();
   }, [router, interests, check_in, check_out, people]);
-  console.log(events);
+
   return (
     <>
       <Navbar />
@@ -81,7 +83,7 @@ const AboutPage = () => {
           />
           <div className="mx-2 mt-4">
             <h2 className="text-3xl font-bold mx-2 text-white mb-2">
-              Available apartments
+              {t('Available apartments')}
             </h2>
             <div className="overflow-y-auto h-[68vh] px-2 scrollbar-hidden">
               <AccommodationList

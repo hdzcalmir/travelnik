@@ -29,5 +29,30 @@
         "English": "English",
         "Bosnian": "Bosnian",
         "German": "German"
+    },
+    "ActivityTable": {
+        "activity": "Activity",
+        "category": "Category",
+        "rating": "Rating",
+        "difficulty": "Difficulty",
+        "status": "Status",
+        "duration": "Duration",
+        "reviews": "reviews",
+        "Easy": "Easy",
+        "Medium": "Medium",
+        "Hard": "Hard",
+        "Not completed": "Not completed",
+        "In progress": "In progress",
+        "Completed": "Completed"
+    },
+    "Accommodations": {
+        "reviews": "reviews",
+        "No reviews": "No reviews",
+        "Address": "Address",
+        "Distance from center": "Distance from center",
+        "Check-in time": "Check-in time",
+        "Check-out time": "Check-out time",
+        "day": "day",
+        "Available apartments": "Available apartments"
     }
 }

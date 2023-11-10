@@ -1,0 +1,58 @@
+{
+    "Hero": {
+        "discover": "Otkrij",
+        "text_1": "Travnik, skriveni dragulj Bosne i Hercegovine!",
+        "text_2": "Travelnik je tvoj personalizirani vodič kroz očaravajući grad Travnik, Bosna i Hercegovina.",
+        "text_3": "Pun insider savjeta, interaktivnih karata i odabranih preporuka, savršen je pratilac za turiste željne otkrivanja bogate historije, impresivne arhitekture i živopisne kulture ovog skrivenog dragulja.",
+        "learn_more": "Saznaj više"
+    },
+    "Filter": {
+        "interests_error": "Morate odabrati svoje interese.",
+        "departure_error": "Morate odabrati datum polaska.",
+        "people_error": "Morate odabrati broj osoba.",
+        "interests_placeholder": "Odaberite svoje interese",
+        "people_placeholder": "Broj osoba",
+        "search_button": "Pretraži"
+    },
+    "Features": {
+        "explore": "Istraži",
+        "text_1": "bogatu historiju Travnika",
+        "text_2": "Travnik, smješten 90 kilometara sjeveroistočno od Sarajeva, grad je natopljen šarmom i bogatom historijom. Njegov skroman vanjski izgled prikriva značajnu historijsku važnost kao nekadašnjeg sjedišta osmanskih vezira Bosne. Travnik posjetiteljima pruža uvid u prošla vremena, gdje odjeci njegove slavne prošlosti još uvijek odzvanjaju kroz kaldrmisane ulice i arhitektonska blaga.",
+        "text_3": "Poznat po svojoj impozantnoj tvrđavi, živopisnom bazaru i rodnom mjestu nobelovca Ive Andrića, Travnik je mjesto gdje prošlost oživljava. Ovaj grad svjedoči o bogatom tkivu baštine Bosne i dokaz je njezinog trajnog duha."
+    },
+    "Navlinks": {
+        "Home": "Početna",
+        "About": "O nama",
+        "History": "Historija"
+    },
+    "Languages": {
+        "English": "Engleski",
+        "Bosnian": "Bosanski",
+        "German": "Njemački"
+    },
+    "ActivityTable": {
+        "activity": "Aktivnost",
+        "category": "Kategorija",
+        "rating": "Ocjena",
+        "difficulty": "Težina",
+        "status": "Status",
+        "duration": "Trajanje",
+        "reviews": "recenzije",
+        "Easy": "Lako",
+        "Medium": "Srednje",
+        "Hard": "Teško",
+        "Not completed": "Nije završeno",
+        "In progress": "U tijeku",
+        "Completed": "Završeno"
+    },
+    "Accommodations": {
+        "reviews": "recenzije",
+        "No reviews": "Nema recenzija",
+        "Address": "Adresa",
+        "Distance from center": "Udaljenost od centra",
+        "Check-in time": "Vrijeme prijave",
+        "Check-out time": "Vrijeme odjave",
+        "day": "dan",
+        "Available apartments": "Dostupni apartmani"
+    }
+}

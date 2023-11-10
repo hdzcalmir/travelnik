@@ -5,6 +5,7 @@ import ActivityCard from "./ActivityCard/ActivityCard";
 import { useState } from "react";
 import ActivityFilter from "./ActivityCard/ActivityFilter";
 import { Utils } from "@/common/utils";
+import { useTranslations } from "next-intl";
 
 interface ActivityTableProps {
   activities: IActivity[] | undefined;
@@ -14,6 +15,7 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
   const [filterDropdown, setFilterDropdown] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<string>("");
   const [searchFIlter, setSearchFIlter] = useState<string>("");
+  const t = useTranslations('ActivityTable');
 
   const sortedActivities = Utils.sortActivities(
     activities || [],
@@ -21,7 +23,6 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
     searchFIlter
   );
 
-  console.log(searchFIlter);
   return (
     <section className="bg-gray-800">
       <div>
@@ -38,22 +39,22 @@ const ActivityTable = ({ activities }: ActivityTableProps) => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-4 py-3">
-                    Activity
+                    {t('activity')}
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Category
+                    {t('category')}
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Rating
+                    {t('rating')}
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Difficulty
+                    {t('difficulty')}
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Status
+                    {t('status')}
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Duration
+                    {t('duration')}
                   </th>
                 </tr>
               </thead>

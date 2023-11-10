@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,6 +22,8 @@ export interface IAccommodation {
 }
 
 const AccommodationCard = (data: IAccommodation) => {
+  const t = useTranslations('Accommodations');
+
   return (
     <div className="md:max-w-2xl xs:max-w-sm sm:max-w-xs">
       <Link href={data.source} target="_blank" className="space-y-10">
@@ -38,7 +41,7 @@ const AccommodationCard = (data: IAccommodation) => {
           <div className="w-full md:w-2/3 bg-gray-700 flex flex-col space-y-2 p-3">
             <div className="flex justify-between item-center">
               <p className="text-gray-300 font-medium md:block">
-                {data.status ? data.status : "No reviews"}
+                {data.status ? data.status : t("No reviews")}
               </p>
               <div className="flex items-center">
                 <svg
@@ -52,7 +55,7 @@ const AccommodationCard = (data: IAccommodation) => {
                 <p className="text-white font-bold text-sm ml-1">
                   {data.rating}
                   <span className="text-gray-300 font-normal">
-                    ({data.reviews} reviews)
+                    ({data.reviews} {t('reviews')})
                   </span>
                 </p>
               </div>
@@ -64,20 +67,20 @@ const AccommodationCard = (data: IAccommodation) => {
               {data.title}
             </h3>
             <p className="md:text-md text-gray-300 text-base">
-              <span className="text-white font-bold">Address:</span>{" "}
+              <span className="text-white font-bold">{t('Address')}:</span>{" "}
               {data.address} <br></br>{" "}
               <span className="text-white font-bold">
-                Distance from center:
+                {t('Distance from center')}:
               </span>{" "}
               {data.distance_from_center}km <br></br>{" "}
-              <span className="text-white font-bold">Check-in time:</span>{" "}
+              <span className="text-white font-bold">{t('Check-in time')}:</span>{" "}
               {data.check_in_time}h |{" "}
-              <span className="text-white font-bold">Check-out time:</span>{" "}
+              <span className="text-white font-bold">{t('Check-out time')}:</span>{" "}
               {data.check_out_time}h
             </p>
             <p className="text-xl font-black text-white">
               €{data.price}
-              <span className="font-normal text-gray-300 text-base">/day</span>
+              <span className="font-normal text-gray-300 text-base">/{t('day')}</span>
             </p>
           </div>
         </div>
