@@ -4,14 +4,16 @@ import { homeSitemap } from "./homeSitemap";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const Navbar = () => {
   const path = usePathname();
+  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
 
   return (
-    <header>
-      <nav className="px-4 lg:px-6 py-8 bg-gray-800 shadow-lg">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+    <header className="relative">
+      <nav className="px-4 lg:px-6 py-8 bg-gray-800 shadow-lg ">
+        <div className="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center">
             <Image
               src="/images/travelnik-logo.png"
@@ -81,6 +83,7 @@ const Navbar = () => {
               </svg>
             </button>
             <button
+              onClick={() => setMobileMenu(!mobileMenu)}
               data-collapse-toggle="mobile-menu-2"
               type="button"
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -115,18 +118,17 @@ const Navbar = () => {
             </button>
           </div>
           <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            className={`${mobileMenu ? "absolute top-20 left-0" : "hidden"} py-2 border-b-2 shadow-lg sm:shadow-none sm:border-b-0 border-b-gray-700 bg-gray-800 z-10 w-full lg:flex lg:w-auto lg:order-1`}
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col justify-center mx-auto mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               {homeSitemap &&
                 homeSitemap.map((navLink) => (
                   <li key={navLink.name}>
                     <Link
                       href={navLink.link}
-                      className={`block py-2 pr-4 pl-3 ${
-                        path === navLink.link ? "text-white" : "text-gray-400"
-                      } rounded lg:bg-transparent lg:p-0`}
+                      className={`block py-2 pr-4 pl-3 ${path === navLink.link ? "text-white" : "text-gray-400"
+                        } rounded lg:bg-transparent lg:p-0 text-lg`}
                       aria-current="page"
                     >
                       {navLink.name}
@@ -137,6 +139,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+
     </header>
   );
 };
