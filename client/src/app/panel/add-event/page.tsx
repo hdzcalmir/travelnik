@@ -3,6 +3,7 @@
 import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN, DEFAULT_MARKER } from "@/common/consts";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import IsAuth from "@/hooks/isAuth";
 import EventAPI from "@/interceptor/Event/Event";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -13,7 +14,7 @@ const addEvent = async (event: any) => {
     await EventAPI.addEvent(event);
 }
 
-export default function AddEvent() {
+function AddEvent() {
 
     let markerExists = false;
     let marker: Marker;
@@ -123,3 +124,5 @@ export default function AddEvent() {
         </div>
     )
 }
+
+export default IsAuth(AddEvent);

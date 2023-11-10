@@ -2,6 +2,7 @@
 import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN, DEFAULT_MARKER } from "@/common/consts";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import IsAuth from "@/hooks/isAuth";
 import ActivityAPI from "@/interceptor/Activity/Activity";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -12,7 +13,7 @@ const addActivity = async (activity: any) => {
     await ActivityAPI.addActivtiy(activity);
 }
 
-export default function AddActivity() {
+function AddActivity() {
 
     let markerExists = false;
     let marker: Marker;
@@ -122,3 +123,4 @@ export default function AddActivity() {
         </div>
     )
 }
+export default IsAuth(AddActivity);

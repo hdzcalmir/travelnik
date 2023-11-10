@@ -4,6 +4,7 @@ import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN,
 import { Category } from "@/common/enums";
 import Footer from "@/components/panel/layout/footer/footer";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar"
+import IsAuth from "@/hooks/isAuth";
 import BusinessAPI from "@/interceptor/Business/Business";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -14,7 +15,7 @@ const addVenture = async (venture: any) => {
     await BusinessAPI.addVenture(venture);
 }
 
-export default function AddVenture() {
+function AddVenture() {
 
     let markerExists = false;
     let marker: Marker;
@@ -155,3 +156,5 @@ export default function AddVenture() {
         </div>
     )
 }
+
+export default IsAuth(AddVenture);
