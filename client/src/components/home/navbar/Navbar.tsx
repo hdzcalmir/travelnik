@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Language from "./Language/Language";
 
 const Navbar = () => {
   const path = usePathname();
@@ -24,64 +25,7 @@ const Navbar = () => {
             />
           </Link>
           <div className="flex items-center lg:order-2">
-            <button
-              type="button"
-              data-dropdown-toggle="language-dropdown"
-              className="hidden sm:inline-flex items-center text-gray-800 dark:text-gray-300 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 lg:px-5 py-2.5 mr-2 focus:outline-none dark:focus:ring-gray-800"
-            >
-              <svg
-                className="mr-2 w-5 h-5 rounded-full"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 3900 3900"
-              >
-                <path fill="#b22234" d="M0 0h7410v3900H0z"></path>
-                <path
-                  d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0"
-                  stroke="#fff"
-                  strokeWidth="300"
-                ></path>
-                <path fill="#3c3b6e" d="M0 0h2964v2100H0z"></path>
-                <g fill="#fff">
-                  <g id="d">
-                    <g id="c">
-                      <g id="e">
-                        <g id="b">
-                          <path
-                            id="a"
-                            d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z"
-                          ></path>
-                          <use xlinkHref="#a" y="420"></use>
-                          <use xlinkHref="#a" y="840"></use>
-                          <use xlinkHref="#a" y="1260"></use>
-                        </g>
-                        <use xlinkHref="#a" y="1680"></use>
-                      </g>
-                      <use xlinkHref="#b" x="247" y="210"></use>
-                    </g>
-                    <use xlinkHref="#c" x="494"></use>
-                  </g>
-                  <use xlinkHref="#d" x="988"></use>
-                  <use xlinkHref="#c" x="1976"></use>
-                  <use xlinkHref="#e" x="2470"></use>
-                </g>
-              </svg>
-              English
-              <svg
-                className="ml-1 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </button>
+            <Language />
             <button
               onClick={() => setMobileMenu(!mobileMenu)}
               data-collapse-toggle="mobile-menu-2"
