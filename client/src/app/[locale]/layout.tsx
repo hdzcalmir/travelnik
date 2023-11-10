@@ -5,8 +5,9 @@ import Providers from './providers'
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { Raleway } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Raleway({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Travelnik - Explore Travnik in few clicks',
@@ -31,8 +32,8 @@ export default async function RootLayout({ children, params: { locale } }: RootL
   }
 
   return (
-    <html lang={locale} >
-      <body className={inter.className}>
+    <html lang={locale} className={montserrat.className}>
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Toaster position="top-right" />
