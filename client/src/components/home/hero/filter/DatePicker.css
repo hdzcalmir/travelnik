@@ -141,7 +141,7 @@
 }
 .flatpickr-months .flatpickr-month {
   border-radius: 5px 5px 0 0;
-  background: rgb(31 41 55);
+  background: rgb(55 65 81);
   color: #fff;
   fill: #fff;
   height: 34px;
@@ -379,7 +379,7 @@
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months {
   appearance: menulist;
-  background: rgb(31 41 55);
+  background: rgb(55 65 81);
   border: none;
   border-radius: 0;
   box-sizing: border-box;
@@ -408,12 +408,12 @@
   background: rgba(0,0,0,0.05);
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
-  background-color: rgb(31 41 55);
+  background-color: rgb(55 65 81);
   outline: none;
   padding: 0;
 }
 .flatpickr-weekdays {
-  background: rgb(31 41 55);
+  background: rgb(55 65 81);
   text-align: center;
   overflow: hidden;
   width: 100%;
@@ -440,7 +440,7 @@
 span.flatpickr-weekday {
   cursor: default;
   font-size: 90%;
-  background: rgb(31 41 55);
+  background: rgb(55 65 81);
   color: #fff;
   line-height: 1;
   margin: 0;
