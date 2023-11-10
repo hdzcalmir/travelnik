@@ -62,7 +62,7 @@ const Navbar = () => {
             </button>
           </div>
           <div
-            className={`${mobileMenu ? "absolute top-20 left-0" : "hidden"} py-2 border-b-2 shadow-lg sm:shadow-none sm:border-b-0 border-b-gray-700 bg-gray-800 z-10 w-full lg:flex lg:w-auto lg:order-1`}
+            className={`${mobileMenu ? "absolute top-20 left-0" : "hidden"} h-screen py-2 border-b-2 shadow-lg sm:shadow-none sm:border-b-0 border-b-gray-700 bg-gray-800 z-10 w-full lg:flex lg:w-auto lg:order-1`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col justify-center mx-auto mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -72,7 +72,7 @@ const Navbar = () => {
                     <Link
                       href={navLink.link}
                       className={`block py-2 pr-4 pl-3 ${path === navLink.link ? "text-white" : "text-gray-400"
-                        } rounded lg:bg-transparent lg:p-0 text-lg`}
+                        } rounded lg:bg-transparent lg:p-0 text-xl text-center`}
                       aria-current="page"
                     >
                       {navLink.name}
