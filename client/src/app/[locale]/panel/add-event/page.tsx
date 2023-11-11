@@ -1,6 +1,7 @@
 "use client"
 
 import { ADDRESS, CITY, CLICK, COUNTRY, COORDS, LAT, LNG, MAP, POST_CODE, TOKEN, DEFAULT_MARKER } from "@/common/consts";
+import { interests } from "@/common/interests";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Footer from "@/components/panel/layout/footer/Footer";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
@@ -9,6 +10,7 @@ import EventAPI from "@/interceptor/Event/Event";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 
 const addEvent = async (event: any) => {
@@ -87,10 +89,18 @@ function AddEvent() {
         setEvent({ ...event, [e.target.name]: e.target.value });
         console.log(event)
     }
-
-    const handleAddVenture = async (e: any) => {
+    
+    const handleAddEvent = async (e: any) => {
         e.preventDefault();
-        await addEvent(event);
+        try {
+            const response = await EventAPI.addEvent(event);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     };
 
     return (
@@ -105,7 +115,7 @@ function AddEvent() {
                         <div className="flex justify-start h-16 items-center border-b border-gray-700 w-full px-5">
                             <h2 className="text-gray-50 font-bold text-xl">Add Event</h2>
                         </div>
-                        <form onSubmit={handleAddVenture} className="w-full space-y-2 py-5">
+                        <form onSubmit={handleAddEvent} className="w-full space-y-2 py-5">
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Name</label>
                                 <input name="name" value={event.name} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Event name" />
@@ -116,7 +126,14 @@ function AddEvent() {
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Category</label>
-                                <input name="category" value={event.category} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Event category" />
+                                <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="category" name="category" value={event.category} onChange={handleInputChange}>
+                                    <option>Select Category..</option>
+                                    {interests.map((interest) => (
+                                        <option key={interest} value={interest}>
+                                            {interest}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Country</label>

@@ -10,11 +10,7 @@ import BusinessAPI from "@/interceptor/Business/Business";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
-
-
-const addVenture = async (venture: any) => {
-    await BusinessAPI.addVenture(venture);
-}
+import toast from "react-hot-toast";
 
 function AddVenture() {
 
@@ -86,12 +82,19 @@ function AddVenture() {
 
     const handleInputChange = (e: any) => {
         setVenture({ ...venture, [e.target.name]: e.target.value });
-        console.log(venture)
     }
 
     const handleAddVenture = async (e: any) => {
         e.preventDefault();
-        await addVenture(venture);
+        try {
+            const response = await BusinessAPI.addVenture(venture);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     };
 
     return (

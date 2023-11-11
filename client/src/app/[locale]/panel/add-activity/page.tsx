@@ -9,6 +9,9 @@ import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import { VentureCategory } from "@/common/enums";
+import toast from "react-hot-toast";
+import { interests } from "@/common/interests";
+import { difficulties } from "@/common/difficulties";
 
 const addActivity = async (activity: any) => {
     await ActivityAPI.addActivtiy(activity);
@@ -56,7 +59,7 @@ function AddActivity() {
                     marker = new mapboxgl.Marker(icon)
                         .setLngLat(data.lngLat)
                         .addTo(map);
-                        setActivity({ ...activity, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                    setActivity({ ...activity, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                     markerExists = true;
                 } else {
                     setActivity({ ...activity, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
@@ -72,7 +75,7 @@ function AddActivity() {
                     marker = new mapboxgl.Marker(icon)
                         .setLngLat(data.lngLat)
                         .addTo(map);
-                        setActivity({ ...activity, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                    setActivity({ ...activity, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                     markerExists = true;
                 } else {
                     setActivity({ ...activity, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
@@ -84,14 +87,21 @@ function AddActivity() {
 
     const handleInputChange = (e: any) => {
         setActivity({ ...activity, [e.target.name]: e.target.value });
-        console.log(activity)
     }
 
-    const handleAddVenture = async (e: any) => {
+    const handleAddActivity = async (e: any) => {
         e.preventDefault();
-        await addActivity(activity);
+        try {
+            const response = await ActivityAPI.addActivtiy(activity);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            console.log(error);
+            toast.error(error.response.data);
+        }
     };
-
 
     return (
         <div>
@@ -105,28 +115,24 @@ function AddActivity() {
                         <div className="flex justify-start h-16 items-center border-b border-gray-700 w-full px-5">
                             <h2 className="text-gray-50 font-bold text-xl">Add Activity</h2>
                         </div>
-                        <form onSubmit={handleAddVenture} className="w-full space-y-2 py-5">
+                        <form onSubmit={handleAddActivity} className="w-full space-y-2 py-5">
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Name</label>
-                                <input name="name" value={activity.name} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture name" />
+                                <input name="name" value={activity.name} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Activity name" />
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Description</label>
-                                <input name="description" value={activity.description} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Venture description" />
+                                <input name="description" value={activity.description} onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" type="text" placeholder="Activity description" />
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Category</label>
                                 <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="category" name="category" value={activity.category} onChange={handleInputChange}>
                                     <option>Select Category..</option>
-                                    <option value={VentureCategory.Restaurant}>Restaurant</option>
-                                    <option value={VentureCategory.Hotel}>Hotel</option>
-                                    <option value={VentureCategory.Hospital}>Hospital</option>
-                                    <option value={VentureCategory.Gym}>Gym</option>
-                                    <option value={VentureCategory.Cinema}>Cinema</option>
-                                    <option value={VentureCategory.GasStation}>Gas Station</option>
-                                    <option value={VentureCategory.Store}>Market</option>
-                                    <option value={VentureCategory.Taxi}>Taxi</option>
-                                    <option value={VentureCategory.BusStation}>Bus Station</option>
+                                    {interests.map((interest) => (
+                                        <option key={interest} value={interest}>
+                                            {interest}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
@@ -147,12 +153,18 @@ function AddActivity() {
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Difficulty</label>
-                                <input type="text" name="difficulty" value={activity.difficulty} placeholder="Enter difficulty" onChange={handleInputChange} className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                                />
+                                <select className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3" id="difficulty" name="difficulty" value={activity.difficulty} onChange={handleInputChange}>
+                                    <option>Select Difficulty..</option>
+                                    {Object.keys(difficulties).map((difficulty) => (
+                                        <option key={difficulty} value={difficulty}>
+                                            {difficulty}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="flex justify-between w-full items-center px-5">
                                 <label className="text-md text-gray-50">Duration</label>
-                                <input type="time" name="duration" value={activity.duration} onChange={handleInputChange} className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" />
+                                <input type="number" name="duration" value={activity.duration} onChange={handleInputChange} className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none" />
                             </div>
                             <div className="bg-gray-700 h-[1px]"></div>
                             <div className="flex justify-end px-5">

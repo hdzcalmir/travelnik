@@ -1,4 +1,5 @@
 import { BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
+import { difficulties } from "./difficulties";
 import { VentureCategory } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
 
@@ -33,14 +34,8 @@ export class Utils {
           Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
       );
     } else if (activeFilter === "difficulty") {
-      const difficultiesOrder: { [key: string]: number } = {
-        "Easy": 1,
-        "Medium": 2,
-        "Hard": 3
-      };
-
       return filteredActivities.sort((a, b) => {
-        return difficultiesOrder[a.difficulty] - difficultiesOrder[b.difficulty];
+        return difficulties[a.difficulty] - difficulties[b.difficulty];
       });
     } else if (activeFilter === "duration") {
       return filteredActivities.sort((a, b) => {
