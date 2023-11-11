@@ -71,7 +71,11 @@ const db = require("../database/database.js");
  */
 const getAllEvents = (req, res) => {
   try {
-    let query = "SELECT * FROM events INNER JOIN location ON events.location_id = location.id";
+    let query = "SELECT events.id, events.location_id, events.name, events.description, events.category, \
+                events.start_date, events.end_date,\
+                location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
+                FROM events\
+                INNER JOIN location ON events.location_id = location.id";
 
     const jsonInterests = req.query.interests;
 

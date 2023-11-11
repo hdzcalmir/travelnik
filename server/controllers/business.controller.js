@@ -64,7 +64,11 @@ const { INTEREST_CATEGORIES } = require("../utils/constants.js");
 
 const getAllBusinesses = (req, res) => {
   try {
-    let getAllBusinessesQuery = 'SELECT * FROM businesses INNER JOIN location ON businesses.location_id = location.id';
+    let getAllBusinessesQuery = 'SELECT businesses.id, businesses.location_id, businesses.reviews, businesses.name, businesses.description, \
+                                businesses.category, businesses.opening_time, businesses.closing_time,\
+                                location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
+                                FROM businesses\
+                                INNER JOIN location ON businesses.location_id = location.id';
     if (req.query.interests && req.query.check_in && req.query.check_out && req.query.people) {
       const jsonInterests = atob(req.query.interests);
       const interests = JSON.parse(jsonInterests);
