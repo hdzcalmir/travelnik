@@ -22,7 +22,6 @@ import VentureAPI from "@/interceptor/Venture/Venture";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 const addVenture = async (venture: any) => {
   await VentureAPI.addVenture(venture);
