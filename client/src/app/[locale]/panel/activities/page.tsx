@@ -13,7 +13,7 @@ function Activities() {
   const { activities, activitiesLoading, deleteVentureMutation } = useActivities();
 
   const handleDeleteVenture = async (id: string) => {
-    await deleteVentureMutation.mutateAsync({id});
+    await deleteVentureMutation.mutateAsync({ id });
   }
 
   if (activitiesLoading) {

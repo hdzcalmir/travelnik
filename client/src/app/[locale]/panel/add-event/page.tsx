@@ -22,7 +22,6 @@ import EventAPI from "@/interceptor/Event/Event";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 const addEvent = async (event: any) => {
   await EventAPI.addEvent(event);

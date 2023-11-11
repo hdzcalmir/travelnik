@@ -6,7 +6,6 @@ import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useVentures from "@/hooks/useVentures";
-import VentureAPI from "@/interceptor/Venture/Venture";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
@@ -30,7 +29,7 @@ function Ventures() {
     );
   }
   const handleDeleteVenture = async (id: string) => {
-    await deleteVentureMutation.mutateAsync({id})
+    await deleteVentureMutation.mutateAsync({ id })
 
   }
 

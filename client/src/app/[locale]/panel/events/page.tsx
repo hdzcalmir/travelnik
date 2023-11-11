@@ -13,7 +13,7 @@ function Events() {
   const { events, eventsLoading, deleteEventMutation } = useEvents();
 
   const handleDeleteVenture = async (id: string) => {
-    await deleteEventMutation.mutateAsync({id});
+    await deleteEventMutation.mutateAsync({ id });
   }
 
   if (eventsLoading) {
