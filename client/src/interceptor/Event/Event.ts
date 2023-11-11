@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import http from "../http";
+import { swalWithBootstrapButtons } from "@/common/sweetAlert";
 
 const EventAPI = {
     fetchEvents: async () => {
@@ -22,14 +23,24 @@ const EventAPI = {
         }
     },
     deleteEvent: async (id: string) => {
-        try {
-            const response = await http.delete(`/event/${id}`);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success(response.data);
+        const result = await swalWithBootstrapButtons.fire({
+            text: 'Are you sure you want to delete this event?',
+            showCancelButton: true,
+            showConfirmButton: true,
+            icon: 'warning',
+            confirmButtonText: '<b>Yes, delete it!</b>',
+            cancelButtonText: '<b>No, return</b>'
+        })
+
+        if (result.isConfirmed) {
+            try {
+                const response = await http.delete(`/event/${id}`);
+                if (response.status === 201) {
+                    toast.success(response.data);
+                }
+            } catch (error: any) {
+                toast.error(error.response.data);
             }
-        } catch (error: any) {
-            toast.error(error.response.data);
         }
     }
 };

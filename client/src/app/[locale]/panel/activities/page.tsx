@@ -6,20 +6,14 @@ import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import useActivities from "@/hooks/useActivities";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
-import ActivityAPI from "@/interceptor/Activity/Activity";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
-const deleteActivity = async (id: string) => {
-  console.log(id);
-  await ActivityAPI.deleteActivity(id);
-}
-
 function Activities() {
-  const { activities, activitiesLoading } = useActivities();
+  const { activities, activitiesLoading, deleteVentureMutation } = useActivities();
 
   const handleDeleteVenture = async (id: string) => {
-    deleteActivity(id);
+    await deleteVentureMutation.mutateAsync({id});
   }
 
   if (activitiesLoading) {
