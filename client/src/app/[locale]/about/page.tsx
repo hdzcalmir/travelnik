@@ -31,7 +31,7 @@ const AboutPage = () => {
                 </Parallax>
             </div>
             <section className="text-white bg-gray-800 mt-12">
-                <div className="mx-auto flex pb-24 md:flex-row flex-col items-center">
+                <div className="mx-auto flex pb-4 md:flex-row flex-col items-center">
                     <div className="lg:max-w-3xl lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
                         <Image src="/images/travelnik-phone.png" alt="Travelnik phone mock" height={400} width={1200} />
                     </div>
@@ -79,18 +79,29 @@ const AboutPage = () => {
 
                 </div >
             </section >
-            <section className="text-white bg-gray-800">
+
+            <section className="p-4 lg:p-8 dark:bg-gray-800 dark:text-gray-100">
+                <div className="container mx-auto space-y-12">
+                    <div className="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
+                        <Image src="/images/travnik-logo.png" className="h-96 dark:bg-gray-600 aspect-video" alt="Travelnik phone mock" height={400} width={400} />
+                        <div className="flex flex-col justify-center flex-1 p-6 dark:bg-gray-700">
+                            <span className="text-xs uppercase text-secondaryColor">Discover Bosnian Charm</span>
+                            <h3 className="text-3xl font-bold">Tourist Board of the Municipality of Travnik</h3>
+                            <p className="my-6 dark:text-gray-400">The Tourist Board of the Municipality of Travnik is a dedicated organization committed to promoting and enhancing the tourism experience in the charming town of Travnik. As a focal point for travel information and services, the Tourist Board strives to showcase the rich cultural heritage, historical landmarks, and natural beauty that define Travnik. Whether you're a history enthusiast eager to explore ancient sites or a nature lover seeking picturesque landscapes, the Tourist Board is here to guide you, providing valuable insights and assistance to ensure a memorable visit to this enchanting destination. Discover the unique blend of tradition and modernity that Travnik offers, and let the Tourist Board be your gateway to an unforgettable travel experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="text-white bg-gray-800 mt-16">
                 <div className="container px-5 mx-auto">
                     <div className="flex flex-col text-center w-full mb-20">
                         <h2 className="text-xs text-secondaryColor tracking-widest font-medium title-font mb-1">
                             OUR MISSION
                         </h2>
-                        <h1 className="sm:text-3xl text-3xl font-medium title-font mb-4 text-gray-100">
+                        <h1 className="text-2xl font-tiny mb-4 text-gray-300">
                             At Travelnik, our mission is to empower and inspire new tourists to explore the enchanting town of Travnik by providing them with a seamless and immersive web-based experience. We aim to be the go-to platform for travelers seeking authentic insights and guidance, ensuring that every visitor discovers the rich cultural heritage, picturesque landscapes, and hidden gems that Travnik has to offer.
                         </h1>
-                        <p className="lg:w-2/3 mx-auto leading-relaxed text-lg text-white/40">
-                            Travelnik © 2023 All Rights Reserved.
-                        </p>
                     </div>
                 </div>
             </section>
