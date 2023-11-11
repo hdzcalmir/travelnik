@@ -75,7 +75,7 @@ function AddEvent() {
                     marker = new mapboxgl.Marker(icon)
                         .setLngLat(data.lngLat)
                         .addTo(map);
-                        setEvent({ ...event, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
+                    setEvent({ ...event, [COUNTRY]: resp.features[4].text, [CITY]: resp.features[2].text, [POST_CODE]: resp.features[1].text, [ADDRESS]: resp.features[0].text, [LAT]: data.lngLat.lat, [LNG]: data.lngLat.lng });
                     markerExists = true;
                 } else {
                     setEvent({ ...event, [COUNTRY]: '', [CITY]: '', [POST_CODE]: '', [ADDRESS]: '', [LAT]: 0, [LNG]: 0 });
@@ -89,18 +89,10 @@ function AddEvent() {
         setEvent({ ...event, [e.target.name]: e.target.value });
         console.log(event)
     }
-    
+
     const handleAddEvent = async (e: any) => {
         e.preventDefault();
-        try {
-            const response = await EventAPI.addEvent(event);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success(response.data);
-            }
-        } catch (error: any) {
-            toast.error(error.response.data);
-        }
+        await addEvent(event);
     };
 
     return (

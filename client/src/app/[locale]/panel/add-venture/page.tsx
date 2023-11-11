@@ -6,11 +6,15 @@ import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Footer from "@/components/panel/layout/footer/Footer";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar"
 import IsAuth from "@/hooks/isAuth";
-import BusinessAPI from "@/interceptor/Business/Business";
+import VentureAPI from "@/interceptor/Venture/Venture";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
+const addVenture = async (venture: any) => {
+    await VentureAPI.addVenture(venture);
+}
 
 function AddVenture() {
 
@@ -86,15 +90,7 @@ function AddVenture() {
 
     const handleAddVenture = async (e: any) => {
         e.preventDefault();
-        try {
-            const response = await BusinessAPI.addVenture(venture);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success(response.data);
-            }
-        } catch (error: any) {
-            toast.error(error.response.data);
-        }
+        await addVenture(venture);
     };
 
     return (

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import http from "../http";
 
 const EventAPI = {
@@ -10,8 +11,15 @@ const EventAPI = {
         return response;
     },
     addEvent: async (event: any) => {
-        const response = await http.post('/event', event);
-        return response;
+        try {
+            const response = await http.post('/event', event);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     },
 };
 

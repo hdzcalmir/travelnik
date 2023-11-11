@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import http from "../http";
 
 const ActivityAPI = {
@@ -10,8 +11,15 @@ const ActivityAPI = {
         return response;
     },
     addActivtiy: async (activity: any) => {
-        const response = await http.post('/activity', activity);
-        return response;
+        try {
+            const response = await http.post('/activity', activity);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     }
 };
 

@@ -8,8 +8,6 @@ import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import { VentureCategory } from "@/common/enums";
-import toast from "react-hot-toast";
 import { interests } from "@/common/interests";
 import { difficulties } from "@/common/difficulties";
 
@@ -91,16 +89,7 @@ function AddActivity() {
 
     const handleAddActivity = async (e: any) => {
         e.preventDefault();
-        try {
-            const response = await ActivityAPI.addActivtiy(activity);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success(response.data);
-            }
-        } catch (error: any) {
-            console.log(error);
-            toast.error(error.response.data);
-        }
+        await addActivity(activity);
     };
 
     return (
