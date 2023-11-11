@@ -230,7 +230,6 @@ const deleteBusiness = (req, res) => {
     if (!req.params.id) return res.status(400).send("Bad request.");
     // >> Check if business exist
     const checkIfBusinessExistQuery = "SELECT * FROM businesses WHERE id = ?";
-
     db.query(checkIfBusinessExistQuery, [req.params.id], (err, data) => {
       if (data.length !== 0) {
         const deleteBusinessQuery = "DELETE FROM businesses WHERE id = ?";

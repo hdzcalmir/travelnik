@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import http from "../http";
-import Swal from 'sweetalert2'
 import { swalWithBootstrapButtons } from "@/common/sweetAlert";
 
 const VentureAPI = {

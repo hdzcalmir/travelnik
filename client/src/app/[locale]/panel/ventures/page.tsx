@@ -9,6 +9,7 @@ import useVentures from "@/hooks/useVentures";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { useEffect } from "react";
 
 const deleteVenture = async (id: string) => {
   console.log(id);
@@ -22,6 +23,7 @@ function Ventures() {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
       <TableSkeleton key={index} />
     ));
+
 
     return (
       <div className="h-[90vh]">
@@ -37,6 +39,8 @@ function Ventures() {
   const handleDeleteVenture = async (id: string) => {
     deleteVenture(id);
   }
+
+  console.log(ventures);
 
   return (
     <div>
