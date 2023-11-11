@@ -37,7 +37,7 @@ const HistoryPage = () => {
               <h1 className="sm:text-3xl text-3xl font-medium title-font mb-4 text-white">
                 {t("header_1")}
               </h1>
-              <p className="lg:w-2/3 mx-auto leading-relaxed text-lg">
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-lg text-gray-400">
                 {t("text_1")}
               </p>
             </div>
@@ -60,7 +60,7 @@ const HistoryPage = () => {
                 <h1 className="text-white text-3xl title-font font-medium mb-1">
                   {t("header_2")}
                 </h1>
-                <p className="leading-relaxed text-white text-lg">
+                <p className="leading-relaxed text-gray-400 text-lg ">
                   {t("text_2")}
                 </p>
               </div>
@@ -77,7 +77,7 @@ const HistoryPage = () => {
                 <h1 className="text-white text-3xl title-font font-medium mb-1">
                   {t("header_3")}
                 </h1>
-                <p className="leading-relaxed text-white text-lg">
+                <p className="leading-relaxed text-gray-400 text-lg">
                   {t("text_3")}
                 </p>
               </div>
