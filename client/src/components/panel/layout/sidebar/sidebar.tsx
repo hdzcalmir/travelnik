@@ -35,7 +35,7 @@ export default function Sidebar() {
           <path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
         </svg>
       </button>
-      <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen border-r border-gray-600 transition-transform ${isMenuOpen ? '' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
+      <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen shadow-xl transition-transform ${isMenuOpen ? '' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
         <div className="h-full py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <div className="flex justify-center">
             <Image alt='travelnik logo' className="mb-10 h-1/2 w-2/4" width={1203} height={503} src='/images/travelnik-logo.png' />
