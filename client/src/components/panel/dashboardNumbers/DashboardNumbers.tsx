@@ -27,8 +27,8 @@ export default function VenturesNumber() {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      <div className="w-full px-4 bg-gray-600 py-5 rounded-lg shadow-lg">
-        <div className="text-sm font-medium text-gray-100 truncate">
+      <div className="w-full px-4 bg-gray-800 py-5 rounded-lg shadow-lg">
+        <div className="text-xs uppercase font-bold text-gray-300 truncate">
           Ventures
         </div>
         {ventures && (
@@ -37,8 +37,8 @@ export default function VenturesNumber() {
           </div>
         )}
       </div>
-      <div className="w-full px-4 py-5 bg-gray-600 rounded-lg shadow-lg">
-        <div className="text-sm font-medium text-gray-100 truncate">
+      <div className="w-full px-4 py-5 bg-gray-800 rounded-lg shadow-lg">
+      <div className="text-xs uppercase font-bold text-gray-300 truncate">
           Activities
         </div>
         {activities && (
@@ -47,8 +47,8 @@ export default function VenturesNumber() {
           </div>
         )}
       </div>
-      <div className="w-full px-4 py-5 bg-gray-600 rounded-lg shadow-lg">
-        <div className="text-sm font-medium text-gray-100 truncate">
+      <div className="w-full px-4 py-5 bg-gray-800 rounded-lg shadow-lg">
+      <div className="text-xs uppercase font-bold text-gray-300 truncate">
           Events
         </div>
         {events && (

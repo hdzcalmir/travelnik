@@ -11,7 +11,7 @@ import VenturesNumber from '@/components/panel/dashboardNumbers/DashboardNumbers
 const Dashboard: NextPage = () => {
 
     return (
-        <div className="h-[100vh] bg-gray-700">
+        <div className="h-[100vh] bg-panelBg">
             <Sidebar></Sidebar>
             <div className="sm:ml-64 p-4 h-full">
             <Breadcrumb homeElement={'Home'}></Breadcrumb>

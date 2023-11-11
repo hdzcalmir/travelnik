@@ -36,7 +36,7 @@ function Activities() {
     return (
         <div>
             <Sidebar></Sidebar>
-            <div className="p-2 sm:p-4 sm:ml-64 h-full bg-gray-700">
+            <div className="p-2 sm:p-4 sm:ml-64 h-full bg-panelBg">
                 <Breadcrumb homeElement={'Home'}></Breadcrumb>
                 <div className="flex flex-col w-full items-center  h-[80vh] border-gray-700">
                     <div className="flex flex-col shadow-lg items-center w-full h-full mb-4 rounded-lg bg-gray-800">

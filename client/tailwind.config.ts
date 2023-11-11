@@ -15,7 +15,8 @@ const config: Config = {
       },
       colors: {
         'primaryColor': 'rgb(31 41 55)',
-        'secondaryColor': '#65CF94'
+        'secondaryColor': '#65CF94',
+        'panelBg': '#2b3544'
       }
     },
   },

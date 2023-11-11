@@ -96,14 +96,14 @@ function AddEvent() {
     return (
         <div>
             <Sidebar></Sidebar>
-            <div className="p-2 sm:p-4 sm:ml-64 h-full bg-gray-700">
+            <div className="p-2 sm:p-4 sm:ml-64 h-full bg-panelBg">
                 <div className="flex flex-col w-full items-center border-gray-200 h-full dark:border-gray-700">
                     <Breadcrumb homeElement={'Home'}></Breadcrumb>
                     <div className="rounded-lg shadow-lg h-96 w-full lg:w-2/3 mb-4" id="map">
                     </div>
-                    <div className="flex flex-col shadow-lg items-center justify-center w-full lg:w-2/3 h-full mb-4 rounded-lg bg-gray-600">
+                    <div className="flex flex-col shadow-lg items-center justify-center w-full lg:w-2/3 h-full mb-4 rounded-lg bg-gray-800">
                         <div className="flex justify-start h-16 items-center border-b border-gray-700 w-full px-5">
-                            <h2 className="text-gray-50 font-semibold text-xl">Add Event</h2>
+                            <h2 className="text-gray-50 font-bold text-xl">Add Event</h2>
                         </div>
                         <form onSubmit={handleAddVenture} className="w-full space-y-2 py-5">
                             <div className="flex justify-between w-full items-center px-5">
