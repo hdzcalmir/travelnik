@@ -12,8 +12,8 @@ import {
   TOKEN,
   DEFAULT_MARKER,
 } from "@/common/consts";
-import Sidebar from "@/components/panel/layout/sidebar/sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
+import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import ActivityAPI from "@/interceptor/Activity/Activity";
 import { mapboxApi } from "@/interceptor/mapboxApi";

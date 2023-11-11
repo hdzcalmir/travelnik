@@ -15,8 +15,8 @@ import {
 } from "@/common/consts";
 import { VentureCategory } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import Sidebar from "@/components/panel/layout/sidebar/sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
+import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import { mapboxApi } from "@/interceptor/mapboxApi";
