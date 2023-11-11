@@ -70,32 +70,28 @@ function Ventures() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ventures?.map((activity) => (
+                  {ventures?.map((venture) => (
                     <tr
-                      key={activity.id}
+                      key={venture.id}
                       className="bg-gray-800 border-b border-gray-700"
                     >
                       <th
                         scope="row"
                         className="px-6 py-4 font-medium whitespace-nowrap "
                       >
-                        {activity.name}
+                        {venture.name}
                       </th>
-                      <td className="px-6 py-4">{activity.address}</td>
-                      <td className="px-6 py-4">{activity.category}</td>
-                      <td className="px-6 py-4">{activity.openingTime}</td>
-                      <td className="px-6 py-4">{activity.closingTime}</td>
+                      <td className="px-6 py-4">{venture.address}</td>
+                      <td className="px-6 py-4">{venture.category}</td>
+                      <td className="px-6 py-4">{venture.openingTime}</td>
+                      <td className="px-6 py-4">{venture.closingTime}</td>
                       <td className="px-6 py-4 space-x-2">
-                        <a
-                          href="#"
-                          className="bg-yellow-600 hover:bg-yellow-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                        >
+                        <a href="#"
+                          className="bg-yellow-600 hover:bg-yellow-500 cursor-pointer rounded-lg px-5 py-2 text-gray-50 font-semibold">
                           Edit
                         </a>
-                        <a
-                          href="#"
-                          className="bg-red-600 hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                        >
+                        <a onClick={()=>{handleDeleteVenture(String(venture.id))}}
+                          className="bg-red-600 hover:bg-red-500 cursor-pointer rounded-lg px-5 py-2 text-gray-50 font-semibold">
                           Delete
                         </a>
                       </td>
