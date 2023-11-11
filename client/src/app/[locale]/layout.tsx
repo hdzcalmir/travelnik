@@ -4,9 +4,9 @@ import Providers from './providers'
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { Raleway } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
-const raleway = Raleway({ subsets: ['latin'] });
+const poppins = Poppins({ weight: ['400'], subsets: ['latin-ext'] });
 
 export const metadata: Metadata = {
   title: 'Travelnik - Explore Travnik in few clicks',
@@ -31,7 +31,7 @@ export default async function RootLayout({ children, params: { locale } }: RootL
   }
 
   return (
-    <html lang={locale} className={raleway.className}>
+    <html lang={locale} className={poppins.className}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>

@@ -22,7 +22,7 @@ const VentureAPI = {
             toast.error(error.response.data);
         }
     },
-    deleteVenture: async (id: string) => {
+    deleteVenture: async (id: string): Promise<void> => {
         const result = await swalWithBootstrapButtons.fire({
             text: 'Are you sure you want to delete this venture?',
             showCancelButton: true,
@@ -35,12 +35,10 @@ const VentureAPI = {
         if (result.isConfirmed) {
             try {
                 const response = await http.delete(`/business/${id}`);
-                console.log(response);
                 if (response.status === 201) {
                     toast.success(response.data);
                 }
             } catch (error: any) {
-                console.log(error);
                 toast.error(error.response.data);
             }
         }

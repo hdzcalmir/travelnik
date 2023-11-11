@@ -1,8 +1,10 @@
 import { IVenture } from "@/common/interfaces/IVenture";
 import VentureAPI from "@/interceptor/Venture/Venture";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const useVentures = () => {
+    const queryClient = useQueryClient();
+
     const { data: ventures, isLoading: venturesLoading } = useQuery<Array<IVenture>, Error>({
         queryKey: ["ventures"],
         queryFn: async () => {
@@ -11,9 +13,22 @@ const useVentures = () => {
         }
     });
 
+    const deleteVenture = async ({ id }: { id: string }) => {
+        await VentureAPI.deleteVenture(id);
+    }
+
+    const deleteVentureMutation = useMutation({
+        mutationFn: deleteVenture,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["ventures"] });
+        },
+    });
+
+
     return {
         ventures,
-        venturesLoading
+        venturesLoading,
+        deleteVentureMutation
     }
 }
 

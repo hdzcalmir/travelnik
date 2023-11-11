@@ -11,13 +11,8 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { useEffect } from "react";
 
-const deleteVenture = async (id: string) => {
-  console.log(id);
-  await VentureAPI.deleteVenture(id);
-}
-
 function Ventures() {
-  const { ventures, venturesLoading } = useVentures();
+  const { ventures, venturesLoading, deleteVentureMutation } = useVentures();
 
   if (venturesLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -37,10 +32,9 @@ function Ventures() {
     );
   }
   const handleDeleteVenture = async (id: string) => {
-    deleteVenture(id);
-  }
+    await deleteVentureMutation.mutateAsync({id})
 
-  console.log(ventures);
+  }
 
   return (
     <div>
