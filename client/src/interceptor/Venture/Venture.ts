@@ -21,6 +21,18 @@ const VentureAPI = {
             toast.error(error.response.data);
         }
     },
+    deleteVenture: async (id: string) => {
+        try {
+            const response = await http.delete(`/business/${id}`);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            console.log(error);
+            toast.error(error.response.data);
+        }
+    }
 };
 
 export default VentureAPI;

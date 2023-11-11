@@ -6,7 +6,12 @@ import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useVentures from "@/hooks/useVentures";
+import VentureAPI from "@/interceptor/Venture/Venture";
 
+const deleteVenture = async (id: string) => {
+    console.log(id);
+    await VentureAPI.deleteVenture(id);
+}
 
 function Ventures() {
 
@@ -28,6 +33,10 @@ function Ventures() {
                 <Footer></Footer>
             </div>
         )
+    }
+
+    const handleDeleteVenture = async (id: string) => {
+        deleteVenture(id);
     }
 
     return (
@@ -53,10 +62,10 @@ function Ventures() {
                                         Category
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                    Opening Time
+                                        Opening Time
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                    Closing Time
+                                        Closing Time
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Actions
@@ -64,26 +73,26 @@ function Ventures() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {ventures?.map((activity) => (
-                                    <tr key={activity.id} className="bg-gray-800 border-b border-gray-700">
+                                {ventures?.map((venture) => (
+                                    <tr key={venture.id} className="bg-gray-800 border-b border-gray-700">
                                         <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap ">
-                                            {activity.name}
+                                            {venture.name}
                                         </th>
                                         <td className="px-6 py-4">
-                                            {activity.address}
+                                            {venture.address}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {activity.category}
+                                            {venture.category}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {activity.openingTime}
+                                            {venture.openingTime}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {activity.closingTime}
+                                            {venture.closingTime}
                                         </td>
                                         <td className="px-6 py-4 space-x-2">
-                                            <a href="#" className="bg-yellow-600 hover:bg-yellow-500 rounded-lg px-5 py-2 text-gray-50 font-semibold">Edit</a>
-                                            <a href="#" className="bg-red-600 hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold">Delete</a>
+                                            <a href="#" className="bg-yellow-600 hover:bg-yellow-500 cursor-pointer rounded-lg px-5 py-2 text-gray-50 font-semibold">Edit</a>
+                                            <a onClick={() => { handleDeleteVenture(String(venture.id)) }} className="bg-red-600 cursor-pointer hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold">Delete</a>
                                         </td>
                                     </tr>
                                 ))}
