@@ -36,7 +36,7 @@ const AboutPage = () => {
                         <Image src="/images/travelnik-phone.png" alt="Travelnik phone mock" height={400} width={1200} />
                     </div>
                     <div className="md:w-1/2 flex flex-col md:items-start md:text-left text-center">
-                        <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
+                        <h1 className="title-font sm:text-4xl text-3xl mb-4 font-bold text-white">
                             <h2 className="text-xs text-secondaryColor tracking-widest font-medium title-font mb-1">
                                 OUR APPLICATION
                             </h2>Travelnik strives to simplify the journey for newcomers
