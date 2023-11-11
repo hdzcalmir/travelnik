@@ -1,5 +1,7 @@
 import toast from "react-hot-toast";
 import http from "../http";
+import Swal from 'sweetalert2'
+import { swalWithBootstrapButtons } from "@/common/sweetAlert";
 
 const VentureAPI = {
     fetchVentures: async () => {
@@ -22,15 +24,26 @@ const VentureAPI = {
         }
     },
     deleteVenture: async (id: string) => {
-        try {
-            const response = await http.delete(`/business/${id}`);
-            console.log(response);
-            if (response.status === 201) {
-                toast.success(response.data);
+        const result = await swalWithBootstrapButtons.fire({
+            text: 'Are you sure you want to delete this venture?',
+            showCancelButton: true,
+            showConfirmButton: true,
+            icon: 'warning',
+            confirmButtonText: '<b>Yes, delete it!</b>',
+            cancelButtonText: '<b>No, return</b>'
+        })
+
+        if (result.isConfirmed) {
+            try {
+                const response = await http.delete(`/business/${id}`);
+                console.log(response);
+                if (response.status === 201) {
+                    toast.success(response.data);
+                }
+            } catch (error: any) {
+                console.log(error);
+                toast.error(error.response.data);
             }
-        } catch (error: any) {
-            console.log(error);
-            toast.error(error.response.data);
         }
     }
 };

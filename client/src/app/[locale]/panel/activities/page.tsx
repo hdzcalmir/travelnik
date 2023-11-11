@@ -6,9 +6,21 @@ import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import useActivities from "@/hooks/useActivities";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
+import ActivityAPI from "@/interceptor/Activity/Activity";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+
+const deleteActivity = async (id: string) => {
+  console.log(id);
+  await ActivityAPI.deleteActivity(id);
+}
 
 function Activities() {
   const { activities, activitiesLoading } = useActivities();
+
+  const handleDeleteVenture = async (id: string) => {
+    deleteActivity(id);
+  }
 
   if (activitiesLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -76,18 +88,14 @@ function Activities() {
                     <td className="px-6 py-4">{activity.category}</td>
                     <td className="px-6 py-4">{activity.difficulty}</td>
                     <td className="px-6 py-4">{activity.duration}</td>
-                    <td className="px-6 py-4 space-x-2">
-                      <a
-                        href="#"
-                        className="bg-yellow-600 hover:bg-yellow-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                      >
-                        Edit
+                    <td className="px-6 py-4 flex space-x-2">
+                      <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <span>Edit</span>
+                        <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                       </a>
-                      <a
-                        href="#"
-                        className="bg-red-600 hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                      >
-                        Delete
+                      <a onClick={() => { handleDeleteVenture(String(activity.id)) }}
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <MdDelete className="text-xl text-red-500"></MdDelete>
                       </a>
                     </td>
                   </tr>

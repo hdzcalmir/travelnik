@@ -6,9 +6,22 @@ import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useEvents from "@/hooks/useEvents";
+import { MdDelete } from "react-icons/md";
+import EventAPI from "@/interceptor/Event/Event";
+import { FaEdit } from "react-icons/fa";
+
+const deleteEvent = async (id: string) => {
+  console.log(id);
+  await EventAPI.deleteEvent(id);
+}
 
 function Events() {
   const { events, eventsLoading } = useEvents();
+
+  const handleDeleteVenture = async (id: string) => {
+    deleteEvent(id);
+  }
+
 
   if (eventsLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -61,33 +74,29 @@ function Events() {
                 </tr>
               </thead>
               <tbody>
-                {events?.map((activity) => (
+                {events?.map((event) => (
                   <tr
-                    key={activity.id}
+                    key={event.id}
                     className="bg-gray-800 border-b border-gray-700"
                   >
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium whitespace-nowrap"
                     >
-                      {activity.name}
+                      {event.name}
                     </th>
-                    <td className="px-6 py-4">{activity.address}</td>
-                    <td className="px-6 py-4">{activity.category}</td>
-                    <td className="px-6 py-4">{activity.start_date}</td>
-                    <td className="px-6 py-4">{activity.end_date}</td>
-                    <td className="px-6 py-4 space-x-2">
-                      <a
-                        href="#"
-                        className="bg-yellow-600 hover:bg-yellow-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                      >
-                        Edit
+                    <td className="px-6 py-4">{event.address}</td>
+                    <td className="px-6 py-4">{event.category}</td>
+                    <td className="px-6 py-4">{event.start_date}</td>
+                    <td className="px-6 py-4">{event.end_date}</td>
+                    <td className="px-6 py-4 flex space-x-2">
+                      <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <span>Edit</span>
+                        <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                       </a>
-                      <a
-                        href="#"
-                        className="bg-red-600 hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold"
-                      >
-                        Delete
+                      <a onClick={() => { handleDeleteVenture(String(event.id)) }}
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <MdDelete className="text-xl text-red-500"></MdDelete>
                       </a>
                     </td>
                   </tr>

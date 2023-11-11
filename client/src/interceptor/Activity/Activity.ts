@@ -20,6 +20,17 @@ const ActivityAPI = {
         } catch (error: any) {
             toast.error(error.response.data);
         }
+    },
+    deleteActivity: async (id: string) => {
+        try {
+            const response = await http.post(`/activity/${id}`);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     }
 };
 

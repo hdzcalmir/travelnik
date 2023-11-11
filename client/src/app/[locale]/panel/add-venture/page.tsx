@@ -22,6 +22,7 @@ import VentureAPI from "@/interceptor/Venture/Venture";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 const addVenture = async (venture: any) => {
   await VentureAPI.addVenture(venture);
@@ -53,6 +54,13 @@ function AddVenture() {
       center: [COORDS[0], COORDS[1]],
       zoom: 14,
     });
+
+    map.addControl(
+      new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      }), 'top-right'
+      );
 
     const nav = new mapboxgl.NavigationControl();
     map.addControl(nav, "top-left");

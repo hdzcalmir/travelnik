@@ -7,6 +7,8 @@ import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useVentures from "@/hooks/useVentures";
 import VentureAPI from "@/interceptor/Venture/Venture";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 const deleteVenture = async (id: string) => {
   console.log(id);
@@ -74,7 +76,7 @@ function Ventures() {
               </thead>
               <tbody>
                 {ventures?.map((venture) => (
-                  <tr key={venture.id}className="bg-gray-800 border-b border-gray-700">
+                  <tr key={venture.id} className="bg-gray-800 border-b border-gray-700">
                     <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                       {venture.id}
                     </th>
@@ -85,14 +87,14 @@ function Ventures() {
                     <td className="px-6 py-4">{venture.category}</td>
                     <td className="px-6 py-4">{venture.openingTime}</td>
                     <td className="px-6 py-4">{venture.closingTime}</td>
-                    <td className="px-6 py-4 space-x-2">
-                      <a href="#"
-                        className="bg-yellow-600 hover:bg-yellow-500 cursor-pointer rounded-lg px-5 py-2 text-gray-50 font-semibold">
-                        Edit
+                    <td className="px-6 py-4 flex space-x-2">
+                      <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <span>Edit</span>
+                        <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                       </a>
                       <a onClick={() => { handleDeleteVenture(String(venture.id)) }}
-                        className="bg-red-600 hover:bg-red-500 cursor-pointer rounded-lg px-5 py-2 text-gray-50 font-semibold">
-                        Delete
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <MdDelete className="text-xl text-red-500"></MdDelete>
                       </a>
                     </td>
                   </tr>

@@ -21,6 +21,17 @@ const EventAPI = {
             toast.error(error.response.data);
         }
     },
+    deleteEvent: async (id: string) => {
+        try {
+            const response = await http.delete(`/event/${id}`);
+            console.log(response);
+            if (response.status === 201) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
+    }
 };
 
 export default EventAPI;
