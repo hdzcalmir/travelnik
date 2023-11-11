@@ -7,21 +7,14 @@ import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useEvents from "@/hooks/useEvents";
 import { MdDelete } from "react-icons/md";
-import EventAPI from "@/interceptor/Event/Event";
 import { FaEdit } from "react-icons/fa";
 
-const deleteEvent = async (id: string) => {
-  console.log(id);
-  await EventAPI.deleteEvent(id);
-}
-
 function Events() {
-  const { events, eventsLoading } = useEvents();
+  const { events, eventsLoading, deleteEventMutation } = useEvents();
 
   const handleDeleteVenture = async (id: string) => {
-    deleteEvent(id);
+    await deleteEventMutation.mutateAsync({id});
   }
-
 
   if (eventsLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (

@@ -9,7 +9,6 @@ import useVentures from "@/hooks/useVentures";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { useEffect } from "react";
 
 function Ventures() {
   const { ventures, venturesLoading, deleteVentureMutation } = useVentures();
@@ -18,7 +17,6 @@ function Ventures() {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
       <TableSkeleton key={index} />
     ));
-
 
     return (
       <div className="h-[90vh]">
