@@ -85,8 +85,8 @@ function Activities() {
                                             {activity.duration}
                                         </td>
                                         <td className="px-6 py-4 space-x-2">
-                                            <a href="#" className="bg-green-500 hover:bg-green-600 rounded-lg px-5 py-2 text-gray-50 font-semibold">Edit</a>
-                                            <a href="#" className="bg-red-500 hover:bg-red-600 rounded-lg px-5 py-2 text-gray-50 font-semibold">Delete</a>
+                                            <a href="#" className="bg-yellow-600 hover:bg-yellow-500 rounded-lg px-5 py-2 text-gray-50 font-semibold">Edit</a>
+                                            <a href="#" className="bg-red-600 hover:bg-red-500 rounded-lg px-5 py-2 text-gray-50 font-semibold">Delete</a>
                                         </td>
                                     </tr>
                                 ))}
