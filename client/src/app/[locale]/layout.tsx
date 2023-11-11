@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import Providers from './providers'
 import { Toaster } from "react-hot-toast";
@@ -7,7 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { Raleway } from 'next/font/google'
 
-const montserrat = Raleway({ subsets: ['latin'] });
+const raleway = Raleway({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Travelnik - Explore Travnik in few clicks',
@@ -32,12 +31,11 @@ export default async function RootLayout({ children, params: { locale } }: RootL
   }
 
   return (
-    <html lang={locale} className={montserrat.className}>
+    <html lang={locale} className={raleway.className}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Toaster position="top-right" />
-
             {children}
           </Providers>
         </NextIntlClientProvider>
