@@ -61,5 +61,14 @@
         "Check-out time": "Check-out time",
         "day": "day",
         "Available apartments": "Available apartments"
+    },
+    "History":{
+        "description":"HISTORY OF TRAVNIK",
+        "header_1":"Travnik: Bosnia's City of the Viziers",
+        "text_1":"Bosnia is well known for many things, but one of them is the striking natural beauty of the country. Still raw and unconquered by industry and urbanization, it covers the gamut in terms of ecological habitats and terrain. In central Bosnia, surrounded by rolling green hills is the “City of Viziers,” the city of Travnik.",
+        "header_2":"Bosnia's Hidden Gem",
+        "text_2":"Located approximately 56 miles (90km) west of the capital Sarajevo, Travnik has been inhabited since the Bronze Age and even during the Roman occupation of the area. In the Middle Ages, Travnik was part of the župa Lašva province of the medieval Bosnian Kingdom and always held an important strategic prominence because of its proximity to major centers of trade. With the Ottoman conquests of the region, Travnik quickly rose to prominence as a shining example of commerce and political importance, as well as architecture and culture.",
+        "header_3":"Capital of Bosnian Ottoman Province",
+        "text_3":"In 1699, after Sarajevo was burned to the ground by Prince Eugene of Savoy, Travnik became the capital of the Bosnian Ottoman province, as well as the residence of the Bosnian viziers, further cementing its importance. The Ottoman occupation of the city saw the rise of numerous architectural projects and the expansion of the city's footprint, as well as a rise in the population. It is said that Travnik produced 77 of the Ottoman Empire’s top viziers. Today, the remnants of the Medieval and Ottoman historical periods are evident in the town’s broad range of cultural and historic buildings. A fortified city, Travnik features a unique mix of Medieval, Ottoman, Mediterranean, and Austro-Hungarian architecture. Its ‘old town’ district features an eclectic mix of this wonderful architecture and is a major draw for thousands of visitors each year."
     }
 }

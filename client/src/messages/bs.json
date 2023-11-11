@@ -61,5 +61,14 @@
         "Check-out time": "Vrijeme odjave",
         "day": "dan",
         "Available apartments": "Dostupni apartmani"
+    },
+    "History": {
+        "description": "HISTORIJA TRAVNIKA",
+        "header_1": "Travnik: Bosanski Grad Vezira",
+        "text_1": "Bosna je dobro poznata po mnogočemu, ali jedna od karakteristika je izuzetna prirodna ljepota zemlje. Još uvijek divlja i nedodirljiva industrijskim razvojem i urbanizacijom, obuhvata cijeli spektar ekoloških staništa i terena. U centralnoj Bosni, okružen zelenim brežuljcima, smjestio se 'Grad Vezira' - grad Travnik.",
+        "header_2": "Bosanski Skriveni Dragulj",
+        "text_2": "Nalazi se otprilike 90 kilometara zapadno od glavnog grada Sarajeva, a naseljen je od doba bronče, pa čak i za vrijeme rimske okupacije ovog područja. U srednjem vijeku, Travnik je bio dio župe Lašva, provincije srednjovjekovnog Bosanskog Kraljevstva, i uvijek je imao važnu stratešku ulogu zbog blizine glavnih trgovinskih centara. Sa osmanskim osvajanjem regije, Travnik je brzo postao značajan zbog trgovine, političkog utjecaja, ali i zbog arhitekture i kulture.",
+        "header_3": "Glavni Grad Bosanskog Osmanskog Vilajeta",
+        "text_3": "Godine 1699., nakon što je Sarajevo spalio princ Eugen od Savoje, Travnik postaje glavni grad Bosanskog Osmanskog vilajeta, kao i rezidencija bosanskih vezira, dodatno potvrđujući svoj značaj. Osmanska okupacija grada dovela je do brojnih arhitektonskih projekata i proširenja gradskog područja, kao i porasta stanovništva. Kaže se da je Travnik dao 77 najvažnijih vezira Osmanskog Carstva. Danas su ostaci srednjovjekovnog i osmanskog perioda vidljivi u raznolikom kulturnom i povijesnom naslijeđu grada. Kao utvrđeni grad, Travnik ima jedinstvenu mješavinu srednjovjekovne, osmanske, mediteranske i austro-ugarske arhitekture. Njegov 'stari grad' okrug sadrži eklektičnu mješavinu ove divne arhitekture i predstavlja glavnu atrakciju za tisuće posjetitelja svake godine."
     }
 }
