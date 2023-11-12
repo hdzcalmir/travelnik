@@ -14,33 +14,35 @@ import EventCalendar from "@/components/home/departure/EventCalendar/EventCalend
 import Map from "@/components/map/Map";
 import Footer from "@/components/home/footer/Footer";
 import { useTranslations } from "next-intl";
+import ActivityModal from "@/components/home/departure/ActivityModal";
 
-const AboutPage = () => {
+const DeparturePage = () => {
   // >> React Hooks
   const params = useSearchParams();
   const router = useRouter();
+  const t = useTranslations("Accommodations");
 
   // >> States & Hooks
   const { accommodations, accommodationsLoading } = useAccommodations();
   const [activities, setActivities] = useState<IActivity[]>();
   const [events, setEvents] = useState<IEvent[]>();
-  const t = useTranslations("Accommodations");
 
   // >> Filters
   const interests = params.get("interests");
   const check_in = params.get("check_in");
   const check_out = params.get("check_out");
   const people = params.get("people");
+  const activity = params.get("activity");
 
   const startDate = check_in ? new Date(check_in) : undefined;
   const endDate = check_out ? new Date(check_out) : undefined;
 
   useEffect(() => {
     if (!interests || !check_in || !check_out || !people) {
-      return router.push('/');
+      return router.push("/");
     }
 
-    // >> Fetch relevant data from back-end API  
+    // >> Fetch relevant data from back-end API
     const fetchActivities = async () => {
       const response = await ActivityAPI.fetchActivitiesWithFilters(
         interests,
@@ -83,7 +85,7 @@ const AboutPage = () => {
           />
           <div className="mx-2 mt-4">
             <h2 className="text-3xl font-bold mx-2 text-white mb-2">
-              {t('Available apartments')}
+              {t("Available apartments")}
             </h2>
             <div className="overflow-y-auto h-[68vh] px-2 scrollbar-hidden">
               <AccommodationList
@@ -95,8 +97,17 @@ const AboutPage = () => {
         </div>
       </div>
       <Footer />
+      <div className="absolute">
+        {activity && activities && (
+          <ActivityModal
+            id={activity}
+            modalOpened={true}
+            activities={activities}
+          />
+        )}
+      </div>
     </>
   );
 };
 
-export default AboutPage;
+export default DeparturePage;
