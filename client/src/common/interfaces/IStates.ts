@@ -39,6 +39,6 @@ export interface IActivityState {
     country: string;
     postal_code: string;
     description: string;
-    duration: string;
+    duration: number | string;
     difficulty: string;
 }

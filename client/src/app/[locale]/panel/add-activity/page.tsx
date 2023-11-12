@@ -32,7 +32,7 @@ function AddActivity() {
     postal_code: "",
     description: "",
     difficulty: "",
-    duration: "",
+    duration: 0,
   });
 
   useEffect(() => {
@@ -182,6 +182,7 @@ function AddActivity() {
                   value={activity.duration}
                   onChange={handleInputChange}
                   className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  placeholder="Enter activity duration.."
                 />
               </div>
               <div className="bg-gray-700 h-[1px]"></div>

@@ -1,18 +1,6 @@
 "use client";
 
-import {
-  ADDRESS,
-  CITY,
-  CLICK,
-  COUNTRY,
-  COORDS,
-  LAT,
-  LNG,
-  MAP,
-  POST_CODE,
-  TOKEN,
-  DEFAULT_MARKER,
-} from "@/common/consts";
+import { TOKEN } from "@/common/consts";
 import { interests } from "@/common/interests";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
@@ -24,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Utils } from "@/common/utils";
 import { IEventState } from "@/common/interfaces/IStates";
 import { GeoLocationFactory } from "@/common/geoLocationFactory";
+import Flatpickr from "react-flatpickr";
 
 const addEvent = async (event: IEventState) => {
   await EventAPI.addEvent(event);
@@ -160,25 +149,45 @@ function AddEvent() {
                   placeholder="Street"
                 />
               </div>
-              <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Starting Date</label>
-                <input
-                  type="date"
-                  name="start_date"
-                  value={event.start_date}
-                  onChange={handleInputChange}
-                  className="appearance-none rounded-lg bg-gray-700 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                />
-              </div>
-              <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Ending Date</label>
-                <input
-                  type="date"
-                  name="end_date"
-                  value={event.end_date}
-                  onChange={handleInputChange}
-                  className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                />
+              <div className="flex justify-between w-full space-x-5 items-center px-5">
+                <label className="text-md text-gray-50 w-full">Starting Date</label>
+                <div className="relative w-full flex justify-end">
+                  <div className="flex absolute inset-y-0 left-20 items-center pl-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <Flatpickr
+                    value={new Date(event.start_date)}
+                    onChange={([date]) => {
+                      setEvent({
+                        ...event,
+                        start_date: date.toISOString()
+                      });
+                    }}
+                    className="bg-gray-50 border w-2/3 cursor-pointer border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor font-medium"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
+                <label className="text-md text-gray-50 w-full">Ending Date</label>
+                <div className="relative w-full flex justify-end">
+                  <div className="flex absolute inset-y-0 left-20 items-center pl-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <Flatpickr
+                    value={new Date(event.end_date)}
+                    onChange={([date]) => {
+                      setEvent({
+                        ...event,
+                        end_date: date.toISOString()
+                      });
+                    }}
+                    className="bg-gray-50 border cursor-pointer w-2/3 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor font-medium"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
               </div>
               <div className="bg-gray-700 h-[1px]"></div>
               <div className="flex justify-end px-5">

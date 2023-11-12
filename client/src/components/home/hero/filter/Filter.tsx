@@ -5,7 +5,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } fr
 import { FaHashtag } from "react-icons/fa";
 import { toast } from 'react-hot-toast';
 import { useRouter } from "next/navigation";
-import "./DatePicker.css";
 import Flatpickr from "react-flatpickr";
 import { useTranslations } from "next-intl";
 

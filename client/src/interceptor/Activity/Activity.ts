@@ -1,6 +1,8 @@
 import toast from "react-hot-toast";
 import http from "../http";
 import { swalWithBootstrapButtons } from "@/common/sweetAlert";
+import { IActivityState } from "@/common/interfaces/IStates";
+import { convertMinutesToTime } from "@/value-converters/minutesToHours";
 
 const ActivityAPI = {
     fetchActivities: async () => {
@@ -11,8 +13,9 @@ const ActivityAPI = {
         const response = await http.get(`/activity?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },
-    addActivtiy: async (activity: any) => {
+    addActivtiy: async (activity: IActivityState) => {
         try {
+            activity.duration = convertMinutesToTime(activity.duration);
             const response = await http.post('/activity', activity);
             console.log(response);
             if (response.status === 201) {
