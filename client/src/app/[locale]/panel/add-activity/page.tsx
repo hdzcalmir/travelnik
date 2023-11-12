@@ -1,17 +1,5 @@
 "use client";
-import {
-  ADDRESS,
-  CITY,
-  CLICK,
-  COUNTRY,
-  COORDS,
-  LAT,
-  LNG,
-  MAP,
-  POST_CODE,
-  TOKEN,
-  DEFAULT_MARKER,
-} from "@/common/consts";
+import { TOKEN } from "@/common/consts";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
@@ -23,8 +11,9 @@ import { interests } from "@/common/interests";
 import { difficulties } from "@/common/difficulties";
 import { Utils } from "@/common/utils";
 import { IActivityState } from "@/common/interfaces/IStates";
+import { GeoLocationFactory } from "@/common/geoLocationFactory";
 
-const addActivity = async (activity: any) => {
+const addActivity = async (activity: IActivityState) => {
   await ActivityAPI.addActivtiy(activity);
 };
 
@@ -50,7 +39,7 @@ function AddActivity() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap(mapboxgl.accessToken);
     new mapboxgl.NavigationControl();
-    Utils.getGeoLocation(map, markerExists, activity, setActivity, marker);
+    GeoLocationFactory.geoLocation(map, markerExists, activity, setActivity, marker);
   }, []);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {

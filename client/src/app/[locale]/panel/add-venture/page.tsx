@@ -19,14 +19,13 @@ import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import VentureAPI from "@/interceptor/Venture/Venture";
-import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import { Utils } from "@/common/utils";
 import { IVentureState } from "@/common/interfaces/IStates";
+import { GeoLocationFactory } from "@/common/geoLocationFactory";
 
-const addVenture = async (venture: any) => {
-  console.log('uso');
+const addVenture = async (venture: IVentureState) => {
   await VentureAPI.addVenture(venture);
 };
 
@@ -52,7 +51,7 @@ function AddVenture() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap(mapboxgl.accessToken);
     new mapboxgl.NavigationControl();
-    Utils.getGeoLocation(map, markerExists, venture, setVenture, marker);
+    GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
   }, []);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
@@ -116,9 +115,7 @@ function AddVenture() {
                   <option value={VentureCategory.Hospital}>Hospital</option>
                   <option value={VentureCategory.Gym}>Gym</option>
                   <option value={VentureCategory.Cinema}>Cinema</option>
-                  <option value={VentureCategory.GasStation}>
-                    Gas Station
-                  </option>
+                  <option value={VentureCategory.GasStation}>Gas Station</option>
                   <option value={VentureCategory.Store}>Market</option>
                   <option value={VentureCategory.Taxi}>Taxi</option>
                   <option value={VentureCategory.BusStation}>

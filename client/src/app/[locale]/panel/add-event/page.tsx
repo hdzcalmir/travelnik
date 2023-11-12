@@ -23,8 +23,9 @@ import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import { Utils } from "@/common/utils";
 import { IEventState } from "@/common/interfaces/IStates";
+import { GeoLocationFactory } from "@/common/geoLocationFactory";
 
-const addEvent = async (event: any) => {
+const addEvent = async (event: IEventState) => {
   await EventAPI.addEvent(event);
 };
 
@@ -50,7 +51,7 @@ function AddEvent() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap(mapboxgl.accessToken);
     new mapboxgl.NavigationControl();
-    Utils.getGeoLocation(map, markerExists, event, setEvent, marker);
+    GeoLocationFactory.geoLocation(map, markerExists, event, setEvent, marker);
   }, []);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
