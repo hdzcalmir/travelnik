@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/footer";
 import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
