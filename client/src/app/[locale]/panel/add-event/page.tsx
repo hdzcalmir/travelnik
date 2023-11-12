@@ -19,9 +19,10 @@ import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import EventAPI from "@/interceptor/Event/Event";
-import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
+import { Utils } from "@/common/utils";
+import { IEventState } from "@/common/interfaces/IStates";
 
 const addEvent = async (event: any) => {
   await EventAPI.addEvent(event);
@@ -31,7 +32,7 @@ function AddEvent() {
   let markerExists = false;
   let marker: Marker;
 
-  const [event, setEvent] = useState({
+  const [event, setEvent] = useState<IEventState>({
     name: "",
     category: "",
     longitude: 0,
@@ -39,7 +40,7 @@ function AddEvent() {
     address: "",
     city: "",
     country: "",
-    postalCode: "",
+    postal_code: "",
     description: "",
     start_date: "",
     end_date: "",
@@ -47,84 +48,17 @@ function AddEvent() {
 
   useEffect(() => {
     mapboxgl.accessToken = TOKEN;
-    const map = new mapboxgl.Map({
-      container: MAP,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [COORDS[0], COORDS[1]],
-      zoom: 14,
-    });
-
-    const nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, "top-left");
-
-    map.on(CLICK, async (data) => {
-      if (!markerExists) {
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setEvent({
-            ...event,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setEvent({
-            ...event,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      } else {
-        marker?.remove();
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setEvent({
-            ...event,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setEvent({
-            ...event,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      }
-    });
+    const map = Utils.getMap(mapboxgl.accessToken);
+    new mapboxgl.NavigationControl();
+    Utils.getGeoLocation(map, markerExists, event, setEvent, marker);
   }, []);
 
-  const handleInputChange = (e: any) => {
-    setEvent({ ...event, [e.target.name]: e.target.value });
-    console.log(event);
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
+    setEvent({ ...event, [name]: value });
   };
 
-  const handleAddEvent = async (e: any) => {
+  const handleAddEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addEvent(event);
   };
@@ -206,7 +140,7 @@ function AddEvent() {
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Postal Code</label>
                 <input
-                  value={event.postalCode}
+                  value={event.postal_code}
                   disabled
                   className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   type="text"

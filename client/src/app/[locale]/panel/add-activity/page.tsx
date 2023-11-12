@@ -16,12 +16,13 @@ import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import ActivityAPI from "@/interceptor/Activity/Activity";
-import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import { interests } from "@/common/interests";
 import { difficulties } from "@/common/difficulties";
+import { Utils } from "@/common/utils";
+import { IActivityState } from "@/common/interfaces/IStates";
 
 const addActivity = async (activity: any) => {
   await ActivityAPI.addActivtiy(activity);
@@ -31,7 +32,7 @@ function AddActivity() {
   let markerExists = false;
   let marker: Marker;
 
-  const [activity, setActivity] = useState({
+  const [activity, setActivity] = useState<IActivityState>({
     name: "",
     category: "",
     longitude: 0,
@@ -39,7 +40,7 @@ function AddActivity() {
     address: "",
     city: "",
     country: "",
-    postalCode: "",
+    postal_code: "",
     description: "",
     difficulty: "",
     duration: "",
@@ -47,83 +48,17 @@ function AddActivity() {
 
   useEffect(() => {
     mapboxgl.accessToken = TOKEN;
-    const map = new mapboxgl.Map({
-      container: MAP,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [COORDS[0], COORDS[1]],
-      zoom: 14,
-    });
-
-    const nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, "top-left");
-
-    map.on(CLICK, async (data) => {
-      if (!markerExists) {
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setActivity({
-            ...activity,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setActivity({
-            ...activity,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      } else {
-        marker?.remove();
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setActivity({
-            ...activity,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setActivity({
-            ...activity,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      }
-    });
+    const map = Utils.getMap(mapboxgl.accessToken);
+    new mapboxgl.NavigationControl();
+    Utils.getGeoLocation(map, markerExists, activity, setActivity, marker);
   }, []);
 
-  const handleInputChange = (e: any) => {
-    setActivity({ ...activity, [e.target.name]: e.target.value });
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
+    setActivity({ ...activity, [name]: value });
   };
 
-  const handleAddActivity = async (e: any) => {
+  const handleAddActivity = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addActivity(activity);
   };
@@ -208,7 +143,7 @@ function AddActivity() {
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Postal Code</label>
                 <input
-                  value={activity.postalCode}
+                  value={activity.postal_code}
                   disabled
                   className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   type="text"

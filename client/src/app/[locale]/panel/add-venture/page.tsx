@@ -22,8 +22,11 @@ import VentureAPI from "@/interceptor/Venture/Venture";
 import { mapboxApi } from "@/interceptor/mapboxApi";
 import mapboxgl, { Marker } from "mapbox-gl";
 import { useEffect, useState } from "react";
+import { Utils } from "@/common/utils";
+import { IVentureState } from "@/common/interfaces/IStates";
 
 const addVenture = async (venture: any) => {
+  console.log('uso');
   await VentureAPI.addVenture(venture);
 };
 
@@ -31,15 +34,15 @@ function AddVenture() {
   let markerExists = false;
   let marker: Marker;
 
-  const [venture, setVenture] = useState({
+  const [venture, setVenture] = useState<IVentureState>({
     name: "",
     category: "",
-    longitude: 0,
     latitude: 0,
+    longitude: 0,
     address: "",
     city: "",
     country: "",
-    postalCode: "",
+    postal_code: "",
     description: "",
     opening_time: "",
     closing_time: "",
@@ -47,83 +50,17 @@ function AddVenture() {
 
   useEffect(() => {
     mapboxgl.accessToken = TOKEN;
-    const map = new mapboxgl.Map({
-      container: MAP,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [COORDS[0], COORDS[1]],
-      zoom: 14,
-    });
-
-    const nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, "top-left");
-
-    map.on(CLICK, async (data) => {
-      if (!markerExists) {
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setVenture({
-            ...venture,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setVenture({
-            ...venture,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      } else {
-        marker?.remove();
-        let icon = document.createElement("div");
-        icon.className = DEFAULT_MARKER;
-
-        const resp = await mapboxApi.reverseGeocode(data.lngLat);
-        if (resp?.features[4]?.text) {
-          marker = new mapboxgl.Marker(icon).setLngLat(data.lngLat).addTo(map);
-          setVenture({
-            ...venture,
-            [COUNTRY]: resp.features[4].text,
-            [CITY]: resp.features[2].text,
-            [POST_CODE]: resp.features[1].text,
-            [ADDRESS]: resp.features[0].text,
-            [LAT]: data.lngLat.lat,
-            [LNG]: data.lngLat.lng,
-          });
-          markerExists = true;
-        } else {
-          setVenture({
-            ...venture,
-            [COUNTRY]: "",
-            [CITY]: "",
-            [POST_CODE]: "",
-            [ADDRESS]: "",
-            [LAT]: 0,
-            [LNG]: 0,
-          });
-        }
-      }
-    });
+    const map = Utils.getMap(mapboxgl.accessToken);
+    new mapboxgl.NavigationControl();
+    Utils.getGeoLocation(map, markerExists, venture, setVenture, marker);
   }, []);
 
-  const handleInputChange = (e: any) => {
-    setVenture({ ...venture, [e.target.name]: e.target.value });
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
+    setVenture({ ...venture, [name]: value });
   };
 
-  const handleAddVenture = async (e: any) => {
+  const handleAddVenture = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addVenture(venture);
   };
@@ -172,8 +109,7 @@ function AddVenture() {
                   id="category"
                   name="category"
                   value={venture.category}
-                  onChange={handleInputChange}
-                >
+                  onChange={handleInputChange}>
                   <option>Select Category..</option>
                   <option value={VentureCategory.Restaurant}>Restaurant</option>
                   <option value={VentureCategory.Hotel}>Hotel</option>
@@ -213,7 +149,7 @@ function AddVenture() {
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Postal Code</label>
                 <input
-                  value={venture.postalCode}
+                  value={venture.postal_code}
                   disabled
                   className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   type="text"
@@ -252,7 +188,7 @@ function AddVenture() {
               </div>
               <div className="bg-gray-700 h-[1px]"></div>
               <div className="flex justify-end px-5">
-                <button className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
+                <button type="submit" className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
                   Add Venture
                 </button>
               </div>

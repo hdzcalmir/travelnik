@@ -7,11 +7,14 @@ const VentureAPI = {
         const response = await http.get('/business');
         return response;
     },
+    
     fetchVenturesWithFilters: async (interests: string | null, check_in: string | null, check_out: string | null, people: string | null) => {
         const response = await http.get(`/business?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },
+
     addVenture: async (venture: any) => {
+        console.log(venture)
         try {
             const response = await http.post('/business', venture);
             console.log(response);
@@ -19,9 +22,11 @@ const VentureAPI = {
                 toast.success(response.data);
             }
         } catch (error: any) {
+            console.log(error);
             toast.error(error.response.data);
         }
     },
+
     deleteVenture: async (id: string): Promise<void> => {
         const result = await swalWithBootstrapButtons.fire({
             text: 'Are you sure you want to delete this venture?',
