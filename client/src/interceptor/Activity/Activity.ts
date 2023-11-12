@@ -7,7 +7,7 @@ const ActivityAPI = {
         const response = await http.get('/activity');
         return response;
     },
-    fetchActivitiesWithFilters: async (interests: string | null, check_in: string | null, check_out: string | null, people: string | null) => {
+    fetchActivitiesWithFilters: async (interests: string | null | undefined, check_in: string | null | undefined, check_out: string | null | undefined, people:string | null | undefined) => {
         const response = await http.get(`/activity?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },

@@ -3,13 +3,17 @@
 import { IActivity } from "@/common/interfaces/IActivity";
 import { Utils } from "@/common/utils";
 import { useTranslations } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface ActivityCardProps {
   activity: IActivity;
 }
 
 const ActivityCard = ({ activity }: ActivityCardProps) => {
-  const t = useTranslations('ActivityTable');
+  const t = useTranslations("ActivityTable");
+  const router = useRouter();
+  const path = usePathname();
+  const searchParams = useSearchParams();
 
   const durationFromDatabase = activity.duration;
 
@@ -22,8 +26,15 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
     .padStart(2, "0")}h`;
   const averageRate = Utils.calculateRate(activity.reviews as IReview[]);
 
+  const openActivityModal = () => {
+    router.push(path + "?" + searchParams + `&activity=${activity.id}`);
+  };
+
   return (
-    <tr className="border-b dark:border-gray-700 hover:bg-gray-700 transition duration-500 cursor-pointer">
+    <tr
+      className="border-b dark:border-gray-700 hover:bg-gray-700 transition duration-500 cursor-pointer"
+      onClick={() => openActivityModal()}
+    >
       <th
         scope="row"
         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -45,7 +56,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             {averageRate}
             <span className="text-gray-400 font-normal">
               ({activity.reviews?.length > 0 ? activity.reviews?.length : 0}{" "}
-              {t('reviews')})
+              {t("reviews")})
             </span>
           </p>
         </div>
@@ -54,18 +65,19 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         <p>{t(activity.difficulty)}</p>
         <div className="w-20 lg:w-48 h-1.5 bg-white overflow-hidden rounded-full">
           <div
-            className={` ${activity.difficulty === "Easy"
-              ? "w-1/4 bg-green-400"
-              : activity.difficulty === "Medium"
+            className={` ${
+              activity.difficulty === "Easy"
+                ? "w-1/4 bg-green-400"
+                : activity.difficulty === "Medium"
                 ? "w-2/3 bg-orange-400"
                 : "w-full bg-red-400"
-              } h-1.5`}
+            } h-1.5`}
           ></div>
         </div>
       </td>
       <td className="px-4 py-3">
         <div className="bg-red-400 rounded text-white justify-center flex text-sm">
-          {t('Not completed')}
+          {t("Not completed")}
         </div>
       </td>
       <td className="px-4 py-3">
