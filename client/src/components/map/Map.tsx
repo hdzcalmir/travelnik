@@ -5,6 +5,7 @@ import useEvents from '@/hooks/useEvents';
 import useActivities from '@/hooks/useActivities';
 import { Utils } from '@/common/utils';
 import { useEffect } from 'react';
+import { Category } from '@/common/enums';
 
 export default function Map() {
 
@@ -24,8 +25,8 @@ export default function Map() {
 
             map.on(LOAD, () => {
                 Utils.getLocations(ventures, venturePopups, map);
-                Utils.getLocations(events, eventPopups, map);
-                Utils.getLocations(activities, activityPopups, map);
+                Utils.getLocations(events, eventPopups, map, Category.Event);
+                Utils.getLocations(activities, activityPopups, map, Category.Activity);
             })
 
         }

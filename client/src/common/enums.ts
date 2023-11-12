@@ -11,6 +11,6 @@ export enum Category {
     Museum = 10,
     Disco = 11,
     ShoppingCenter = 12,
-    Activity = 12,
-    Event = 12
+    Activity = 13,
+    Event = 14
 }

@@ -97,7 +97,7 @@ export class Utils {
     const popups: Array<Popup> = [];
     locations?.forEach((location) => {
       const popup = new mapboxgl.Popup({ offset: 30 })
-        .setHTML(Utils.getPopupUI( location))
+        .setHTML(Utils.getPopupUI(location))
 
       popups.push(popup);
     })
@@ -134,10 +134,10 @@ export class Utils {
     }
   }
 
-  static getLocations(locations: Array<IVenture | IEvent | IActivity> | undefined, popups: mapboxgl.Popup[], map: mapboxgl.Map) {
+  static getLocations(locations: Array<IVenture | IEvent | IActivity> | undefined, popups: mapboxgl.Popup[], map: mapboxgl.Map, type = 0) {
     locations?.forEach((location, index) => {
       let el = document.createElement('div');
-      el.className = Utils.getMarker(Number(location?.category));
+      el.className = Utils.getMarker(type === 0 ? Number(location?.category) : type);
       new mapboxgl.Marker(el)
         .setLngLat([location.longitude, location.latitude])
         .setPopup(popups[index])
