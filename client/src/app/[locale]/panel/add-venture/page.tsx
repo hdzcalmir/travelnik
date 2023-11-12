@@ -39,13 +39,7 @@ function AddVenture() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
-    GeoLocationFactory.geoLocation(
-      map,
-      markerExists,
-      venture,
-      setVenture,
-      marker
-    );
+    GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
   }, []);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
