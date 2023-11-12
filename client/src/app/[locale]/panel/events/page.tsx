@@ -1,7 +1,7 @@
 "use client";
 
-import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/Footer";
+import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Footer from "@/components/panel/layout/footer/footer";
 import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
@@ -14,7 +14,7 @@ function Events() {
 
   const handleDeleteVenture = async (id: string) => {
     await deleteEventMutation.mutateAsync({ id });
-  }
+  };
 
   if (eventsLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -87,8 +87,12 @@ function Events() {
                         <span>Edit</span>
                         <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                       </a>
-                      <a onClick={() => { handleDeleteVenture(String(event.id)) }}
-                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                      <a
+                        onClick={() => {
+                          handleDeleteVenture(String(event.id));
+                        }}
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold"
+                      >
                         <MdDelete className="text-xl text-red-500"></MdDelete>
                       </a>
                     </td>

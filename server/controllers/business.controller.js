@@ -64,12 +64,18 @@ const { INTEREST_CATEGORIES } = require("../utils/constants.js");
 
 const getAllBusinesses = (req, res) => {
   try {
-    let getAllBusinessesQuery = 'SELECT businesses.id, businesses.location_id, businesses.reviews, businesses.name, businesses.description, \
+    let getAllBusinessesQuery =
+      "SELECT businesses.id, businesses.location_id, businesses.reviews, businesses.name, businesses.description, \
                                 businesses.category, businesses.opening_time, businesses.closing_time,\
                                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                                 FROM businesses\
-                                INNER JOIN location ON businesses.location_id = location.id';
-    if (req.query.interests && req.query.check_in && req.query.check_out && req.query.people) {
+                                INNER JOIN location ON businesses.location_id = location.id";
+    if (
+      req.query.interests &&
+      req.query.check_in &&
+      req.query.check_out &&
+      req.query.people
+    ) {
       const jsonInterests = atob(req.query.interests);
       const interests = JSON.parse(jsonInterests);
 
@@ -80,8 +86,9 @@ const getAllBusinesses = (req, res) => {
       getAllBusinessesQuery = `SELECT * 
                               FROM businesses 
                               INNER JOIN location ON businesses.location_id = location.id 
-                              WHERE category IN (${selectedCategories.join(',')})`;
-
+                              WHERE category IN (${selectedCategories.join(
+                                ","
+                              )})`;
     }
     db.query(getAllBusinessesQuery, (err, data) => {
       return res.status(200).json(data);
@@ -175,7 +182,14 @@ const createNewBusiness = (req, res) => {
             "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
           db.query(
             insertNewLocationQuery,
-            [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
+            [
+              location.latitude,
+              location.longitude,
+              location.address,
+              location.city,
+              location.country,
+              location.postalCode,
+            ],
             (err, data) => {
               if (data) {
                 // >> If business does not exist, create it
@@ -191,7 +205,7 @@ const createNewBusiness = (req, res) => {
                 ]);
                 return res.status(201).send("Business successfully created.");
               } else {
-                console.log(err)
+                console.log(err);
 
                 return res.status(500).send("Internal server error.");
               }
@@ -201,7 +215,7 @@ const createNewBusiness = (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).send("Internal server error.");
   }
 };
@@ -237,7 +251,9 @@ const deleteBusiness = (req, res) => {
     db.query(checkIfBusinessExistQuery, [req.params.id], (err, data) => {
       if (data.length !== 0) {
         const deleteBusinessQuery = "DELETE FROM businesses WHERE id = ?";
+        const deleteLocationQuery = "DELETE FROM location WHERE id = ?";
 
+        db.query(deleteLocationQuery, [data[0].location_id]);
         db.query(deleteBusinessQuery, [req.params.id], (err, data) => {
           if (data) {
             return res.status(200).send("Business successfully deleted.");

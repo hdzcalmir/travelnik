@@ -1,7 +1,7 @@
 "use client";
 
-import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/Footer";
+import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Footer from "@/components/panel/layout/footer/footer";
 import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
@@ -29,9 +29,8 @@ function Ventures() {
     );
   }
   const handleDeleteVenture = async (id: string) => {
-    await deleteVentureMutation.mutateAsync({ id })
-
-  }
+    await deleteVentureMutation.mutateAsync({ id });
+  };
 
   return (
     <div>
@@ -71,24 +70,37 @@ function Ventures() {
               </thead>
               <tbody>
                 {ventures?.map((venture) => (
-                  <tr key={venture.id} className="bg-gray-800 border-b border-gray-700">
-                    <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                  <tr
+                    key={venture.id}
+                    className="bg-gray-800 border-b border-gray-700"
+                  >
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium whitespace-nowrap"
+                    >
                       {venture.id}
                     </th>
-                    <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium whitespace-nowrap"
+                    >
                       {venture.name}
                     </th>
                     <td className="px-6 py-4">{venture.address}</td>
                     <td className="px-6 py-4">{venture.category}</td>
-                    <td className="px-6 py-4">{venture.openingTime}</td>
-                    <td className="px-6 py-4">{venture.closingTime}</td>
+                    <td className="px-6 py-4">{venture.opening_time}</td>
+                    <td className="px-6 py-4">{venture.closing_time}</td>
                     <td className="px-6 py-4 flex space-x-2">
                       <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
                         <span>Edit</span>
                         <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                       </a>
-                      <a onClick={() => { handleDeleteVenture(String(venture.id)) }}
-                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                      <a
+                        onClick={() => {
+                          handleDeleteVenture(String(venture.id));
+                        }}
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold"
+                      >
                         <MdDelete className="text-xl text-red-500"></MdDelete>
                       </a>
                     </td>

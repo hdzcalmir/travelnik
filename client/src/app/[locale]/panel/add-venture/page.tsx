@@ -15,8 +15,8 @@ import {
 } from "@/common/consts";
 import { VentureCategory } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/Footer";
+import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Footer from "@/components/panel/layout/footer/footer";
 import IsAuth from "@/hooks/isAuth";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -51,10 +51,18 @@ function AddVenture() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap(mapboxgl.accessToken);
     new mapboxgl.NavigationControl();
-    GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
+    GeoLocationFactory.geoLocation(
+      map,
+      markerExists,
+      venture,
+      setVenture,
+      marker
+    );
   }, []);
 
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+  const handleInputChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  > = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     setVenture({ ...venture, [name]: value });
   };
@@ -108,14 +116,17 @@ function AddVenture() {
                   id="category"
                   name="category"
                   value={venture.category}
-                  onChange={handleInputChange}>
+                  onChange={handleInputChange}
+                >
                   <option>Select Category..</option>
                   <option value={VentureCategory.Restaurant}>Restaurant</option>
                   <option value={VentureCategory.Hotel}>Hotel</option>
                   <option value={VentureCategory.Hospital}>Hospital</option>
                   <option value={VentureCategory.Gym}>Gym</option>
                   <option value={VentureCategory.Cinema}>Cinema</option>
-                  <option value={VentureCategory.GasStation}>Gas Station</option>
+                  <option value={VentureCategory.GasStation}>
+                    Gas Station
+                  </option>
                   <option value={VentureCategory.Store}>Market</option>
                   <option value={VentureCategory.Taxi}>Taxi</option>
                   <option value={VentureCategory.BusStation}>
@@ -185,7 +196,10 @@ function AddVenture() {
               </div>
               <div className="bg-gray-700 h-[1px]"></div>
               <div className="flex justify-end px-5">
-                <button type="submit" className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
+                <button
+                  type="submit"
+                  className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl"
+                >
                   Add Venture
                 </button>
               </div>
