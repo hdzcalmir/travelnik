@@ -8,6 +8,8 @@ import useActivities from "@/hooks/useActivities";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { useState } from "react";
+import EditActivityModal from "@/components/panel/modals/EditActivtyModal";
 
 function Activities() {
   const { activities, activitiesLoading, deleteVentureMutation } =
@@ -16,6 +18,9 @@ function Activities() {
   const handleDeleteVenture = async (id: string) => {
     await deleteVentureMutation.mutateAsync({ id });
   };
+
+  const [isOpened, toggleModal] = useState(false);
+
 
   if (activitiesLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -85,7 +90,9 @@ function Activities() {
                       <td className="px-6 py-4">{activity.difficulty}</td>
                       <td className="px-6 py-4">{activity.duration}</td>
                       <td className="px-6 py-4 flex space-x-2">
-                        <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <a onClick={() => {
+                          toggleModal(!isOpened);
+                        }} className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
                           <span>Edit</span>
                           <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                         </a>
@@ -101,6 +108,10 @@ function Activities() {
                     </tr>
                   ))}
                 </tbody>
+                {
+                  isOpened &&
+                  <EditActivityModal></EditActivityModal>
+                }
               </table>
             </div>
           </div>
