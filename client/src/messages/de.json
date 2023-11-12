@@ -70,5 +70,28 @@
         "text_2": "Etwa 90 Kilometer westlich der Hauptstadt Sarajevo gelegen, ist Travnik seit der Bronzezeit besiedelt, auch während der römischen Besatzung der Region. Im Mittelalter war Travnik Teil der Provinz Lašva des mittelalterlichen Königreichs Bosnien und hatte immer eine wichtige strategische Bedeutung aufgrund seiner Nähe zu wichtigen Handelszentren. Mit der osmanischen Eroberung der Region stieg Travnik schnell zu einem strahlenden Beispiel für Handel und politische Bedeutung sowie Architektur und Kultur auf.",
         "header_3": "Hauptstadt der Bosnisch-Osmanischen Provinz",
         "text_3": "Im Jahr 1699, nachdem Sarajevo von Prinz Eugen von Savoyen niedergebrannt wurde, wurde Travnik zur Hauptstadt der bosnisch-osmanischen Provinz und zum Sitz der bosnischen Wesire, was seine Bedeutung weiter festigte. Die osmanische Besetzung der Stadt führte zu zahlreichen architektonischen Projekten und zur Ausdehnung des Stadtgebiets sowie zu einem Anstieg der Bevölkerung. Es wird gesagt, dass Travnik 77 der Top-Wesire des Osmanischen Reiches hervorbrachte. Heute sind die Überreste der mittelalterlichen und osmanischen historischen Perioden in der breiten Palette kultureller und historischer Gebäude der Stadt sichtbar. Als befestigte Stadt zeigt Travnik eine einzigartige Mischung aus mittelalterlicher, osmanischer, mediterraner und österreichisch-ungarischer Architektur. Der 'alte Stadtdistrikt' bietet eine eklektische Mischung dieser wunderbaren Architektur und ist ein Hauptanziehungspunkt für Tausende von Besuchern jedes Jahr."
+    },
+    "About": {
+        "description": "ÜBER UNSERE ANWENDUNG",
+        "header_1": "Travelnik bemüht sich, die Reise für Neulinge zu vereinfachen",
+        "text_1": "Bei Travelnik glauben wir an die transformative Kraft des Reisens, um bedeutende Verbindungen zu schaffen, Perspektiven zu erweitern und eine tiefe Wertschätzung für Vielfalt zu fördern. Indem wir zuverlässige Informationen, personalisierte Empfehlungen bereitstellen und eine lebendige Gemeinschaft von Entdeckern fördern, streben wir danach, jede Reise des Besuchers nach Travnik zu einem erfreulichen und bereichernden Abenteuer zu machen.",
+        "button_1": "Beginnen Sie mit der Erkundung auf der",
+        "button_2": "Webseite",
+        "button_3": "HOL ES DIR",
+        "button_4": "Laden Sie es herunter auf",
+        "description_2": "Entdecken Sie den bosnischen Charme",
+        "header_2": "Tourismusverband der Gemeinde Travnik",
+        "text_2": "Der Tourismusverband der Gemeinde Travnik ist eine engagierte Organisation, die sich der Förderung und Verbesserung des Tourismuserlebnisses in der charmanten Stadt Travnik verschrieben hat. Als Anlaufstelle für Reiseinformationen und -dienstleistungen bemüht sich der Tourismusverband, das reiche kulturelle Erbe, historische Sehenswürdigkeiten und die natürliche Schönheit zu präsentieren, die Travnik definieren. Egal, ob Sie ein Geschichtsbegeisterter sind, der alte Stätten erkunden möchte, oder ein Naturliebhaber, der malerische Landschaften sucht, der Tourismusverband steht Ihnen zur Seite und bietet wertvolle Einblicke und Unterstützung, um einen unvergesslichen Besuch in diesem bezaubernden Ziel zu gewährleisten. Entdecken Sie die einzigartige Mischung aus Tradition und Moderne, die Travnik bietet, und lassen Sie den Tourismusverband Ihr Tor zu einem unvergesslichen Reiseerlebnis sein.",
+        "description_3": "UNSERE MISSION",
+        "text_3": "Bei Travelnik ist unsere Mission, neue Touristen dazu zu befähigen und zu inspirieren, die bezaubernde Stadt Travnik zu erkunden, indem wir ihnen eine nahtlose und immersive webbasierte Erfahrung bieten. Wir streben danach, die bevorzugte Plattform für Reisende zu sein, die authentische Einblicke und Anleitung suchen, um sicherzustellen, dass jeder Besucher das reiche kulturelle Erbe, die malerischen Landschaften und die versteckten Schätze entdeckt, die Travnik zu bieten hat.",
+        "contact_us_header": "Kontaktiere uns",
+        "contact_us_description": "Interessiert an einer Zusammenarbeit mit Travelnik? Melden Sie sich, um potenzielle Partnerschaften und Zusammenarbeit zu besprechen.",
+        "name": "Name",
+        "email": "E-Mail",
+        "message": "Nachricht",
+        "message_text": "Geben Sie Ihre Nachricht ein",
+        "email_text": "Geben Sie Ihre E-Mail ein",
+        "name_text": "Geben Sie Ihren Namen ein",
+        "button_send": "Senden"
     }
 }
