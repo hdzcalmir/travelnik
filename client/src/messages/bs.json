@@ -70,5 +70,28 @@
         "text_2": "Nalazi se otprilike 90 kilometara zapadno od glavnog grada Sarajeva, a naseljen je od doba bronče, pa čak i za vrijeme rimske okupacije ovog područja. U srednjem vijeku, Travnik je bio dio župe Lašva, provincije srednjovjekovnog Bosanskog Kraljevstva, i uvijek je imao važnu stratešku ulogu zbog blizine glavnih trgovinskih centara. Sa osmanskim osvajanjem regije, Travnik je brzo postao značajan zbog trgovine, političkog utjecaja, ali i zbog arhitekture i kulture.",
         "header_3": "Glavni Grad Bosanskog Osmanskog Vilajeta",
         "text_3": "Godine 1699., nakon što je Sarajevo spalio princ Eugen od Savoje, Travnik postaje glavni grad Bosanskog Osmanskog vilajeta, kao i rezidencija bosanskih vezira, dodatno potvrđujući svoj značaj. Osmanska okupacija grada dovela je do brojnih arhitektonskih projekata i proširenja gradskog područja, kao i porasta stanovništva. Kaže se da je Travnik dao 77 najvažnijih vezira Osmanskog Carstva. Danas su ostaci srednjovjekovnog i osmanskog perioda vidljivi u raznolikom kulturnom i povijesnom naslijeđu grada. Kao utvrđeni grad, Travnik ima jedinstvenu mješavinu srednjovjekovne, osmanske, mediteranske i austro-ugarske arhitekture. Njegov 'stari grad' okrug sadrži eklektičnu mješavinu ove divne arhitekture i predstavlja glavnu atrakciju za tisuće posjetitelja svake godine."
+    },
+    "About":{
+        "description":"NAŠA APLIKACIJA",
+        "header_1":"Travelnik nastoji pojednostaviti putovanje za nove posjetioce",
+        "text_1":"U Travelniku vjerujemo u transformacijsku moć putovanja da stvori značajne veze, proširi perspektive i razvije duboko poštovanje prema raznolikosti. Pružanjem pouzdanih informacija, personaliziranih preporuka i poticanjem živahne zajednice istraživača, težimo da svako putovanje posjetitelja u Travnik bude ugodna i obogaćujuća avantura.",
+        "button_1":"Počnite istraživati na",
+        "button_2":"Web stranici",
+        "button_3":"PREUZMITE",
+        "button_4":"Preuzmite na",
+        "description_2":"Otkrijte Bosanski Šarm",
+        "header_2":"Turistička zajednica općine Travnik",
+        "text_2":"Turistička zajednica općine Travnik posvećena je promicanju i unapređenju turističkog doživljaja u šarmantnom gradu Travniku. Kao središnje mjesto za putne informacije i usluge, Turistička zajednica nastoji prikazati bogato kulturno nasljeđe, povijesne znamenitosti i prirodnu ljepotu koje definiraju Travnik. Bez obzira jeste li zaljubljenik u povijest željan istraživanja drevnih lokaliteta ili ljubitelj prirode traži slikovite krajolike, Turistička zajednica tu je da vas vodi, pružajući vrijedne uvide i pomoć kako bi osigurala nezaboravan posjet ovom očaravajućem odredištu. Otkrijte jedinstvenu kombinaciju tradicije i modernosti koju nudi Travnik, i dopustite Turističkoj zajednici da vam bude ulaznica u nezaboravno putničko iskustvo.",
+        "description_3":"NAŠA MISIJA",
+        "text_3":"U Travelniku, naša misija je osnažiti i inspirirati nove turiste da istraže očaravajući grad Travnik pružajući im besprijekorno i uzbudljivo iskustvo na webu. Cilj nam je postati platforma po izboru putnika koji traže autentične uvide i smjernice, osiguravajući da svaki posjetitelj otkrije bogato kulturno nasljeđe, slikovite krajolike i skrivene dragulje koje Travnik nudi.",
+        "contact_us_header":"Kontaktirajte nas",
+        "contact_us_description":"Zainteresirani za suradnju s Travelnikom? Javite se kako bismo razgovarali o mogućim partnerstvima i suradnjama.",
+        "name":"Ime",
+        "email":"Email",
+        "message":"Poruka",
+        "message_text":"Unesite svoju poruku",
+        "email_text":"Unesite svoj email",
+        "name_text":"Unesite svoje ime",
+        "button_send":"Pošalji"
     }
 }
