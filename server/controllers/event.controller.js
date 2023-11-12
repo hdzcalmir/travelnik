@@ -131,7 +131,9 @@ const deleteEvent = (req, res) => {
     db.query(checkIfEventExistQuery, [req.params.id], (err, data) => {
       if (data.length !== 0) {
         const deleteEventQuery = "DELETE FROM events WHERE id = ?";
+        const deleteLocationQuery = "DELETE FROM location WHERE id = ?";
 
+        db.query(deleteLocationQuery, [data[0].location_id]);
         db.query(deleteEventQuery, [req.params.id], (err, data) => {
           if (data) {
             return res.status(200).send("Event successfully deleted.");

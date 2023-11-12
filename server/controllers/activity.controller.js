@@ -72,7 +72,8 @@ const db = require("../database/database.js");
  */
 const getAllActivities = (req, res) => {
   try {
-    let query = "SELECT activities.id, activities.location_id, activities.reviews, activities.name, activities.description,\
+    let query =
+      "SELECT activities.id, activities.location_id, activities.reviews, activities.name, activities.description,\
                 activities.category, activities.duration, activities.difficulty,\
                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                 FROM activities\
@@ -83,7 +84,9 @@ const getAllActivities = (req, res) => {
     if (jsonInterests) {
       const interests = JSON.parse(atob(jsonInterests));
       if (interests.length > 0) {
-        const interestsString = interests.map(interest => `category = '${interest}'`).join(' OR ');
+        const interestsString = interests
+          .map((interest) => `category = '${interest}'`)
+          .join(" OR ");
         query += ` WHERE ${interestsString}`;
       }
     }
@@ -98,7 +101,6 @@ const getAllActivities = (req, res) => {
     return res.status(500).send("Internal server error.");
   }
 };
-
 
 /**
  * @swagger
@@ -193,7 +195,14 @@ const createNewActivity = (req, res) => {
             "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
           db.query(
             insertNewLocationQuery,
-            [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
+            [
+              location.latitude,
+              location.longitude,
+              location.address,
+              location.city,
+              location.country,
+              location.postalCode,
+            ],
             (err, data) => {
               if (err) {
                 return res.status(500).send("Internal server error.");
@@ -271,7 +280,9 @@ const deleteActivity = (req, res) => {
 
       if (data.length !== 0) {
         const deleteActivityQuery = "DELETE FROM activities WHERE id = ?";
+        const deleteLocationQuery = "DELETE FROM location WHERE id = ?";
 
+        db.query(deleteLocationQuery, [data[0].location_id]);
         db.query(deleteActivityQuery, [req.params.id], (err, data) => {
           if (err) {
             return res.status(500).send("Internal server error.");
