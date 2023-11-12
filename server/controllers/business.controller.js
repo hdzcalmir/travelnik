@@ -150,7 +150,6 @@ const getAllBusinesses = (req, res) => {
  *         description: Internal server error.
  */
 const createNewBusiness = (req, res) => {
-  console.log('upo');
   try {
     if (!req.body.name || !req.body.category)
       return res.status(400).send("Bad request.");

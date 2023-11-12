@@ -7,8 +7,8 @@ export interface IVenture {
     address: string,
     city: string,
     country: string,
-    postalCode: string,
+    postal_code: string,
     description: string,
-    openingTime: string,
-    closingTime: string
+    opening_time: string,
+    closing_time: string
 }

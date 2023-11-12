@@ -93,20 +93,42 @@ export class Utils {
     const popups: Array<Popup> = [];
     locations?.forEach((location) => {
       const popup = new mapboxgl.Popup({ offset: 30 })
-        .setHTML(
-          `<div class="flex flex-col justify-center items-center">
-          <h3 class="font-bold text-[16px]">${location?.name}</h3>
-          <p class="font-semibold text-left mt-2">Opis:</p>
-          <p class="w-full text-center">${location?.description}</p>
-          <p class="font-semibold text-left mt-2">Ocjena:</p>
-          <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
-          </div>
-          `
-        )
+        .setHTML(Utils.getPopupUI(location))
+
       popups.push(popup);
     })
     return popups;
   }
+
+    private static getPopupUI(location: IActivity | IVenture | IEvent): string {
+      if (this.isVenture(location)) {
+        return `<div class="flex flex-col justify-center items-center">
+        <h3 class="font-bold text-[16px]">${location?.name}</h3>
+        <p class="font-semibold text-left mt-2">Opis:</p>
+        <p class="w-full text-center">${location?.description}</p>
+        <p class="font-semibold text-left mt-2">Ocjena:</p>
+        <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
+        </div>`;
+      } else if (this.isEvent(location)) {
+        return `<div class="flex flex-col justify-center items-center">
+        <h3 class="font-bold text-[16px]">${location?.name}</h3>
+        <p class="font-semibold text-left mt-2">Opis:</p>
+        <p class="w-full text-center">${location?.description}</p>
+        </div>`;
+      } else if (this.isActivity(location)) {
+        return `<div class="flex flex-col justify-center items-center">
+        <h3 class="font-bold text-[16px]">${location?.name}</h3>
+        <p class="font-semibold text-left mt-2">Opis:</p>
+        <p class="w-full text-center">${location?.description}</p>
+        </div>`;
+      } else {
+        return `<div class="flex flex-col justify-center items-center">
+        <h3 class="font-bold text-[16px]">Error</h3>
+        <p class="font-semibold text-left mt-2">Opis:</p>
+        <p class="w-full text-center">Error</p>
+        </div>`;
+      }
+    }
 
   static getLocations(locations: Array<IVenture | IEvent | IActivity> | undefined, popups: mapboxgl.Popup[], map: mapboxgl.Map) {
     locations?.forEach((location, index) => {
@@ -128,5 +150,64 @@ export class Utils {
     });
     return map;
   }
+
+
+      private static isVenture(obj: any): obj is IVenture {
+        return (
+          typeof obj === 'object' &&
+          obj !== null &&
+          'name' in obj &&
+          'category' in obj &&
+          'latitude' in obj &&
+          'longitude' in obj &&
+          'address' in obj &&
+          'city' in obj &&
+          'country' in obj &&
+          'postal_code' in obj &&
+          'description' in obj &&
+          'opening_time' in obj &&
+          'closing_time' in obj
+        );
+      }
+
+      private static isEvent(obj: any): obj is IEvent {
+        return (
+          typeof obj === 'object' &&
+          obj !== null &&
+          'location_id' in obj &&
+          'name' in obj &&
+          'category' in obj &&
+          'latitude' in obj &&
+          'longitude' in obj &&
+          'address' in obj &&
+          'city' in obj &&
+          'country' in obj &&
+          'postal_code' in obj &&
+          'description' in obj &&
+          'start_date' in obj &&
+          'end_date' in obj
+        );
+      }
+
+      private static isActivity(obj: any): obj is IActivity {
+        return (
+          typeof obj === 'object' &&
+          obj !== null &&
+          'location_id' in obj &&
+          'reviews' in obj &&
+          'name' in obj &&
+          'category' in obj &&
+          'latitude' in obj &&
+          'longitude' in obj &&
+          'address' in obj &&
+          'city' in obj &&
+          'country' in obj &&
+          'postal_code' in obj &&
+          'description' in obj &&
+          'duration' in obj &&
+          'difficulty' in obj
+        );
+      }
+
 
 }
