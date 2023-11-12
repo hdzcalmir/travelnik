@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ActivityTable from "@/components/home/departure/ActivityTable";
 import EventCalendar from "@/components/home/departure/EventCalendar/EventCalendar";
-import Map from "@/components/map/map";
+import Map from "@/components/map/Map";
 import Footer from "@/components/home/footer/Footer";
 import { useTranslations } from "next-intl";
 

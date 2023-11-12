@@ -16,7 +16,7 @@ import {
 import { Category } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -49,7 +49,7 @@ function AddVenture() {
 
   useEffect(() => {
     mapboxgl.accessToken = TOKEN;
-    const map = Utils.getMap(mapboxgl.accessToken);
+    const map = Utils.getMap();
     new mapboxgl.NavigationControl();
     GeoLocationFactory.geoLocation(
       map,

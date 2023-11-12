@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";

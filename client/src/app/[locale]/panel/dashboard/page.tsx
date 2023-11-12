@@ -3,10 +3,10 @@
 import IsAuth from "@/hooks/isAuth";
 import { NextPage } from "next";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import Map from "@/components/map/map";
+import Map from "@/components/map/Map";
 import VenturesNumber from "@/components/panel/dashboardNumbers/DashboardNumbers";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Footer from "@/components/panel/layout/footer/Footer";
 
 const Dashboard: NextPage = () => {
   return (
