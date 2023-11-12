@@ -1,6 +1,6 @@
 "use client";
 import { TOKEN } from "@/common/consts";
-import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import ActivityAPI from "@/interceptor/Activity/Activity";
@@ -37,15 +37,9 @@ function AddActivity() {
 
   useEffect(() => {
     mapboxgl.accessToken = TOKEN;
-    const map = Utils.getMap(mapboxgl.accessToken);
+    const map = Utils.getMap();
     new mapboxgl.NavigationControl();
-    GeoLocationFactory.geoLocation(
-      map,
-      markerExists,
-      activity,
-      setActivity,
-      marker
-    );
+    GeoLocationFactory.geoLocation(map, markerExists, activity, setActivity, marker);
   }, []);
 
   const handleInputChange: React.ChangeEventHandler<

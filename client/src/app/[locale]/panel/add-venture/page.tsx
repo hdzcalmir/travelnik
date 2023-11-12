@@ -13,7 +13,7 @@ import {
   TOKEN,
   DEFAULT_MARKER,
 } from "@/common/consts";
-import { VentureCategory } from "@/common/enums";
+import { Category } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/footer";
@@ -119,17 +119,17 @@ function AddVenture() {
                   onChange={handleInputChange}
                 >
                   <option>Select Category..</option>
-                  <option value={VentureCategory.Restaurant}>Restaurant</option>
-                  <option value={VentureCategory.Hotel}>Hotel</option>
-                  <option value={VentureCategory.Hospital}>Hospital</option>
-                  <option value={VentureCategory.Gym}>Gym</option>
-                  <option value={VentureCategory.Cinema}>Cinema</option>
-                  <option value={VentureCategory.GasStation}>
+                  <option value={Category.Restaurant}>Restaurant</option>
+                  <option value={Category.Hotel}>Hotel</option>
+                  <option value={Category.Hospital}>Hospital</option>
+                  <option value={Category.Gym}>Gym</option>
+                  <option value={Category.Cinema}>Cinema</option>
+                  <option value={Category.GasStation}>
                     Gas Station
                   </option>
-                  <option value={VentureCategory.Store}>Market</option>
-                  <option value={VentureCategory.Taxi}>Taxi</option>
-                  <option value={VentureCategory.BusStation}>
+                  <option value={Category.Store}>Market</option>
+                  <option value={Category.Taxi}>Taxi</option>
+                  <option value={Category.BusStation}>
                     Bus Station
                   </option>
                 </select>

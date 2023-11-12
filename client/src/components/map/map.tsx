@@ -16,7 +16,7 @@ export default function Map() {
         if (locationsAreLoaded()) {
 
             mapboxgl.accessToken = TOKEN;
-            const map = Utils.getMap(mapboxgl.accessToken);
+            const map = Utils.getMap();
 
             const venturePopups: Array<Popup> = Utils.getPopups(ventures);
             const eventPopups: Array<Popup> = Utils.getPopups(events);

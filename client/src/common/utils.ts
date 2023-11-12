@@ -1,7 +1,7 @@
 import mapboxgl, { Popup } from "mapbox-gl";
-import { BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, LAT_COORD, LNG_COORD, MAP, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
+import { ACTIVITY_MARKER, BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, EVENT_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, LAT_COORD, LNG_COORD, MAP, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
 import { difficulties } from "./difficulties";
-import { VentureCategory } from "./enums";
+import { Category } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
 import { IEvent } from "./interfaces/IEvent";
 import { IVenture } from "./interfaces/IVenture";
@@ -60,30 +60,34 @@ export class Utils {
 
   static getMarker(category: number): string {
     switch (category) {
-      case VentureCategory.Restaurant:
+      case Category.Restaurant:
         return RESTAURANT_MARKER;
-      case VentureCategory.GasStation:
+      case Category.GasStation:
         return GASSTATION_MARKER;
-      case VentureCategory.Hotel:
+      case Category.Hotel:
         return HOTEL_MARKER;
-      case VentureCategory.BusStation:
+      case Category.BusStation:
         return BUSSTATION_MARKER;
-      case VentureCategory.Gym:
+      case Category.Gym:
         return GYM_MARKER;
-      case VentureCategory.Hospital:
+      case Category.Hospital:
         return HOSPITAL_MARKER;
-      case VentureCategory.Taxi:
+      case Category.Taxi:
         return TAXI_MARKER;
-      case VentureCategory.Cinema:
+      case Category.Cinema:
         return CINEMA_MARKER;
-      case VentureCategory.Store:
+      case Category.Store:
         return STORE_MARKER;
-      case VentureCategory.Museum:
+      case Category.Museum:
         return MUSEUM_MARKER;
-      case VentureCategory.Disco:
+      case Category.Disco:
         return DISCO_MARKER;
-      case VentureCategory.ShoppingCenter:
+      case Category.ShoppingCenter:
         return SHOPPINGCENTER_MARKER;
+      case Category.Event:
+        return EVENT_MARKER;
+      case Category.Activity:
+        return ACTIVITY_MARKER;
       default:
         return DEFAULT_MARKER;
     }
@@ -145,7 +149,7 @@ export class Utils {
     });
   }
 
-  static getMap(token: string) {
+  static getMap() {
     const map = new mapboxgl.Map({
       container: MAP,
       style: 'mapbox://styles/mapbox/streets-v12',

@@ -25,3 +25,5 @@ export const STORE_MARKER = 'storeMarker';
 export const MUSEUM_MARKER = 'museumMarker';
 export const DISCO_MARKER = 'discoMarker';
 export const SHOPPINGCENTER_MARKER = 'shoppingCenterMarker';
+export const EVENT_MARKER = 'eventMarker';
+export const ACTIVITY_MARKER = 'activityMarker';
