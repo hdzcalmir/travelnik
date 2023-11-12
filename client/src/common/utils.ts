@@ -118,16 +118,12 @@ export class Utils {
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
       <p class="font-semibold text-left mt-2">Opis:</p>
       <p class="w-full text-center">${location?.description}</p>
-      <p class="font-semibold text-left mt-2">Ocjena:</p>
-      <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
       </div>`;
     } else if (this.isIActivity(location)) {
       return `<div class="flex flex-col justify-center items-center">
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
       <p class="font-semibold text-left mt-2">Opis:</p>
       <p class="w-full text-center">${location?.description}</p>
-      <p class="font-semibold text-left mt-2">Ocjena:</p>
-      <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
       </div>`;
     } else {
       return `<div class="flex flex-col justify-center items-center">
