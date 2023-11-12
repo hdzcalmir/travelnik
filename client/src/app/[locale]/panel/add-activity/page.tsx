@@ -175,7 +175,7 @@ function AddActivity() {
                 </select>
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Duration</label>
+                <label className="text-md text-gray-50">Duration<span className="text-xs text-gray-400"> (minutes)</span></label>
                 <input
                   type="number"
                   name="duration"
