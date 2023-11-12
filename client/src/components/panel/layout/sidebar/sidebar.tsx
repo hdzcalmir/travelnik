@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Sitemap } from "../../../../common/sitemap";
 import AccommodationsSyncButton from "../../accommodations/SyncButton";

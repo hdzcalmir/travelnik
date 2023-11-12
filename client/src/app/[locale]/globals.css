@@ -164,8 +164,40 @@
   cursor: pointer;
 }
 
+.shoppingCenterMarker {
+  background-image: url("../../../public/map-icons/gas.png");
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.shoppingCenterMarker {
+  background-image: url("../../../public/map-icons/gas.png");
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
 .defaultMarker {
   background-image: url("../../../public/map-icons/default.png");
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.eventMarker {
+  background-image: url("../../../public/map-icons/event.png");
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
+.activityMarker {
+  background-image: url("../../../public/map-icons/activity.png");
   background-size: cover;
   width: 31.32px;
   height: 44.28px;

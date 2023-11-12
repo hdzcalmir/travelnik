@@ -14,7 +14,7 @@ const config: Config = {
         'raleway': ['Raleway', 'sans-serif']
       },
       colors: {
-        'primaryColor': 'rgb(31 41 55)',
+        'primaryColor': '#1F2937',
         'secondaryColor': '#65CF94',
         'panelBg': '#2b3544'
       }

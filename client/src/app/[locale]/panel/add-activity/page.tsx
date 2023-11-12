@@ -1,7 +1,7 @@
 "use client";
 import { TOKEN } from "@/common/consts";
 import Sidebar from "@/components/panel/layout/sidebar/sidebar";
-import Footer from "@/components/panel/layout/footer/footer";
+import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
 import ActivityAPI from "@/interceptor/Activity/Activity";
 import mapboxgl, { Marker } from "mapbox-gl";

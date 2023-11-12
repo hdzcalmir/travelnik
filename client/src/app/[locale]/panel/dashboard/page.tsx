@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Map from "@/components/map/map";
 import VenturesNumber from "@/components/panel/dashboardNumbers/DashboardNumbers";
-import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/footer";
 
 const Dashboard: NextPage = () => {
