@@ -1,18 +1,6 @@
 "use client";
 
-import {
-  ADDRESS,
-  CITY,
-  CLICK,
-  COUNTRY,
-  COORDS,
-  LAT,
-  LNG,
-  MAP,
-  POST_CODE,
-  TOKEN,
-  DEFAULT_MARKER,
-} from "@/common/consts";
+import { TOKEN} from "@/common/consts";
 import { Category } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
@@ -60,12 +48,10 @@ function AddVenture() {
     );
   }, []);
 
-  const handleInputChange: React.ChangeEventHandler<
-    HTMLInputElement | HTMLSelectElement
-  > = (e) => {
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     setVenture({ ...venture, [name]: value });
-  };
+  }
 
   const handleAddVenture = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
