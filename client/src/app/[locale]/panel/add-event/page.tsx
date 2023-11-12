@@ -15,8 +15,8 @@ import {
 } from "@/common/consts";
 import { interests } from "@/common/interests";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
-import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
-import Footer from "@/components/panel/layout/footer/Footer";
+import Sidebar from "@/components/panel/layout/sidebar/sidebar";
+import Footer from "@/components/panel/layout/footer/footer";
 import IsAuth from "@/hooks/isAuth";
 import EventAPI from "@/interceptor/Event/Event";
 import mapboxgl, { Marker } from "mapbox-gl";
@@ -54,7 +54,9 @@ function AddEvent() {
     GeoLocationFactory.geoLocation(map, markerExists, event, setEvent, marker);
   }, []);
 
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+  const handleInputChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  > = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     setEvent({ ...event, [name]: value });
   };
