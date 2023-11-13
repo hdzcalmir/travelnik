@@ -479,33 +479,48 @@ const businessFeedback = (req, res) => {
       if (data && data.length !== 0) {
         const reviews = JSON.parse(data[0].reviews || "[]");
 
-        const lastId = reviews.length > 0 ? reviews[reviews.length - 1].id : 0;
-
-        reviews.push({
-          id: lastId + 1,
+        const newReview = {
           name: req.body.name,
           text: req.body.message,
-          images: [],
           rate: req.body.rating,
           approved: false,
           date: new Date(),
-        });
+          entity_type: "business",
+          entity_id: req.body.id,
+        };
 
-        const updateBusinessQuery =
-          "UPDATE businesses SET reviews = ? WHERE id = ?";
-        db.query(
-          updateBusinessQuery,
-          [JSON.stringify(reviews), req.body.id],
-          (updateErr) => {
-            if (updateErr) {
-              console.error(updateErr);
-              return res.status(500).send("Error updating business data.");
-            }
-            return res
-              .status(200)
-              .send("Your feedback is successfully submitted");
+        // Insert the new review into the 'reviews' table
+        const insertReviewQuery = "INSERT INTO reviews SET ?";
+        db.query(insertReviewQuery, newReview, (insertErr, result) => {
+          if (insertErr) {
+            console.error(insertErr);
+            return res.status(500).send("Error inserting review details.");
           }
-        );
+
+          const reviewId = result.insertId;
+
+          // Update the 'businesses' table to store the review IDs
+          if (!reviews.includes(reviewId)) {
+            reviews.push(reviewId);
+          }
+
+          const updateBusinessQuery =
+            "UPDATE businesses SET reviews = ? WHERE id = ?";
+          db.query(
+            updateBusinessQuery,
+            [JSON.stringify(reviews), req.body.id],
+            (updateErr) => {
+              if (updateErr) {
+                console.error(updateErr);
+                return res.status(500).send("Error updating business data.");
+              }
+
+              return res
+                .status(200)
+                .send("Your feedback is successfully submitted");
+            }
+          );
+        });
       } else {
         res.status(404).send("There is no business with that ID.");
       }
