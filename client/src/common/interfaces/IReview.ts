@@ -5,4 +5,5 @@ export interface IReview {
     text: string;
     rate: number;
     images: [];
+    approved:boolean;
 }

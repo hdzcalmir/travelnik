@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -12,8 +12,9 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { IActivity } from "@/common/interfaces/IActivity";
 import { FaClock, FaMapMarkedAlt } from "react-icons/fa";
-import { MdAddLocationAlt, MdCategory } from "react-icons/md";
+import { MdAddLocationAlt, MdCategory, MdRateReview } from "react-icons/md";
 import ReviewsCard from "./ActivityModal/ReviewsCard";
+import Feedback from "./ActivityModal/Feedback";
 
 interface ActivityModalProps {
   id: string;
@@ -30,6 +31,7 @@ export default function ActivityModal({
   const path = usePathname();
   const searchParams = useSearchParams();
   let { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [leaveFeedback, setLeaveFeedback] = useState<boolean>(false);
 
   if (modalOpened) {
     isOpen = true;
@@ -60,7 +62,7 @@ export default function ActivityModal({
         classNames={{
           body: "py-6",
           backdrop: "bg-[#1F2937]/50 backdrop-opacity-40",
-          base: "border-[#1F2937] bg-[#1F2937] dark:bg-[#1F2937] text-[#a8b0d3] shadow-lg drop-shadow-lg border-2 border-gray-700",
+          base: "border-[#1F2937] bg-[#1F2937] dark:bg-[#1F2937] text-[#a8b0d3] shadow-lg drop-shadow-lg border-2 border-gray-700 h-[60rem] overflow-y-auto scrollbar-hidden",
           header: "border-b-[1px] border-[#1F2937]",
           footer: "border-t-[1px] border-[#1F2937]",
           closeButton: "hover:bg-white/5 active:bg-white/10",
@@ -103,6 +105,16 @@ export default function ActivityModal({
                   </span>
                 </p>
                 <ReviewsCard activity={activity} />
+                <Button
+                  className="bg-secondaryColor/80 shadow-lg shadow-indigo-500/20 flex items-center w-2/6 py-4"
+                  onPress={() => {
+                    setLeaveFeedback(!leaveFeedback);
+                  }}
+                >
+                  <MdRateReview className="h-5 w-5" />
+                  Leave the review
+                </Button>
+                {leaveFeedback && <Feedback data={activity} />}
               </ModalBody>
               <ModalFooter>
                 <Button
