@@ -9,9 +9,28 @@ import useEvents from "@/hooks/useEvents";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { convertDateFormat } from "@/value-converters/date";
+import EditEventModal, { IEventUpdate } from "@/components/panel/modals/EditEventModal";
+import { useState } from "react";
+import { IEvent } from "@/common/interfaces/IEvent";
 
 function Events() {
   const { events, eventsLoading, deleteEventMutation } = useEvents();
+
+  const [isOpened, toggleModal] = useState(false);
+  const [event, setEvent] = useState<any>({
+    id: "",
+    name: "",
+    description: "",
+    category: "",
+    start_date: "",
+    end_date: "",
+    latitude: 0,
+    longitude: 0,
+    address: "",
+    city: "",
+    country: "",
+    postal_code: ""
+  });
 
   const handleDeleteVenture = async (id: string) => {
     await deleteEventMutation.mutateAsync({ id });
@@ -33,8 +52,6 @@ function Events() {
       </div>
     );
   }
-
-
 
   return (
     <div>
@@ -87,7 +104,11 @@ function Events() {
                       <td className="px-6 py-4">{convertDateFormat(event.start_date)}</td>
                       <td className="px-6 py-4">{convertDateFormat(event.end_date)}</td>
                       <td className="px-6 py-4 flex space-x-2">
-                        <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <a onClick={() => {
+                          setEvent(event);
+                          toggleModal(true);
+                        }}
+                         className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
                           <span>Edit</span>
                           <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                         </a>
@@ -104,6 +125,10 @@ function Events() {
                   ))}
                 </tbody>
               </table>
+              {
+                isOpened &&
+                <EditEventModal data={event as IEvent} toggleModal={() => toggleModal(false)}></EditEventModal>
+              }
             </div>
           </div>
         </div>

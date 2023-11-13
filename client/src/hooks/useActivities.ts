@@ -1,4 +1,5 @@
 import { IActivity } from "@/common/interfaces/IActivity";
+import { IActivityUpdate } from "@/components/panel/modals/EditActivtyModal";
 import ActivityAPI from "@/interceptor/Activity/Activity";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -17,8 +18,19 @@ const useActivities = () => {
         await ActivityAPI.deleteActivity(id);
     }
 
-    const deleteVentureMutation = useMutation({
+    const deleteActivityMutation = useMutation({
         mutationFn: deleteActivity,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["activities"] });
+        },
+    });
+
+    const updateActivity = async ({ id, activity}: { id: string | undefined, activity: IActivityUpdate }) => {
+        await ActivityAPI.updateActivity(id, activity);
+    }
+
+    const updateActivityMutation = useMutation({
+        mutationFn: updateActivity,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["activities"] });
         },
@@ -28,7 +40,8 @@ const useActivities = () => {
     return {
         activities,
         activitiesLoading,
-        deleteVentureMutation
+        deleteActivityMutation,
+        updateActivityMutation
     }
 }
 

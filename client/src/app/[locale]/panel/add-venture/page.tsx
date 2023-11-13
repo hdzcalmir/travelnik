@@ -96,17 +96,14 @@ function AddVenture() {
                   id="category"
                   name="category"
                   value={venture.category}
-                  onChange={handleInputChange}
-                >
+                  onChange={handleInputChange}>
                   <option>Select Category..</option>
                   <option value={Category.Restaurant}>Restaurant</option>
                   <option value={Category.Hotel}>Hotel</option>
                   <option value={Category.Hospital}>Hospital</option>
                   <option value={Category.Gym}>Gym</option>
                   <option value={Category.Cinema}>Cinema</option>
-                  <option value={Category.GasStation}>
-                    Gas Station
-                  </option>
+                  <option value={Category.GasStation}>Gas Station</option>
                   <option value={Category.Store}>Market</option>
                   <option value={Category.Taxi}>Taxi</option>
                   <option value={Category.BusStation}>

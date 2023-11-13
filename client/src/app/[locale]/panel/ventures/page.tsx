@@ -8,9 +8,28 @@ import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import useVentures from "@/hooks/useVentures";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import EditVentureModal from "@/components/panel/modals/EditVentureModal";
+import { IVenture } from "@/common/interfaces/IVenture";
+import { useState } from "react";
 
 function Ventures() {
   const { ventures, venturesLoading, deleteVentureMutation } = useVentures();
+
+  const [isOpened, toggleModal] = useState(false);
+  const [venture, setVenture] = useState<any>({
+    id: "",
+    name: "",
+    category: "",
+    description: "",
+    opening_time: "",
+    closing_time: "",
+    latitude: 0,
+    longitude: 0,
+    address: "",
+    city: "",
+    country: "",
+    postal_code: ""
+  });
 
   if (venturesLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
@@ -31,6 +50,7 @@ function Ventures() {
   const handleDeleteVenture = async (id: string) => {
     await deleteVentureMutation.mutateAsync({ id });
   };
+
 
   return (
     <div>
@@ -92,7 +112,12 @@ function Ventures() {
                       <td className="px-6 py-4">{venture.opening_time}</td>
                       <td className="px-6 py-4">{venture.closing_time}</td>
                       <td className="px-6 py-4 flex space-x-2">
-                        <a className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        <a 
+                        onClick={() => {
+                          setVenture(venture);
+                          toggleModal(true);
+                        }} 
+                        className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
                           <span>Edit</span>
                           <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                         </a>
@@ -109,6 +134,10 @@ function Ventures() {
                   ))}
                 </tbody>
               </table>
+              {
+                isOpened &&
+                <EditVentureModal data={venture as IVenture} toggleModal={() => toggleModal(false)}></EditVentureModal>
+              }
             </div>
           </div>
         </div>

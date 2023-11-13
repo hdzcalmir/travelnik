@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import http from "../http";
 import { swalWithBootstrapButtons } from "@/common/sweetAlert";
+import { IEventUpdate } from "@/components/panel/modals/EditEventModal";
 
 const EventAPI = {
     fetchEvents: async () => {
@@ -42,7 +43,18 @@ const EventAPI = {
                 toast.error(error.response.data);
             }
         }
+    },
+    updateEvent: async (id: string | undefined, event: IEventUpdate) => {
+        try {
+            const response = await http.patch(`/event/${id}`, event);
+            if (response.status === 200) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     }
+
 };
 
 export default EventAPI;

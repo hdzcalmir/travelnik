@@ -48,8 +48,7 @@ export class Utils {
     if (activeFilter === "category") {
       return filteredActivities.sort((a, b) => a.category.localeCompare(b.category));
     } else if (activeFilter === "rating") {
-      return filteredActivities.sort(
-        (a, b) =>
+      return filteredActivities.sort((a, b) =>
           Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
       );
     } else if (activeFilter === "difficulty") {
@@ -58,13 +57,10 @@ export class Utils {
       });
     } else if (activeFilter === "duration") {
       return filteredActivities.sort((a, b) => {
-        const durationA = Utils.convertDurationToSeconds(a.duration);
-        const durationB = Utils.convertDurationToSeconds(b.duration);
-        return durationA - durationB;
+        return Utils.convertDurationToSeconds(a.duration) - Utils.convertDurationToSeconds(b.duration);
       });
-    } else {
+    } else 
       return filteredActivities;
-    }
   };
 
 

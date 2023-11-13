@@ -1,20 +1,20 @@
-import { difficulties } from '@/common/difficulties';
-import { IActivity } from '@/common/interfaces/IActivity';
-import useActivities from '@/hooks/useActivities';
+import { Category } from '@/common/enums';
+import { IVenture } from '@/common/interfaces/IVenture';
+import useVentures from '@/hooks/useVentures';
 import React, { useState } from 'react';
 
 
-interface EditActivityModalProps {
-  data: IActivity;
+interface EditVentureModalProps {
+  data: IVenture;
   toggleModal: () => void;
 }
 
-export interface IActivityUpdate {
-  name: string;
+export interface IVentureUpdate {
+  name: string,
+  category: Category,
   description: string,
-  category: string,
-  duration: string,
-  difficulty: string,
+  opening_time: string,
+  closing_time: string,
   latitude: number,
   longitude: number,
   address: string,
@@ -22,24 +22,23 @@ export interface IActivityUpdate {
   country: string,
   postal_code: string
 }
-const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal }) => {
+const EditVentureModal: React.FC<EditVentureModalProps> = ({ data, toggleModal }) => {
 
-  const { updateActivityMutation } =
-    useActivities();
-  
+  const { updateVentureMutation } = useVentures();
+
   const id = data.id;
 
-  const [activity, setActivity] = useState<IActivityUpdate>({
+  const [venture, setVenture] = useState<IVentureUpdate>({
     name: data.name,
-    description: data.description,
     category: data.category,
-    duration: data.duration,
-    difficulty: data.description,
+    description: data.description,
+    opening_time: data.opening_time,
+    closing_time: data.closing_time,
     latitude: data.latitude,
     longitude: data.longitude,
     address: data.address,
-    city: data.address,
-    country: data.address,
+    city: data.city,
+    country: data.country,
     postal_code: "72270"
   })
 
@@ -47,15 +46,15 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
     HTMLInputElement | HTMLSelectElement
   > = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
-    setActivity({ ...activity, [name]: value });
+    setVenture({ ...venture, [name]: value });
   };
 
   const handleUpdateActivity = async (e: React.FormEvent<HTMLFormElement>) => {
+    toggleModal();
     e.preventDefault();
-    await updateActivityMutation.mutateAsync({id, activity});
+    await updateVentureMutation.mutateAsync({ id, venture });
   };
 
-  console.log(activity)
   return (
     <>
       <div
@@ -72,7 +71,7 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Activity Data
+              Update Venture Data
             </h3>
             <button
               type="button"
@@ -106,37 +105,60 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Name</label>
                 <input
-                  className="appearance-none bg-gray-800 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                  type="text"
-                  placeholder="Activity name"
                   name="name"
                   onChange={handleInputChange}
+                  className="appearance-none rounded-lg bg-gray-800 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Venture name"
                 />
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Difficulty</label>
+                <label className="text-md text-gray-50">Description</label>
+                <input
+                  name="description"
+                  onChange={handleInputChange}
+                  className="appearance-none rounded-lg bg-gray-800 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Venture description"
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Category</label>
                 <select
                   className="outline-none text-gray-50 py-3 px-2 bg-gray-800 rounded-lg w-2/3"
-                  id="difficulty"
-                  name="difficulty"
-                  onChange={handleInputChange}
-                >
-                  <option>Select Difficulty..</option>
-                  {Object.keys(difficulties).map((difficulty) => (
-                    <option key={difficulty} value={difficulty}>
-                      {difficulty}
-                    </option>
-                  ))}
+                  id="category"
+                  name="category"
+                  onChange={handleInputChange}>
+                  <option>Select Category..</option>
+                  <option value={Category.Restaurant}>Restaurant</option>
+                  <option value={Category.Hotel}>Hotel</option>
+                  <option value={Category.Hospital}>Hospital</option>
+                  <option value={Category.Gym}>Gym</option>
+                  <option value={Category.Cinema}>Cinema</option>
+                  <option value={Category.GasStation}>Gas Station</option>
+                  <option value={Category.Store}>Market</option>
+                  <option value={Category.Taxi}>Taxi</option>
+                  <option value={Category.BusStation}>
+                    Bus Station
+                  </option>
                 </select>
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Duration</label>
+                <label className="text-md text-gray-50">Opening Time</label>
                 <input
-                  type="number"
-                  name="duration"
+                  type="time"
+                  name="opening_time"
+                  onChange={handleInputChange}
+                  className="appearance-none rounded-lg bg-gray-800 border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Closing Time</label>
+                <input
+                  type="time"
+                  name="closing_time"
                   onChange={handleInputChange}
                   className="appearance-none mb-5 bg-gray-800 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                  placeholder="Duration in minutes.."
                 />
               </div>
             </div>
@@ -163,4 +185,4 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
   );
 };
 
-export default EditActivityModal;
+export default EditVentureModal;

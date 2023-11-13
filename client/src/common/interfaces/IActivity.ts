@@ -1,3 +1,5 @@
+import { IReview } from "./IReview";
+
 export interface IActivity {
     id?: string;
     location_id: number;

@@ -1,13 +1,14 @@
 import toast from "react-hot-toast";
 import http from "../http";
 import { swalWithBootstrapButtons } from "@/common/sweetAlert";
+import { IVentureUpdate } from "@/components/panel/modals/EditVentureModal";
 
 const VentureAPI = {
     fetchVentures: async () => {
         const response = await http.get('/business');
         return response;
     },
-    
+
     fetchVenturesWithFilters: async (interests: string | null, check_in: string | null, check_out: string | null, people: string | null) => {
         const response = await http.get(`/business?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
@@ -46,6 +47,17 @@ const VentureAPI = {
             } catch (error: any) {
                 toast.error(error.response.data);
             }
+        }
+    },
+
+    updateVenture: async (id: string | undefined, venture: IVentureUpdate) => {
+        try {
+            const response = await http.patch(`/business/${id}`, venture);
+            if (response.status === 200) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
         }
     }
 };

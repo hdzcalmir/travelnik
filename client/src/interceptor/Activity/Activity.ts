@@ -3,13 +3,14 @@ import http from "../http";
 import { swalWithBootstrapButtons } from "@/common/sweetAlert";
 import { IActivityState } from "@/common/interfaces/IStates";
 import { convertMinutesToTime } from "@/value-converters/minutesToHours";
+import { IActivityUpdate } from "@/components/panel/modals/EditActivtyModal";
 
 const ActivityAPI = {
     fetchActivities: async () => {
         const response = await http.get('/activity');
         return response;
     },
-    fetchActivitiesWithFilters: async (interests: string | null | undefined, check_in: string | null | undefined, check_out: string | null | undefined, people:string | null | undefined) => {
+    fetchActivitiesWithFilters: async (interests: string | null | undefined, check_in: string | null | undefined, check_out: string | null | undefined, people: string | null | undefined) => {
         const response = await http.get(`/activity?interests=${interests}&check_in=${check_in}&check_out=${check_out}&people=${people}`);
         return response;
     },
@@ -44,6 +45,17 @@ const ActivityAPI = {
             } catch (error: any) {
                 toast.error(error.response.data);
             }
+        }
+    },
+
+    updateActivity: async (id: string | undefined, activity: IActivityUpdate) => {
+        try {
+            const response = await http.patch(`/activity/${id}`, activity);
+            if (response.status === 200) {
+                toast.success(response.data);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
         }
     }
 };

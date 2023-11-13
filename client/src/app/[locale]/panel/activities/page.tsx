@@ -9,17 +9,32 @@ import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
-import EditActivityModal from "@/components/panel/modals/EditActivtyModal";
+import EditActivityModal, { IActivityUpdate } from "@/components/panel/modals/EditActivtyModal";
+import { IActivity } from "@/common/interfaces/IActivity";
 
 function Activities() {
-  const { activities, activitiesLoading, deleteVentureMutation } =
+  const { activities, activitiesLoading, deleteActivityMutation } =
     useActivities();
 
   const handleDeleteVenture = async (id: string) => {
-    await deleteVentureMutation.mutateAsync({ id });
+    await deleteActivityMutation.mutateAsync({ id });
   };
 
   const [isOpened, toggleModal] = useState(false);
+  const [activity, setActivity] = useState<any>({
+    id: "",
+    name: "",
+    description: "",
+    category: "",
+    duration: "",
+    difficulty: "",
+    latitude: 0,
+    longitude: 0,
+    address: "",
+    city: "",
+    country: "",
+    postal_code: ""
+  });
 
 
   if (activitiesLoading) {
@@ -91,7 +106,8 @@ function Activities() {
                       <td className="px-6 py-4">{activity.duration}</td>
                       <td className="px-6 py-4 flex space-x-2">
                         <a onClick={() => {
-                          toggleModal(!isOpened);
+                          setActivity(activity);
+                          toggleModal(true);
                         }} className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
                           <span>Edit</span>
                           <FaEdit className="text-lg text-secondaryColor"></FaEdit>
@@ -108,11 +124,11 @@ function Activities() {
                     </tr>
                   ))}
                 </tbody>
-                {
-                  isOpened &&
-                  <EditActivityModal></EditActivityModal>
-                }
               </table>
+              {
+                isOpened &&
+                <EditActivityModal data={activity as IActivity} toggleModal={() => toggleModal(false)}></EditActivityModal>
+              }
             </div>
           </div>
         </div>

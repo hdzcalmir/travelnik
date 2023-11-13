@@ -1,4 +1,5 @@
 import { IVenture } from "@/common/interfaces/IVenture";
+import { IVentureUpdate } from "@/components/panel/modals/EditVentureModal";
 import VentureAPI from "@/interceptor/Venture/Venture";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -24,11 +25,23 @@ const useVentures = () => {
         },
     });
 
+    const updateVenture = async ({ id, venture}: { id: string | undefined, venture: IVentureUpdate }) => {
+        await VentureAPI.updateVenture(id, venture);
+    }
+
+    const updateVentureMutation = useMutation({
+        mutationFn: updateVenture,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["ventures"] });
+        },
+    });
+
 
     return {
         ventures,
         venturesLoading,
-        deleteVentureMutation
+        deleteVentureMutation,
+        updateVentureMutation
     }
 }
 

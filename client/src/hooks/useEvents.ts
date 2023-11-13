@@ -1,4 +1,5 @@
 import { IEvent } from "@/common/interfaces/IEvent";
+import { IEventUpdate } from "@/components/panel/modals/EditEventModal";
 import EventAPI from "@/interceptor/Event/Event";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -24,10 +25,22 @@ const useEvents = () => {
         },
     });
 
+    const updateEvent = async ({ id, event }: { id: string | undefined, event: IEventUpdate }) => {
+        await EventAPI.updateEvent(id, event);
+    }
+
+    const updateEventMutation = useMutation({
+        mutationFn: updateEvent,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["events"] });
+        },
+    });
+
     return {
         events,
         eventsLoading,
-        deleteEventMutation
+        deleteEventMutation,
+        updateEventMutation
     }
 }
 

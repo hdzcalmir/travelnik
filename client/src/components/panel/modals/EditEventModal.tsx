@@ -1,20 +1,23 @@
 import { difficulties } from '@/common/difficulties';
-import { IActivity } from '@/common/interfaces/IActivity';
+import { interests } from '@/common/interests';
+import { IEvent } from '@/common/interfaces/IEvent';
 import useActivities from '@/hooks/useActivities';
+import useEvents from '@/hooks/useEvents';
 import React, { useState } from 'react';
+import Flatpickr from "react-flatpickr";
 
 
 interface EditActivityModalProps {
-  data: IActivity;
+  data: IEvent;
   toggleModal: () => void;
 }
 
-export interface IActivityUpdate {
-  name: string;
+export interface IEventUpdate {
+  name: string,
   description: string,
   category: string,
-  duration: string,
-  difficulty: string,
+  start_date: string,
+  end_date: string,
   latitude: number,
   longitude: number,
   address: string,
@@ -22,40 +25,41 @@ export interface IActivityUpdate {
   country: string,
   postal_code: string
 }
-const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal }) => {
 
-  const { updateActivityMutation } =
-    useActivities();
-  
+const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal }) => {
+
+  const { updateEventMutation } =
+    useEvents();
+
   const id = data.id;
 
-  const [activity, setActivity] = useState<IActivityUpdate>({
+  const [event, setEvent] = useState<IEventUpdate>({
     name: data.name,
     description: data.description,
     category: data.category,
-    duration: data.duration,
-    difficulty: data.description,
+    start_date: data.start_date,
+    end_date: data.end_date,
     latitude: data.latitude,
     longitude: data.longitude,
     address: data.address,
-    city: data.address,
-    country: data.address,
-    postal_code: "72270"
+    city: data.city,
+    country: data.country,
+    postal_code: data.postal_code
   })
 
   const handleInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
   > = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
-    setActivity({ ...activity, [name]: value });
+    setEvent({ ...event, [name]: value });
   };
 
   const handleUpdateActivity = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateActivityMutation.mutateAsync({id, activity});
+    await updateEventMutation.mutateAsync({ id, event });
   };
 
-  console.log(activity)
+  console.log(event)
   return (
     <>
       <div
@@ -72,7 +76,7 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Activity Data
+              Update Event Data
             </h3>
             <button
               type="button"
@@ -108,36 +112,65 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
                 <input
                   className="appearance-none bg-gray-800 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   type="text"
-                  placeholder="Activity name"
+                  placeholder="Event name"
                   name="name"
                   onChange={handleInputChange}
                 />
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Difficulty</label>
+                <label className="text-md text-gray-50">Interest</label>
                 <select
                   className="outline-none text-gray-50 py-3 px-2 bg-gray-800 rounded-lg w-2/3"
-                  id="difficulty"
-                  name="difficulty"
+                  name="category"
                   onChange={handleInputChange}
                 >
-                  <option>Select Difficulty..</option>
-                  {Object.keys(difficulties).map((difficulty) => (
-                    <option key={difficulty} value={difficulty}>
-                      {difficulty}
+                  <option>Select Interest..</option>
+                  {interests.map((interest) => (
+                    <option key={interest} value={interest}>
+                      {interest}
                     </option>
                   ))}
                 </select>
               </div>
-              <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Duration</label>
-                <input
-                  type="number"
-                  name="duration"
-                  onChange={handleInputChange}
-                  className="appearance-none mb-5 bg-gray-800 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
-                  placeholder="Duration in minutes.."
-                />
+              <div className="flex flex-col justify-between w-full space-y-2 items-center px-5">
+                <label className="text-md text-gray-50 w-full">Starting Date</label>
+                <div className="relative w-full flex justify-end">
+                  <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <Flatpickr
+                    value={new Date(event.start_date)}
+                    onChange={([date]) => {
+                      setEvent({
+                        ...event,
+                        start_date: date.toISOString()
+                      });
+                    }}
+                    className="bg-gray-50 border w-full cursor-pointer border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor font-medium"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
+                <label className="text-md text-gray-50 w-full">Ending Date</label>
+                <div className="relative w-full">
+                  <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <Flatpickr
+                    value={new Date(event.end_date)}
+                    onChange={([date]) => {
+                      setEvent({
+                        ...event,
+                        end_date: date.toISOString()
+                      });
+                    }}
+                    className="bg-gray-50 border cursor-pointer w-full border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-secondaryColor focus:border-secondaryColor block pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-secondaryColor dark:focus:border-secondaryColor font-medium"
+                    placeholder="DD/MM/YYYY"
+                  />
+                </div>
               </div>
             </div>
             <div className="flex justify-end gap-x-2">
@@ -163,4 +196,4 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
   );
 };
 
-export default EditActivityModal;
+export default EditEventModal;
