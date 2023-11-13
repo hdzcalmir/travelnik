@@ -73,7 +73,7 @@ const db = require("../database/database.js");
 const getAllActivities = (req, res) => {
   try {
     let query =
-      "SELECT activities.id, activities.location_id, activities.reviews, activities.name, activities.description,\
+      "SELECT activities.id, activities.location_id, activities.name, activities.description,\
                 activities.category, activities.duration, activities.difficulty,\
                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                 FROM activities\
@@ -91,11 +91,43 @@ const getAllActivities = (req, res) => {
       }
     }
 
-    db.query(query, (err, data) => {
+    db.query(query, async (err, data) => {
       if (err) {
         return res.status(500).send("Internal server error.");
       }
-      return res.status(200).json(data);
+
+      // Fetch reviews for each activity
+      const activitiesWithReviews = await Promise.all(
+        data.map(async (activity) => {
+          const reviewsQuery = `SELECT * FROM reviews WHERE entity_id = ${activity.id} AND entity_type = 'activity'`;
+          const reviews = await new Promise((resolve, reject) => {
+            db.query(reviewsQuery, (err, reviewsData) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(reviewsData);
+              }
+            });
+          });
+          const reviewsDetails = await Promise.all(
+            reviews.map(async (review) => {
+              const reviewDetailsQuery = `SELECT * FROM reviews WHERE id = ${review.id}`;
+              return new Promise((resolve, reject) => {
+                db.query(reviewDetailsQuery, (err, reviewDetails) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(reviewDetails[0]);
+                  }
+                });
+              });
+            })
+          );
+          return { ...activity, reviews: reviewsDetails };
+        })
+      );
+
+      return res.status(200).json(activitiesWithReviews);
     });
   } catch (error) {
     return res.status(500).send("Internal server error.");
@@ -460,7 +492,6 @@ const editActivity = (req, res) => {
  *       '500':
  *         description: Internal server error.
  */
-
 const activityFeedback = (req, res) => {
   if (!req.body.name || !req.body.message || !req.body.rating || !req.body.id)
     return res.status(400).send("Bad request");
@@ -475,39 +506,56 @@ const activityFeedback = (req, res) => {
       }
 
       if (data.length !== 0) {
-        const reviews = JSON.parse(data[0].reviews);
+        const reviews = JSON.parse(data[0].reviews) || [];
 
-        const lastId = reviews.length > 0 ? reviews[reviews.length - 1].id : 0;
-
-        reviews.push({
-          id: lastId + 1,
+        const newReview = {
           name: req.body.name,
           text: req.body.message,
-          images: [],
           rate: req.body.rating,
           approved: false,
           date: new Date(),
-        });
+          entity_type: "activity",
+          entity_id: req.body.id,
+        };
 
-        const updateActivityQuery =
-          "UPDATE activities SET reviews = ? WHERE id = ?";
-        db.query(
-          updateActivityQuery,
-          [JSON.stringify(reviews), req.body.id],
-          (updateErr) => {
-            if (updateErr) {
-              return res.status(500).send("Error updating activity data.");
-            }
-            return res
-              .status(200)
-              .send("Your feedback is successfully submitted");
+        // Insert the new review into the 'reviews' table
+        const insertReviewQuery = "INSERT INTO reviews SET ?";
+        db.query(insertReviewQuery, newReview, (insertErr, result) => {
+          if (insertErr) {
+            console.error(insertErr);
+            return res.status(500).send("Error inserting review details.");
           }
-        );
+
+          const reviewId = result.insertId;
+
+          // Update the 'activities' table to store the review IDs
+          if (!reviews.includes(reviewId)) {
+            reviews.push(reviewId);
+          }
+
+          const updateActivityQuery =
+            "UPDATE activities SET reviews = ? WHERE id = ?";
+          db.query(
+            updateActivityQuery,
+            [JSON.stringify(reviews), req.body.id],
+            (updateErr) => {
+              if (updateErr) {
+                console.error(updateErr);
+                return res.status(500).send("Error updating activity data.");
+              }
+
+              return res
+                .status(200)
+                .send("Your feedback is successfully submitted");
+            }
+          );
+        });
       } else {
         res.status(404).send("There is no activity with that ID.");
       }
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).send("Internal server error.");
   }
 };

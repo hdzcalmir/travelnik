@@ -26,13 +26,11 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
     .toString()
     .padStart(2, "0")}h`;
 
-  const jsonParsedReviews: IReview[] =
-    activity?.reviews !== undefined
-      ? JSON.parse(activity.reviews as unknown as string)
-      : [];
+  const jsonParsedReviews: IReview[] = activity?.reviews;
+  console.log(jsonParsedReviews);
 
   const filterApprovedReviews = jsonParsedReviews.filter(
-    (review) => review.approved === true
+    (review) => review.approved === 1
   );
   const averageRate = Utils.calculateRate(filterApprovedReviews);
 

@@ -65,7 +65,7 @@ const { INTEREST_CATEGORIES } = require("../utils/constants.js");
 const getAllBusinesses = (req, res) => {
   try {
     let getAllBusinessesQuery =
-      "SELECT businesses.id, businesses.location_id, businesses.reviews, businesses.name, businesses.description, \
+      "SELECT businesses.id, businesses.location_id, businesses.name, businesses.description, \
                                 businesses.category, businesses.opening_time, businesses.closing_time,\
                                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                                 FROM businesses\
@@ -90,8 +90,44 @@ const getAllBusinesses = (req, res) => {
                                 ","
                               )})`;
     }
-    db.query(getAllBusinessesQuery, (err, data) => {
-      return res.status(200).json(data);
+
+    db.query(getAllBusinessesQuery, async (err, data) => {
+      if (err) {
+        return res.status(500).send("Internal server error.");
+      }
+
+      // Fetch reviews for each business
+      const businessesWithReviews = await Promise.all(
+        data.map(async (business) => {
+          const reviewsQuery = `SELECT * FROM reviews WHERE entity_id = ${business.id} AND entity_type = 'business'`;
+          const reviews = await new Promise((resolve, reject) => {
+            db.query(reviewsQuery, (err, reviewsData) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(reviewsData);
+              }
+            });
+          });
+          const reviewsDetails = await Promise.all(
+            reviews.map(async (review) => {
+              const reviewDetailsQuery = `SELECT * FROM reviews WHERE id = ${review.id}`;
+              return new Promise((resolve, reject) => {
+                db.query(reviewDetailsQuery, (err, reviewDetails) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(reviewDetails[0]);
+                  }
+                });
+              });
+            })
+          );
+          return { ...business, reviews: reviewsDetails };
+        })
+      );
+
+      return res.status(200).json(businessesWithReviews);
     });
   } catch (error) {
     return res.status(500).send("Internal server error.");
@@ -443,33 +479,48 @@ const businessFeedback = (req, res) => {
       if (data && data.length !== 0) {
         const reviews = JSON.parse(data[0].reviews || "[]");
 
-        const lastId = reviews.length > 0 ? reviews[reviews.length - 1].id : 0;
-
-        reviews.push({
-          id: lastId + 1,
+        const newReview = {
           name: req.body.name,
           text: req.body.message,
-          images: [],
           rate: req.body.rating,
           approved: false,
           date: new Date(),
-        });
+          entity_type: "business",
+          entity_id: req.body.id,
+        };
 
-        const updateBusinessQuery =
-          "UPDATE businesses SET reviews = ? WHERE id = ?";
-        db.query(
-          updateBusinessQuery,
-          [JSON.stringify(reviews), req.body.id],
-          (updateErr) => {
-            if (updateErr) {
-              console.error(updateErr);
-              return res.status(500).send("Error updating business data.");
-            }
-            return res
-              .status(200)
-              .send("Your feedback is successfully submitted");
+        // Insert the new review into the 'reviews' table
+        const insertReviewQuery = "INSERT INTO reviews SET ?";
+        db.query(insertReviewQuery, newReview, (insertErr, result) => {
+          if (insertErr) {
+            console.error(insertErr);
+            return res.status(500).send("Error inserting review details.");
           }
-        );
+
+          const reviewId = result.insertId;
+
+          // Update the 'businesses' table to store the review IDs
+          if (!reviews.includes(reviewId)) {
+            reviews.push(reviewId);
+          }
+
+          const updateBusinessQuery =
+            "UPDATE businesses SET reviews = ? WHERE id = ?";
+          db.query(
+            updateBusinessQuery,
+            [JSON.stringify(reviews), req.body.id],
+            (updateErr) => {
+              if (updateErr) {
+                console.error(updateErr);
+                return res.status(500).send("Error updating business data.");
+              }
+
+              return res
+                .status(200)
+                .send("Your feedback is successfully submitted");
+            }
+          );
+        });
       } else {
         res.status(404).send("There is no business with that ID.");
       }

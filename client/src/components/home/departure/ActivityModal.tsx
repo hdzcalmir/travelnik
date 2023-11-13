@@ -80,7 +80,7 @@ export default function ActivityModal({
                 <div className="flex justify-center text-white text-xl">
                   {activity?.name}
                 </div>
-                <p>{activity?.description}</p>
+                <p className="text-white">{activity?.description}</p>
                 <p className="flex flex-col space-y-2">
                   <span className="text-gray-300 font-semibold flex items-center">
                     <MdCategory className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
