@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 07:56 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- Host: localhost:3306
+-- Generation Time: Nov 13, 2023 at 11:19 PM
+-- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `accommodations` (
   `check_in_time` varchar(12) DEFAULT NULL,
   `check_out_time` varchar(12) DEFAULT NULL,
   `address` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accommodations`
@@ -79,7 +79,8 @@ INSERT INTO `accommodations` (`id`, `source`, `image`, `title`, `rating`, `price
 (28, 'https://www.booking.com/hotel/ba/krajina-v.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/455229314.jpg?k=3f0e0d2ef29121743d6d091097db396aa5d155d54e28de630a4bf40fe56310f2&o=', 'Krajina V', 8.8, 41.25, '13.85', 24, 'Excellent', 17.5442270349447, 44.3169080034726, '07:00', '11:00', 'Babanovac'),
 (29, 'https://www.booking.com/hotel/ba/apartment-vremeplov.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/87254405.jpg?k=93fa97a46aa0bb3eb9737934f849c73b9301073f28725d44476448e20450d3ec&o=', 'Apartment Vremeplov', 8.6, 35, '0.65', 284, 'Excellent', 17.670524418354, 44.2271034231815, '07:00', '10:30', 'Varoš 10'),
 (30, 'https://www.booking.com/hotel/ba/villa-popovic-nova-bila1.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/415286098.jpg?k=8622406337fe2deadbab84cd76524fe4d0221631273ba640843f851ce7fba30d&o=', 'Hostel Villa Popović', 9, 16.88, '7.05', 59, 'Wonderful', 17.7409658984263, 44.1970691475776, '00:00', '00:00', 'Podolac bb'),
-(31, 'https://www.booking.com/hotel/ba/apartmani-venci-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/376173840.jpg?k=41fb414c116258c84be432f8d4fbaf75c050b742ead127360eea0ba238063aff&o=', 'Apartmani Venci Travnik', 8.9, 60, '0.55', 59, 'Excellent', 17.6567860634056, 44.2279029897834, '08:00', '11:00', 'Stanična');
+(31, 'https://www.booking.com/hotel/ba/apartmani-venci-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/376173840.jpg?k=41fb414c116258c84be432f8d4fbaf75c050b742ead127360eea0ba238063aff&o=', 'Apartmani Venci Travnik', 8.9, 60, '0.55', 59, 'Excellent', 17.6567860634056, 44.2279029897834, '08:00', '11:00', 'Stanična'),
+(32, 'https://www.booking.com/hotel/ba/apartment-aria-travnik.html', 'https://cf.bstatic.com/xdata/images/hotel/square60/351653258.jpg?k=6d4c9206541aeefeee524b8e5b12e134b64d031234cc10c076bb4ca202ead38e&o=', 'Apartment Aria', 9.7, 27, '1.10', 79, 'Exceptional', 17.649170405667, 44.225287360698, '12:00', '15:30', 'Aleja Konzula (zgrada Bunian )');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,15 @@ CREATE TABLE `activities` (
   `category` varchar(50) DEFAULT NULL,
   `duration` time DEFAULT NULL,
   `difficulty` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `activities`
+--
+
+INSERT INTO `activities` (`id`, `location_id`, `reviews`, `name`, `description`, `category`, `duration`, `difficulty`) VALUES
+(1, 2, '[1,2,3,4,5,6]', 'Eat 20 ćevapa at Ćevabdžinica Hari', 'This is easy task for those who are from Travnik.', 'Food', '00:45:00', 'Hard'),
+(4, 6, '[13,14,15,16]', 'Hiking - Vezir Palace', 'This week we organize hiking event. We will be meeting at Vezir Palace at 08:00 AM.', 'Hiking', '00:00:01', 'Hard');
 
 -- --------------------------------------------------------
 
@@ -113,7 +122,15 @@ CREATE TABLE `businesses` (
   `category` varchar(50) DEFAULT NULL,
   `opening_time` time DEFAULT NULL,
   `closing_time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `businesses`
+--
+
+INSERT INTO `businesses` (`id`, `location_id`, `reviews`, `name`, `description`, `category`, `opening_time`, `closing_time`) VALUES
+(1, 2, NULL, 'Test', 'stjaktasjitas', '1', '18:07:00', '22:07:00'),
+(2, 5, '[7,8,9,10,11,12]', 'BEST Supermarket 6', 'Here you can buy food & drinks', '9', '08:00:00', '21:00:00');
 
 -- --------------------------------------------------------
 
@@ -129,7 +146,14 @@ CREATE TABLE `events` (
   `category` varchar(50) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `location_id`, `name`, `description`, `category`, `start_date`, `end_date`) VALUES
+(2, 4, 'Visit Radića Brdo', 'Let\'s group and visit together location \"Radića Brdo\"', 'Hiking', '2023-11-11 00:00:00', '2023-11-12 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -145,7 +169,17 @@ CREATE TABLE `location` (
   `city` varchar(128) DEFAULT NULL,
   `country` varchar(128) DEFAULT NULL,
   `postal_code` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `longitude`, `latitude`, `address`, `city`, `country`, `postal_code`) VALUES
+(2, 17.659867735474847, 44.22794904944067, 'Bašbunar', 'Travnik', 'Bosnia and Herzegovina', '72270'),
+(4, 17.645276518433036, 44.236066982513734, 'Brza Cesta Lašva-Travnik-Jajce', 'Travnik', 'Bosnia and Herzegovina', '72270'),
+(5, 17.66567203806099, 44.2272802063666, 'Šehida', 'Travnik', 'Bosnia and Herzegovina', NULL),
+(6, 17.669641628720996, 44.229118873325945, 'Varoš', 'Travnik', 'Bosnia and Herzegovina', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,10 +189,37 @@ CREATE TABLE `location` (
 
 CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
+  `name` varchar(64) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `text` text DEFAULT NULL,
-  `rate` int(11) DEFAULT NULL,
-  `images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`images`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `rate` tinyint(4) NOT NULL DEFAULT 1,
+  `images` longtext DEFAULT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT 0,
+  `entity_id` int(11) DEFAULT NULL,
+  `entity_type` enum('activity','business') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `name`, `date`, `text`, `rate`, `images`, `approved`, `entity_id`, `entity_type`) VALUES
+(1, 'Alice Johnson', '2023-11-13 14:30:00', 'Great experience at Ćevabdžinica Hari!', 4, NULL, 1, 1, 'activity'),
+(2, 'Bob Smith', '2023-11-14 10:45:00', 'Delicious ćevapa, will come back!', 5, NULL, 1, 1, 'activity'),
+(3, 'Eva Davis', '2023-11-15 19:20:00', 'Friendly staff, loved the ambiance.', 4, NULL, 1, 1, 'activity'),
+(4, 'Charlie Brown', '2023-11-16 12:15:00', 'Average experience, but decent food.', 3, NULL, 1, 1, 'activity'),
+(5, 'Grace Miller', '2023-11-17 18:00:00', 'Not a fan of ćevapa, but the place was nice.', 2, NULL, 1, 1, 'activity'),
+(6, 'David Wilson', '2023-11-18 15:30:00', 'Fantastic ćevapa and service!', 5, NULL, 1, 1, 'activity'),
+(7, 'Emily White', '2023-11-20 11:00:00', 'BEST Supermarket has a wide variety of products!', 5, NULL, 1, 2, 'business'),
+(8, 'Tom Johnson', '2023-11-21 14:30:00', 'Clean and organized store, excellent service.', 4, NULL, 1, 2, 'business'),
+(9, 'Sophia Davis', '2023-11-22 17:45:00', 'Reasonable prices and friendly staff at BEST Supermarket.', 4, NULL, 1, 2, 'business'),
+(10, 'Michael Smith', '2023-11-23 10:15:00', 'Great deals on fresh produce, my go-to supermarket.', 5, NULL, 1, 2, 'business'),
+(11, 'Olivia Brown', '2023-11-24 15:20:00', 'BEST Supermarket never disappoints, always find what I need.', 5, NULL, 1, 2, 'business'),
+(12, 'Liam Wilson', '2023-11-25 12:45:00', 'The BEST Supermarket truly lives up to its name!', 5, NULL, 1, 2, 'business'),
+(13, 'Ibrahim Okić', '2023-11-13 23:10:04', 'gaga', 3, NULL, 1, 4, 'activity'),
+(14, 'Hajraga', '2023-11-13 23:10:25', 'Test 2', 2, NULL, 1, 4, 'activity'),
+(15, 'Testerica', '2023-11-13 23:12:16', 'test', 5, NULL, 1, 4, 'activity'),
+(16, 'Hajro', '2023-11-13 23:13:41', 'tata', 4, NULL, 1, 4, 'activity');
 
 -- --------------------------------------------------------
 
@@ -173,7 +234,7 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `role` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -239,37 +300,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accommodations`
 --
 ALTER TABLE `accommodations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `businesses`
 --
 ALTER TABLE `businesses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
