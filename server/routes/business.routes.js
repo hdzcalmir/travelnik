@@ -3,6 +3,7 @@ const {
   createNewBusiness,
   deleteBusiness,
   editBusiness,
+  businessFeedback,
 } = require("../controllers/business.controller.js");
 const express = require("express");
 
@@ -54,5 +55,7 @@ router.get("/", getAllBusinesses);
 router.post("/", createNewBusiness);
 router.delete("/:id", deleteBusiness);
 router.patch("/:id", editBusiness);
+
+router.post("/review", businessFeedback);
 
 module.exports = router;

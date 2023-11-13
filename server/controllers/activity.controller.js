@@ -423,9 +423,94 @@ const editActivity = (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/activity/review:
+ *   post:
+ *     tags:
+ *       - Activities
+ *     summary: Submit feedback for an activity
+ *     description: Submit feedback for a specific activity by its ID.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *                 description: The ID of the activity to submit feedback for.
+ *               name:
+ *                 type: string
+ *                 description: The name of the person providing feedback.
+ *               message:
+ *                 type: string
+ *                 description: The feedback message.
+ *               rating:
+ *                 type: integer
+ *                 description: The rating provided (1 to 5).
+ *     responses:
+ *       '200':
+ *         description: Feedback successfully submitted.
+ *       '400':
+ *         description: Bad request. Please provide name, message, rating, and ID.
+ *       '404':
+ *         description: Activity with that ID not found.
+ *       '500':
+ *         description: Internal server error.
+ */
+
+const activityFeedback = (req, res) => {
+  if (!req.body.name || !req.body.message || !req.body.rating || !req.body.id)
+    return res.status(400).send("Bad request");
+
+  try {
+    const getActivityDataQuery =
+      "SELECT * FROM activities WHERE id = ? LIMIT 1";
+    db.query(getActivityDataQuery, [req.body.id], (err, data) => {
+      if (data.length !== 0) {
+        const reviews = JSON.parse(data[0].reviews);
+
+        const lastId = reviews.length > 0 ? reviews[reviews.length - 1].id : 0;
+
+        reviews.push({
+          id: lastId + 1,
+          name: req.body.name,
+          text: req.body.message,
+          images: [],
+          rate: req.body.rating,
+          approved: false,
+          date: new Date(),
+        });
+
+        const updateActivityQuery =
+          "UPDATE activities SET reviews = ? WHERE id = ?";
+        db.query(
+          updateActivityQuery,
+          [JSON.stringify(reviews), req.body.id],
+          (updateErr) => {
+            if (updateErr) {
+              return res.status(500).send("Error updating activity data.");
+            }
+            return res
+              .status(200)
+              .send("Your feedback is successfully submitted");
+          }
+        );
+      } else {
+        res.status(404).send("There is no activity with that ID.");
+      }
+    });
+  } catch (error) {
+    return res.status(500).send("Internal server error.");
+  }
+};
+
 module.exports = {
   getAllActivities,
   deleteActivity,
   createNewActivity,
   editActivity,
+  activityFeedback,
 };

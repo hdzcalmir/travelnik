@@ -2,7 +2,7 @@
 
 import { IReview } from "@/common/interfaces/IReview";
 import { Avatar } from "@nextui-org/react";
-import Image from "next/image";
+import moment from "moment";
 
 interface UserReviewsProps {
   review: IReview;
@@ -22,7 +22,9 @@ const UserReviews = ({ review }: UserReviewsProps) => {
           </div>
           <div>
             <h4 className="font-bold">{review.name}</h4>
-            <span className="text-xs dark:text-gray-400">{review.date}</span>
+            <span className="text-xs dark:text-gray-400">
+              {moment(review.date).fromNow()}
+            </span>
           </div>
         </div>
         <div className="flex items-center space-x-2 dark:text-yellow-500">

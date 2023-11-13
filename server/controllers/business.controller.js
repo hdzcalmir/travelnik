@@ -390,9 +390,100 @@ const editBusiness = (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/business/review:
+ *   post:
+ *     tags:
+ *       - Businesses
+ *     summary: Submit feedback for a business
+ *     description: Submit feedback for a specific business by its ID.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 description: The ID of the business to submit feedback for.
+ *               name:
+ *                 type: string
+ *                 description: The name of the person providing feedback.
+ *               message:
+ *                 type: string
+ *                 description: The feedback message.
+ *               rating:
+ *                 type: integer
+ *                 description: The rating provided (1 to 5).
+ *     responses:
+ *       '200':
+ *         description: Feedback successfully submitted.
+ *       '400':
+ *         description: Bad request. Please provide name, message, rating, and ID.
+ *       '404':
+ *         description: Business with that ID not found.
+ *       '500':
+ *         description: Internal server error.
+ */
+const businessFeedback = (req, res) => {
+  if (!req.body.name || !req.body.message || !req.body.rating || !req.body.id)
+    return res.status(400).send("Bad request");
+
+  try {
+    const getBusinessDataQuery =
+      "SELECT * FROM businesses WHERE id = ? LIMIT 1";
+    db.query(getBusinessDataQuery, [req.body.id], (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error.");
+      }
+
+      if (data && data.length !== 0) {
+        const reviews = JSON.parse(data[0].reviews || "[]");
+
+        const lastId = reviews.length > 0 ? reviews[reviews.length - 1].id : 0;
+
+        reviews.push({
+          id: lastId + 1,
+          name: req.body.name,
+          text: req.body.message,
+          images: [],
+          rate: req.body.rating,
+          approved: false,
+          date: new Date(),
+        });
+
+        const updateBusinessQuery =
+          "UPDATE businesses SET reviews = ? WHERE id = ?";
+        db.query(
+          updateBusinessQuery,
+          [JSON.stringify(reviews), req.body.id],
+          (updateErr) => {
+            if (updateErr) {
+              console.error(updateErr);
+              return res.status(500).send("Error updating business data.");
+            }
+            return res
+              .status(200)
+              .send("Your feedback is successfully submitted");
+          }
+        );
+      } else {
+        res.status(404).send("There is no business with that ID.");
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal server error.");
+  }
+};
+
 module.exports = {
   getAllBusinesses,
   createNewBusiness,
   deleteBusiness,
   editBusiness,
+  businessFeedback,
 };

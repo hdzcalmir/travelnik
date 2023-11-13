@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { IActivity } from "@/common/interfaces/IActivity";
 import { IVenture } from "@/common/interfaces/IVenture";
 import { IEvent } from "@/common/interfaces/IEvent";
+import toast from "react-hot-toast";
+import http from "@/interceptor/http";
 
 interface FeedbackProps {
-  data: IActivity | undefined | IVenture | IEvent;
+  data: IActivity | undefined | IVenture;
 }
 
 const Feedback = ({ data }: FeedbackProps) => {
@@ -20,10 +22,44 @@ const Feedback = ({ data }: FeedbackProps) => {
   };
 
   // Function to handle feedback submission
-  const handleFeedbackSubmit = () => {
-    console.log("Name:", name);
-    console.log("Message:", message);
-    console.log("Rating:", rating);
+  const handleFeedbackSubmit = async () => {
+    if (rating === 0) {
+      toast.error("You need to select rating.");
+      return;
+    }
+    if (name.length === 0) {
+      toast.error("You need to enter your name.");
+      return;
+    }
+    if (message.length === 0) {
+      toast.error("You need to enter your message.");
+      return;
+    }
+    if (
+      (data as IActivity).difficulty !== undefined &&
+      (data as IActivity).duration !== undefined
+    ) {
+      await http.post("/activity/review", {
+        id: data?.id,
+        name,
+        message,
+        rating,
+      });
+    }
+
+    if (
+      (data as IVenture).opening_time !== undefined &&
+      (data as IVenture).closing_time !== undefined
+    ) {
+      await http.post("/business/review", {
+        id: data?.id,
+        name,
+        message,
+        rating,
+      });
+    }
+
+    toast.success("Your feedback is successfully submited.");
 
     setName("");
     setMessage("");
@@ -81,7 +117,7 @@ const Feedback = ({ data }: FeedbackProps) => {
           ></textarea>
           <button
             type="button"
-            className="py-4 my-8 font-semibold rounded-md dark:text-white dark:bg-secondaryColor"
+            className="py-4 my-8 font-semibold rounded-md dark:text-white dark:bg-secondaryColor/80 hover:bg-secondaryColor transition duration-500"
             onClick={handleFeedbackSubmit}
           >
             Leave feedback

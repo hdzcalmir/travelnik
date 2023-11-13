@@ -105,15 +105,17 @@ export default function ActivityModal({
                   </span>
                 </p>
                 <ReviewsCard activity={activity} />
-                <Button
-                  className="bg-secondaryColor/80 shadow-lg shadow-indigo-500/20 flex items-center w-2/6 py-4"
-                  onPress={() => {
-                    setLeaveFeedback(!leaveFeedback);
-                  }}
-                >
-                  <MdRateReview className="h-5 w-5" />
-                  Leave the review
-                </Button>
+                <div className="flex justify-end">
+                  <Button
+                    className="bg-secondaryColor/80 shadow-lg shadow-indigo-500/20 mr-11 items-center w-2/6 py-4"
+                    onPress={() => {
+                      setLeaveFeedback(!leaveFeedback);
+                    }}
+                  >
+                    <MdRateReview className="h-5 w-5" />
+                    Leave the review
+                  </Button>
+                </div>
                 {leaveFeedback && <Feedback data={activity} />}
               </ModalBody>
               <ModalFooter>

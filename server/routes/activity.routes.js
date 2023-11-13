@@ -3,6 +3,7 @@ const {
   deleteActivity,
   createNewActivity,
   editActivity,
+  activityFeedback,
 } = require("../controllers/activity.controller.js");
 const express = require("express");
 
@@ -54,5 +55,7 @@ router.get("/", getAllActivities);
 router.post("/", createNewActivity);
 router.delete("/:id", deleteActivity);
 router.patch("/:id", editActivity);
+
+router.post("/review", activityFeedback);
 
 module.exports = router;
