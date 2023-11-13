@@ -73,7 +73,7 @@ const db = require("../database/database.js");
 const getAllActivities = (req, res) => {
   try {
     let query =
-      "SELECT activities.id, activities.location_id, activities.reviews, activities.name, activities.description,\
+      "SELECT activities.id, activities.location_id, activities.name, activities.description,\
                 activities.category, activities.duration, activities.difficulty,\
                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                 FROM activities\
@@ -91,11 +91,43 @@ const getAllActivities = (req, res) => {
       }
     }
 
-    db.query(query, (err, data) => {
+    db.query(query, async (err, data) => {
       if (err) {
         return res.status(500).send("Internal server error.");
       }
-      return res.status(200).json(data);
+
+      // Fetch reviews for each activity
+      const activitiesWithReviews = await Promise.all(
+        data.map(async (activity) => {
+          const reviewsQuery = `SELECT * FROM reviews WHERE entity_id = ${activity.id} AND entity_type = 'activity'`;
+          const reviews = await new Promise((resolve, reject) => {
+            db.query(reviewsQuery, (err, reviewsData) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(reviewsData);
+              }
+            });
+          });
+          const reviewsDetails = await Promise.all(
+            reviews.map(async (review) => {
+              const reviewDetailsQuery = `SELECT * FROM reviews WHERE id = ${review.id}`;
+              return new Promise((resolve, reject) => {
+                db.query(reviewDetailsQuery, (err, reviewDetails) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(reviewDetails[0]);
+                  }
+                });
+              });
+            })
+          );
+          return { ...activity, reviews: reviewsDetails };
+        })
+      );
+
+      return res.status(200).json(activitiesWithReviews);
     });
   } catch (error) {
     return res.status(500).send("Internal server error.");

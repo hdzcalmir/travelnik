@@ -17,13 +17,12 @@ interface ReviewsCardProps {
 const ReviewsCard = ({ activity }: ReviewsCardProps) => {
   const [userReviews, setUserReviews] = useState<boolean>(false);
 
-  const jsonParsedReviews: IReview[] =
-    activity?.reviews !== undefined
-      ? JSON.parse(activity.reviews as unknown as string)
-      : [];
+  const jsonParsedReviews: IReview[] = activity?.reviews
+    ? activity.reviews
+    : [];
 
   const filterApprovedReviews = jsonParsedReviews.filter(
-    (review) => review.approved === true
+    (review) => review.approved === 1
   );
 
   const calculatedRate = Utils.calculateRate(filterApprovedReviews);
