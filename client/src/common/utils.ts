@@ -5,19 +5,35 @@ import { Category } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
 import { IEvent } from "./interfaces/IEvent";
 import { IVenture } from "./interfaces/IVenture";
+import { IReview } from "./interfaces/IReview";
 
 export class Utils {
 
-  static calculateRate(reviews: IReview[]): number {
-    if (!reviews || reviews?.length === 0) {
+  static calculateNumberOfGradeReviews = (grade:number, reviews:IReview[]) => {
+    return reviews.filter((review) => review.rate === grade).length;
+  };
+  
+  static calculatePercentageOfGradeReviews = (grade:number, reviews:IReview[]) => {
+    const totalReviews = reviews.length;
+    const grade5Reviews = Utils.calculateNumberOfGradeReviews(grade, reviews);
+  
+    if (totalReviews === 0) {
       return 0;
     }
+  
+    return (grade5Reviews / totalReviews) * 100;
+  };
 
-    const totalRates = reviews?.reduce((acc, review) => acc + review?.rate, 0);
-    const averageRate = totalRates / reviews?.length;
-
+  static calculateRate(reviews: IReview[]): number {
+    if (!Array.isArray(reviews) || reviews.length === 0) {
+      return 0;
+    }
+  
+    const totalRates = reviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
+    const averageRate = totalRates / reviews.length;
+  
     return averageRate;
-  }
+  }  
 
   static sortActivities = (activities: IActivity[], activeFilter: string, searchFilter: string) => {
     let filteredActivities = activities;
