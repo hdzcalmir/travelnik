@@ -469,6 +469,11 @@ const activityFeedback = (req, res) => {
     const getActivityDataQuery =
       "SELECT * FROM activities WHERE id = ? LIMIT 1";
     db.query(getActivityDataQuery, [req.body.id], (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error.");
+      }
+
       if (data.length !== 0) {
         const reviews = JSON.parse(data[0].reviews);
 
