@@ -219,9 +219,65 @@ const updateReviewStatus = (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/review/{id}:
+ *   delete:
+ *     summary: Delete a review
+ *     description: Delete a review based on the provided ID.
+ *     tags:
+ *       - Reviews
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the review to delete.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: Review deleted successfully.
+ *       '400':
+ *         description: Bad request. Provide a valid review ID.
+ *       '404':
+ *         description: Review not found.
+ *       '500':
+ *         description: Internal server error.
+ */
+
+const deleteReview = (req, res) => {
+  try {
+    const reviewId = req.params.id;
+
+    if (!reviewId) {
+      return res.status(400).send("Bad request.");
+    }
+
+    // Assuming you have a 'reviews' table in your database
+    const deleteReviewQuery = "DELETE FROM reviews WHERE id = ?";
+
+    db.query(deleteReviewQuery, [reviewId], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error.");
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).send("Review not found.");
+      }
+
+      return res.status(200).send("Review deleted successfully.");
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal server error.");
+  }
+};
+
 module.exports = {
   getAllReviews,
   getAllUnapprovedReviews,
   getAllApprovedReviews,
   updateReviewStatus,
+  deleteReview,
 };
