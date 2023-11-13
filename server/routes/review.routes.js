@@ -3,6 +3,7 @@ const {
   getAllReviews,
   getAllUnapprovedReviews,
   getAllApprovedReviews,
+  updateReviewStatus,
 } = require("../controllers/review.controller.js");
 
 const router = express.Router();
@@ -61,5 +62,6 @@ const router = express.Router();
 router.get("/", getAllReviews);
 router.get("/approved", getAllApprovedReviews);
 router.get("/unapproved", getAllUnapprovedReviews);
+router.patch("/", updateReviewStatus);
 
 module.exports = router;

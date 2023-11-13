@@ -153,8 +153,75 @@ const getAllApprovedReviews = (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /api/review:
+ *   patch:
+ *     summary: Update review status
+ *     description: Update the approval status of a review.
+ *     tags:
+ *       - Reviews
+ *     parameters:
+ *       - in: body
+ *         name: Review Status
+ *         description: The ID of the review and the new status.
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: integer
+ *               description: The ID of the review to update.
+ *             status:
+ *               type: boolean
+ *               description: The new approval status (true/false).
+ *         example:
+ *           id: 1
+ *           status: true
+ *     responses:
+ *       '200':
+ *         description: Review status updated successfully.
+ *       '400':
+ *         description: Bad request. Provide both 'id' and 'status'.
+ *       '404':
+ *         description: Review not found.
+ *       '500':
+ *         description: Internal server error.
+ */
+
+const updateReviewStatus = (req, res) => {
+  try {
+    console.log(req.body);
+    const { id, status } = req.body;
+
+    if (!id) {
+      return res.status(400).send("Bad request.");
+    }
+
+    const updateReviewStatusQuery =
+      "UPDATE reviews SET approved = ? WHERE id = ?";
+
+    db.query(updateReviewStatusQuery, [status, id], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Internal server error.");
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).send("Review not found.");
+      }
+
+      return res.status(200).send("Review status updated successfully.");
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal server error.");
+  }
+};
+
 module.exports = {
   getAllReviews,
   getAllUnapprovedReviews,
   getAllApprovedReviews,
+  updateReviewStatus,
 };
