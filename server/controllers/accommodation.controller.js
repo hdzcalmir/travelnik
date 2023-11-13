@@ -1,7 +1,6 @@
 const axios = require("axios");
 const db = require("../database/database.js");
 const { bookingApiOptions } = require("../utils/booking_api.js");
-const { logger } = require("../utils/logger.js");
 const Accommodation = require("../models/Accommodation.js");
 
 /**
@@ -30,7 +29,8 @@ const Accommodation = require("../models/Accommodation.js");
  */
 const getAllAccomodation = (req, res) => {
   try {
-    const getAccommodationWithFiltersQuery = "SELECT * FROM accommodations ORDER BY id DESC LIMIT 15";
+    const getAccommodationWithFiltersQuery =
+      "SELECT * FROM accommodations ORDER BY id DESC LIMIT 15";
     db.query(getAccommodationWithFiltersQuery, (err, data) => {
       return res.status(200).json(data);
     });
