@@ -19,7 +19,12 @@
         "Music": "Muzika",
         "Hiking": "Planinarenje",
         "Fashion": "Odjeća",
-        "Sport": "Sport"
+        "Sport": "Sport",
+        "Choose filter": "Izaberite filter",
+        "Category": "Kategorija",
+        "Rating": "Ocjena",
+        "Difficulty": "Težina",
+        "Duration": "Trajanje"
     },
     "Features": {
         "explore": "Istraži",

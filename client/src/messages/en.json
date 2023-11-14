@@ -19,7 +19,12 @@
         "Music": "Music",
         "Hiking": "Hiking",
         "Fashion": "Fashion",
-        "Sport": "Sport"
+        "Sport": "Sport",
+        "Choose filter": "Choose filter",
+        "Category": "Category",
+        "Rating": "Rating",
+        "Difficulty": "Difficulty",
+        "Duration": "Duration"
     },
     "Features": {
         "explore": "Explore",

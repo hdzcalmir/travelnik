@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface ActivityFilterProps {
@@ -18,6 +19,8 @@ const ActivityFilter = ({
   setActiveFilter,
   setSearchFilter,
 }: ActivityFilterProps) => {
+
+  const t = useTranslations("Filter");
   const setFilter = (filter: string) => {
     setActiveFilter(filter);
   };
@@ -121,32 +124,32 @@ const ActivityFilter = ({
               } w-48 p-3 bg-white rounded-lg dark:bg-gray-700`}
           >
             <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-              Choose filter
+              {t("Choose filter")}
             </h6>
             <ul className="space-y-2 text-sm">
               <li
                 onClick={() => setFilter("category")}
                 className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
               >
-                Category
+                {t("Category")}
               </li>
               <li
                 onClick={() => setFilter("rating")}
                 className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
               >
-                Rating
+                {t("Rating")}
               </li>
               <li
                 onClick={() => setFilter("difficulty")}
                 className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
               >
-                Difficulty
+                {t("Difficulty")}
               </li>
               <li
                 onClick={() => setFilter("duration")}
                 className="flex items-center text-white hover:bg-white-20 cursor-pointer hover:text-gray-400 transition duration-500"
               >
-                Duration
+                {t("Duration")}
               </li>
             </ul>
           </div>

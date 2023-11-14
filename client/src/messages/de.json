@@ -19,7 +19,12 @@
         "Music": "Musik",
         "Hiking": "Wandern",
         "Fashion": "Mode",
-        "Sport": "Sport"
+        "Sport": "Sport",
+        "Choose filter": "Filter auswählen",
+        "Category": "Kategorie",
+        "Rating": "Bewertung",
+        "Difficulty": "Schwierigkeitsgrad",
+        "Duration": "Dauer"
     },
     "Features": {
         "explore": "Erkunden",
