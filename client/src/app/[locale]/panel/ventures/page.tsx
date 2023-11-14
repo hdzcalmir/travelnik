@@ -13,6 +13,7 @@ import { useState } from "react";
 import Card from "@/components/panel/card/card";
 import { IoGrid } from "react-icons/io5";
 import EditVentureModal from "@/components/panel/modals/EditVentureModal";
+import { Utils } from "@/common/utils";
 
 function Ventures() {
   const { ventures, venturesLoading, deleteVentureMutation } = useVentures();
@@ -117,7 +118,7 @@ function Ventures() {
                           {venture.name}
                         </th>
                         <td className="px-6 py-4">{venture.address}</td>
-                        <td className="px-6 py-4">{venture.category}</td>
+                        <td className="px-6 py-4">{Utils.getCategory(venture.category)}</td>
                         <td className="px-6 py-4">{venture.opening_time}</td>
                         <td className="px-6 py-4">{venture.closing_time}</td>
                         <td className="px-6 py-4 flex space-x-2">

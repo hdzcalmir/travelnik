@@ -158,6 +158,18 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
                   onChange={handleInputChange}
                 />
               </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Address</label>
+                <input
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
+                  value={data.address}
+                  disabled
+                  type="text"
+                  placeholder="Event name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
               <div className="flex flex-col md:space-x-3 md:flex-row justify-between w-full space-y-2 items-center px-5">
                 <label className="text-md text-gray-50 w-full">Starting Date</label>
                 <div className="relative w-full flex justify-end">

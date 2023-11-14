@@ -50,6 +50,7 @@ const ActivityAPI = {
 
     updateActivity: async (id: string | undefined, activity: IActivityUpdate) => {
         try {
+            activity.duration = convertMinutesToTime(activity.duration);
             const response = await http.patch(`/activity/${id}`, activity);
             if (response.status === 200) {
                 toast.success(response.data);
