@@ -8,13 +8,14 @@ import StarRating from "./StarRating";
 import { MdRateReview } from "react-icons/md";
 import { useState } from "react";
 import UserReviews from "./UserReviews";
-import Feedback from "./Feedback";
+import { useTranslations } from "next-intl";
 
 interface ReviewsCardProps {
   activity: IActivity | undefined;
 }
 
 const ReviewsCard = ({ activity }: ReviewsCardProps) => {
+  const t = useTranslations("Reviews");
   const [userReviews, setUserReviews] = useState<boolean>(false);
 
   const jsonParsedReviews: IReview[] = activity?.reviews
@@ -34,7 +35,7 @@ const ReviewsCard = ({ activity }: ReviewsCardProps) => {
         <StarRating calculatedRate={calculatedRate} />
         <p className="text-sm dark:text-gray-400">
           {activity && activity.reviews ? filterApprovedReviews.length : 0}{" "}
-          global ratings
+          {t("global ratings")}
         </p>
         <div className="flex flex-col mt-4">
           {[5, 4, 3, 2, 1].map((grade) => (
@@ -49,7 +50,7 @@ const ReviewsCard = ({ activity }: ReviewsCardProps) => {
           onClick={() => setUserReviews(!userReviews)}
           className="mt-5 flex items-center underline text-gray-200 cursor-pointer hover:text-gray-400 transition duration-500"
         >
-          <MdRateReview className="mr-2 w-5 h-5" /> See all reviews
+          <MdRateReview className="mr-2 w-5 h-5" /> {t("See all reviews")}
         </p>
       </div>
       {userReviews && (

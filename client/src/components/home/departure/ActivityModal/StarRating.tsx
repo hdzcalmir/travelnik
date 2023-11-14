@@ -1,10 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface StarRatingProps {
   calculatedRate: number;
 }
 
 const StarRating = ({ calculatedRate }: StarRatingProps) => {
+  const t = useTranslations("Reviews");
   const filledStars = Math.floor(calculatedRate);
   const hasHalfStar = calculatedRate % 1 !== 0;
 
@@ -29,7 +32,7 @@ const StarRating = ({ calculatedRate }: StarRatingProps) => {
         ))}
       </div>
       <span className="dark:text-gray-400">
-        {calculatedRate.toFixed(2)} out of 5
+        {calculatedRate.toFixed(2)} {t("out of 5")}
       </span>
     </div>
   );
