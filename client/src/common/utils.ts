@@ -149,7 +149,7 @@ export class Utils {
       <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">${location?.description}</p>
       <p class="font-semibold text-left mt-2">Reviews:</p>
-      <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
+      <p class="w-full text-center">⭐${Utils.calculateRate(location.reviews).toFixed(2)} <span class="text-gray-500">(${location.reviews.length} reviews)</span></p>
       </div>`;
     } else if (this.isIEvent(location)) {
       return `<div class="flex flex-col justify-center items-center">
@@ -162,6 +162,8 @@ export class Utils {
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
       <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">${location?.description}</p>
+      <p class="font-semibold text-left mt-2">Reviews:</p>
+      <p class="w-full text-center">⭐${Utils.calculateRate(location.reviews).toFixed(2)} <span class="text-gray-500">(${location.reviews.length} reviews)</span></p>
       </div>`;
     } else {
       return `<div class="flex flex-col justify-center items-center">

@@ -1,6 +1,9 @@
+import { IReview } from "./IReview";
+
 export interface IVenture {
     id?: string;
     name: string,
+    reviews: IReview[];
     category: number,
     latitude: number,
     longitude: number,
