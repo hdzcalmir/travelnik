@@ -116,6 +116,9 @@
         "star": "star",
         "out of 5": "out of 5",
         "Start": "Start",
-        "Close": "Close"
+        "Close": "Close",
+        "Category": "Category",
+        "Address": "Address",
+        "Duration": "Duration"
     }
 }

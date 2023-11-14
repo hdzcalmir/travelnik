@@ -86,21 +86,21 @@ export default function ActivityModal({
                 <p className="flex flex-col space-y-2">
                   <span className="text-gray-300 font-semibold flex items-center">
                     <MdCategory className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
-                    Category:{" "}
+                    {t("Category")}:{" "}
                     <span className=" text-gray-400 ml-2 font-normal">
                       {activity?.category}
                     </span>
                   </span>
                   <span className="text-gray-300 font-semibold flex items-center">
                     <MdAddLocationAlt className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
-                    Address:{" "}
+                    {t("Address")}:{" "}
                     <span className=" text-gray-400 ml-2 font-normal">
                       {activity?.address}
                     </span>
                   </span>
                   <span className="text-gray-300 font-semibold flex items-center">
                     <FaClock className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
-                    Duration:{" "}
+                    {t("Duration")}:{" "}
                     <span className=" text-gray-400 ml-2 font-normal">
                       {activity?.duration}
                     </span>

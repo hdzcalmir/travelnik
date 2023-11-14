@@ -116,6 +116,9 @@
         "star": "zvijezda",
         "out of 5": "od 5",
         "Start": "Pokreni",
-        "Close": "Izlaz"
+        "Close": "Izlaz",
+        "Category": "Kategorija",
+        "Address": "Adresa",
+        "Duration": "Trajanje"
     }
 }
