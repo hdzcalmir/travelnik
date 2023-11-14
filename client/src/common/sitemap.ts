@@ -2,7 +2,7 @@ import { BsCalendar2EventFill } from "react-icons/bs";
 import { VscActivateBreakpoints } from "react-icons/vsc";
 import { IoIosAddCircle } from "react-icons/io";
 import { BiSolidBusiness } from "react-icons/bi";
-import { MdRateReview } from "react-icons/md";
+import { MdCalendarMonth, MdRateReview } from "react-icons/md";
 
 export const Sitemap = [
     {
@@ -57,6 +57,16 @@ export const Sitemap = [
                 name: 'Reviews',
                 route: '/panel/reviews',
                 icon: MdRateReview
+            }
+        ]
+    },
+    {
+        name: 'CALENDAR',
+        routes: [
+            {
+                name: 'Calendar',
+                route: '/panel/calendar',
+                icon: MdCalendarMonth
             }
         ]
     }
