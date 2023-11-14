@@ -28,7 +28,7 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
 
   const { updateActivityMutation } =
     useActivities();
-  
+
   const id = data.id;
 
   const [activity, setActivity] = useState<IActivityUpdate>({
@@ -36,12 +36,12 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
     description: data.description,
     category: data.category,
     duration: data.duration,
-    difficulty: data.description,
+    difficulty: data.difficulty,
     latitude: data.latitude,
     longitude: data.longitude,
     address: data.address,
-    city: data.address,
-    country: data.address,
+    city: data.city,
+    country: data.country,
     postal_code: "72270"
   })
 
@@ -54,10 +54,9 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
 
   const handleUpdateActivity = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await updateActivityMutation.mutateAsync({id, activity});
+    await updateActivityMutation.mutateAsync({ id, activity });
   };
 
-  console.log(activity)
   return (
     <>
       <div
@@ -73,9 +72,12 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
       >
         <div className="relative rounded-lg shadow bg-gray-800">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Activity Data <span className="font-medium text-gray-500">- {data.name}</span>
-            </h3>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Update Activity Data <span className="font-medium text-gray-500">- {data.name}</span>
+              </h3>
+              <span className="text-sm text-gray-400">Update will appear only on fields that you change.</span>
+            </div>
             <button
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -168,9 +170,9 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
                 </select>
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Duration</label>
+                <label className="text-md text-gray-50">Duration<span className="text-sm text-gray-500"> (minutes)</span></label>
                 <input
-                  type="number"
+                  type="text"
                   name="duration"
                   onChange={handleInputChange}
                   className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
@@ -186,14 +188,14 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
                 }}
               >
                 <span className="mr-2">Cancel</span>
-                <MdCancel className="text-[16px] text-red-500"/>
+                <MdCancel className="text-[16px] text-red-500" />
               </button>
               <button
                 type="submit"
                 className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
               >
-                  <span className="mr-2">Update</span>
-                <FaCheckCircle className="text-[16px] text-green-500"/>
+                <span className="mr-2">Update</span>
+                <FaCheckCircle className="text-[16px] text-green-500" />
               </button>
             </div>
           </form>

@@ -75,7 +75,7 @@ function Activities() {
                       Address
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Category
+                      Interest
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Difficulty

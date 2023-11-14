@@ -101,7 +101,7 @@ function AddActivity() {
                 />
               </div>
               <div className="flex justify-between w-full items-center px-5">
-                <label className="text-md text-gray-50">Category</label>
+                <label className="text-md text-gray-50">Interest</label>
                 <select
                   className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3"
                   id="category"
@@ -109,7 +109,7 @@ function AddActivity() {
                   value={activity.category}
                   onChange={handleInputChange}
                 >
-                  <option>Select Category..</option>
+                  <option>Select Interest..</option>
                   {interests.map((interest) => (
                     <option key={interest} value={interest}>
                       {interest}

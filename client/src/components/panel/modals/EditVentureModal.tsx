@@ -72,9 +72,12 @@ const EditVentureModal: React.FC<EditVentureModalProps> = ({ data, toggleModal }
       >
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-800">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Venture Data <span className="font-medium text-gray-500">- {data.name}</span>
-            </h3>
+          <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Update Venture Data <span className="font-medium text-gray-500">- {data.name}</span>
+              </h3>
+              <span className="text-sm text-gray-400">Update will appear only on fields that you change.</span>
+            </div>
             <button
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"

@@ -189,7 +189,7 @@ function AddEvent() {
                   />
                 </div>
               </div>
-              <div className="bg-gray-700 h-[1px]"></div>
+              <div className="bg-gray-700s h-[1px]"></div>
               <div className="flex justify-end px-5">
                 <button className="flex-shrink-0 mt-5 bg-secondaryColor/80 hover:bg-secondaryColor font-semibold text-md text-white py-2 px-4 rounded-xl">
                   Add Event
