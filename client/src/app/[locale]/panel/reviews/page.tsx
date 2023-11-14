@@ -12,7 +12,7 @@ import useReviews from "@/hooks/useReviews";
 import moment from "moment";
 
 function Reviews() {
-    const { reviews, reviewsLoading } = useReviews();
+    const { reviews, reviewsLoading, deleteReviewMutation } = useReviews();
 
     const [isOpened, toggleModal] = useState(false);
 
@@ -32,9 +32,9 @@ function Reviews() {
             </div>
         );
     }
-    // const handleDeleteVenture = async (id: string) => {
-    //     await deleteVentureMutation.mutateAsync({ id });
-    // };
+    const handleDeleteReview = async (id: string) => {
+        await deleteReviewMutation.mutateAsync({ id });
+    };
 
 
     return (
@@ -114,7 +114,7 @@ function Reviews() {
                                                 </a>
                                                 <a
                                                     onClick={() => {
-                                                        // handleDeleteVenture(String(venture.id));
+                                                        handleDeleteReview(String(review.id));
                                                     }}
                                                     className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold"
                                                 >
