@@ -30,7 +30,8 @@
     "Navlinks": {
         "Home": "Home",
         "About": "About",
-        "History": "History"
+        "History": "History",
+        "Map": "Map"
     },
     "Languages": {
         "English": "English",
@@ -62,36 +63,36 @@
         "day": "day",
         "Available apartments": "Available apartments"
     },
-    "History":{
-        "description":"HISTORY OF TRAVNIK",
-        "header_1":"Travnik: Bosnia's City of the Viziers",
-        "text_1":"Bosnia is well known for many things, but one of them is the striking natural beauty of the country. Still raw and unconquered by industry and urbanization, it covers the gamut in terms of ecological habitats and terrain. In central Bosnia, surrounded by rolling green hills is the “City of Viziers,” the city of Travnik.",
-        "header_2":"Bosnia's Hidden Gem",
-        "text_2":"Located approximately 56 miles (90km) west of the capital Sarajevo, Travnik has been inhabited since the Bronze Age and even during the Roman occupation of the area. In the Middle Ages, Travnik was part of the župa Lašva province of the medieval Bosnian Kingdom and always held an important strategic prominence because of its proximity to major centers of trade. With the Ottoman conquests of the region, Travnik quickly rose to prominence as a shining example of commerce and political importance, as well as architecture and culture.",
-        "header_3":"Capital of Bosnian Ottoman Province",
-        "text_3":"In 1699, after Sarajevo was burned to the ground by Prince Eugene of Savoy, Travnik became the capital of the Bosnian Ottoman province, as well as the residence of the Bosnian viziers, further cementing its importance. The Ottoman occupation of the city saw the rise of numerous architectural projects and the expansion of the city's footprint, as well as a rise in the population. It is said that Travnik produced 77 of the Ottoman Empire’s top viziers. Today, the remnants of the Medieval and Ottoman historical periods are evident in the town’s broad range of cultural and historic buildings. A fortified city, Travnik features a unique mix of Medieval, Ottoman, Mediterranean, and Austro-Hungarian architecture. Its ‘old town’ district features an eclectic mix of this wonderful architecture and is a major draw for thousands of visitors each year."
+    "History": {
+        "description": "HISTORY OF TRAVNIK",
+        "header_1": "Travnik: Bosnia's City of the Viziers",
+        "text_1": "Bosnia is well known for many things, but one of them is the striking natural beauty of the country. Still raw and unconquered by industry and urbanization, it covers the gamut in terms of ecological habitats and terrain. In central Bosnia, surrounded by rolling green hills is the “City of Viziers,” the city of Travnik.",
+        "header_2": "Bosnia's Hidden Gem",
+        "text_2": "Located approximately 56 miles (90km) west of the capital Sarajevo, Travnik has been inhabited since the Bronze Age and even during the Roman occupation of the area. In the Middle Ages, Travnik was part of the župa Lašva province of the medieval Bosnian Kingdom and always held an important strategic prominence because of its proximity to major centers of trade. With the Ottoman conquests of the region, Travnik quickly rose to prominence as a shining example of commerce and political importance, as well as architecture and culture.",
+        "header_3": "Capital of Bosnian Ottoman Province",
+        "text_3": "In 1699, after Sarajevo was burned to the ground by Prince Eugene of Savoy, Travnik became the capital of the Bosnian Ottoman province, as well as the residence of the Bosnian viziers, further cementing its importance. The Ottoman occupation of the city saw the rise of numerous architectural projects and the expansion of the city's footprint, as well as a rise in the population. It is said that Travnik produced 77 of the Ottoman Empire’s top viziers. Today, the remnants of the Medieval and Ottoman historical periods are evident in the town’s broad range of cultural and historic buildings. A fortified city, Travnik features a unique mix of Medieval, Ottoman, Mediterranean, and Austro-Hungarian architecture. Its ‘old town’ district features an eclectic mix of this wonderful architecture and is a major draw for thousands of visitors each year."
     },
-    "About":{
-        "description":"OUR APPLICATION",
-        "header_1":"Travelnik strives to simplify the journey for newcomers",
-        "text_1":"At Travelnik, we believe in the transformative power of travel to create meaningful connections, broaden perspectives, and cultivate a deep appreciation for diversity. By providing reliable information, personalized recommendations, and fostering a vibrant community of explorers, we aspire to make every visitor's journey to Travnik a delightful and enriching adventure.",
-        "button_1":"Start exploring on the",
-        "button_2":"Website",
-        "button_3":"GET IT ON",
-        "button_4":"Download on the",
-        "description_2":"Discover Bosnian Charm",
-        "header_2":"Tourist Board of the Municipality of Travnik",
-        "text_2":"The Tourist Board of the Municipality of Travnik is a dedicated organization committed to promoting and enhancing the tourism experience in the charming town of Travnik. As a focal point for travel information and services, the Tourist Board strives to showcase the rich cultural heritage, historical landmarks, and natural beauty that define Travnik. Whether you're a history enthusiast eager to explore ancient sites or a nature lover seeking picturesque landscapes, the Tourist Board is here to guide you, providing valuable insights and assistance to ensure a memorable visit to this enchanting destination. Discover the unique blend of tradition and modernity that Travnik offers, and let the Tourist Board be your gateway to an unforgettable travel experience.",
-        "description_3":"OUR MISSION",
-        "text_3":"At Travelnik, our mission is to empower and inspire new tourists to explore the enchanting town of Travnik by providing them with a seamless and immersive web-based experience. We aim to be the go-to platform for travelers seeking authentic insights and guidance, ensuring that every visitor discovers the rich cultural heritage, picturesque landscapes, and hidden gems that Travnik has to offer.",
-        "contact_us_header":"Contact Us",
-        "contact_us_description":"Interested in collaborating with Travelnik? Reach out to discuss potential partnerships and collaborations.",
-        "name":"Name",
-        "email":"Email",
-        "message":"Message",
-        "message_text":"Enter your message",
-        "email_text":"Enter your email",
-        "name_text":"Enter your name",
-        "button_send":"Send"
+    "About": {
+        "description": "OUR APPLICATION",
+        "header_1": "Travelnik strives to simplify the journey for newcomers",
+        "text_1": "At Travelnik, we believe in the transformative power of travel to create meaningful connections, broaden perspectives, and cultivate a deep appreciation for diversity. By providing reliable information, personalized recommendations, and fostering a vibrant community of explorers, we aspire to make every visitor's journey to Travnik a delightful and enriching adventure.",
+        "button_1": "Start exploring on the",
+        "button_2": "Website",
+        "button_3": "GET IT ON",
+        "button_4": "Download on the",
+        "description_2": "Discover Bosnian Charm",
+        "header_2": "Tourist Board of the Municipality of Travnik",
+        "text_2": "The Tourist Board of the Municipality of Travnik is a dedicated organization committed to promoting and enhancing the tourism experience in the charming town of Travnik. As a focal point for travel information and services, the Tourist Board strives to showcase the rich cultural heritage, historical landmarks, and natural beauty that define Travnik. Whether you're a history enthusiast eager to explore ancient sites or a nature lover seeking picturesque landscapes, the Tourist Board is here to guide you, providing valuable insights and assistance to ensure a memorable visit to this enchanting destination. Discover the unique blend of tradition and modernity that Travnik offers, and let the Tourist Board be your gateway to an unforgettable travel experience.",
+        "description_3": "OUR MISSION",
+        "text_3": "At Travelnik, our mission is to empower and inspire new tourists to explore the enchanting town of Travnik by providing them with a seamless and immersive web-based experience. We aim to be the go-to platform for travelers seeking authentic insights and guidance, ensuring that every visitor discovers the rich cultural heritage, picturesque landscapes, and hidden gems that Travnik has to offer.",
+        "contact_us_header": "Contact Us",
+        "contact_us_description": "Interested in collaborating with Travelnik? Reach out to discuss potential partnerships and collaborations.",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "message_text": "Enter your message",
+        "email_text": "Enter your email",
+        "name_text": "Enter your name",
+        "button_send": "Send"
     }
 }

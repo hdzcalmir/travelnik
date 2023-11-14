@@ -5,12 +5,16 @@ import { Languages } from "./languages";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next-intl/link";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Language = () => {
     const [languageDropdown, setLanguageDropDown] = useState<boolean>(false);
     const languageRef = useRef<HTMLDivElement>(null);
     const t = useTranslations('Languages');
     const locale = useLocale();
+    const searchParams = useSearchParams();
+    const queryParams = new URLSearchParams(searchParams);
+    const path = usePathname();
 
     const currentLanguage = Languages.find(lang => lang.locale === locale);
 
@@ -57,7 +61,8 @@ const Language = () => {
             <div id="dropdownDelay" className={`z-10 ${languageDropdown ? "absolute " : "hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700`}>
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
                     {Languages && Languages.map((language) => (
-                        <Link href="/" locale={language.locale} key={language.name} className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
+                        <Link href={path.replace(/\bbs\b/, '').replace(/\bde\b/, '') + `?${queryParams}`}
+                            locale={language.locale} key={language.name} className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">
                             <Image src={language.icon} width={20} height={20} alt={`Flag of ${language.name}`} className="mr-2" />
                             {t(language.name)}
                         </Link>

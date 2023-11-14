@@ -10,5 +10,9 @@ export const homeSitemap = [
     {
         name: "History",
         link: "/history"
+    },
+    {
+        name: "Map",
+        link: "/map"
     }
 ];

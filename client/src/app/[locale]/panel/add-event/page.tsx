@@ -20,7 +20,8 @@ const addEvent = async (event: IEventState) => {
 
 function AddEvent() {
   let markerExists = false;
-  let marker: Marker;
+  let marker: Marker = new mapboxgl.Marker()
+    .setLngLat([0, 0]);
 
   const [event, setEvent] = useState<IEventState>({
     name: "",
@@ -41,7 +42,7 @@ function AddEvent() {
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
     GeoLocationFactory.geoLocation(map, markerExists, event, setEvent, marker);
-  }, []);
+  }, [event, marker, markerExists]);
 
   const handleInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
