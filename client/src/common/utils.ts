@@ -105,6 +105,36 @@ export class Utils {
     }
   }
 
+  static getCategory(category: number): string {
+    switch (category) {
+      case Category.Restaurant:
+        return "Restaurant";
+      case Category.GasStation:
+        return "Gas Station";
+      case Category.Hotel:
+        return "Hotel";
+      case Category.BusStation:
+        return "Bus Station";
+      case Category.Gym:
+        return "Gym";
+      case Category.Hospital:
+        return "Hospital";
+      case Category.Taxi:
+        return "Taxi";
+      case Category.Cinema:
+        return "Cinema";
+      case Category.Store:
+        return "Store";
+      case Category.Museum:
+        return "Museum";
+      case Category.Disco:
+        return "Disco";
+      case Category.ShoppingCenter:
+        default:
+        return "Shopping Center";
+    }
+  }
+
   static getPopups(locations: Array<IVenture | IEvent | IActivity> | undefined): Array<Popup> {
     const popups: Array<Popup> = [];
     locations?.forEach((location) => {

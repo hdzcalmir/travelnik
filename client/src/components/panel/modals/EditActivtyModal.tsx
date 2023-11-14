@@ -2,6 +2,8 @@ import { difficulties } from '@/common/difficulties';
 import { IActivity } from '@/common/interfaces/IActivity';
 import useActivities from '@/hooks/useActivities';
 import React, { useState } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
+import { MdCancel } from 'react-icons/md';
 
 
 interface EditActivityModalProps {
@@ -67,12 +69,12 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
       <div
         id="crud-modal"
         aria-hidden="true"
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50 w-full max-w-md p-4 md:p-5"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50 w-full lg:w-2/5 p-4 md:p-5"
       >
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="relative rounded-lg shadow bg-gray-800">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Activity Data
+              Update Activity Data <span className="font-medium text-gray-500">- {data.name}</span>
             </h3>
             <button
               type="button"
@@ -106,7 +108,43 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Name</label>
                 <input
-                  className="appearance-none bg-gray-800 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Activity name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Country</label>
+                <input
+                  value={data.country}
+                  disabled
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Activity name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">City</label>
+                <input
+                  value={data.city}
+                  disabled
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Activity name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Address</label>
+                <input
+                  value={data.address}
+                  disabled
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
                   type="text"
                   placeholder="Activity name"
                   name="name"
@@ -116,7 +154,7 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Difficulty</label>
                 <select
-                  className="outline-none text-gray-50 py-3 px-2 bg-gray-800 rounded-lg w-2/3"
+                  className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3"
                   id="difficulty"
                   name="difficulty"
                   onChange={handleInputChange}
@@ -135,25 +173,27 @@ const EditActivityModal: React.FC<EditActivityModalProps> = ({ data, toggleModal
                   type="number"
                   name="duration"
                   onChange={handleInputChange}
-                  className="appearance-none mb-5 bg-gray-800 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  className="appearance-none mb-5 bg-gray-700 rounded-lg border-none w-2/3 text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   placeholder="Duration in minutes.."
                 />
               </div>
             </div>
             <div className="flex justify-end gap-x-2">
               <button
-                className="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800"
+                className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
                 onClick={() => {
                   toggleModal();
                 }}
               >
-                Cancel
+                <span className="mr-2">Cancel</span>
+                <MdCancel className="text-[16px] text-red-500"/>
               </button>
               <button
                 type="submit"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
               >
-                Update
+                  <span className="mr-2">Update</span>
+                <FaCheckCircle className="text-[16px] text-green-500"/>
               </button>
             </div>
           </form>

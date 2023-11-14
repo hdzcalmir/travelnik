@@ -108,7 +108,7 @@ function Activities() {
                         <a onClick={() => {
                           setActivity(activity);
                           toggleModal(true);
-                        }} className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold">
+                        }} className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-medium">
                           <span>Edit</span>
                           <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                         </a>
@@ -116,7 +116,7 @@ function Activities() {
                           onClick={() => {
                             handleDeleteVenture(String(activity.id));
                           }}
-                          className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-semibold"
+                          className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-2 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-medium"
                         >
                           <MdDelete className="text-xl text-red-500"></MdDelete>
                         </a>

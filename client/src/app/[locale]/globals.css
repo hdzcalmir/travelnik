@@ -1017,3 +1017,11 @@ span.flatpickr-weekday {
             transform: translate3d(0, 0, 0);
   }
 }  
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: brightness(0) invert(1);
+}
+
+select {
+  border-right: 12px solid transparent
+}

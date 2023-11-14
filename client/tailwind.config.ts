@@ -14,6 +14,8 @@ const config: Config = {
         'raleway': ['Raleway', 'sans-serif']
       },
       colors: {
+        'transparentBtn': '#ffffff15',
+        'hoverBtn': '#ffffff34',
         'primaryColor': '#1F2937',
         'secondaryColor': '#65CF94',
         'panelBg': '#2b3544'

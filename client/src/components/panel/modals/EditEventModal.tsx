@@ -5,6 +5,8 @@ import useActivities from '@/hooks/useActivities';
 import useEvents from '@/hooks/useEvents';
 import React, { useState } from 'react';
 import Flatpickr from "react-flatpickr";
+import { FaCheckCircle } from 'react-icons/fa';
+import { MdCancel } from 'react-icons/md';
 
 
 interface EditActivityModalProps {
@@ -71,12 +73,12 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
       <div
         id="crud-modal"
         aria-hidden="true"
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50 w-full max-w-md p-4 md:p-5"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50 w-full lg:w-2/5 p-4 md:p-5"
       >
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="relative bg-white rounded-lg shadow dark:bg-gray-800">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Update Event Data
+              Update Event Data <span className="font-medium text-gray-500">- {data.name}</span>
             </h3>
             <button
               type="button"
@@ -110,7 +112,7 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Name</label>
                 <input
-                  className="appearance-none bg-gray-800 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
                   type="text"
                   placeholder="Event name"
                   name="name"
@@ -120,7 +122,7 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
               <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Interest</label>
                 <select
-                  className="outline-none text-gray-50 py-3 px-2 bg-gray-800 rounded-lg w-2/3"
+                  className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3"
                   name="category"
                   onChange={handleInputChange}
                 >
@@ -132,7 +134,31 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
                   ))}
                 </select>
               </div>
-              <div className="flex flex-col justify-between w-full space-y-2 items-center px-5">
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Country</label>
+                <input
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
+                  value={data.country}
+                  disabled
+                  type="text"
+                  placeholder="Event name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">City</label>
+                <input
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-500 py-3 px-2 leading-tight focus:outline-none"
+                  value={data.city}
+                  disabled
+                  type="text"
+                  placeholder="Event name"
+                  name="name"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex flex-col md:space-x-3 md:flex-row justify-between w-full space-y-2 items-center px-5">
                 <label className="text-md text-gray-50 w-full">Starting Date</label>
                 <div className="relative w-full flex justify-end">
                   <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -173,20 +199,22 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({ data, toggleModal })
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-x-2">
+            <div className="flex mt-16 justify-end gap-x-2">
               <button
-                className="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800"
+                className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
                 onClick={() => {
                   toggleModal();
                 }}
               >
-                Cancel
+                <span className="mr-2">Cancel</span>
+                <MdCancel className="text-[16px] text-red-500"/>
               </button>
               <button
                 type="submit"
-                className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
               >
-                Update
+                  <span className="mr-2">Update</span>
+                <FaCheckCircle className="text-[16px] text-green-500"/>
               </button>
             </div>
           </form>
