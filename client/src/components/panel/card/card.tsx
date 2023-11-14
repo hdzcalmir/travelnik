@@ -8,19 +8,20 @@ import { MdDelete } from 'react-icons/md';
 interface CardProps {
     data: Array<IVenture>;
     toggleModal: () => void;
+    setVenture: any;
 }
 
-const Card: React.FC<CardProps> = ({ data, toggleModal }) => {
+const Card: React.FC<CardProps> = ({ data, toggleModal, setVenture }) => {
 
     const { deleteVentureMutation, updateVentureMutation } = useVentures();
 
     const handleDeleteVenture = async (id: string) => {
         await deleteVentureMutation.mutateAsync({ id });
-      };
+    };
 
     const handleUpdateVenture = async (id: string) => {
         await deleteVentureMutation.mutateAsync({ id });
-      };
+    };
 
     return (
         <>
@@ -51,9 +52,10 @@ const Card: React.FC<CardProps> = ({ data, toggleModal }) => {
                             <MdDelete className="text-xl text-red-500" />
                         </button>
                         <button
-                         onClick={() => {
-                            toggleModal()
-                        }}
+                            onClick={() => {
+                                setVenture(location);
+                                toggleModal();
+                            }}
                             className="text-white inline-flex items-center bg-transparentBtn hover:bg-hoverBtn focus:ring-4 focus:outline-none font-medium rounded-lg text-md px-5 py-2.5 text-center"
                         >
                             <span className="mr-2">Edit</span>

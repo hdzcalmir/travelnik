@@ -150,7 +150,7 @@ function Ventures() {
         }
         {cardView &&
           <div className="grid w-full grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2 md:space-y-0 md:space-x-2">
-            <Card data={ventures as Array<IVenture>} toggleModal={() => toggleModal(true)}></Card>
+            <Card data={ventures as Array<IVenture>} toggleModal={() => toggleModal(true)} setVenture={setVenture}></Card>
           </div>
         }
         {
