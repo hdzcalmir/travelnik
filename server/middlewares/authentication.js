@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config()
 
 function generateAccessToken(data) {
-    return jwt.sign({ data }, process.env.NEXTAUTH_SECRET, { expiresIn: "1800s", });
+    return jwt.sign({ data }, process.env.NEXTAUTH_SECRET, { expiresIn: "3600s", });
 }
 
 async function VerifyToken(req, res, next) {
