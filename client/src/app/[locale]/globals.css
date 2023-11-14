@@ -1086,3 +1086,49 @@ select {
   word-wrap: break-word;
   word-break: break-word;
 }
+
+.fc .fc-toolbar-title {
+  color:#65CF94;
+}
+.fc .fc-scrollgrid {
+  border-bottom-width: 0px;
+  border-collapse: separate;
+  border-right-width: 0px;
+  border-radius: 10px;
+}
+
+.fc .fc-daygrid-day-top {
+  color: #fff;
+  font-size: 20px;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #65cf955d;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  color: #fff;
+  font-size: 20px;
+}
+
+.fc .fc-button-group > .fc-button {
+  background: #65CF94;
+}
+
+.fc-h-event .fc-event-main-frame {
+  display: flex;
+  background: #65CF94;
+  border: none !important;
+}
+
+.fc-h-event {
+  background-color: var(--fc-event-bg-color);
+  border: 1px solid #65CF94;
+  display: block;
+  font-size: 20px;
+  color:#1F2937;
+}
+
+.fc-h-event .fc-event-title-container {
+  color:#1F2937;
+}

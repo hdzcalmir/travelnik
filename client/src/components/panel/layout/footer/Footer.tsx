@@ -45,7 +45,7 @@ export default function Footer() {
         </span>
       </div>
       <div className="bg-gray-800 h-6 flex justify-center">
-        <span>All Rights Reserved by City of Travnik. | Copyright © 2023.</span>
+        <span>All Rights Reserved by city of Travnik. | Copyright © 2023.</span>
       </div>
     </footer>
   )
