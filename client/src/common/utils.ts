@@ -9,30 +9,28 @@ import { IReview } from "./interfaces/IReview";
 
 export class Utils {
 
-  static calculateNumberOfGradeReviews = (grade: number, reviews: IReview[]) => {
-    return reviews.filter((review) => review.rate === grade).length;
-  };
-
   static calculatePercentageOfGradeReviews = (grade: number, reviews: IReview[]) => {
     const totalReviews = reviews.length;
     const grade5Reviews = Utils.calculateNumberOfGradeReviews(grade, reviews);
 
-    if (totalReviews === 0) {
+    if (totalReviews === 0)
       return 0;
-    }
 
     return (grade5Reviews / totalReviews) * 100;
   };
 
+  static calculateNumberOfGradeReviews = (grade: number, reviews: IReview[]) => {
+    return reviews.filter((review) => review.rate === grade).length;
+  };
+
   static calculateRate(reviews: IReview[]): number {
-    if (!Array.isArray(reviews) || reviews.length === 0) {
+    if (!Array.isArray(reviews) || reviews.length === 0)
       return 0;
-    }
 
-    const totalRates = reviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
-    const averageRate = totalRates / reviews.length;
+    const reviewsSum = reviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
+    const overallReview = reviewsSum / reviews.length;
 
-    return averageRate;
+    return overallReview;
   }
 
   static sortActivities = (activities: IActivity[], activeFilter: string, searchFilter: string) => {
@@ -63,12 +61,10 @@ export class Utils {
       return filteredActivities;
   };
 
-
   static convertDurationToSeconds(duration: string): number {
     const [hours, minutes, seconds] = duration.split(":").map(Number);
     return hours * 3600 + minutes * 60 + seconds;
   }
-
 
   static getMarker(category: number): string {
     switch (category) {
@@ -253,6 +249,4 @@ export class Utils {
       'difficulty' in obj
     );
   }
-
-
 }
