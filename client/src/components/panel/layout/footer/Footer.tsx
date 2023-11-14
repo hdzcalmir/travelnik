@@ -7,9 +7,18 @@ export default function Footer() {
   return (
     <footer className="text-gray-600 sm:ml-64 bg-panelBg body-font">
       <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <div className="flex space-x-2 title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <Image
+              src="/images/travnik-logo.png"
+              className="w-[120px] h-[130px] dark:bg-gray-600 aspect-video"
+              alt="Travelnik phone mock"
+              height={600}
+              width={400}
+            />
+          <div className="h-32 bg-gray-500 w-[1px]"></div>
           <Image alt='travelnik logo' className="w-1/5" width={1203} height={503} src='/images/travelnik-logo.png' />
-        </a>
+
+        </div>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a className="text-gray-500">
             <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -34,6 +43,9 @@ export default function Footer() {
             </svg>
           </a>
         </span>
+      </div>
+      <div className="bg-gray-800 h-6 flex justify-center">
+        <span>All Rights Reserved by City of Travnik. | Copyright © 2023.</span>
       </div>
     </footer>
   )
