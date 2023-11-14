@@ -17,7 +17,7 @@ const ReviewsGrade = ({ grade, reviews }: ReviewsGradeProps) => {
     <div className="flex flex-col mt-4">
       {reviews && (
         <div className="flex items-center space-x-1">
-          <span className="flex-shrink-0 w-14 text-sm">{grade} {t("star")}</span>
+          <span className="flex-shrink-0 w-18 text-sm">{grade} {t("star")}</span>
           <div className="flex-1 h-4 overflow-hidden rounded-sm dark:bg-gray-700">
             <div
               className="dark:bg-orange-300 h-4"

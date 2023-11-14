@@ -26,15 +26,15 @@ const Feedback = ({ data }: FeedbackProps) => {
   // Function to handle feedback submission
   const handleFeedbackSubmit = async () => {
     if (rating === 0) {
-      toast.error(t("You need to select rating."));
+      toast.error(t("You need to select rating") + ".");
       return;
     }
     if (name.length === 0) {
-      toast.error(t("You need to enter your name."));
+      toast.error(t("You need to enter your name") + ".");
       return;
     }
     if (message.length === 0) {
-      toast.error(t("You need to enter your message."));
+      toast.error(t("You need to enter your message") + ".");
       return;
     }
     if (
@@ -61,7 +61,7 @@ const Feedback = ({ data }: FeedbackProps) => {
       });
     }
 
-    toast.success(t("Your feedback is successfully submited."));
+    toast.success(t("Your feedback is successfully submited") + ".");
 
     setName("");
     setMessage("");
@@ -72,10 +72,10 @@ const Feedback = ({ data }: FeedbackProps) => {
     <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-800 dark:text-gray-100">
       <div className="flex flex-col items-center w-full">
         <h2 className="text-3xl font-semibold text-center">
-          {t("Your opinion matters!")}
+          {t("Your opinion matters") + "!"}
         </h2>
         <div className="flex flex-col items-center py-6 space-y-3">
-          <span className="text-center">{t("How was your experience?")}</span>
+          <span className="text-center">{t("How was your experience") + "?"}</span>
           <div className="flex space-x-3">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -111,7 +111,7 @@ const Feedback = ({ data }: FeedbackProps) => {
           />
           <textarea
             rows={3}
-            placeholder={t("Message...")}
+            placeholder={t("Message") + "..."}
             className="p-4 rounded-md resize-none dark:text-gray-100 dark:bg-gray-700"
             value={message}
             onChange={(e) => setMessage(e.target.value)}

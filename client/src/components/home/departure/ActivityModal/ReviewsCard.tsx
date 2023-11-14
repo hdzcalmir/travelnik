@@ -31,7 +31,7 @@ const ReviewsCard = ({ activity }: ReviewsCardProps) => {
   return (
     <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-700 dark:text-gray-100 h-[26rem]  overflow-y-auto scrollbar-hidden">
       <div className="flex flex-col w-full">
-        <h2 className="text-3xl font-semibold">Reviews</h2>
+        <h2 className="text-3xl font-semibold">{t("Reviews")}</h2>
         <StarRating calculatedRate={calculatedRate} />
         <p className="text-sm dark:text-gray-400">
           {activity && activity.reviews ? filterApprovedReviews.length : 0}{" "}
