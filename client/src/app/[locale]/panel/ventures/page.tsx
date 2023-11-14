@@ -67,11 +67,11 @@ function Ventures() {
           </div>
         </div>
         <div className="flex flex-col w-full items-center border-gray-200 h-[80vh] dark:border-gray-700">
-          <div className="flex flex-col shadow-lg items-center w-full h-full mb-4 rounded-lg bg-gray-800">
-            <div className="flex h-10 mt-5  w-full px-5">
-              <h2 className="text-gray-50 font-bold text-xl">Ventures</h2>
-            </div>
-            {!cardView &&
+          {!cardView &&
+            <div className="flex flex-col shadow-lg items-center w-full h-full mb-4 rounded-lg bg-gray-800">
+              <div className="flex h-10 mt-5  w-full px-5">
+                <h2 className="text-gray-50 font-bold text-xl">Ventures</h2>
+              </div>
               <div className="w-full overflow-auto">
                 <table className="w-full text-sm text-left rtl:text-right  text-gray-400">
                   <thead className="text-xs  uppercase border-b border-gray-700 text-gray-50">
@@ -145,13 +145,13 @@ function Ventures() {
                   </tbody>
                 </table>
               </div>
-            }
-            {cardView &&
-              <div className="grid w-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2 md:space-y-0 md:space-x-2">
-                <Card data={ventures as Array<IVenture>} toggleModal={() => toggleModal(true)} setVenture={setVenture}></Card>
-              </div>
-            }
-          </div>
+            </div>
+          }
+          {cardView &&
+            <div className="grid w-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2 md:space-y-0 md:space-x-2">
+              <Card data={ventures as Array<IVenture>} toggleModal={() => toggleModal(true)} setVenture={setVenture}></Card>
+            </div>
+          }
         </div>
         {
           isOpened &&

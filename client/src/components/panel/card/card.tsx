@@ -1,6 +1,7 @@
 import { IVenture } from '@/common/interfaces/IVenture';
 import { Utils } from '@/common/utils';
 import useVentures from '@/hooks/useVentures';
+import { hours } from '@/value-converters/hours';
 import React from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
@@ -22,18 +23,27 @@ const Card: React.FC<CardProps> = ({ data, toggleModal, setVenture }) => {
     return (
         <>
             {data.map((location, index) => (
-                <div key={index} className="max-w-sm h-96 flex flex-col justify-between border border-gray-600 rounded-xl bg-gray-800">
+                <div key={index} className="max-w-sm h-96 shadow-lg flex flex-col justify-between rounded-xl bg-gray-800">
                     <div className="space-y-5">
                         <div className="tracking-tight flex justify-center border-gray-600 border-b">
-                            <h5 className="text-2xl p-6 text-white">{location.name}</h5>
+                            <h5 className="text-2xl p-4 text-white">{location.name}</h5>
                         </div>
                         <div className="space-y-2 p-4">
-                            <div className="font-normal text-gray-200"><span className="text-gray-400">Description: </span>{location.description}</div>
-                            <div className="font-normal text-gray-200"><span className="text-gray-400">Address: </span>{location.address}</div>
-                            <div className="font-normal text-gray-200"><span className="text-gray-400">Category: </span>{Utils.getCategory(location.category)}</div>
-                            <div className="flex mt-1 space-x-4">
-                                <div className="font-normal text-gray-200"><span className="text-gray-400">Opening time: </span>{location.opening_time}</div>
-                                <div className="font-normal text-gray-200"><span className="text-gray-400">Closing time: </span>{location.closing_time}</div>
+                            <div className="flex">
+                                <div className="font-normal text-sm text-gray-400 w-1/3">Description:</div>
+                                <div className="w-2/3 text-gray-50 text-sm">{location.description}</div>
+                            </div>
+                            <div className="flex">
+                                <div className="font-normal text-sm text-gray-400 w-1/3">Street:</div>
+                                <div className="w-2/3 text-gray-50 text-sm">{location.address}</div>
+                            </div>
+                            <div className="flex">
+                                <div className="font-normal text-sm text-gray-400 w-1/3">Category:</div>
+                                <div className="w-2/3 text-gray-50 text-sm">{Utils.getCategory(location.category)}</div>
+                            </div>
+                            <div className="flex mt-1 text-sm space-x-4">
+                                <div className="font-normal text-gray-200"><span className="text-gray-400">Opening time: </span>{hours(location.opening_time)}</div>
+                                <div className="font-normal text-gray-200"><span className="text-gray-400">Closing time: </span>{hours(location.closing_time)}</div>
                             </div>
                         </div>
                     </div>
