@@ -107,7 +107,7 @@ export default function ActivityModal({
                 <ReviewsCard activity={activity} />
                 <div className="flex justify-end">
                   <Button
-                    className="bg-secondaryColor/80 shadow-lg shadow-indigo-500/20 mr-11 items-center w-2/6 py-4"
+                    className="bg-secondaryColor/80 shadow-lg shadow-secondaryColor/20 mr-11 items-center w-2/6 py-4"
                     onPress={() => {
                       setLeaveFeedback(!leaveFeedback);
                     }}
@@ -130,7 +130,7 @@ export default function ActivityModal({
                   Close
                 </Button>
                 <Button
-                  className="bg-secondaryColor/80 shadow-lg shadow-indigo-500/20 flex items-center"
+                  className="bg-secondaryColor/80 shadow-lg shadow-secondaryColor/20 flex items-center"
                   onPress={() => {
                     handleClick();
                     isOpen = false;
