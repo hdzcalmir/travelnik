@@ -1,6 +1,6 @@
 "use client";
 
-import { TOKEN} from "@/common/consts";
+import { TOKEN } from "@/common/consts";
 import { Category } from "@/common/enums";
 import Breadcrumb from "@/components/panel/layout/breadcrumb/Breadcrumb";
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
@@ -19,7 +19,8 @@ const addVenture = async (venture: IVentureState) => {
 
 function AddVenture() {
   let markerExists = false;
-  let marker: Marker;
+  let marker: Marker = new mapboxgl.Marker()
+    .setLngLat([0, 0]);
 
   const [venture, setVenture] = useState<IVentureState>({
     name: "",
@@ -40,7 +41,7 @@ function AddVenture() {
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
     GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
-  }, []);
+  }, [venture, marker, markerExists]);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;

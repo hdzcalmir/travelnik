@@ -19,7 +19,8 @@ const addActivity = async (activity: IActivityState) => {
 
 function AddActivity() {
   let markerExists = false;
-  let marker: Marker;
+  let marker: Marker = new mapboxgl.Marker()
+    .setLngLat([0, 0]);
 
   const [activity, setActivity] = useState<IActivityState>({
     name: "",
@@ -46,7 +47,7 @@ function AddActivity() {
       setActivity,
       marker
     );
-  }, []);
+  }, [activity, marker, markerExists]);
 
   const handleInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement

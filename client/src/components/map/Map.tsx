@@ -14,6 +14,10 @@ export default function Map() {
     const { activities, activitiesLoading } = useActivities();
 
     useEffect(() => {
+        function locationsAreLoaded() {
+            return !venturesLoading && !eventsLoading && !activitiesLoading;
+        }
+
         if (locationsAreLoaded()) {
 
             mapboxgl.accessToken = TOKEN;
@@ -35,8 +39,4 @@ export default function Map() {
         <div className="rounded-lg h-full mb-4 shadow-lg" id="map">
         </div>
     )
-
-    function locationsAreLoaded() {
-        return !venturesLoading && !eventsLoading && !activitiesLoading;
-    }
 }
