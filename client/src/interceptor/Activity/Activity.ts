@@ -32,7 +32,7 @@ const ActivityAPI = {
             showCancelButton: true,
             showConfirmButton: true,
             icon: 'warning',
-            confirmButtonText: '<b>Yes, delete it!</b>',
+            confirmButtonText: `<b>Yes, delete it!</b>`,
             cancelButtonText: '<b>No, return</b>'
         })
 
