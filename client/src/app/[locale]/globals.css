@@ -1046,7 +1046,7 @@ select {
   border: 0;
   border-radius: .25em;
   background: initial;
-  background-color: #ffffff15 !important;
+  background-color: #f50a0a80 !important;
   border: none !important;
   outline: none !important;
   color: #fff;
@@ -1068,8 +1068,8 @@ select {
 }
 
 .swal2-icon.swal2-warning {
-  border-color: #65CF94 !important;
-  color: #65CF94 !important;
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 .swal2-html-container {
