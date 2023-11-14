@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from "@/components/panel/layout/sidebar/Sidebar";
 import Footer from "@/components/panel/layout/footer/Footer";
 import IsAuth from "@/hooks/isAuth";
@@ -29,6 +29,8 @@ function Calendar() {
   const eventsMap: EventMap[] = [];
   const { events, eventsLoading } = useEvents();
 
+  const [view, setView] = useState('dayGridMonth');
+
   if (eventsLoading) {
     const skeletonElements = Array.from({ length: 1 }, (_, index) => (
       <TableSkeleton key={index} />
@@ -45,22 +47,30 @@ function Calendar() {
       </div>
     );
   } else {
-    events?.map((event)=>{
+    events?.map((event) => {
       let ev = new EventMap(event.name, event.start_date, event.end_date);
       eventsMap.push(ev);
     })
   }
+
 
   return (
     <div>
       <Sidebar></Sidebar>
       <div className="p-2 sm:p-4 sm:ml-64 h-2/3 bg-panelBg">
         <Breadcrumb homeElement={"Home"}></Breadcrumb>
-        <FullCalendar
-          initialView="dayGridMonth"
-          events={eventsMap}
-          plugins={[dayGridPlugin, interactionPlugin]}
-        />
+        <div className="w-2/3 mx-auto">
+          <div className="flex space-x-2 justify-end mb-2">
+            <button onClick={() => { setView('dayGridMonth') }} className={`${view === 'dayGridMonth' ? 'bg-secondaryColor': 'bg-transparentBtn hover:bg-hoverBtn'} rounded-lg text-gray-50 p-2`}>Month</button>
+            <button onClick={() => { setView('dayGridWeek') }} className={`${view === 'dayGridWeek' ? 'bg-secondaryColor': 'bg-transparentBtn hover:bg-hoverBtn'} rounded-lg text-gray-50 p-2`}>Week</button>
+            <button onClick={() => { setView('listWeek') }} className={`${view === 'listWeek' ? 'bg-secondaryColor': 'bg-transparentBtn hover:bg-hoverBtn'} rounded-lg text-gray-50 p-2`}>Day</button>
+          </div>
+          <FullCalendar
+            initialView={view}
+            events={eventsMap}
+            plugins={[dayGridPlugin, interactionPlugin]}
+          />
+        </div>
       </div>
       <Footer></Footer>
     </div>
