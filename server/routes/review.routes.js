@@ -3,7 +3,7 @@ const {
   getAllReviews,
   getAllUnapprovedReviews,
   getAllApprovedReviews,
-  updateReviewStatus,
+  updateUnapprovedReviewStatus,
   deleteReview,
 } = require("../controllers/review.controller.js");
 const { VerifyToken } = require("../middlewares/authentication.js");
@@ -64,7 +64,7 @@ const router = express.Router();
 router.get("/", VerifyToken, getAllReviews);
 router.get("/approved", VerifyToken, getAllApprovedReviews);
 router.get("/unapproved", VerifyToken, getAllUnapprovedReviews);
-router.patch("/", VerifyToken, updateReviewStatus);
+router.patch("/", VerifyToken, updateUnapprovedReviewStatus);
 router.delete("/:id", VerifyToken, deleteReview);
 
 module.exports = router;

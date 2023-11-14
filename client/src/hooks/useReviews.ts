@@ -13,21 +13,44 @@ const useReviews = () => {
         }
     });
 
-    const deleteReview = async ({ id }: { id: string }) => {
-        await ReviewAPI.deleteReview(id);
+    const { data: unapprovedReviews, isLoading: unapprovedReviewsLoading } = useQuery<Array<IReview>, Error>({
+        queryKey: ["unapproved_reviews"],
+        queryFn: async () => {
+            const { data } = await ReviewAPI.fetchUnapprovedReviews();
+            return data;
+        }
+    });
+
+    const deleteUnapprovedReview = async ({ id }: { id: string }) => {
+        await ReviewAPI.deleteUnapprovedReview(id);
     }
 
-    const deleteReviewMutation = useMutation({
-        mutationFn: deleteReview,
+    const deleteUnapprovedReviewMutation = useMutation({
+        mutationFn: deleteUnapprovedReview,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["reviews"] });
+            queryClient.invalidateQueries({ queryKey: ["unapproved_reviews"] });
+        },
+    });
+
+    const updateUnapprovedReview = async ({ id, status }: { id: number | undefined, status: boolean }) => {
+        await ReviewAPI.updateUnapprovedReview(id, status);
+    }
+
+    const updateUnapprovedReviewMutation = useMutation({
+        mutationFn: updateUnapprovedReview,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["unapproved_reviews"] });
         },
     });
 
     return {
         reviews,
         reviewsLoading,
-        deleteReviewMutation
+        unapprovedReviews,
+        unapprovedReviewsLoading,
+        deleteUnapprovedReviewMutation,
+        updateUnapprovedReview,
+        updateUnapprovedReviewMutation
     }
 }
 

@@ -87,7 +87,7 @@ const getAllReviews = (req, res) => {
 
 const getAllUnapprovedReviews = (req, res) => {
   try {
-    const getAllReviewsQuery = "SELECT * FROM reviews WHERE approved = false";
+    const getAllReviewsQuery = "SELECT * FROM reviews WHERE approved = 0";
 
     db.query(getAllReviewsQuery, (err, data) => {
       if (err) {
@@ -138,7 +138,7 @@ const getAllUnapprovedReviews = (req, res) => {
 
 const getAllApprovedReviews = (req, res) => {
   try {
-    const getAllReviewsQuery = "SELECT * FROM reviews WHERE approved = true";
+    const getAllReviewsQuery = "SELECT * FROM reviews WHERE approved = 1";
 
     db.query(getAllReviewsQuery, (err, data) => {
       if (err) {
@@ -189,19 +189,18 @@ const getAllApprovedReviews = (req, res) => {
  *         description: Internal server error.
  */
 
-const updateReviewStatus = (req, res) => {
+const updateUnapprovedReviewStatus = (req, res) => {
   try {
-    console.log(req.body);
     const { id, status } = req.body;
 
     if (!id) {
       return res.status(400).send("Bad request.");
     }
 
-    const updateReviewStatusQuery =
+    const updateUnapprovedReviewStatusQuery =
       "UPDATE reviews SET approved = ? WHERE id = ?";
 
-    db.query(updateReviewStatusQuery, [status, id], (err, result) => {
+    db.query(updateUnapprovedReviewStatusQuery, [status, id], (err, result) => {
       if (err) {
         console.error(err);
         return res.status(500).send("Internal server error.");
@@ -278,6 +277,6 @@ module.exports = {
   getAllReviews,
   getAllUnapprovedReviews,
   getAllApprovedReviews,
-  updateReviewStatus,
+  updateUnapprovedReviewStatus,
   deleteReview,
 };

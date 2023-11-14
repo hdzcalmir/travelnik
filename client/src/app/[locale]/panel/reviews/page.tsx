@@ -10,13 +10,26 @@ import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
 import useReviews from "@/hooks/useReviews";
 import moment from "moment";
+import ReviewDetailsModal from "@/components/panel/modals/ReviewDetailsModal";
+import { IReview } from "@/common/interfaces/IReview";
 
 function Reviews() {
-    const { reviews, reviewsLoading, deleteReviewMutation } = useReviews();
+    const { unapprovedReviews, unapprovedReviewsLoading, deleteUnapprovedReviewMutation } = useReviews();
 
     const [isOpened, toggleModal] = useState(false);
+    const [review, setReview] = useState<IReview>({
+        id: -1,
+        entity_id: -1,
+        entity_type: "",
+        name: "",
+        date: "",
+        text: "",
+        rate: 1,
+        images: [],
+        approved: 0,
+    });
 
-    if (reviewsLoading) {
+    if (unapprovedReviewsLoading) {
         const skeletonElements = Array.from({ length: 1 }, (_, index) => (
             <TableSkeleton key={index} />
         ));
@@ -32,8 +45,9 @@ function Reviews() {
             </div>
         );
     }
+
     const handleDeleteReview = async (id: string) => {
-        await deleteReviewMutation.mutateAsync({ id });
+        await deleteUnapprovedReviewMutation.mutateAsync({ id });
     };
 
 
@@ -77,7 +91,7 @@ function Reviews() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {reviews?.map((review) => (
+                                    {unapprovedReviews?.map((review) => (
                                         <tr
                                             key={review.id}
                                             className="bg-gray-800 border-b border-gray-700"
@@ -111,6 +125,7 @@ function Reviews() {
                                             <td className="px-6 py-4 flex space-x-2">
                                                 <a
                                                     onClick={() => {
+                                                        setReview(review)
                                                         toggleModal(true);
                                                     }}
                                                     className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-medium">
@@ -133,10 +148,10 @@ function Reviews() {
                         </div>
                     </div>
                 </div>
-                {/* {
+                {
                     isOpened &&
-                    <EditVentureModal data={venture as IVenture} toggleModal={() => toggleModal(false)}></EditVentureModal>
-                } */}
+                    <ReviewDetailsModal data={review as IReview} toggleModal={() => toggleModal(false)} />
+                }
             </div>
             <Footer></Footer>
         </div>
