@@ -47,7 +47,7 @@ function AddActivity() {
       setActivity,
       marker
     );
-  }, [activity, marker, markerExists]);
+  }, []);
 
   const handleInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
