@@ -9,18 +9,18 @@ import { IReview } from "./interfaces/IReview";
 
 export class Utils {
 
-  static calculateNumberOfGradeReviews = (grade:number, reviews:IReview[]) => {
+  static calculateNumberOfGradeReviews = (grade: number, reviews: IReview[]) => {
     return reviews.filter((review) => review.rate === grade).length;
   };
-  
-  static calculatePercentageOfGradeReviews = (grade:number, reviews:IReview[]) => {
+
+  static calculatePercentageOfGradeReviews = (grade: number, reviews: IReview[]) => {
     const totalReviews = reviews.length;
     const grade5Reviews = Utils.calculateNumberOfGradeReviews(grade, reviews);
-  
+
     if (totalReviews === 0) {
       return 0;
     }
-  
+
     return (grade5Reviews / totalReviews) * 100;
   };
 
@@ -28,12 +28,12 @@ export class Utils {
     if (!Array.isArray(reviews) || reviews.length === 0) {
       return 0;
     }
-  
+
     const totalRates = reviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
     const averageRate = totalRates / reviews.length;
-  
+
     return averageRate;
-  }  
+  }
 
   static sortActivities = (activities: IActivity[], activeFilter: string, searchFilter: string) => {
     let filteredActivities = activities;
@@ -49,7 +49,7 @@ export class Utils {
       return filteredActivities.sort((a, b) => a.category.localeCompare(b.category));
     } else if (activeFilter === "rating") {
       return filteredActivities.sort((a, b) =>
-          Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
+        Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
       );
     } else if (activeFilter === "difficulty") {
       return filteredActivities.sort((a, b) => {
@@ -59,7 +59,7 @@ export class Utils {
       return filteredActivities.sort((a, b) => {
         return Utils.convertDurationToSeconds(a.duration) - Utils.convertDurationToSeconds(b.duration);
       });
-    } else 
+    } else
       return filteredActivities;
   };
 
@@ -130,7 +130,7 @@ export class Utils {
       case Category.Disco:
         return "Disco";
       case Category.ShoppingCenter:
-        default:
+      default:
         return "Shopping Center";
     }
   }
@@ -150,27 +150,27 @@ export class Utils {
     if (this.isIVenture(location)) {
       return `<div class="flex flex-col justify-center items-center">
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
-      <p class="font-semibold text-left mt-2">Opis:</p>
+      <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">${location?.description}</p>
-      <p class="font-semibold text-left mt-2">Ocjena:</p>
+      <p class="font-semibold text-left mt-2">Reviews:</p>
       <p class="w-full text-center">⭐⭐⭐⭐⭐</p>
       </div>`;
     } else if (this.isIEvent(location)) {
       return `<div class="flex flex-col justify-center items-center">
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
-      <p class="font-semibold text-left mt-2">Opis:</p>
+      <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">${location?.description}</p>
       </div>`;
     } else if (this.isIActivity(location)) {
       return `<div class="flex flex-col justify-center items-center">
       <h3 class="font-bold text-[16px]">${location?.name}</h3>
-      <p class="font-semibold text-left mt-2">Opis:</p>
+      <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">${location?.description}</p>
       </div>`;
     } else {
       return `<div class="flex flex-col justify-center items-center">
       <h3 class="font-bold text-[16px]">Error!</h3>
-      <p class="font-semibold text-left mt-2">Opis:</p>
+      <p class="font-semibold text-left mt-2">Description:</p>
       <p class="w-full text-center">Error!</p>
       </div>`;
     }
