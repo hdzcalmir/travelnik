@@ -41,7 +41,7 @@ function AddVenture() {
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
     GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
-  }, [venture, marker, markerExists]);
+  }, []);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;

@@ -42,7 +42,7 @@ function AddEvent() {
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
     GeoLocationFactory.geoLocation(map, markerExists, event, setEvent, marker);
-  }, [event, marker, markerExists]);
+  }, []);
 
   const handleInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
