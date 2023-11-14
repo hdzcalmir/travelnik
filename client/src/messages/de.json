@@ -94,5 +94,23 @@
         "email_text": "Geben Sie Ihre E-Mail ein",
         "name_text": "Geben Sie Ihren Namen ein",
         "button_send": "Senden"
+    },
+    "Reviews": {
+        "You need to select rating.": "Sie müssen eine Bewertung auswählen.",
+        "You need to enter your name.": "Sie müssen Ihren Namen eingeben.",
+        "You need to enter your message.": "Sie müssen Ihre Nachricht eingeben.",
+        "Your feedback is successfully submitted.": "Ihr Feedback wurde erfolgreich übermittelt.",
+        "Your opinion matters!": "Ihre Meinung zählt!",
+        "How was your experience?": "Wie war Ihre Erfahrung?",
+        "Leave feedback": "Feedback hinterlassen",
+        "Enter your name": "Geben Sie Ihren Namen ein",
+        "Message...": "Nachricht...",
+        "Reviews": "Bewertungen",
+        "global ratings": "globale Bewertungen",
+        "See all reviews": "Alle Bewertungen anzeigen",
+        "star": "Stern",
+        "out of 5": "von 5",
+        "Start": "Starten",
+        "Close": "Schließen"
     }
 }

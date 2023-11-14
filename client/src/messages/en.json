@@ -94,5 +94,23 @@
         "email_text": "Enter your email",
         "name_text": "Enter your name",
         "button_send": "Send"
+    },
+    "Reviews": {
+        "You need to select rating.": "You need to select rating.",
+        "You need to enter your name.": "You need to enter your name.",
+        "You need to enter your message.": "You need to enter your message.",
+        "Your feedback is successfully submited.": "Your feedback is successfully submited.",
+        "Your opinion matters!": "Your opinion matters!",
+        "How was your experience?": "How was your experience?",
+        "Leave feedback": "Leave feedback",
+        "Enter your name": "Enter your name",
+        "Message...": "Message...",
+        "Reviews": "Reviews",
+        "global ratings": "global ratings",
+        "See all reviews": "See all reviews",
+        "star": "star",
+        "out of 5": "out of 5",
+        "Start": "Start",
+        "Close": "Close"
     }
 }

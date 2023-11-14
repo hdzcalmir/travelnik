@@ -15,6 +15,7 @@ import { FaClock, FaMapMarkedAlt } from "react-icons/fa";
 import { MdAddLocationAlt, MdCategory, MdRateReview } from "react-icons/md";
 import ReviewsCard from "./ActivityModal/ReviewsCard";
 import Feedback from "./ActivityModal/Feedback";
+import { useTranslations } from "next-intl";
 
 interface ActivityModalProps {
   id: string;
@@ -29,6 +30,7 @@ export default function ActivityModal({
 }: ActivityModalProps) {
   const router = useRouter();
   const path = usePathname();
+  const t = useTranslations("Reviews");
   const searchParams = useSearchParams();
   let { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [leaveFeedback, setLeaveFeedback] = useState<boolean>(false);
@@ -113,7 +115,7 @@ export default function ActivityModal({
                     }}
                   >
                     <MdRateReview className="h-5 w-5" />
-                    Leave the review
+                    {t("Leave feedback")}
                   </Button>
                 </div>
                 {leaveFeedback && <Feedback data={activity} />}
@@ -127,7 +129,7 @@ export default function ActivityModal({
                     isOpen = false;
                   }}
                 >
-                  Close
+                  {t("Close")}
                 </Button>
                 <Button
                   className="bg-secondaryColor/80 shadow-lg shadow-secondaryColor/20 flex items-center"
@@ -149,7 +151,7 @@ export default function ActivityModal({
                       fill="#EDF3F0"
                     />
                   </svg>
-                  Start
+                  {t("Start")}
                 </Button>
               </ModalFooter>
             </>
