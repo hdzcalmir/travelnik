@@ -14,6 +14,7 @@ import Card from "@/components/panel/card/card";
 import { IoGrid } from "react-icons/io5";
 import EditVentureModal from "@/components/panel/modals/EditVentureModal";
 import { Utils } from "@/common/utils";
+import { getHourFormat } from "@/value-converters/hours";
 
 function Ventures() {
   const { ventures, venturesLoading, deleteVentureMutation } = useVentures();
@@ -143,8 +144,12 @@ function Ventures() {
                         <td className="px-6 py-4">
                           {Utils.getCategory(Number(venture.category))}
                         </td>
-                        <td className="px-6 py-4">{venture.opening_time}</td>
-                        <td className="px-6 py-4">{venture.closing_time}</td>
+                        <td className="px-6 py-4">
+                          {getHourFormat(venture.opening_time)}
+                        </td>
+                        <td className="px-6 py-4">
+                          {getHourFormat(venture.closing_time)}
+                        </td>
                         <td className="px-6 py-4 flex space-x-2">
                           <a
                             onClick={() => {
@@ -173,7 +178,7 @@ function Ventures() {
             </div>
           )}
           {cardView && (
-            <div className="grid w-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2 md:space-y-0 md:space-x-2">
+            <div className="grid w-full overflow-auto h-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2  md:space-x-2">
               <Card
                 data={ventures as Array<IVenture>}
                 toggleModal={() => toggleModal(true)}

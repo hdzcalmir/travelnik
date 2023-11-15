@@ -14,6 +14,7 @@ import { IVentureState } from "@/common/interfaces/IStates";
 import { GeoLocationFactory } from "@/common/geoLocationFactory";
 
 const addVenture = async (venture: IVentureState) => {
+  console.log("drugi");
   await VentureAPI.addVenture(venture);
 };
 
@@ -118,6 +119,7 @@ function AddVenture() {
                   <option value={Category.BusStation}>Bus Station</option>
                   <option value={Category.Museum}>Museum</option>
                   <option value={Category.Disco}>Disco</option>
+                  <option value={Category.Caffe}>Caffe</option>
                   <option value={Category.ShoppingCenter}>
                     Shopping Center
                   </option>

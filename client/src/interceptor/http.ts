@@ -1,5 +1,4 @@
 import axios from 'axios';
-import toast from 'react-hot-toast';
 
 const http = axios.create({
     baseURL: 'http://localhost:8000/api',
@@ -14,7 +13,6 @@ http.interceptors.request.use(
         };
     },
     (error) => {
-        toast.error("test");
         return Promise.reject(error);
     }
 );

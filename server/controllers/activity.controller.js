@@ -192,88 +192,78 @@ const getAllActivities = (req, res) => {
  *       '500':
  *         description: Internal server error.
  */
-const createNewActivity = (req, res) => {
+const createNewActivity = async (req, res) => {
   try {
     if (
       !req.body.name ||
       !req.body.category ||
       !req.body.duration ||
       !req.body.difficulty
-    )
+    ) {
       return res.status(400).send("Bad request.");
+    }
 
-    // >> Find if activity with that data already exists
     const getActivityQuery =
       "SELECT * FROM activities WHERE name = ? AND category = ?";
-    db.query(
-      getActivityQuery,
-      [req.body.name, req.body.category],
-      (err, data) => {
-        if (err) {
-          return res.status(500).send("Internal server error.");
-        }
+    const data = await queryAsync(getActivityQuery, [
+      req.body.name,
+      req.body.category,
+    ]);
 
-        if (data.length !== 0) {
-          return res.status(409).send("That activity already exists.");
-        } else {
-          let location = new Location();
-          location.latitude = req.body.latitude;
-          location.longitude = req.body.longitude;
-          location.address = req.body.address;
-          location.city = req.body.city;
-          location.country = req.body.country;
-          location.postalCode = req.body.postalCode;
-          const insertNewLocationQuery =
-            "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
-          db.query(
-            insertNewLocationQuery,
-            [
-              location.latitude,
-              location.longitude,
-              location.address,
-              location.city,
-              location.country,
-              location.postalCode,
-            ],
-            (err, data) => {
-              if (err) {
-                return res.status(500).send("Internal server error.");
-              }
+    if (data.length !== 0) {
+      return res.status(409).send("That activity already exists.");
+    } else {
+      const location = new Location();
+      location.latitude = req.body.latitude;
+      location.longitude = req.body.longitude;
+      location.address = req.body.address;
+      location.city = req.body.city;
+      location.country = req.body.country;
+      location.postalCode = req.body.postalCode;
 
-              if (data) {
-                const insertActivityQuery =
-                  "INSERT INTO activities (name, category, description, duration, difficulty, location_id) VALUES(?, ?, ?, ?, ?, ?) ";
-                db.query(
-                  insertActivityQuery,
-                  [
-                    req.body.name,
-                    req.body.category,
-                    req.body.description,
-                    req.body.duration,
-                    req.body.difficulty,
-                    data.insertId,
-                  ],
-                  (err, data) => {
-                    if (err) {
-                      return res.status(500).send("Internal server error.");
-                    }
+      const insertNewLocationQuery =
+        "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
+      const locationData = await queryAsync(insertNewLocationQuery, [
+        location.latitude,
+        location.longitude,
+        location.address,
+        location.city,
+        location.country,
+        location.postalCode,
+      ]);
 
-                    return res
-                      .status(201)
-                      .send("Activity successfully created.");
-                  }
-                );
-              } else {
-                return res.status(500).send("Internal server error.");
-              }
-            }
-          );
-        }
+      if (locationData) {
+        const insertActivityQuery =
+          "INSERT INTO activities (name, category, description, duration, difficulty, location_id) VALUES(?, ?, ?, ?, ?, ?) ";
+        await queryAsync(insertActivityQuery, [
+          req.body.name,
+          req.body.category,
+          req.body.description,
+          req.body.duration,
+          req.body.difficulty,
+          locationData.insertId,
+        ]);
+
+        return res.status(201).send("Activity successfully created.");
+      } else {
+        return res.status(500).send("Internal server error.");
       }
-    );
+    }
   } catch (error) {
     return res.status(500).send("Internal server error.");
   }
+};
+
+const queryAsync = (query, params) => {
+  return new Promise((resolve, reject) => {
+    db.query(query, params, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
 };
 
 /**

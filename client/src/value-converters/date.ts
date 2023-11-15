@@ -1,7 +1,7 @@
 export function convertDateFormat(isoDateString: string) {
     const isoDate = new Date(isoDateString);
 
-    const day = isoDate.getUTCDate();
+    const day = isoDate.getUTCDate() + 1;
     const month = isoDate.getUTCMonth() + 1; 
     const year = isoDate.getUTCFullYear();
 

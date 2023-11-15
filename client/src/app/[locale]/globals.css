@@ -204,6 +204,14 @@
   cursor: pointer;
 }
 
+.coffeeMarker {
+  background-image: url("../../../public/map-icons/coffee.png");
+  background-size: cover;
+  width: 31.32px;
+  height: 44.28px;
+  cursor: pointer;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
 }

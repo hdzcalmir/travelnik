@@ -15,10 +15,8 @@ const VentureAPI = {
     },
 
     addVenture: async (venture: any) => {
-        console.log(venture)
         try {
             const response = await http.post('/business', venture);
-            console.log(response);
             if (response.status === 201) {
                 toast.success(response.data);
             }

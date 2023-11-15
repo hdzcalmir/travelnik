@@ -29,3 +29,4 @@ export const CHURCH_MARKER = 'churchMarker';
 export const SHOPPINGCENTER_MARKER = 'shoppingCenterMarker';
 export const EVENT_MARKER = 'eventMarker';
 export const ACTIVITY_MARKER = 'activityMarker';
+export const COFFEE_MARKER = 'coffeeMarker';

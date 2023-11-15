@@ -59,7 +59,7 @@ const db = require("../database/database.js");
  *                     description: Country of the event.
  *                   postal_code:
  *                     type: string
- *                     description: Postal code of city where event is. 
+ *                     description: Postal code of city where event is.
  *                   duration:
  *                     type: string
  *                     description: The duration of the event.
@@ -71,7 +71,8 @@ const db = require("../database/database.js");
  */
 const getAllEvents = (req, res) => {
   try {
-    let query = "SELECT events.id, events.location_id, events.name, events.description, events.category, \
+    let query =
+      "SELECT events.id, events.location_id, events.name, events.description, events.category, \
                 events.start_date, events.end_date,\
                 location.longitude, location.latitude, location.address, location.city, location.country, location.postal_code\
                 FROM events\
@@ -82,7 +83,9 @@ const getAllEvents = (req, res) => {
     if (jsonInterests) {
       const interests = JSON.parse(atob(jsonInterests));
       if (interests.length > 0) {
-        const interestsString = interests.map(interest => `category = '${interest}'`).join(' OR ');
+        const interestsString = interests
+          .map((interest) => `category = '${interest}'`)
+          .join(" OR ");
         query += ` WHERE ${interestsString}`;
       }
     }
@@ -97,7 +100,6 @@ const getAllEvents = (req, res) => {
     return res.status(500).send("Internal server error.");
   }
 };
-
 
 /**
  * @swagger
@@ -129,12 +131,18 @@ const deleteEvent = (req, res) => {
     const checkIfEventExistQuery = "SELECT * FROM events WHERE id = ?";
 
     db.query(checkIfEventExistQuery, [req.params.id], (err, data) => {
+      if (err) {
+        return res.status(500).send("Internal server error.");
+      }
       if (data.length !== 0) {
         const deleteEventQuery = "DELETE FROM events WHERE id = ?";
         const deleteLocationQuery = "DELETE FROM location WHERE id = ?";
 
         db.query(deleteLocationQuery, [data[0].location_id]);
         db.query(deleteEventQuery, [req.params.id], (err, data) => {
+          if (err) {
+            return res.status(500).send("Internal server error.");
+          }
           if (data) {
             return res.status(200).send("Event successfully deleted.");
           } else return res.status(404).send("That event does not exist.");
@@ -234,7 +242,14 @@ const createNewEvent = (req, res) => {
           "INSERT INTO location (latitude, longitude, address, city, country, postal_code) VALUES(?, ?, ?, ?, ?, ?)";
         db.query(
           insertNewLocationQuery,
-          [location.latitude, location.longitude, location.address, location.city, location.country, location.postalCode],
+          [
+            location.latitude,
+            location.longitude,
+            location.address,
+            location.city,
+            location.country,
+            location.postalCode,
+          ],
           (err, data) => {
             if (data) {
               const startDate = new Date(req.body.start_date)

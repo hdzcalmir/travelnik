@@ -204,6 +204,9 @@ const createNewBusiness = (req, res) => {
       getBusinessQuery,
       [req.body.name, req.body.category],
       (err, data) => {
+        if (err) {
+          return res.status(500).send("Internal server error.");
+        }
         if (data.length !== 0) {
           return res.status(409).send("That business already exist.");
         } else {
@@ -227,6 +230,9 @@ const createNewBusiness = (req, res) => {
               location.postalCode,
             ],
             (err, data) => {
+              if (err) {
+                return res.status(500).send("Internal server error.");
+              }
               if (data) {
                 // >> If business does not exist, create it
                 const insertBusinessQuery =
