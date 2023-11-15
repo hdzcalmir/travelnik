@@ -1,5 +1,5 @@
 import mapboxgl, { Popup } from "mapbox-gl";
-import { ACTIVITY_MARKER, BUSSTATION_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, EVENT_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, LAT_COORD, LNG_COORD, MAP, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
+import { ACTIVITY_MARKER, BUSSTATION_MARKER, CHURCH_MARKER, CINEMA_MARKER, DEFAULT_MARKER, DISCO_MARKER, EVENT_MARKER, GASSTATION_MARKER, GYM_MARKER, HOSPITAL_MARKER, HOTEL_MARKER, LAT_COORD, LNG_COORD, MAP, MOSQUE_MARKER, MUSEUM_MARKER, RESTAURANT_MARKER, SHOPPINGCENTER_MARKER, STORE_MARKER, TAXI_MARKER } from "./consts";
 import { difficulties } from "./difficulties";
 import { Category } from "./enums";
 import { IActivity } from "./interfaces/IActivity";
@@ -92,6 +92,10 @@ export class Utils {
         return DISCO_MARKER;
       case Category.ShoppingCenter:
         return SHOPPINGCENTER_MARKER;
+      case Category.Mosque:
+        return MOSQUE_MARKER;
+      case Category.Church:
+        return CHURCH_MARKER;
       case Category.Event:
         return EVENT_MARKER;
       case Category.Activity:
@@ -123,6 +127,10 @@ export class Utils {
         return "Store";
       case Category.Museum:
         return "Museum";
+      case Category.Church:
+        return "Church";
+      case Category.Mosque:
+        return "Mosque";
       case Category.Disco:
         return "Disco";
       case Category.ShoppingCenter:

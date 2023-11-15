@@ -32,7 +32,7 @@ function Ventures() {
     address: "",
     city: "",
     country: "",
-    postal_code: ""
+    postal_code: "",
   });
 
   if (venturesLoading) {
@@ -62,12 +62,34 @@ function Ventures() {
         <div className="flex justify-between">
           <Breadcrumb homeElement={"Home"}></Breadcrumb>
           <div className="flex space-x-3 items-center">
-            <div onClick={() => { toggleCardView(false) }} className={`${cardView ? 'bg-transparentBtn hover:bg-hoverBtn' : 'bg-secondaryColor'} cursor-pointer text-gray-50 p-3 rounded-lg`}><FaList /></div>
-            <div onClick={() => { toggleCardView(true) }} className={`${cardView ? 'bg-secondaryColor' : 'bg-transparentBtn hover:bg-hoverBtn'} cursor-pointer text-gray-50 p-3 rounded-lg`}><IoGrid /></div>
+            <div
+              onClick={() => {
+                toggleCardView(false);
+              }}
+              className={`${
+                cardView
+                  ? "bg-transparentBtn hover:bg-hoverBtn"
+                  : "bg-secondaryColor"
+              } cursor-pointer text-gray-50 p-3 rounded-lg`}
+            >
+              <FaList />
+            </div>
+            <div
+              onClick={() => {
+                toggleCardView(true);
+              }}
+              className={`${
+                cardView
+                  ? "bg-secondaryColor"
+                  : "bg-transparentBtn hover:bg-hoverBtn"
+              } cursor-pointer text-gray-50 p-3 rounded-lg`}
+            >
+              <IoGrid />
+            </div>
           </div>
         </div>
         <div className="flex flex-col w-full items-center border-gray-200 h-[80vh] dark:border-gray-700">
-          {!cardView &&
+          {!cardView && (
             <div className="flex flex-col shadow-lg items-center w-full h-full mb-4 rounded-lg bg-gray-800">
               <div className="flex h-10 mt-5  w-full px-5">
                 <h2 className="text-gray-50 font-bold text-xl">Ventures</h2>
@@ -118,7 +140,9 @@ function Ventures() {
                           {venture.name}
                         </th>
                         <td className="px-6 py-4">{venture.address}</td>
-                        <td className="px-6 py-4">{Utils.getCategory(venture.category)}</td>
+                        <td className="px-6 py-4">
+                          {Utils.getCategory(Number(venture.category))}
+                        </td>
                         <td className="px-6 py-4">{venture.opening_time}</td>
                         <td className="px-6 py-4">{venture.closing_time}</td>
                         <td className="px-6 py-4 flex space-x-2">
@@ -127,7 +151,8 @@ function Ventures() {
                               setVenture(venture);
                               toggleModal(true);
                             }}
-                            className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-medium">
+                            className="bg-[#ffffff1a] hover:bg-[#ffffff2d] text-md px-4 space-x-2 justify-center flex py-2 items-center text-gray-50 cursor-pointer rounded-lg font-medium"
+                          >
                             <span>Edit</span>
                             <FaEdit className="text-lg text-secondaryColor"></FaEdit>
                           </a>
@@ -146,17 +171,23 @@ function Ventures() {
                 </table>
               </div>
             </div>
-          }
-          {cardView &&
+          )}
+          {cardView && (
             <div className="grid w-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2 md:space-y-0 md:space-x-2">
-              <Card data={ventures as Array<IVenture>} toggleModal={() => toggleModal(true)} setVenture={setVenture}></Card>
+              <Card
+                data={ventures as Array<IVenture>}
+                toggleModal={() => toggleModal(true)}
+                setVenture={setVenture}
+              ></Card>
             </div>
-          }
+          )}
         </div>
-        {
-          isOpened &&
-          <EditVentureModal data={venture as IVenture} toggleModal={() => toggleModal(false)}></EditVentureModal>
-        }
+        {isOpened && (
+          <EditVentureModal
+            data={venture as IVenture}
+            toggleModal={() => toggleModal(false)}
+          ></EditVentureModal>
+        )}
       </div>
       <Footer></Footer>
     </div>

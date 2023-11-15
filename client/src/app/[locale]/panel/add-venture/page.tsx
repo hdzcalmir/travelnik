@@ -19,8 +19,7 @@ const addVenture = async (venture: IVentureState) => {
 
 function AddVenture() {
   let markerExists = false;
-  let marker: Marker = new mapboxgl.Marker()
-    .setLngLat([0, 0]);
+  let marker: Marker = new mapboxgl.Marker().setLngLat([0, 0]);
 
   const [venture, setVenture] = useState<IVentureState>({
     name: "",
@@ -40,13 +39,21 @@ function AddVenture() {
     mapboxgl.accessToken = TOKEN;
     const map = Utils.getMap();
     new mapboxgl.NavigationControl();
-    GeoLocationFactory.geoLocation(map, markerExists, venture, setVenture, marker);
+    GeoLocationFactory.geoLocation(
+      map,
+      markerExists,
+      venture,
+      setVenture,
+      marker
+    );
   }, []);
 
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
+  const handleInputChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  > = (e) => {
     const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     setVenture({ ...venture, [name]: value });
-  }
+  };
 
   const handleAddVenture = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,7 +104,8 @@ function AddVenture() {
                   id="category"
                   name="category"
                   value={venture.category}
-                  onChange={handleInputChange}>
+                  onChange={handleInputChange}
+                >
                   <option>Select Category..</option>
                   <option value={Category.Restaurant}>Restaurant</option>
                   <option value={Category.Hotel}>Hotel</option>
@@ -107,9 +115,14 @@ function AddVenture() {
                   <option value={Category.GasStation}>Gas Station</option>
                   <option value={Category.Store}>Market</option>
                   <option value={Category.Taxi}>Taxi</option>
-                  <option value={Category.BusStation}>
-                    Bus Station
+                  <option value={Category.BusStation}>Bus Station</option>
+                  <option value={Category.Museum}>Museum</option>
+                  <option value={Category.Disco}>Disco</option>
+                  <option value={Category.ShoppingCenter}>
+                    Shopping Center
                   </option>
+                  <option value={Category.Mosque}>Mosque</option>
+                  <option value={Category.Church}>Church</option>
                 </select>
               </div>
               <div className="flex justify-between w-full items-center px-5">

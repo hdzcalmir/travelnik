@@ -10,7 +10,9 @@ export enum Category {
     Store = 9,
     Museum = 10,
     Disco = 11,
-    ShoppingCenter = 12,
-    Activity = 13,
-    Event = 14
+    Mosque = 12,
+    Church = 13,
+    ShoppingCenter = 14,
+    Activity = 15,
+    Event = 16
 }
