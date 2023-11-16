@@ -95,7 +95,7 @@ function Ventures() {
               <div className="flex h-10 mt-5  w-full px-5">
                 <h2 className="text-gray-50 font-bold text-xl">Ventures</h2>
               </div>
-              <div className="w-full overflow-auto">
+              <div className="w-full overflow-auto scrollbar-hidden ">
                 <table className="w-full text-sm text-left rtl:text-right  text-gray-400">
                   <thead className="text-xs  uppercase border-b border-gray-700 text-gray-50">
                     <tr>
@@ -178,7 +178,7 @@ function Ventures() {
             </div>
           )}
           {cardView && (
-            <div className="grid w-full overflow-auto h-full p-5 grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-2  md:space-x-2">
+            <div className="grid w-full overflow-auto scrollbar-hidden h-full grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-4 md:space-x-4">
               <Card
                 data={ventures as Array<IVenture>}
                 toggleModal={() => toggleModal(true)}

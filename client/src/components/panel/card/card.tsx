@@ -25,7 +25,7 @@ const Card: React.FC<CardProps> = ({ data, toggleModal, setVenture }) => {
         <div
           key={index}
           className={`max-w-sm ${
-            index === 0 ? "mt-2 ml-2" : ""
+            index === 0 ? "mt-4 ml-4" : ""
           } h-96 shadow-lg flex flex-col justify-between rounded-xl bg-gray-800`}
         >
           <div className="space-y-5">
