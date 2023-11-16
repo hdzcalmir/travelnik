@@ -10,7 +10,11 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import useEvents from "@/hooks/useEvents";
 import TableSkeleton from "@/components/panel/tableSkeleton/TableSkeleton";
-import { convertDateMapFormat } from "@/value-converters/date";
+import {
+  convertDateMapFormat,
+  convertDateMapFormatCalendar,
+  convertDateMapFormatCalendarEnd,
+} from "@/value-converters/date";
 
 class EventMap {
   title: string;
@@ -47,7 +51,11 @@ function Calendar() {
     );
   } else {
     events?.map((event) => {
-      let ev = new EventMap(event.name, event.start_date, event.end_date);
+      let ev = new EventMap(
+        event.name,
+        convertDateMapFormatCalendar(event.start_date),
+        convertDateMapFormatCalendarEnd(event.end_date)
+      );
       eventsMap.push(ev);
     });
   }

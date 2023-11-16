@@ -17,3 +17,23 @@ export function convertDateMapFormat(isoDateString: string) {
 
     return formattedDate;
 }
+
+export function convertDateMapFormatCalendar(date: string) {
+    let originalDate = new Date(date);
+
+    // Add one day to the date
+    originalDate.setDate(originalDate.getDate() + 1);
+    
+    // Convert the updated date back to ISO string format
+    return originalDate.toISOString();
+}
+
+export function convertDateMapFormatCalendarEnd(date: string) {
+    let originalDate = new Date(date);
+
+    // Add one day to the date
+    originalDate.setDate(originalDate.getDate() + 2);
+    
+    // Convert the updated date back to ISO string format
+    return originalDate.toISOString();
+}

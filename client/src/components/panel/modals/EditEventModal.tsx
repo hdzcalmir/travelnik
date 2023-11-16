@@ -125,6 +125,16 @@ const EditEventModal: React.FC<EditActivityModalProps> = ({
                 />
               </div>
               <div className="flex justify-between w-full items-center px-5">
+                <label className="text-md text-gray-50">Description</label>
+                <input
+                  className="appearance-none bg-gray-700 border-none w-2/3 rounded-lg text-gray-50 py-3 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  placeholder="Event description"
+                  name="description"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex justify-between w-full items-center px-5">
                 <label className="text-md text-gray-50">Interest</label>
                 <select
                   className="outline-none text-gray-50 py-3 px-2 bg-gray-700 rounded-lg w-2/3"
