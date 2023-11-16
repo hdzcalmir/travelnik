@@ -24,11 +24,13 @@ export class Utils {
   };
 
   static calculateRate(reviews: IReview[]): number {
-    if (!Array.isArray(reviews) || reviews.length === 0)
+    const approvedReviews = reviews.filter(review => review.approved === 1);
+
+    if (!Array.isArray(approvedReviews) || approvedReviews.length === 0)
       return 0;
 
-    const reviewsSum = reviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
-    const overallReview = reviewsSum / reviews.length;
+    const reviewsSum = approvedReviews.reduce((acc, review) => acc + (review?.rate || 0), 0);
+    const overallReview = reviewsSum / approvedReviews.length;
 
     return overallReview;
   }
@@ -46,9 +48,13 @@ export class Utils {
     if (activeFilter === "category") {
       return filteredActivities.sort((a, b) => a.category.localeCompare(b.category));
     } else if (activeFilter === "rating") {
-      return filteredActivities.sort((a, b) =>
-        Utils.calculateRate(a.reviews) - Utils.calculateRate(b.reviews)
-      );
+      return filteredActivities
+        .filter(activity => activity.reviews.some(review => review.approved === 1))
+        .sort((a, b) => {
+          const averageRatingA = Utils.calculateRate(a.reviews);
+          const averageRatingB = Utils.calculateRate(b.reviews);
+          return averageRatingB - averageRatingA;
+        });
     } else if (activeFilter === "difficulty") {
       return filteredActivities.sort((a, b) => {
         return difficulties[a.difficulty] - difficulties[b.difficulty];
