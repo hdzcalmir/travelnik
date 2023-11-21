@@ -27,7 +27,6 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
     .padStart(2, "0")}h`;
 
   const jsonParsedReviews: IReview[] = activity?.reviews;
-  console.log(jsonParsedReviews);
 
   const filterApprovedReviews = jsonParsedReviews.filter(
     (review) => review.approved === 1
@@ -37,6 +36,10 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const openActivityModal = () => {
     router.push(path + "?" + searchParams + `&activity=${activity.id}`);
   };
+
+  const handleStartActivity = () => {
+    router.push('/activity' + "?" + searchParams + `&activity=${activity.id}`);
+  }
 
   return (
     <tr
@@ -104,7 +107,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             ></path>
           </svg>
           {formattedDuration}
-          <button className="text-white bg-green-500 rounded-lg ml-2 p-0.5">
+          <button className="text-white bg-green-500 rounded-lg ml-2 p-0.5" onClick={handleStartActivity}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
