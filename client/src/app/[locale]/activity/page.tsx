@@ -8,29 +8,88 @@ import { useTranslations } from "next-intl";
 import Map from "@/components/map/Map";
 import { MdAddLocationAlt, MdCategory } from "react-icons/md";
 import { FaClock, FaMapMarkedAlt } from "react-icons/fa";
+import ActivityAPI from "@/interceptor/Activity/Activity";
+import { IActivity } from "@/common/interfaces/IActivity";
+import { parseDuration } from "@/value-converters/parseDuration";
+import { useDispatch } from "react-redux";
 
-const DeparturePage = () => {
+const ActivityStartPage = () => {
     // >> React Hooks
     const params = useSearchParams();
     const router = useRouter();
     const t = useTranslations("Reviews");
-    const [time, setTime] = useState({ miliSecond: 0, second: 0, minute: 0 });
+
+    // >> States
+    const [activities, setActivities] = useState<IActivity[]>();
+    const [currentActivity, setCurrentActivity] = useState<IActivity>();
+
+    const [time, setTime] = useState<{
+        miliSecond: number;
+        second: number;
+        minute: number;
+        formattedHours?: string;
+        formattedMinutes?: string;
+        formattedSeconds?: string;
+    }>({
+        miliSecond: 0,
+        second: 0,
+        minute: 0,
+        formattedHours: "00",
+        formattedMinutes: "00",
+        formattedSeconds: "00"
+    });
 
     // >> Filters
     const interests = params.get("interests");
     const check_in = params.get("check_in");
     const check_out = params.get("check_out");
     const people = params.get("people");
-    const activity = params.get("activity");
-
-    const startDate = check_in ? new Date(check_in) : undefined;
-    const endDate = check_out ? new Date(check_out) : undefined;
+    const activityId = params.get("activity");
 
     useEffect(() => {
-        if (!interests || !check_in || !check_out || !people) {
-            return router.push("/");
-        }
+        const fetchData = async () => {
+            if (!interests || !check_in || !check_out || !people) {
+                return router.push("/");
+            }
+
+            try {
+                const response = await ActivityAPI.fetchActivitiesWithFilters(
+                    interests,
+                    check_in,
+                    check_out,
+                    people
+                );
+
+                setActivities(response.data);
+            } catch (error) {
+                console.error("Error fetching activities:", error);
+            }
+        };
+
+        fetchData();
     }, [router, interests, check_in, check_out, people]);
+
+    useEffect(() => {
+        if (activities && activityId && !currentActivity) {
+            setActivities(prevActivities => {
+                const newActivity = prevActivities?.find(activity => activity.id == activityId);
+                if (newActivity) {
+                    setCurrentActivity(newActivity);
+                    if (newActivity?.duration) {
+                        const { formattedHours, formattedMinutes, formattedSeconds } = parseDuration(newActivity?.duration);
+
+                        setTime(prevTime => ({
+                            ...prevTime,
+                            formattedHours,
+                            formattedMinutes,
+                            formattedSeconds,
+                        }));
+                    }
+                }
+                return prevActivities;
+            });
+        }
+    }, [activities, activityId, currentActivity]);
 
     return (
         <>
@@ -46,29 +105,29 @@ const DeparturePage = () => {
                                 </div>
                                 <div className="ml-4">
                                     <div className="flex text-white text-xl justify-center lg:justify-normal">
-                                        Test
+                                        {currentActivity?.name}
                                     </div>
-                                    <p className="w-[70%] mx-auto lg:mx-0 text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod hic laborum, quia at alias ex quidem maiores, nobis expedita, assumenda ad facere quaerat. Earum id dolorem minima, deleniti quidem ducimus?</p>
+                                    <p className="w-[70%] mx-auto lg:mx-0 text-gray-400">{currentActivity?.description}</p>
                                     <p className="flex flex-col space-y-2 ">
                                         <span className="text-gray-300 font-semibold flex items-center justify-center lg:justify-normal">
                                             <MdCategory className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
                                             {t("Category")}:{" "}
                                             <span className=" text-gray-400 ml-2 font-normal">
-                                                Hiking
+                                                {currentActivity?.category}
                                             </span>
                                         </span>
                                         <span className="text-gray-300 font-semibold flex items-center justify-center lg:justify-normal">
                                             <MdAddLocationAlt className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
                                             {t("Address")}:{" "}
                                             <span className=" text-gray-400 ml-2 font-normal">
-                                                Test
+                                                {currentActivity?.address}
                                             </span>
                                         </span>
                                         <span className="text-gray-300 font-semibold flex items-center justify-center lg:justify-normal">
                                             <FaClock className="mr-2 w-6 h-6 bg-secondaryColor rounded-full text-gray-700 p-0.5" />
                                             {t("Duration")}:{" "}
                                             <span className=" text-gray-400 ml-2 font-normal">
-                                                00:00:00
+                                                {currentActivity?.duration}
                                             </span>
                                         </span>
                                     </p>
@@ -77,11 +136,7 @@ const DeparturePage = () => {
                         </div>
                         <div className="mx-auto lg:mr-10 bg-gray-200 dark:bg-primaryColor border-8 border-gray-600 dark:border-secondaryColor drop-shadow-lg m-4 p-2 rounded-full lg:w-40 lg:h-40 h-72 w-72 flex flex-col items-center justify-center shadow-lg">
                             <h1 className="mt-3 text-3xl lg:text-2xl text-primaryColor dark:text-gray-100">
-                                {time.minute < 10 ? "0" + time.minute : time.minute}:
-                                {time.second < 10 ? "0" + time.second : time.second}:
-                                {time.miliSecond < 100
-                                    ? "0" + (time.miliSecond / 10).toFixed(0)
-                                    : (time.miliSecond / 10).toFixed(0)}
+                                {time.formattedHours}:{time.formattedMinutes}:{time.formattedSeconds}
                             </h1>
                             <button className="text-white bg-red-400 rounded-lg px-4 py-2 text-lg lg:text-md">Stop</button>
                         </div>
@@ -93,4 +148,4 @@ const DeparturePage = () => {
     );
 };
 
-export default DeparturePage;
+export default ActivityStartPage;

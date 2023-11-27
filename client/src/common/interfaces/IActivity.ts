@@ -4,6 +4,7 @@ export interface IActivity {
     id?: string;
     location_id: number;
     reviews: IReview[];
+    status?: number;
     name: string,
     category: string,
     latitude: number,
@@ -14,5 +15,5 @@ export interface IActivity {
     postal_code: string,
     description: string,
     duration: string,
-    difficulty: string
+    difficulty: string;
 }

@@ -34,7 +34,11 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "react-parallax": "^3.5.1",
+    "react-redux": "^8.1.3",
     "react-spring": "^9.7.3",
+    "react-timer-hook": "^3.0.7",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
     "sharp": "^0.32.6",
     "sweetalert2": "^11.6.13"
   },
