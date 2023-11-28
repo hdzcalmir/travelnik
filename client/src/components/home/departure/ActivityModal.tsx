@@ -45,10 +45,18 @@ export default function ActivityModal({
     const newPath = `${path}?${queryParams.toString()}`;
 
     router.push(newPath);
+
   };
+
   const activity: IActivity | undefined = activities?.find(
     (activityI) => activityI.id == id
   );
+
+  const handleStartActivity = () => {
+    const queryParams = new URLSearchParams(searchParams);
+    queryParams.delete("activity");
+    router.push('/activity' + "?" + searchParams + `&activity=${activity?.id}`);
+  }
 
   return (
     <>
@@ -134,7 +142,7 @@ export default function ActivityModal({
                 <Button
                   className="bg-secondaryColor/80 shadow-lg shadow-secondaryColor/20 flex items-center"
                   onPress={() => {
-                    handleClick();
+                    handleStartActivity();
                     isOpen = false;
                   }}
                 >

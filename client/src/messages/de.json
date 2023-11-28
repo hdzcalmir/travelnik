@@ -120,5 +120,6 @@
         "Category": "Kategorie",
         "Address": "Adresse",
         "Duration": "Dauer"
-    }
+    },
+    "ActivityPage": {}
 }
