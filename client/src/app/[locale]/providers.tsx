@@ -18,7 +18,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <PersistGate loading={null} persistor={persistor}>
           <QueryClientProvider client={client}>
             <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </QueryClientProvider>
         </PersistGate>
       </Provider>

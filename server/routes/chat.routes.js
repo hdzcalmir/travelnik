@@ -1,4 +1,4 @@
-const { getAnswerFromBot } = require('../controllers/chat.controller.js');
+const { getAllChats, getAnswerFromBot } = require('../controllers/chat.controller.js');
 const express = require('express');
 
 const router = express.Router();
@@ -10,6 +10,7 @@ const router = express.Router();
  *   description: OpenAI Chat-based interactions
  */
 
+router.get("/", getAllChats);
 router.post("/", getAnswerFromBot);
 
 module.exports = router;
