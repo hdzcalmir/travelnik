@@ -11,12 +11,12 @@ const Message = ({ message }: MessageProps) => {
         <>
             {message.role === "assistant" && (
                 <div className="mb-2">
-                    <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">Hello, I am your virtual assistant for Travnik. If you have any question please let me know.</p>
+                    <p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">{message.content}</p>
                 </div>
             )}
             {message.role === "user" && (
                 <div className="mb-2 text-right">
-                    <p className="bg-secondaryColor text-white rounded-lg py-2 px-4 inline-block">hello</p>
+                    <p className="bg-secondaryColor text-white rounded-lg py-2 px-4 inline-block">{message.content}</p>
                 </div>
             )}
         </>

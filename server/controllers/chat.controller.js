@@ -76,6 +76,7 @@ const getAnswerFromBot = async (req, res) => {
         const response = await openai.chat.completions.create({
             messages: chatHistory,
             model: "gpt-3.5-turbo",
+            max_tokens: 100,
         });
 
         chatHistory.push({ role: 'assistant', content: response.choices[0].message.content });

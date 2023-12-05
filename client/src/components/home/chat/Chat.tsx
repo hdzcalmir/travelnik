@@ -4,6 +4,7 @@ import useChat from "@/hooks/useChat";
 import Message from "./Message";
 import MessageSkeleton from "./Skeleton";
 import { Dispatch, SetStateAction } from "react";
+import Button from "./Button";
 
 interface ChatProps {
     chatOpened: boolean;
@@ -28,10 +29,7 @@ const Chat = ({ chatOpened, setChatOpened }: ChatProps) => {
                 <div className="p-4 h-80 overflow-y-auto">
                     {messagesLoading ? <MessageSkeleton /> : messages?.map((message) => <Message key={message.content} message={message} />)}
                 </div>
-                <div className="p-4 border-t flex">
-                    <input type="text" placeholder="Type a message" className="w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-secondaryColor" />
-                    <button className="bg-secondaryColor text-white px-4 py-2 rounded-r-md hover:bg-secondaryColor/80 transition duration-300">Send</button>
-                </div>
+                <Button />
             </div>
         </div>
     );
