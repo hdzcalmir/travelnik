@@ -13,6 +13,8 @@ app.use(cookieParser());
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 
+
+
 const specs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
@@ -23,6 +25,7 @@ const eventRoutes = require("./routes/event.routes.js");
 const userRoutes = require("./routes/user.routes.js");
 const locationRoutes = require("./routes/location.routes.js");
 const reviewRoutes = require("./routes/review.routes.js");
+const chatRoutes = require("./routes/chat.routes.js");
 
 app.use("/api/accommodation", accommodationRoutes);
 app.use("/api/activity", activityRoutes);
@@ -31,6 +34,7 @@ app.use("/api/event", eventRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/location", locationRoutes);
 app.use("/api/review", reviewRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`API-SERVER >> Server running on port ${process.env.PORT}`);
