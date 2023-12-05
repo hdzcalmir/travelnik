@@ -1,5 +1,4 @@
 import useChat from "@/hooks/useChat";
-import ChatAPI from "@/interceptor/Chat/Chat";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
