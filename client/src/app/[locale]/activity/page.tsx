@@ -83,10 +83,10 @@ const ActivityStartPage = () => {
   return (
     <>
       <Navbar />
-      <div className="relative h-screen lg:h-[80vh] w-full">
+      <div className="relative h-[85vh] lg:h-[80vh] w-full">
         <Map />
         <div className="bg-gray-800/80 absolute bottom-0 z-10 w-full border-t-2 backdrop-blur-md border-t-gray-800">
-          <div className="flex lg:justify-between flex-col-reverse lg:flex-row">
+          <div className="flex lg:justify-between flex-row-reverse lg:flex-row">
             <ActivityInfo currentActivity={currentActivity} />
             <Timer expiryTimestamp={time} />
           </div>
