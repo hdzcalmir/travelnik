@@ -28,6 +28,11 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
   const isTimerDone = useRef(false);
   const [stopTimer, setStopTimer] = useState(false);
 
+  const redirectToDeparture = useCallback((): void => {
+    const queryParams = new URLSearchParams(searchParams);
+    router.push('/departure' + "?" + queryParams.toString());
+  }, [router, searchParams]);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (stopTimer) {
@@ -41,17 +46,17 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
       if (!isTimerDone.current && remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0) {
         console.log('Timer is done!');
         isTimerDone.current = true;
+
+        redirectToDeparture();
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [expiryTimestamp, calculateTimeRemaining, stopTimer]);
+  }, [expiryTimestamp, calculateTimeRemaining, stopTimer, redirectToDeparture]);
 
   const handleStopClick = () => {
     setStopTimer(!stopTimer);
-
-    const queryParams = new URLSearchParams(searchParams);
-    router.push('/departure' + "?" + queryParams.toString());
+    redirectToDeparture();
   };
 
   const { hours, minutes, seconds } = timeRemaining;
