@@ -8,7 +8,6 @@ import Map from "@/components/map/Map";
 import ActivityAPI from "@/interceptor/Activity/Activity";
 import { IActivity } from "@/common/interfaces/IActivity";
 import { parseDurationToSeconds } from "@/value-converters/parseDuration";
-import { useDispatch } from "react-redux";
 import Timer from "@/components/home/departure/Timer/Timer";
 import ActivityInfo from "@/components/home/departure/ActivityInfo/ActivityInfo";
 
