@@ -1,10 +1,15 @@
+import { IChat } from "@/common/interfaces/IChat";
 import useChat from "@/hooks/useChat";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 
-const Button: React.FC = () => {
-    const { updateChatMutation } = useChat();
+interface ButtonProps {
+    setWaitingResponse: Dispatch<SetStateAction<boolean>>;
+    messages: IChat[] | undefined;
+}
 
+const Button = ({ setWaitingResponse, messages }: ButtonProps) => {
+    const { updateChatMutation } = useChat();
     const [text, setText] = useState<string>("");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -15,8 +20,15 @@ const Button: React.FC = () => {
         e.preventDefault();
         try {
             setText("");
+            setWaitingResponse(true);
+            messages?.push({
+                role: "user",
+                content: text
+            })
             await updateChatMutation.mutateAsync({ message: text });
+            setWaitingResponse(false);
         } catch (error) {
+            setWaitingResponse(false);
             toast.error("Internal server error.");
         }
     };
