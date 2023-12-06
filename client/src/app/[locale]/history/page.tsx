@@ -5,6 +5,7 @@ import Footer from "@/components/home/footer/Footer";
 import Image from "next/image";
 import { Parallax } from "react-parallax";
 import { useTranslations } from "next-intl";
+import ChatIcon from "@/components/home/chat/Icon";
 
 const HistoryPage = () => {
   const t = useTranslations("History");
@@ -92,6 +93,7 @@ const HistoryPage = () => {
           </div>
         </section>
       </div>
+      <ChatIcon />
       <Footer />
     </>
   );

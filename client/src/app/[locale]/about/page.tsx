@@ -1,5 +1,6 @@
 "use client";
 
+import ChatIcon from "@/components/home/chat/Icon";
 import Footer from "@/components/home/footer/Footer";
 import Navbar from "@/components/home/navbar/Navbar";
 import { useLocale, useTranslations } from "next-intl";
@@ -260,6 +261,7 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+      <ChatIcon />
       <Footer />
     </div>
   );
