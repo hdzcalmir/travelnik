@@ -14,8 +14,8 @@ const Navbar = () => {
   const t = useTranslations('Navlinks');
 
   return (
-    <header className="relative">
-      <nav className="px-4 lg:px-6 py-8 bg-gray-800 shadow-lg ">
+    <header className="relative z-30">
+      <nav className="px-4 lg:px-6 py-8 bg-gray-800 shadow-lg">
         <div className="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link href="/" className="flex items-center">
             <Image

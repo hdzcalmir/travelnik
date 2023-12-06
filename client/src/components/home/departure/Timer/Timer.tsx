@@ -1,39 +1,46 @@
-"use client"
-
-import { useRouter, useSearchParams } from 'next/navigation';
+// Timer.tsx
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { addActivity, updateActivities } from '@/redux/actions';
+import { IActivity } from '@/common/interfaces/IActivity';
+import { Utils } from '@/common/utils';
 
 interface TimerProps {
   expiryTimestamp: Date;
+  currentActivity: IActivity | undefined;
 }
 
-interface TimeRemaining {
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
-const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
+const Timer: React.FC<TimerProps> = ({ expiryTimestamp, currentActivity }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const currentActivities: Partial<IActivity>[] = useSelector((state: RootState) => state.currentActivities);
 
-  const calculateTimeRemaining = useCallback((): TimeRemaining => {
-    const totalSeconds = Math.max(0, Math.floor((expiryTimestamp.getTime() - Date.now()) / 1000));
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    return { hours, minutes, seconds };
-  }, [expiryTimestamp]);
-
-  const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(() => calculateTimeRemaining());
+  const [timeRemaining, setTimeRemaining] = useState(() => Utils.calculateTimeRemaining(expiryTimestamp));
   const isTimerDone = useRef(false);
   const [stopTimer, setStopTimer] = useState(false);
 
-  const redirectToDeparture = useCallback((): void => {
-    const queryParams = new URLSearchParams(searchParams);
-    router.push('/departure' + "?" + queryParams.toString());
-  }, [router, searchParams]);
+  const stopActivity = useCallback((): void => {
+    const isActivityInserted = currentActivities.some(activity => activity.id === currentActivity?.id);
+    const currentStatus = Utils.getCurrentStatus(isTimerDone.current);
+
+    if (isActivityInserted) {
+      const updatedActivities = Utils.updateExistingActivity(currentActivities as IActivity[], currentActivity, () => currentStatus);
+
+      updatedActivities.forEach(updatedActivity => {
+        const { id, status } = updatedActivity;
+        if (id) {
+          Utils.updateActivityStatus(dispatch, updateActivities, id, status);
+        }
+      });
+    } else {
+      Utils.addNewActivity(dispatch, addActivity, currentActivity as IActivity, isTimerDone.current);
+    }
+
+    Utils.redirectToDeparture(router, searchParams);
+  }, [currentActivities, dispatch, router, currentActivity, searchParams]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,23 +49,22 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
         return;
       }
 
-      const remaining = calculateTimeRemaining();
+      const remaining = Utils.calculateTimeRemaining(expiryTimestamp);
       setTimeRemaining(remaining);
 
       if (!isTimerDone.current && remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0) {
         console.log('Timer is done!');
         isTimerDone.current = true;
-
-        redirectToDeparture();
+        stopActivity();
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [expiryTimestamp, calculateTimeRemaining, stopTimer, redirectToDeparture]);
+  }, [expiryTimestamp, stopTimer, stopActivity]);
 
   const handleStopClick = () => {
     setStopTimer(!stopTimer);
-    redirectToDeparture();
+    stopActivity();
   };
 
   const { hours, minutes, seconds } = timeRemaining;

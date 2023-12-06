@@ -87,7 +87,7 @@ const ActivityStartPage = () => {
         <div className="bg-gray-800/80 absolute bottom-0 z-10 w-full border-t-2 backdrop-blur-md border-t-gray-800">
           <div className="flex lg:justify-between flex-row-reverse lg:flex-row">
             <ActivityInfo currentActivity={currentActivity} />
-            <Timer expiryTimestamp={time} />
+            <Timer expiryTimestamp={time} currentActivity={currentActivity} />
           </div>
         </div>
       </div>

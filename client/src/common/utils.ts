@@ -6,6 +6,7 @@ import { IActivity } from "./interfaces/IActivity";
 import { IEvent } from "./interfaces/IEvent";
 import { IVenture } from "./interfaces/IVenture";
 import { IReview } from "./interfaces/IReview";
+import { ActivityStatus } from "./enums/activityStatus";
 
 export class Utils {
 
@@ -65,6 +66,43 @@ export class Utils {
       });
     } else
       return filteredActivities;
+  };
+
+  static getCurrentStatus = (isTimerDone: boolean): ActivityStatus => (
+    isTimerDone ? ActivityStatus.COMPLETED : ActivityStatus.PENDING
+  );
+
+  static updateActivityStatus = (dispatch: any, updateActivities: any, id: string, status: ActivityStatus) => {
+    dispatch(updateActivities(id, status));
+  };
+
+  static addNewActivity = (dispatch: any, addActivity: any, currentActivity: IActivity | undefined, isTimerDone: boolean) => {
+    const status = Utils.getCurrentStatus(isTimerDone);
+    dispatch(addActivity({ id: currentActivity?.id, name: currentActivity?.name, status }));
+  };
+
+  static updateExistingActivity = (currentActivities: IActivity[], currentActivity: IActivity | undefined, getCurrentStatus: any) => {
+    const currentStatus = getCurrentStatus();
+    return currentActivities.map(activity => {
+      if (activity.id === currentActivity?.id) {
+        return { ...activity, status: currentStatus };
+      }
+      return activity;
+    });
+  };
+
+  static calculateTimeRemaining = (expiryTimestamp: Date) => {
+    const totalSeconds = Math.max(0, Math.floor((expiryTimestamp.getTime() - Date.now()) / 1000));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return { hours, minutes, seconds };
+  };
+
+  static redirectToDeparture = (router: any, searchParams: any) => {
+    const queryParams = new URLSearchParams(searchParams);
+    router.push('/departure' + "?" + queryParams.toString());
   };
 
   static convertDurationToSeconds(duration: string): number {
