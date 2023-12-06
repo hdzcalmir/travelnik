@@ -22,7 +22,7 @@ const Navbar = () => {
               src="/images/travelnik-logo.png"
               className="mr-3 w-2/4"
               alt="Travelnik logo"
-              width={200}
+              width={190}
               height={10}
             />
           </Link>

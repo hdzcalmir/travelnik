@@ -30,6 +30,7 @@ const ActivityStartPage = () => {
   const people = params.get("people");
   const activityId = params.get("activity");
 
+
   useEffect(() => {
     const fetchData = async () => {
       if (!interests || !check_in || !check_out || !people) {

@@ -54,9 +54,10 @@ export default function ActivityModal({
 
   const handleStartActivity = () => {
     const queryParams = new URLSearchParams(searchParams);
-    queryParams.delete("activity");
-    router.push('/activity' + "?" + searchParams + `&activity=${activity?.id}`);
+    queryParams.set("activity", activity?.id || "");
+    router.push('/activity' + "?" + queryParams.toString());
   }
+
 
   return (
     <>

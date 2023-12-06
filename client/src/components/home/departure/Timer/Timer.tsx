@@ -1,3 +1,4 @@
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 interface TimerProps {
@@ -11,6 +12,9 @@ interface TimeRemaining {
 }
 
 const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const calculateTimeRemaining = useCallback((): TimeRemaining => {
     const totalSeconds = Math.max(0, Math.floor((expiryTimestamp.getTime() - Date.now()) / 1000));
     const hours = Math.floor(totalSeconds / 3600);
@@ -22,9 +26,15 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
 
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(() => calculateTimeRemaining());
   const isTimerDone = useRef(false);
+  const [stopTimer, setStopTimer] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
+      if (stopTimer) {
+        clearInterval(intervalId);
+        return;
+      }
+
       const remaining = calculateTimeRemaining();
       setTimeRemaining(remaining);
 
@@ -35,7 +45,14 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [expiryTimestamp, calculateTimeRemaining]);
+  }, [expiryTimestamp, calculateTimeRemaining, stopTimer]);
+
+  const handleStopClick = () => {
+    setStopTimer(!stopTimer);
+
+    const queryParams = new URLSearchParams(searchParams);
+    router.push('/departure' + "?" + queryParams.toString());
+  };
 
   const { hours, minutes, seconds } = timeRemaining;
 
@@ -44,7 +61,9 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
       <h1 className="mt-3 text-3xl lg:text-2xl text-primaryColor dark:text-gray-100">
         {`${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
       </h1>
-      <button className="text-white bg-red-400 rounded-lg px-4 py-2 text-lg lg:text-md">Stop</button>
+      <button onClick={handleStopClick} className={`text-white bg-red-400 rounded-lg px-4 py-2 text-lg lg:text-md`}>
+        Stop
+      </button>
     </div>
   );
 };
