@@ -3,8 +3,10 @@
 import { IActivity } from "@/common/interfaces/IActivity";
 import { IReview } from "@/common/interfaces/IReview";
 import { Utils } from "@/common/utils";
+import { RootState } from "@/redux/store";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSelector } from "react-redux";
 
 interface ActivityCardProps {
   activity: IActivity;
@@ -15,6 +17,17 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const router = useRouter();
   const path = usePathname();
   const searchParams = useSearchParams();
+
+  const currentActivities: Partial<IActivity>[] = useSelector((state: RootState) => state.currentActivities);
+  const matchingActivityFromCurrent = currentActivities.find((currentActivity) => currentActivity.id === activity.id && currentActivity.name === activity.name);
+  const status =
+    matchingActivityFromCurrent?.status === 0
+      ? "Not completed"
+      : matchingActivityFromCurrent?.status === 1
+        ? "In progress"
+        : matchingActivityFromCurrent?.status === 2
+          ? "Completed"
+          : "Not completed";
 
   const durationFromDatabase = activity.duration;
 
@@ -87,8 +100,8 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         </div>
       </td>
       <td className="px-4 py-3">
-        <div className="bg-red-400 rounded text-white justify-center flex text-sm px-2 text-center">
-          {t("Not completed")}
+        <div className={`rounded text-white justify-center flex text-sm px-2 text-center ${status === "Not completed" ? 'bg-red-400' : status === "In progress" ? 'bg-orange-400' : 'bg-green-400'}`}>
+          {matchingActivityFromCurrent ? t(status) : t("Not completed")}
         </div>
       </td>
       <td className="px-4 py-3">

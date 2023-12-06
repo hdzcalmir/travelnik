@@ -1,4 +1,5 @@
-// Timer.tsx
+"use client"
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,7 +54,6 @@ const Timer: React.FC<TimerProps> = ({ expiryTimestamp, currentActivity }) => {
       setTimeRemaining(remaining);
 
       if (!isTimerDone.current && remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0) {
-        console.log('Timer is done!');
         isTimerDone.current = true;
         stopActivity();
       }
