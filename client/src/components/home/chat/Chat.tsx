@@ -5,7 +5,6 @@ import Message from "./Message";
 import MessageSkeleton from "./Skeleton";
 import { Dispatch, SetStateAction, useState } from "react";
 import Button from "./Button";
-import { TiMessageTyping } from "react-icons/ti";
 import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 
 interface ChatProps {

@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const swaggerJsdoc = require("swagger-jsdoc");
@@ -12,6 +13,7 @@ const app = express();
 app.use(cookieParser());
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
+app.use(session({ secret: process.env.EXPRESS_SESSION, resave: true, saveUninitialized: true }));
 
 
 

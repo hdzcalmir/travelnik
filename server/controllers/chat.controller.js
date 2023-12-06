@@ -17,16 +17,21 @@ const openai = require("../utils/openai_api.js");
  *         role: "user"
  *         content: "Hello, I'm a tourist interested in Travnik. Can you recommend some landmarks?"
  */
-let chatHistory = [
+const systemMessages = [
     {
         role: "system",
-        content: "You are the assistant for tourists in the city of Travnik and you are only allowed to provide data for that city. Provide detailed information about the location, history, and landmarks in Travnik. As the Travnik assistant, highlight popular locations that tourists should visit. List the must-see landmarks and attractions. Inform tourists about current events and festivals happening in Travnik. Provide details about cultural events that they may find interesting. Delve into the historical background of Travnik. Share significant historical facts and the role the city has played in the past. Imagine you're advising tourists. Share tips on what visitors should know when exploring Travnik for a safe and enjoyable experience. Recommend good restaurants to tourists. Highlight local dishes that visitors must try for a complete culinary experience. Keep tourists informed about the current weather in Travnik and provide a forecast for the next few days to help them plan accordingly. As the Travnik assistant, offer special insights and advice for tourists exploring the city. Share recommendations that locals would suggest."
-    },
+        content: "You are the assistant for tourists in the city of Travnik and you are only allowed to provide data for that city..."
+    }
+];
+
+let assistantMessages = [
     {
         role: "assistant",
         content: "Hello, I am your virtual assistant for Travnik. If you have any question please let me know."
     }
 ];
+
+let chatHistory = {};
 
 /**
  * @swagger
@@ -68,23 +73,34 @@ let chatHistory = [
  */
 
 const getAnswerFromBot = async (req, res) => {
+    if (!req.body.message) return res.status(400).send("Bad request");
+    const userId = req.session.userId || generateUserId();
+    const message = req.body.message;
     try {
-        const message = req.body.message;
 
-        chatHistory.push({ role: 'user', content: message });
+        req.session.userId = userId;
+
+        const userMessage = { role: 'user', content: message };
+
+        chatHistory[userId] = chatHistory[userId] || [];
+        chatHistory[userId].push(userMessage);
+
+        const userMessages = [...systemMessages, ...assistantMessages, ...chatHistory[userId].slice(1)];
 
         const response = await openai.chat.completions.create({
-            messages: chatHistory,
+            messages: userMessages,
             model: "gpt-3.5-turbo",
             max_tokens: 100,
         });
 
-        chatHistory.push({ role: 'assistant', content: response.choices[0].message.content });
+        chatHistory[userId].push({ role: 'assistant', content: response.choices[0].message.content });
 
         return res.status(200).send(response.choices[0].message.content);
     } catch (error) {
-        console.log(error)
-        return res.status(500).send("Internal server error.");
+        const errorMessage = "We are sorry, but the assistant is currently unavailable. Please try again later.";
+        chatHistory[userId].push({ role: 'assistant', content: errorMessage });
+
+        return res.status(200).send(errorMessage);
     }
 };
 
@@ -114,10 +130,17 @@ const getAnswerFromBot = async (req, res) => {
 
 const getAllChats = (req, res) => {
     try {
-        return res.status(200).send(chatHistory.slice(1));
+        const userId = req.session.userId || generateUserId();
+        const userChatHistory = chatHistory[userId] || [];
+        const allMessages = [...assistantMessages, ...userChatHistory];
+        return res.status(200).send(allMessages);
     } catch (error) {
         return res.status(500).send("Internal server error.");
     }
 };
+
+function generateUserId() {
+    return Math.random().toString(36).substring(2, 15);
+}
 
 module.exports = { getAllChats, getAnswerFromBot };

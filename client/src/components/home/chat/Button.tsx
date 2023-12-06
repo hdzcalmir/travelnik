@@ -1,7 +1,6 @@
 import { IChat } from "@/common/interfaces/IChat";
 import useChat from "@/hooks/useChat";
 import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
-import toast from "react-hot-toast";
 
 interface ButtonProps {
     setWaitingResponse: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +28,6 @@ const Button = ({ setWaitingResponse, messages }: ButtonProps) => {
             setWaitingResponse(false);
         } catch (error) {
             setWaitingResponse(false);
-            toast.error("Internal server error.");
         }
     };
 
