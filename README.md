@@ -22,4 +22,9 @@ To start backend we need to enter server directory and run command:
 `npm start`
 
 After that application will run on port `3000`.
+
 Link: `localhost:3000`
+
+After going to `localhost:3000` this will be screen that we see.
+
+[![Screenshot-1.png](https://i.postimg.cc/RhqNPz2F/Screenshot-1.png)](https://postimg.cc/kR3J4LJ3)
