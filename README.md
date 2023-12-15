@@ -14,7 +14,8 @@ To start frontend we need to enter client directory and run command:
 then,
 
 `npm run dev` for starting dev environemnt
-`npm start` for strating production environment
+
+`npm start` for starting production environment
 
 To start backend we need to enter server directory and run command:
 
