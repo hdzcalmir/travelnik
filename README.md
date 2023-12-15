@@ -1,4 +1,4 @@
-# Travelnik - Enjoy in what Travnik offers
+# Travelnik - Discover Travnik, Bosnia and Herzegovina's Hidden Gem!
 
 Travelnik is developed in:
 1. NextJS
