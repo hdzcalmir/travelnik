@@ -16,3 +16,9 @@ then,
 `npm run dev` for starting dev environemnt
 `npm start` for strating production environment
 
+To start backend we need to enter server directory and run command:
+
+`npm start`
+
+After that application will run on port `3000`.
+Link: `localhost:3000`
