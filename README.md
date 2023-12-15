@@ -25,10 +25,9 @@ After that application will run on port `3000`.
 
 Link: `localhost:3000`
 
-After going to `localhost:3000` this will be screen that we see.
+After navigating to `localhost:3000`, this will be the screen that we see.
 
 [![Screenshot-3.png](https://i.postimg.cc/BvY826wy/Screenshot-3.png)](https://postimg.cc/R3tVBMmQ)
-[![Screenshot-2.png](https://i.postimg.cc/FHXHScF1/Screenshot-2.png)](https://postimg.cc/PPKHsCwk)
 
 It's also important to mention that this application uses two APIs:
 1. [Mapbox](https://www.mapbox.com/) - It has been used for maps.
