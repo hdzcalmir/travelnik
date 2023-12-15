@@ -46,3 +46,9 @@ To make work OpenAI API work again everything that needs to be done is to add to
 `travelnik/server/.env`
 
 `OPENAI_API_KEY="OPEN AI KEY GOES HERE"`
+
+To make work OpenAI API work again everything that needs to be done is to add token.
+
+`travelnik/server/.env`
+
+`BOOKING_API="BOOKING API KEY GOES HERE"`
