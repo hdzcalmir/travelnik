@@ -32,4 +32,26 @@ After going to `localhost:3000` this will be screen that we see.
 
 It's also important to mention that this application uses two APIs:
 1. [Mapbox](https://www.mapbox.com/) - He's been used for maps.
-2. [OpenAI](https://www.openai.com) - It has been used for interaction with tourists and other app users. (This feature was added as bonus after contest.)
+2. [Booking](https://www.mapbox.com/) - He's been used to fetch apartments available in Travnik from Booking.
+3. [OpenAI](https://www.openai.com) - It has been used for interaction with tourists and other app users. (This feature was added as bonus after contest.)
+
+To make work Mapbox API work again everything that needs to be done is to add token.
+
+`travelnik/client/src/common/consts.ts`
+
+[![Screenshot-5.png](https://i.postimg.cc/6pRVtdq0/Screenshot-5.png)](https://postimg.cc/fVzSvSxt)
+
+To make work Mapbox API work again everything that needs to be done is to add token.
+
+`travelnik/server/.env`
+
+`PORT=8000
+DATABASE_HOST=localhost
+DATABASE_USER=root
+DATABASE_PASSWORD=
+DATABASE_NAME=travelnik-database
+BACKEND_URL=http://localhost:8000
+FRONTEND_URL=http://localhost:3000
+BOOKING_API=API_KEY
+NEXTAUTH_SECRET=API_KEY
+OPENAI_API_KEY=**API_KEY**`
