@@ -41,17 +41,8 @@ To make work Mapbox API work again everything that needs to be done is to add to
 
 [![Screenshot-5.png](https://i.postimg.cc/6pRVtdq0/Screenshot-5.png)](https://postimg.cc/fVzSvSxt)
 
-To make work Mapbox API work again everything that needs to be done is to add token.
+To make work OpenAI API work again everything that needs to be done is to add token.
 
 `travelnik/server/.env`
 
-`PORT=8000
-DATABASE_HOST=localhost
-DATABASE_USER=root
-DATABASE_PASSWORD=
-DATABASE_NAME=travelnik-database
-BACKEND_URL=http://localhost:8000
-FRONTEND_URL=http://localhost:3000
-BOOKING_API=API_KEY
-NEXTAUTH_SECRET=API_KEY
-OPENAI_API_KEY="OPEN AI KEY GOES HERE"`
+`OPENAI_API_KEY="OPEN AI KEY GOES HERE"`
