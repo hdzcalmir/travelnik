@@ -10,6 +10,7 @@ To start application we need to start both, frontend and backend.
 
 
 To start frontend we need to enter client directory and run command:
+
 `npm run build` to run build
 
 then,
