@@ -35,19 +35,19 @@ It's also important to mention that this application uses two APIs:
 2. [Booking](https://www.mapbox.com/) - It has been used to fetch apartments available in Travnik from Booking.
 3. [OpenAI](https://www.openai.com) - It has been used for interaction with tourists and other app users. (This feature was added as bonus after contest.)
 
-To make work Mapbox API work again everything that needs to be done is to add token.
+To reestablish functionality for the Mapbox API, all you need to do is add the token.
 
 `travelnik/client/src/common/consts.ts`
 
 [![Screenshot-5.png](https://i.postimg.cc/6pRVtdq0/Screenshot-5.png)](https://postimg.cc/fVzSvSxt)
 
-To make work OpenAI API work again everything that needs to be done is to add token.
+To restore functionality to the OpenAI API, simply add the required key.
 
 `travelnik/server/.env`
 
 `OPENAI_API_KEY="OPEN AI KEY GOES HERE"`
 
-To make work OpenAI API work again everything that needs to be done is to add token.
+To restore functionality to the Booking API, all that is required is to add the key.
 
 `travelnik/server/.env`
 
