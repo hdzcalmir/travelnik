@@ -27,5 +27,5 @@ Link: `localhost:3000`
 
 After going to `localhost:3000` this will be screen that we see.
 
-[![Screenshot-1.png](https://i.postimg.cc/RhqNPz2F/Screenshot-1.png)](https://postimg.cc/kR3J4LJ3)
+[![Screenshot-3.png](https://i.postimg.cc/BvY826wy/Screenshot-3.png)](https://postimg.cc/R3tVBMmQ)
 [![Screenshot-2.png](https://i.postimg.cc/FHXHScF1/Screenshot-2.png)](https://postimg.cc/PPKHsCwk)
