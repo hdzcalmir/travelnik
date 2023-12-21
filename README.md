@@ -28,9 +28,7 @@ Link: `localhost:3000`
 After navigating to `localhost:3000`, this will be the screen that we see.
 
 ## Demo video
-
-[![Application Demo Video](https://github.com/hdzcalmir/travelnik/assets/70588174/1297805b-670e-4030-8109-f22c5d8cc102)]([https://youtu.be/aMFEpCQLuOA](https://www.youtube.com/watch?v=MmH4ltC2MIo)) 
-
+[![Application Demo Video](https://github.com/hdzcalmir/travelnik/assets/70588174/1297805b-670e-4030-8109-f22c5d8cc102)](https://www.youtube.com/watch?v=MmH4ltC2MIo)
 
 It's also important to mention that this application uses two APIs:
 1. [Mapbox](https://www.mapbox.com/) - It has been used for maps.
