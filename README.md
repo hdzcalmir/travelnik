@@ -30,7 +30,7 @@ After navigating to `localhost:3000`, this will be the screen that we see.
 ## Demo video
 [![Application Demo Video](https://github.com/hdzcalmir/travelnik/assets/70588174/1297805b-670e-4030-8109-f22c5d8cc102)](https://www.youtube.com/watch?v=MmH4ltC2MIo)
 
-It's also important to mention that this application uses two APIs:
+It's also important to mention that this application uses three APIs:
 1. [Mapbox](https://www.mapbox.com/) - It has been used for maps.
 2. [Booking](https://developers.booking.com/api/index.html) - It has been used to fetch apartments available in Travnik from Booking.
 3. [OpenAI](https://www.openai.com) - It has been used for interaction with tourists and other app users. (This feature was added as bonus after contest.)
